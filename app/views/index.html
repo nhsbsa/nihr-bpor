@@ -17,7 +17,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "" %}
+{% set pageName = "Design Dashboard" %}
 
 <!-- For adding a breadcrumb or back link -->
 <!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
@@ -27,50 +27,249 @@
 <!-- For adding page content -->
 <!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
 {% block content %}
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
-
-      <!-- You can delete the lines below -->
-      <h2 class="nhsuk-heading-l">
-        NHS prototype kit
-        <span class="nhsuk-caption-xl nhsuk-caption--bottom">Version {{version}}</span>
-      </h2>
-      <hr>
-
-
-      <!-- Add your content here -->
-      <!-- Styles and components can be found at https://service-manual.nhs.uk/design-system -->
-
-      <h1 class="nhsuk-heading-xl">
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-full">
+    <div class="nhsuk-u-reading-width">
+      <h1>
         {{ serviceName }}
+        <span class="nhsuk-caption-xl nhsuk-caption--bottom">Be Part of Research / Join Dementia Research</span>
       </h1>
-
-      <p>Set the service name for your prototype by editing <strong>/app/config.js</strong>.</p>
-
-      <p>
-        This is the index page for your prototype. You can find it at <strong>/app/views/index.html</strong>.
-      </p>
-
-      <hr>
-
-      <h2 class="nhsuk-heading-l">
-        Get started
-      </h2>
-
-      <ul class="nhsuk-list nhsuk-list--bullet">
-        <li>
-          <a href="https://prototype-kit.service-manual.nhs.uk/how-tos">NHS prototype kit guides</a> – including a tutorial
-        </li>
-        <li>
-          <a href="https://service-manual.nhs.uk/design-system">NHS digital service manual</a> – for code snippets and guidance on using NHS styles, components and patterns
-        </li>
-      </ul>
-
-      <p>
-        There is a selection of <a href="/example-templates">example page templates</a> in <strong>/lib/example-templates/</strong>. To use these, copy and paste them into <strong>/app/views/</strong>.
-      </p>
-      <!-- End of content -->
-
     </div>
   </div>
+  <div class="nhsuk-grid-column-two-thirds">
+    <h2>Versions</h2>
+    
+    <details class="nhsuk-details nhsuk-expander">
+      <summary class="nhsuk-details__summary">
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-two-thirds">
+            <span class="nhsuk-details__summary-text">
+              Pre-Screener (Researcher View)
+            </span>
+          </div>
+          <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
+            <strong class="nhsuk-tag nhsuk-tag--yellow">UR</strong>
+          </div>
+        </div>
+      </summary>
+      <div class="nhsuk-details__text">
+        <h3 class="nhsuk-heading-s">Handover Notes</h3>
+        <p>In addition to design iterations from user research there were further business requirements that came up during the design process.</p>
+        <p>It was decided that researchers would not be permitted to download files containing personally identifiable information as this would not pass the DPIA. Instead the ‘add collaborator’ feature was deemed necessary so that researchers can work on studies together.</p>
+        <p>We were part way through preparing for research when the team entered a handover period. Valuable work and co-design took place in Figma. Subsequently they were asked to transfer the work to html as part of handover obligations.</p>
+        <h3 class="nhsuk-heading-s">Changes from previous iteration</h3>
+        <ul>
+          <li>...</li>
+        </ul>
+        <hr>
+        {{ button({
+          "text": "View prototype",
+          "href": "/researcher"
+        }) }}
+        <br/>
+        {{ actionLink({
+          classes: "nhsuk-u-margin-bottom-3",
+          text: "View user journey",
+          href: "https://www.figma.com/design/jK5OzJmRhqAQzpmCWSGzZ4/Pre-screener-MVP?node-id=1465-28506&p=f&t=uuauhffX61HZUdE0-0",
+          openInNewWindow: true
+        }) }}
+      </div>
+    </details>
+
+    <details class="nhsuk-details nhsuk-expander">
+      <summary class="nhsuk-details__summary">
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-two-thirds">
+            <span class="nhsuk-details__summary-text">
+              Pre-Screener (Admin View)
+            </span>
+          </div>
+          <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
+            <strong class="nhsuk-tag nhsuk-tag--blue">DESIGN</strong>
+          </div>
+        </div>
+      </summary>
+      <div class="nhsuk-details__text">
+        <h3 class="nhsuk-heading-s">User research</h3>
+        <p class="nhsuk-u-font-weight-bold">...</p>
+        <h3 class="nhsuk-heading-s">Changes from previous iteration</h3>
+        <ul>
+          <li>...</li>
+        </ul>
+        <hr>
+        {{ button({
+          "text": "View prototype",
+          "href": "/admin"
+        }) }}
+        <br/>
+        {{ actionLink({
+          classes: "nhsuk-u-margin-bottom-3",
+          text: "View user journey",
+          href: "https://www.figma.com/design/jK5OzJmRhqAQzpmCWSGzZ4/Pre-screener-MVP?node-id=1465-28507&p=f&t=uuauhffX61HZUdE0-0",
+          openInNewWindow: true
+        }) }}
+      </div>
+    </details>
+
+    <details class="nhsuk-details nhsuk-expander">
+      <summary class="nhsuk-details__summary">
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-two-thirds">
+            <span class="nhsuk-details__summary-text">
+              Pre-Screener (Volunteer View)
+            </span>
+          </div>
+          <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
+            <strong class="nhsuk-tag nhsuk-tag--yellow">UR</strong>
+          </div>
+        </div>
+      </summary>
+      <div class="nhsuk-details__text">
+        <h3 class="nhsuk-heading-s">Handover Notes</h3>
+        <p>The team kicked off the volunteer journey work on 15th September 2025.</p>
+        <p>We drafted the journey on Lucid and have transferred a draft version to html. The handover period for the Hippo team commenced while this work was in progress and we pivoted to focus on the requested handover requirements.</p>
+        <p>In line with delivery constraints we have considered options for user testing now vs in the future. It was decided that volunteer research should go ahead in order to de-risk the work. Decision made by Nicola and Tom.</p>
+        <h3 class="nhsuk-heading-s">Changes from previous iteration</h3>
+        <ul>
+          <li>...</li>
+        </ul>
+        <hr>
+        {{ button({
+          "text": "View prototype",
+          "href": "/volunteer"
+        }) }}
+        <br/>
+        {{ actionLink({
+          classes: "nhsuk-u-margin-bottom-3",
+          text: "View user journey",
+          href: "https://lucid.app/lucidspark/ba9c2a88-1c5b-4716-96e5-8bc9683eb9a1/edit?invitationId=inv_8dbb7e9d-4dde-4a94-b783-8db3c24cdc1d&page=0_0#",
+          openInNewWindow: true
+        }) }}
+      </div>
+    </details>
+
+    <details class="nhsuk-details nhsuk-expander">
+      <summary class="nhsuk-details__summary">
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-two-thirds">
+            <span class="nhsuk-details__summary-text">
+              Study Creation (Researcher)
+            </span>
+          </div>
+          <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
+            <strong class="nhsuk-tag nhsuk-tag--blue">DESIGN</strong>
+          </div>
+        </div>
+      </summary>
+      <div class="nhsuk-details__text">
+        <h3 class="nhsuk-heading-s">User research</h3>
+        <p class="nhsuk-u-font-weight-bold">...</p>
+        <h3 class="nhsuk-heading-s">Changes from previous iteration</h3>
+        <ul>
+          <li>...</li>
+        </ul>
+        <hr>
+        {{ button({
+          "text": "View prototype",
+          "href": "/researcher"
+        }) }}
+        <br/>
+        {{ actionLink({
+          classes: "nhsuk-u-margin-bottom-3",
+          text: "View user journey",
+          href: "https://lucid.app/lucidspark/4a3972cd-e38b-4e75-9400-f82a33fcd769/edit?invitationId=inv_588f937b-1e9a-4248-b06d-e300f3de1c97&page=0_0#",
+          openInNewWindow: true
+        }) }}
+      </div>
+    </details>
+
+    <hr/>
+
+    <details class="nhsuk-details nhsuk-expander">  <!-- Early Drafts -->
+      <summary class="nhsuk-details__summary">
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-two-thirds">
+            <span class="nhsuk-details__summary-text">
+              Archive
+            </span>
+          </div>
+          <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
+            <strong class="nhsuk-tag nhsuk-tag--red">RETIRED</strong>
+          </div>
+        </div>
+      </summary>
+      <div class="nhsuk-details__text">
+
+        <details class="nhsuk-details nhsuk-expander">
+          <summary class="nhsuk-details__summary">
+            <div class="nhsuk-grid-row">
+              <div class="nhsuk-grid-column-two-thirds">
+                <span class="nhsuk-details__summary-text">
+                  Be Part of Research (v0.1)
+                </span>
+              </div>
+              <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
+                <strong class="nhsuk-tag nhsuk-tag--red">RETIRED</strong>
+              </div>
+            </div>
+          </summary>
+          <div class="nhsuk-details__text">
+            <h3 class="nhsuk-heading-s">User research</h3>
+            <p class="nhsuk-u-font-weight-bold">...</p>
+            <h3 class="nhsuk-heading-s">Changes from previous iteration</h3>
+            <ul>
+              <li>...</li>
+            </ul>
+            <hr>
+            {{ button({
+              "text": "View prototype",
+              "href": "#"
+            }) }}
+          </div>
+        </details>
+
+      </div>
+    </details>
+
+    <hr/>
+
+    {{ actionLink({
+    text: "View Design Decision Log (opens in a new window)",
+    href: "https://nihr.atlassian.net/wiki/spaces/BBP/database/1878786051",
+    openInNewWindow: true
+    }) }} 
+
+  </div>
+  <div class="nhsuk-grid-column-one-third key-padding-left">
+      <h3>Key</h2>
+      <table class="nhsuk-table">
+        <tbody class="nhsuk-table__body">
+          <tr role="row" class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">
+              <strong class="nhsuk-tag nhsuk-tag--blue  nhsuk-u-font-size-14">DESIGN</strong>
+            </td>
+            <td class="nhsuk-table__cell nhsuk-u-font-size-14">All or parts of the version are still being designed</td>
+          </tr>
+          <tr role="row" class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">
+              <strong class="nhsuk-tag nhsuk-tag--yellow nhsuk-u-font-size-14">UR</strong>
+            </td>
+            <td class="nhsuk-table__cell nhsuk-u-font-size-14">All or parts of the version are currently with UR for usability testing</td>
+          </tr>
+          <tr role="row" class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">
+              <strong class="nhsuk-tag nhsuk-tag--green nhsuk-u-font-size-14">DEV</strong>
+            </td>
+            <td class="nhsuk-table__cell nhsuk-u-font-size-14">All or parts of the version are currently in development</td>
+          </tr>
+          <tr role="row" class="nhsuk-table__row">
+            <td class="nhsuk-table__cell">
+              <strong class="nhsuk-tag nhsuk-tag--red  nhsuk-u-font-size-14">RETIRED</strong>
+            </td>
+            <td class="nhsuk-table__cell nhsuk-u-font-size-14">All or parts of the version have been retired and replaced with new prototypes and Miro boards</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
 {% endblock %}

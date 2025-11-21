@@ -1,0 +1,35 @@
+// BPOR - Header
+
+.nhsuk-header__container {
+    padding: 32px 0;
+}
+
+.nhsuk-header__organisation-logo[src$=".svg"] {
+    width: 142px;
+    max-width: 142px;
+}
+
+.nhsuk-header--white {
+    border-bottom: 1px solid $nhsuk-border-colour;
+}
+
+.bpor-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  gap: 32px;
+  padding: 32px 0;
+}
+
+.bpor-logo-container { 
+  /* flex:0 1 auto; */
+  align-self:auto;
+}
+
+.nhs-logo-container { 
+  /* flex:0 1 auto; */
+  align-self:auto;
+}
+
+// BPOR - Footer
+

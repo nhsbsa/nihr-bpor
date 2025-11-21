@@ -2,3 +2,15 @@
 @import "nhsuk-frontend/dist/nhsuk";
 
 // Add your custom CSS/Sass styles below.
+
+$nihr-colour: #193E72;
+
+@import "nihr-header-footer";
+@import "bpor-header-footer";
+@import "jdr-header-footer";
+@import "side-nav";
+
+
+.nihr-dashboard {
+    max-width: 1200px; // Larger width required for dashboard features e.g. tables etc...
+}
