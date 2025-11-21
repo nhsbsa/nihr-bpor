@@ -68,84 +68,167 @@
 </div>
 {% endset %}
 
-{{ footer({
-  classes: "nihr-footer",
-  navigation: [
-    {
-      title: "Useful links",
-      items: [
-        {
-          href: "https://www.nihr.ac.uk/contact-us",
-          text: "Contact us"
-        },
-        {
-          href: "https://www.nihr.ac.uk/glossary",
-          text: "Glossary"
-        },
-        {
-          href: "https://www.nihr.ac.uk/login-nihr-systems",
-          text: "Login to NIHR systems"
-        },
-        {
-          href: "https://www.nihr.ac.uk/newsletters",
-          text: "Newsletters"
-        }
-      ]
-    },
-    {
-      title: "About",
-      items: [
-        {
-          href: "https://www.nihr.ac.uk/news-views-stories",
-          text: "News, views and stories"
-        },
-        {
-          href: "https://www.nihr.ac.uk/about-us/who-we-are/policies-and-guidelines",
-          text: "Policies and guidelines"
-        },
-        {
-          href: "https://www.nihr.ac.uk/people",
-          text: "Our people"
-        },
-        {
-          href: "https://www.nihr.ac.uk/events",
-          text: "Events"
-        }
-      ]
-    },
-    {
-      title: "Get involved",
-      items: [
-        {
-          href: "https://www.nihr.ac.uk/jobs",
-          text: "Jobs"
-        },
-        {
-          href: "https://www.nihr.ac.uk/get-involved/committees",
-          text: "Join our committees"
-        },
-        {
-          href: "https://www.nihr.ac.uk/get-involved/read-and-review-documentation",
-          text: "Become a reviewer"
-        },
-        {
-          href: "https://www.nihr.ac.uk/get-involved/take-part-in-a-study",
-          text: "Take part in a study"
-        },
-        {
-          href: "/prototype-admin/reset?returnPage=" + (currentPage | urlencode),
-          text: "Reset data"
-        }
-      ]
-    }
-  ],
-  meta: {
-    html: footerHTML
-  },
-  copyright: {
-    text: ""
-  }
-}) }}
+<footer class="bpor-footer-top" role="contentinfo">
+
+  <div class="nhsuk-width-container"><a href="https://www.accessibility-services.co.uk/certificates/nihr-be-part-of-research/"><img src="/images/shaw-trust-logo.svg" alt=""></a></div>
+
+</footer>
+
+<footer class="nhsuk-footer nihr-footer" role="contentinfo">
+  <div class="nhsuk-width-container">
+
+  
+    <div class="nhsuk-footer__navigation nhsuk-grid-row">
+    
+      <div class="nhsuk-grid-column-one-quarter">
+      
+        <h2 class="nhsuk-footer__heading nhsuk-heading-s">Services</h2>
+      
+      
+        <ul class="nhsuk-footer__list">
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/find-a-study">Find a study</a>
+          </li>
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/researchers-and-health-and-care-professionals/Information-for-researchers/">Add my study</a>
+          </li>
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/results/a-z-conditions#">A-Z of conditions</a>
+          </li>
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/what-is-health-and-care-research/glossary/">Glossary</a>
+          </li>
+        
+        </ul>
+      </div>
+    
+      <div class="nhsuk-grid-column-one-quarter">
+      
+        <h2 class="nhsuk-footer__heading nhsuk-heading-s">Learn</h2>
+      
+      
+        <ul class="nhsuk-footer__list">
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/what-is-health-and-care-research/">What is health and care research?</a>
+          </li>
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/take-part-in-research/why-taking-part-matters/">Why taking part matters</a>
+          </li>
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/take-part-in-research/what-to-expect-on-a-study/">What to expect on a study</a>
+          </li>
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/take-part-in-research/consenting-to-a-study/">Consenting to a study</a>
+          </li>
+
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/site-policies/complaints">Complaints</a>
+          </li>
+        
+        </ul>
+      </div>
+    
+      <div class="nhsuk-grid-column-one-quarter">
+      
+        <h2 class="nhsuk-footer__heading nhsuk-heading-s">Site policies</h2>
+      
+      
+        <ul class="nhsuk-footer__list">
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/site-policies">All site policies</a>
+          </li>
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/site-policies/accessibility">Accessibility</a>
+          </li>
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://nihr.us14.list-manage.com/subscribe?u=299dc02111e8a68172029095f&id=3b030a1027">Newsletter</a>
+          </li>
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/site-policies/cookie-policy">Cookie policy</a>
+          </li>
+
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/site-policies/freedom-of-information">Freedom of information</a>
+          </li>
+
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/site-policies/privacy-policy">Privacy policy</a>
+          </li>
+
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/site-policies/terms-and-conditions">Terms and conditions</a>
+          </li>
+        
+        </ul>
+      </div>
+
+      <div class="nhsuk-grid-column-one-quarter">
+      
+        <h2 class="nhsuk-footer__heading nhsuk-heading-s">Stay connected</h2>
+      
+      
+        <ul class="nhsuk-footer__list">
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/News-and-features/">Blogs</a>
+          </li>
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="https://bepartofresearch.nihr.ac.uk/get-in-touch">Get in touch</a>
+          </li>
+        
+          <li class="nhsuk-footer__list-item">
+            <a class="nhsuk-footer__list-item-link" href="/prototype-admin/reset?returnPage=%2Fvolunteer">Reset data</a>
+          </li>
+        
+        </ul>
+      </div>
+    
+    </div>
+  
+
+  </div>
+</footer>
+
+<footer class="bpor-footer-bottom" role="contentinfo">
+
+  <div class="nhsuk-width-container">
+    
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="https://www.nihr.ac.uk/"><img src="/images/NIHR-logo.svg" alt=""></a>
+      </div>
+
+      <div class="footer-col">
+        <a href="http://www.research.hscni.net/"><img src="/images/hsc-logo.svg" alt=""></a>
+      </div>
+
+      <div class="footer-col">
+        <a href="https://www.nhsresearchscotland.org.uk/"><img src="/images/nhs-scotland-logo.svg" alt=""></a>
+      </div>
+
+      <div class="footer-col">
+        <a href="https://healthandcareresearchwales.org/"><img src="/images/hcr-wales-logo.svg" alt=""></a>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
 {% endblock %}
 
 {% block bodyEnd %}
