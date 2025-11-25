@@ -17,7 +17,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Enter your study information" %}
+{% set pageName = "Set your inclusion and exclusion criteria" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -60,46 +60,80 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<form action="study-details" method="post" novalidate>
+<form action="inclusion-exclusion-criteria" method="post" novalidate>
 {% call fieldset({
   legend: {
-    text: "Enter your study information",
+    text: "Set your inclusion and exclusion criteria",
     classes: "nhsuk-fieldset__legend--xl",
     isPageHeading: true
   }
 }) %}
 
 {{ hint({
-  text: "You should enter the details of the study you'd like to pre-screen volunteers for."
+  text: "Select one or more options."
 }) }}
 
-
-  {{ input({
-    label: {
-      text: "Full study name"
+{{ checkboxes({
+  idPrefix: "addhealthConditions",
+  name: "addhealthConditions",
+  fieldset: {
+    legend: {
+      text: "Add health conditions",
+      classes: "nhsuk-fieldset__legend--m"
+    }
+  },
+  items: [
+    {
+      value: "recruitHealthCondition",
+      text: "Recruit by health condition"
     },
-    id: "studyName",
-    name: "studyName",
-    classes: "nhsuk-input--width-20"
-  }) }}
+    {
+      value: "excludeHealthCondition",
+      text: "Exclude by health condition"
+    }
+  ]
+}) }}
 
-  {{ input({
-    label: {
-      text: "Study ID"
+{{ checkboxes({
+  idPrefix: "addMedications",
+  name: "addMedications",
+  fieldset: {
+    legend: {
+      text: "Add medications",
+      classes: "nhsuk-fieldset__legend--m"
+    }
+  },
+  items: [
+    {
+      value: "recruitMedication",
+      text: "Recruit by medication"
     },
-    id: "studyID",
-    name: "studyID",
-    classes: "nhsuk-input--width-10"
-  }) }}
+    {
+      value: "excludeMedication",
+      text: "Exclude by medication"
+    }
+  ]
+}) }}
 
-  {{ input({
-    label: {
-      text: "Research arm or subset (optional)"
-    },
-    id: "researchArmSubset",
-    name: "researchArmSubset",
-    classes: "nhsuk-input--width-20"
-  }) }}
+{{ checkboxes({
+  idPrefix: "addAddionalQuestion",
+  name: "addAddionalQuestion",
+  fieldset: {
+    legend: {
+      text: "Add additional questions",
+      classes: "nhsuk-fieldset__legend--m"
+    }
+  },
+  hint: {
+    text: "You can add up to 5 additional questions if you’d like to pre-screen volunteers further. Any questions you add must have a yes or no answer."
+  },
+  items: [
+    {
+      value: "additionalQuestion",
+      text: "I’d like to add additional questions"
+    }
+  ]
+}) }}
 
 {% endcall %}
 

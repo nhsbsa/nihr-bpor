@@ -32,6 +32,18 @@ router.post('/study-details', function (req, res) {
     }
 })
 
+router.post('/inclusion-exclusion-criteria', function (req, res) {
+
+    var addhealthConditions = req.session.data['addhealthConditions'];
+    var addMedications = req.session.data['addMedications'];
+    var addAddionalQuestion = req.session.data['addAddionalQuestion'];
+
+    console.log(addhealthConditions)
+
+    res.redirect('inclusion-exclusion-criteria');
+
+})
+
 // End Routes
 
 module.exports = router;
