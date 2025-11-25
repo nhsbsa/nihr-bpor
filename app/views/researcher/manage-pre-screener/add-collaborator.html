@@ -17,7 +17,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "" %}
+{% set pageName = "Add a collaborator" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -38,12 +38,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/index">Home</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/index">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/create-pre-screener/">Create pre-screener</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/manage-pre-screener/">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/manage-pre-screener/">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -54,95 +54,48 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-<h1>Welcome to [service name]</h1>
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
 
-{{ summaryList({
-  rows: [
-    {
-      key: {
-        text: "Title"
-      },
-      value: {
-        text: "Mrs"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "title"
-          }
-        ]
-      }
+{% call fieldset({
+  legend: {
+    text: "Add a collaborator",
+    classes: "nhsuk-fieldset__legend--xl",
+    isPageHeading: true
+  }
+}) %}
+
+{{ hint({
+  text: "Enter the person's full name and email address. They will receive an email with access to view and edit the pre-screener report."
+}) }}
+
+
+  {{ input({
+    label: {
+      text: "Collaborator full name"
     },
-    {
-      key: {
-        text: "First name"
-      },
-      value: {
-        text: "Jane"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "first name"
-          }
-        ]
-      }
+    id: "collaboratorFullname",
+    name: "collaboratorFullname",
+    classes: "nhsuk-input--width-20"
+  }) }}
+
+  {{ input({
+    label: {
+      text: "Collaborator email address"
     },
-    {
-      key: {
-        text: "Last name"
-      },
-      value: {
-        text: "Doe"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "last name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Email address"
-      },
-      value: {
-        text: "jane.doe@birminghamuniversity.ac.uk"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "email address"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Organisation"
-      },
-      value: {
-        text: "Birmingham University"
-      }
-    },
-    {
-      key: {
-        text: "Role"
-      },
-      value: {
-        text: "Researcher"
-      }
-    }
-  ]
+    id: "collaboratorEmailAddress",
+    name: "collaboratorEmailAddress",
+    classes: "nhsuk-input--width-20"
+  }) }}
+
+{% endcall %}
+
+{{ button({
+  text: "Send an invite",
+  href: "invitation-sent"
 }) }}
 
     </div>

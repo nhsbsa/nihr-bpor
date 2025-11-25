@@ -17,7 +17,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "" %}
+{% set pageName = "Manage collaborators" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -38,12 +38,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/index">Home</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/index">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/create-pre-screener/">Create pre-screener</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/manage-pre-screener/">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/manage-pre-screener/">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -54,96 +54,35 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-<h1>Welcome to [service name]</h1>
-
-{{ summaryList({
-  rows: [
-    {
-      key: {
-        text: "Title"
-      },
-      value: {
-        text: "Mrs"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "title"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "First name"
-      },
-      value: {
-        text: "Jane"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "first name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Last name"
-      },
-      value: {
-        text: "Doe"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "last name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Email address"
-      },
-      value: {
-        text: "jane.doe@birminghamuniversity.ac.uk"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "email address"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Organisation"
-      },
-      value: {
-        text: "Birmingham University"
-      }
-    },
-    {
-      key: {
-        text: "Role"
-      },
-      value: {
-        text: "Researcher"
-      }
-    }
-  ]
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
+
+{{ warningCallout({
+  heading: "You are about to remove a collaborator",
+  text: "This action cannot be undone. Once a collaborator is removed they will have to be re-invited to regain access to this pre-screener report.",
+  classes: "nhsuk-u-margin-top-5"
+}) }}
+
+<p>Are you sure you want to remove <strong>Dr. Emily Carter</strong> as a collaborator?</p>
+
+
+<div class="nhsuk-button-group">
+  {{ button({
+    text: "Remove collaborator",
+    classes: "nhsuk-button--warning",
+    href: "collaborator-removed"
+  }) }}
+
+  {{ button({
+    text: "Back to manage collaborators",
+    classes: "nhsuk-button--secondary",
+    href: "manage-collaborators"
+  }) }}
+</div>
+
 
     </div>
   </div>

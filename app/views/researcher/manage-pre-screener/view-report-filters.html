@@ -1,0 +1,356 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-in.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Pre-screener summary report for Cognitive therapy in Dementia" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/index">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Study management</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/create-pre-screener/">Create pre-screener</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/manage-pre-screener/">Manage pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Help</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+<h1>Pre-screener summary report for Cognitive therapy in Dementia</h1>
+
+<p class="nhsuk-body-l">This report shows the current status of pre-screeners that have been completed</p>
+
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-one-half">
+    
+    {{ button({
+      text: "Show filters",
+      classes: "nhsuk-button--secondary",
+      href: "view-report"
+    }) }}
+
+  </div>
+  <div class="nhsuk-grid-column-one-half nhsuk-u-text-align-right">
+
+    <div class="nhsuk-button-group">
+      <a href="manage-collaborators" class="nhsuk-link">Manage collaborators</a>
+
+      {{ button({
+        text: "Add a collaborator",
+        classes: "nhsuk-button--secondary",
+        href: "add-collaborator"
+      }) }}
+      
+    </div>    
+
+  </div>
+</div>
+
+{{ card({
+  heading: "Filter",
+  headingClasses: "nhsuk-heading-s",
+  description: "Card description text goes here"
+}) }}
+
+{{ table({
+  responsive: false,
+  panel: false,
+  firstCellIsHeader: true,
+  head: [
+    {
+      text: "Volunteer details"
+    },
+    {
+      text: "Date submitted"
+    },
+    {
+      text: "Match to study"
+    },
+    {
+      text: "Status"
+    }
+  ],
+  rows: [
+[
+  {
+    html: 'Dr Lila Hammond<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Lila.Hammond@example.com<br>Phone: 07123 445678</span>'
+  },
+  { text: "04 March 2025" },
+  { text: "Complete match" },
+  {
+    html: '
+<div class="nhsuk-form-group">
+  <select class="nhsuk-select" id="sort-by" name="sortBy">
+    <option value="1" selected>Awaiting contact</option>
+    <option value="2">Attempted contact</option>
+    <option value="3">Successfully contacted</option>
+    <option value="4">Recruited / Enrolled</option>
+    <option value="5">Not eligible</option>
+    <option value="6">Volunteer declined</option>
+  </select>
+</div>
+    '
+  }
+],
+[
+  {
+    html: 'Prof Mark Densley<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Mark.Densley@example.com<br>Phone: 07988 112390</span>'
+  },
+  { text: "19 April 2025" },
+  { text: "Partial match" },
+  {
+    html: '
+<div class="nhsuk-form-group">
+  <select class="nhsuk-select" id="sort-by" name="sortBy">
+    <option value="1">Awaiting contact</option>
+    <option value="2" selected>Attempted contact</option>
+    <option value="3">Successfully contacted</option>
+    <option value="4">Recruited / Enrolled</option>
+    <option value="5">Not eligible</option>
+    <option value="6">Volunteer declined</option>
+  </select>
+</div>
+    '
+  }
+],
+[
+  {
+    html: 'Dr Amira Patel<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Amira.Patel@example.com<br>Phone: 07211 998234</span>'
+  },
+  { text: "07 May 2025" },
+  { text: "Complete match" },
+  {
+    html: '
+<div class="nhsuk-form-group">
+  <select class="nhsuk-select" id="sort-by" name="sortBy">
+    <option value="1" selected>Awaiting contact</option>
+    <option value="2">Attempted contact</option>
+    <option value="3">Successfully contacted</option>
+    <option value="4">Recruited / Enrolled</option>
+    <option value="5">Not eligible</option>
+    <option value="6">Volunteer declined</option>
+  </select>
+</div>
+    '
+  }
+],
+[
+  {
+    html: 'Dr Henri Clarke<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Henri.Clarke@example.com<br>Phone: 07854 100921</span>'
+  },
+  { text: "22 June 2025" },
+  { text: "No match" },
+  {
+    html: '
+<div class="nhsuk-form-group">
+  <select class="nhsuk-select" id="sort-by" name="sortBy">
+    <option value="1">Awaiting contact</option>
+    <option value="2">Attempted contact</option>
+    <option value="3" selected>Successfully contacted</option>
+    <option value="4">Recruited / Enrolled</option>
+    <option value="5">Not eligible</option>
+    <option value="6">Volunteer declined</option>
+  </select>
+</div>
+    '
+  }
+],
+[
+  {
+    html: 'Dr Sofia Martinez<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Sofia.Martinez@example.com<br>Phone: 07199 347812</span>'
+  },
+  { text: "09 July 2025" },
+  { text: "Complete match" },
+  {
+    html: '
+<div class="nhsuk-form-group">
+  <select class="nhsuk-select" id="sort-by" name="sortBy">
+    <option value="1" selected>Awaiting contact</option>
+    <option value="2">Attempted contact</option>
+    <option value="3">Successfully contacted</option>
+    <option value="4">Recruited / Enrolled</option>
+    <option value="5">Not eligible</option>
+    <option value="6">Volunteer declined</option>
+  </select>
+</div>
+    '
+  }
+],
+[
+  {
+    html: 'Prof Daniel Whittaker<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Daniel.Whittaker@example.com<br>Phone: 07654 332871</span>'
+  },
+  { text: "15 August 2025" },
+  { text: "Partial match" },
+  {
+    html: '
+<div class="nhsuk-form-group">
+  <select class="nhsuk-select" id="sort-by" name="sortBy">
+    <option value="1">Awaiting contact</option>
+    <option value="2">Attempted contact</option>
+    <option value="3">Successfully contacted</option>
+    <option value="4" selected>Recruited / Enrolled</option>
+    <option value="5">Not eligible</option>
+    <option value="6">Volunteer declined</option>
+  </select>
+</div>
+    '
+  }
+],
+[
+  {
+    html: 'Dr Jasmine O’Neill<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Jasmine.ONeill@example.com<br>Phone: 07510 883462</span>'
+  },
+  { text: "28 August 2025" },
+  { text: "No match" },
+  {
+    html: '
+<div class="nhsuk-form-group">
+  <select class="nhsuk-select" id="sort-by" name="sortBy">
+    <option value="1">Awaiting contact</option>
+    <option value="2" selected>Attempted contact</option>
+    <option value="3">Successfully contacted</option>
+    <option value="4">Recruited / Enrolled</option>
+    <option value="5">Not eligible</option>
+    <option value="6">Volunteer declined</option>
+  </select>
+</div>
+    '
+  }
+],
+[
+  {
+    html: 'Dr Oliver Bennet<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Oliver.Bennet@example.com<br>Phone: 07345 667902</span>'
+  },
+  { text: "02 September 2025" },
+  { text: "Complete match" },
+  {
+    html: '
+<div class="nhsuk-form-group">
+  <select class="nhsuk-select" id="sort-by" name="sortBy">
+    <option value="1" selected>Awaiting contact</option>
+    <option value="2">Attempted contact</option>
+    <option value="3">Successfully contacted</option>
+    <option value="4">Recruited / Enrolled</option>
+    <option value="5">Not eligible</option>
+    <option value="6">Volunteer declined</option>
+  </select>
+</div>
+    '
+  }
+],
+[
+  {
+    html: 'Prof Emily Carter<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Emily.Carter@example.com<br>Phone: 07901 234578</span>'
+  },
+  { text: "14 October 2025" },
+  { text: "Partial match" },
+  {
+    html: '
+<div class="nhsuk-form-group">
+  <select class="nhsuk-select" id="sort-by" name="sortBy">
+    <option value="1">Awaiting contact</option>
+    <option value="2">Attempted contact</option>
+    <option value="3" selected>Successfully contacted</option>
+    <option value="4">Recruited / Enrolled</option>
+    <option value="5">Not eligible</option>
+    <option value="6">Volunteer declined</option>
+  </select>
+</div>
+    '
+  }
+],
+[
+  {
+    html: 'Dr Nathan Li<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Nathan.Li@example.com<br>Phone: 07422 991003</span>'
+  },
+  { text: "30 November 2025" },
+  { text: "Complete match" },
+  {
+    html: '
+<div class="nhsuk-form-group">
+  <select class="nhsuk-select" id="sort-by" name="sortBy">
+    <option value="1" selected>Awaiting contact</option>
+    <option value="2">Attempted contact</option>
+    <option value="3">Successfully contacted</option>
+    <option value="4">Recruited / Enrolled</option>
+    <option value="5">Not eligible</option>
+    <option value="6">Volunteer declined</option>
+  </select>
+</div>
+    '
+  }
+]
+  ]
+}) }}
+
+<p>Showing 10 of 28 result(s)</p>
+
+{{ pagination({
+  next: {
+    href: "#"
+  },
+  items: [
+    {
+      number: 1,
+      href: '#',
+      current: true
+    },
+    {
+      number: 2,
+      href: '#'
+    },
+    {
+      number: 3,
+      href: '#'
+    }
+  ]
+}) }}
+
+    </div>
+  </div>
+{% endblock %}

@@ -17,7 +17,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "" %}
+{% set pageName = "Manage collaborators" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -38,12 +38,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/index">Home</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/index">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/create-pre-screener/">Create pre-screener</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/manage-pre-screener/">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/manage-pre-screener/">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -54,95 +54,19 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-<h1>Welcome to [service name]</h1>
+{{ panel({
+  titleText: "Collaborator removed",
+  text: "We have sent an email notifying this person that they have been removed as a collaborator."
+}) }}
 
-{{ summaryList({
-  rows: [
-    {
-      key: {
-        text: "Title"
-      },
-      value: {
-        text: "Mrs"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "title"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "First name"
-      },
-      value: {
-        text: "Jane"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "first name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Last name"
-      },
-      value: {
-        text: "Doe"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "last name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Email address"
-      },
-      value: {
-        text: "jane.doe@birminghamuniversity.ac.uk"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "email address"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Organisation"
-      },
-      value: {
-        text: "Birmingham University"
-      }
-    },
-    {
-      key: {
-        text: "Role"
-      },
-      value: {
-        text: "Researcher"
-      }
-    }
-  ]
+<p>They will have access to view and edit this pre-screener summary report once they follow the link in the email.</p>
+
+<p>If they do not have an NIHR account, they will need to create one. The email includes instructions on how to do this.</p>
+
+{{ button({
+  text: "Back to manage collaborators",
+  classes: "nhsuk-button--secondary",
+  href: "manage-collaborators"
 }) }}
 
     </div>
