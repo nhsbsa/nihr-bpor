@@ -17,7 +17,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Manage collaborators" %}
+{% set pageName = "Enter your study information" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -38,12 +38,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/index">Home</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/create-pre-screener/">Create pre-screener</a></li>
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/manage-pre-screener/">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/v1/create-pre-screener/">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/manage-pre-screener/">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -60,29 +60,51 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-{{ warningCallout({
-  heading: "You are about to remove a collaborator",
-  text: "This action cannot be undone. Once a collaborator is removed they will have to be re-invited to regain access to this pre-screener report.",
-  classes: "nhsuk-u-margin-top-5"
+{% call fieldset({
+  legend: {
+    text: "Enter your study information",
+    classes: "nhsuk-fieldset__legend--xl",
+    isPageHeading: true
+  }
+}) %}
+
+{{ hint({
+  text: "You should enter the details of the study you'd like to pre-screen volunteers for."
 }) }}
 
-<p>Are you sure you want to remove <strong>Dr. Emily Carter</strong> as a collaborator?</p>
 
-
-<div class="nhsuk-button-group">
-  {{ button({
-    text: "Remove collaborator",
-    classes: "nhsuk-button--warning",
-    href: "collaborator-removed"
+  {{ input({
+    label: {
+      text: "Full study name"
+    },
+    id: "studyName",
+    name: "studyName",
+    classes: "nhsuk-input--width-20"
   }) }}
 
-  {{ button({
-    text: "Back to manage collaborators",
-    classes: "nhsuk-button--secondary",
-    href: "manage-collaborators"
+  {{ input({
+    label: {
+      text: "Study ID"
+    },
+    id: "studyID",
+    name: "studyID",
+    classes: "nhsuk-input--width-10"
   }) }}
-</div>
 
+  {{ input({
+    label: {
+      text: "Research arm or subset (optional)"
+    },
+    id: "researchArmSubset",
+    name: "researchArmSubset",
+    classes: "nhsuk-input--width-20"
+  }) }}
+
+{% endcall %}
+
+{{ button({
+  text: "Save and continue"
+}) }}
 
     </div>
   </div>

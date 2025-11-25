@@ -3,7 +3,7 @@
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
 <!-- Extends the layout from /app/views/layout.html -->
-{% extends 'layout-admin-nihr-logged-in.html' %}
+{% extends 'layout-researcher-nihr-logged-in.html' %}
 <!--
   In /app/views/layout.html you can:
     - change the header and footer
@@ -31,12 +31,6 @@
 {% block content %}
 
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
-      <h1>Welcome to [service name]</h1>
-    </div>
-  </div>
-
-  <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-one-quarter">
 
       <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
@@ -44,18 +38,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="#">Home</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Account management</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Approve account requests</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">User account management</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Create administrator accounts</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/v1/">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Manage pending pre-screeners</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Approved pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/create-pre-screener/">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/manage-pre-screener/">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -66,28 +54,96 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-      <ul class="nhsuk-grid-row nhsuk-card-group">
-        <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
-          {{ card({
+<h1>Welcome to [service name]</h1>
+
+{{ summaryList({
+  rows: [
+    {
+      key: {
+        text: "Title"
+      },
+      value: {
+        text: "Mrs"
+      },
+      actions: {
+        items: [
+          {
             href: "#",
-            primary: "true",
-            clickable: "true",
-            heading: "Account requests",
-            headingClasses: "nhsuk-heading-m",
-            description: 'Approve new requests for a [service name] account'
-          }) }}
-        </li>
-        <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
-          {{ card({
+            text: "Change",
+            visuallyHiddenText: "title"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "First name"
+      },
+      value: {
+        text: "Jane"
+      },
+      actions: {
+        items: [
+          {
             href: "#",
-            primary: "true",
-            clickable: "true",
-            heading: "Pre-screener approvals",
-            headingClasses: "nhsuk-heading-m",
-            description: "Review new pre-screener requests from researchers"
-          }) }}
-        </li>
-      </ul>
+            text: "Change",
+            visuallyHiddenText: "first name"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Last name"
+      },
+      value: {
+        text: "Doe"
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "last name"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Email address"
+      },
+      value: {
+        text: "jane.doe@birminghamuniversity.ac.uk"
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "email address"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Organisation"
+      },
+      value: {
+        text: "Birmingham University"
+      }
+    },
+    {
+      key: {
+        text: "Role"
+      },
+      value: {
+        text: "Researcher"
+      }
+    }
+  ]
+}) }}
 
     </div>
   </div>

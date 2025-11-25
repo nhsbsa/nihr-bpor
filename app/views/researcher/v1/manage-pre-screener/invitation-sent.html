@@ -17,7 +17,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Enter your study information" %}
+{% set pageName = "Invitation sent" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -38,12 +38,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/index">Home</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/create-pre-screener/">Create pre-screener</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/manage-pre-screener/">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/create-pre-screener/">Create pre-screener</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/v1/manage-pre-screener/">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -54,57 +54,27 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-{{ backLink({
-    "href": "javascript:history.go(-1)",
-    "text": "Back",
-    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+{{ panel({
+  titleText: "Invitation sent",
+  text: "We have sent an email invitation to your collaborator"
 }) }}
 
-{% call fieldset({
-  legend: {
-    text: "Enter your study information",
-    classes: "nhsuk-fieldset__legend--xl",
-    isPageHeading: true
-  }
-}) %}
+<p>They will have access to view and edit this pre-screener summary report once they follow the link in the email.</p>
 
-{{ hint({
-  text: "You should enter the details of the study you'd like to pre-screen volunteers for."
-}) }}
+<p>If they do not have an NIHR account, they will need to create one. The email includes instructions on how to do this.</p>
 
-
-  {{ input({
-    label: {
-      text: "Full study name"
-    },
-    id: "studyName",
-    name: "studyName",
-    classes: "nhsuk-input--width-20"
+<div class="nhsuk-button-group">
+  {{ button({
+    text: "Back to pre-screener summary",
+    href: "view-report"
   }) }}
 
-  {{ input({
-    label: {
-      text: "Study ID"
-    },
-    id: "studyID",
-    name: "studyID",
-    classes: "nhsuk-input--width-10"
+  {{ button({
+    text: "Add another collaborator",
+    classes: "nhsuk-button--secondary",
+    href: "add-collaborator"
   }) }}
-
-  {{ input({
-    label: {
-      text: "Research arm or subset (optional)"
-    },
-    id: "researchArmSubset",
-    name: "researchArmSubset",
-    classes: "nhsuk-input--width-20"
-  }) }}
-
-{% endcall %}
-
-{{ button({
-  text: "Save and continue"
-}) }}
+</div>
 
     </div>
   </div>
