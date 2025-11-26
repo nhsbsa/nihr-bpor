@@ -1,0 +1,93 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-volunteer-bpor.html' %}
+
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "How would you like us to contact you?" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back"
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1>How would you like us to contact you?</h1>
+
+      <h2>Your contact details</h2>
+
+      <p>Check the contact details we currently have for you. You should update them if they are not correct.</p>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: "Joe Bloggs"
+            }
+          },
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: "joe.bloggs@gmail.com"
+            }
+          }
+        ]
+      }) }}
+
+      <h2>Would you like to add a phone number?</h2>
+
+      <p>We’ll use your phone number to contact you about this study. If you do not add a phone number, we’ll contact you by email.</p>
+
+<form action="review-details" method="post" novalidate>
+
+      {{ input({
+        label: {
+          text: "Phone number"
+        },
+        id: "phoneNumber",
+        name: "phoneNumber",
+        type: "tel",
+        autocomplete: "tel",
+        classes: "nhsuk-input--width-20",
+        value: data.phoneNumber
+      }) }}
+
+      {{ button({
+        text: "Continue"
+      }) }}
+
+</form>
+
+    </div>
+  </div>
+{% endblock %}
