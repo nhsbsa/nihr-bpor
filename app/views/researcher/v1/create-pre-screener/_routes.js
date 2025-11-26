@@ -40,7 +40,7 @@ router.post('/inclusion-exclusion-criteria', function (req, res) {
 
     console.log(addhealthConditions)
 
-    res.redirect('inclusion-exclusion-criteria');
+    res.redirect('recruit-health-condition');
 
 })
 
