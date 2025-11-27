@@ -17,7 +17,7 @@
       <p class="nhsuk-body">This will reset all of the data entered in this session.</p>
 
       <form action="/prototype-admin/reset-session-data" method="post">
-        <input type="hidden" name="returnPage" value="{{ returnPage }}">
+        <input type="hidden" name="returnPage" value="/">
         {{ button({
           text: "Reset all data"
         }) }}
