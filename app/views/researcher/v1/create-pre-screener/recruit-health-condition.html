@@ -83,16 +83,25 @@
 {% call details({
   summaryText: "If a condition is not listed"
 }) %}
-  <p>Enter the name of one or more conditions that are not listed in our database. Check each condition before you submit them - they’ll appear to potential participants exactly as you’ve entered them.</p>
-  <div class="nhsuk-form-group">
-  <label class="nhsuk-label" for="nonListedCondition">
-    Non-listed condition
-  </label>
-  <input class="nhsuk-input nhsuk-input--width-20" id="nonListedCondition" name="nonListedCondition" type="text">
-  </div>
-  <button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-    Add non-listed condition
-  </button>
+
+  {{ input({
+    label: {
+      text: "Non-listed condition",
+      classes: "nhsuk-label--m"
+    },
+      hint: {
+      html: "<p>Enter the name of one or more conditions that are not listed in our database. Check each condition before you submit them - they’ll appear to potential participants exactly as you’ve entered them.</p>"
+    },
+    id: "nonListedCondition",
+    name: "nonListedCondition",
+    classes: "nhsuk-input--width-20"
+  }) }}
+
+  {{ button({
+    text: "Add non-listed condition",
+    classes: "nhsuk-button--secondary"
+  }) }}
+
 {% endcall %}
 
 {{ button({
