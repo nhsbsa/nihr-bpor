@@ -1269,5 +1269,5 @@ var health_conditions = [
   { endonym: "X-ray", name: "X-ray" },
   { endonym: "Yellow fever", name: "Yellow fever" },
   { endonym: "Your contraception guide", name: "Your contraception guide" },
-  { endonym: "Zika virus", name: "Zika virus" },
+  { endonym: "Zika virus", name: "Zika virus" }
 ];
