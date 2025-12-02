@@ -45,13 +45,13 @@
     <div class="nhsuk-header__navigation-container nhsuk-width-container nihr-dashboard">
       <ul class="nhsuk-header__navigation-list">
         <li class="nhsuk-header__navigation-item">
-          <a class="nhsuk-header__navigation-link" href="home" {% if currentPage == "Home" %}aria-current="true"{% endif %}>Home</a>
+          <a class="nhsuk-header__navigation-link" href="home" {% if currentPage == "Home" %}aria-current="true"{% endif %}>{% if currentPage == "Home" %}<strong class="nhsuk-header__navigation-item-current-fallback">Home</strong>{% else %}Home{% endif %}</a>
         </li>
         <li class="nhsuk-header__navigation-item">
-          <a class="nhsuk-header__navigation-link" href="create-start" {% if currentPage == "Create pre-screener" %}aria-current="true"{% endif %}><strong class="nhsuk-header__navigation-item-current-fallback">Create pre-screener</strong></a>
+          <a class="nhsuk-header__navigation-link" href="create-start" {% if currentPage == "Create pre-screener" %}aria-current="true"{% endif %}>{% if currentPage == "Create pre-screener" %}<strong class="nhsuk-header__navigation-item-current-fallback">Create pre-screener</strong>{% else %}Create pre-screener{% endif %}</a>
         </li>
         <li class="nhsuk-header__navigation-item">
-          <a class="nhsuk-header__navigation-link" href="manage-start" {% if currentPage == "Manage pre-screeners" %}aria-current="true"{% endif %}>Manage pre-screeners</a>
+          <a class="nhsuk-header__navigation-link" href="manage-start" {% if currentPage == "Manage pre-screeners" %}aria-current="true"{% endif %}>{% if currentPage == "Manage pre-screeners" %}<strong class="nhsuk-header__navigation-item-current-fallback">Manage pre-screeners</strong>{% else %}Manage pre-screeners{% endif %}</a>
         </li>
         <li class="nhsuk-header__navigation-item">
           <a class="nhsuk-header__navigation-link" href="#" {% if currentPage == "Help" %}aria-current="true"{% endif %}>Help</a>

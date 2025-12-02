@@ -21,8 +21,13 @@ $nihr-colour: #193E72;
 .nhsuk-header__navigation {
     background-color: $nihr-colour;
 }
+
+.nhsuk-header__menu-list .nhsuk-header__navigation-link[aria-current=true]::before {
+    border-color: $nihr-colour;
+}
+
 .nhsuk-header__navigation-link::before {
-    border: 0 solid $nihr-colour;
+    border-color: white;
 }
 
 .hide-on-mobile {
