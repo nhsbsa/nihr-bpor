@@ -59,110 +59,152 @@
 <h1>Manage pre-screeners</h1>
 
 {{ table({
-  responsive: false,
+  responsive: true,
   panel: false,
   firstCellIsHeader: true,
   head: [
-    {
-      text: 'Study details'
-    },
-    {
-      text: 'Owner'
-    },
-    {
-      text: 'Status'
-    },
-    {
-      text: 'Actions'
-    }
+    { text: 'Study details' },
+    { text: 'Screener ID' },
+    { text: 'Owner' },
+    { text: 'Status' },
+    { text: 'Actions' }
   ],
   rows: [
     [
       {
-        html: 'Cognitive therapy in Dementia<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Screener ID: DR-333121</span>'
+        header: 'Study details',
+        text: 'Cognitive therapy in Dementia'
       },
       {
+        header: 'Screener ID',
+        text: 'DR-333121'
+      },
+      {
+        header: 'Owner',
         text: 'Sofia Martinez'
       },
       {
+        header: 'Status',
         html: '<strong class="nhsuk-tag nhsuk-tag--green">Approved</strong>'
       },
       {
+        header: 'Actions',
         html: '<p><a href="view-report">View report</a></p>'
       }
     ],
     [
       {
-        html: 'Studying the influence of pet therapy on mental health in dementia patients<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Screener ID: DR-947721</span>'
+        header: 'Study details',
+        text: 'Studying the influence of pet therapy on mental health in dementia patients'
       },
       {
+        header: 'Screener ID',
+        text: 'DR-947721'
+      },
+      {
+        header: 'Owner',
         text: 'Raj Singh'
       },
       {
+        header: 'Status',
         html: '<strong class="nhsuk-tag nhsuk-tag--green">Approved</strong>'
       },
       {
+        header: 'Actions',
         html: '<p><a href="#">View report</a></p>'
       }
     ],
     [
       {
-        html: 'Exploring the effects of art therapy on memory retention in older adults<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Screener ID: DR-847281</span>'
+        header: 'Study details',
+        text: 'Exploring the effects of art therapy on memory retention in older adults'
       },
       {
+        header: 'Screener ID',
+        text: 'DR-847281'
+      },
+      {
+        header: 'Owner',
         text: 'Bill Murphy'
       },
       {
+        header: 'Status',
         html: '<strong class="nhsuk-tag nhsuk-tag--blue">Pending review</strong>'
       },
       {
+        header: 'Actions',
         html: '<p><a href="#">View report</a></p>'
       }
     ],
     [
       {
-        html: 'The impact of yoga practices on stress reduction in individuals with anxiety<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Screener ID: DR-883312</span>'
+        header: 'Study details',
+        text: 'The impact of yoga practices on stress reduction in individuals with anxiety'
       },
       {
+        header: 'Screener ID',
+        text: 'DR-883312'
+      },
+      {
+        header: 'Owner',
         text: 'Sofia Martinez'
       },
       {
+        header: 'Status',
         html: '<strong class="nhsuk-tag nhsuk-tag--yellow">Changes requested</strong>'
       },
       {
+        header: 'Actions',
         html: '<p><a href="#">View report</a></p>'
       }
     ],
     [
       {
-        html: 'Investigating the role of music therapy in enhancing cognitive function in seniors<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Screener ID: DR-083128</span>'
+        header: 'Study details',
+        text: 'Investigating the role of music therapy in enhancing cognitive function in seniors'
       },
       {
+        header: 'Screener ID',
+        text: 'DR-083128'
+      },
+      {
+        header: 'Owner',
         text: 'Sofia Martinez'
       },
       {
+        header: 'Status',
         html: '<strong class="nhsuk-tag nhsuk-tag--purple">Archived</strong>'
       },
       {
+        header: 'Actions',
         html: '<p><a href="#">View report</a></p>'
       }
     ],
     [
       {
-        html: 'Examining the benefits of physical exercise on cognitive decline in Alzheimer’s patients<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Screener ID: DR-471021</span>'
+        header: 'Study details',
+        text: 'Examining the benefits of physical exercise on cognitive decline in Alzheimer’s patients'
       },
       {
+        header: 'Screener ID',
+        text: 'DR-471021'
+      },
+      {
+        header: 'Owner',
         text: 'Sofia Martinez'
       },
       {
+        header: 'Status',
         html: '<strong class="nhsuk-tag nhsuk-tag--grey">Draft</strong>'
       },
       {
+        header: 'Actions',
         html: '<p><a href="#">View report</a></p>'
       }
     ]
   ]
 }) }}
+
 
 <p>Showing 10 of 28 result(s)</p>
 
