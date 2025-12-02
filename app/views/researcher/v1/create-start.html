@@ -1,4 +1,6 @@
-<!-- Use this page as the index for your project -->
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Create pre-screener" %}
 
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
@@ -31,7 +33,7 @@
 {% block content %}
 
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-one-quarter">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
 
       <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
 

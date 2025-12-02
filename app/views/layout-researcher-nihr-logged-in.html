@@ -15,7 +15,7 @@
 <!-- Edit the header -->
 <!-- Header code examples can be found at https://service-manual.nhs.uk/design-system/components/header -->
 {% block header %}
-<header class="nhsuk-header nhsuk-header--white" role="banner" data-module="nhsuk-header" data-nhsuk-header-init="">
+<header class="nhsuk-header nhsuk-header--white" role="banner" data-module="nhsuk-header">
    <div class="nhsuk-header__container nhsuk-width-container nihr-dashboard">
       <div class="nhsuk-header__service">
          <a class="nhsuk-header__service-logo" href="/" aria-label="National Institute for Health and Care Research Logo  homepage">
@@ -38,6 +38,32 @@
          </ul>
       </nav>
    </div>
+
+   <!-- Use "nhsuk-header__navigation-item--current" class on <li> for selected state -->
+
+   <nav class="nhsuk-header__navigation show-on-mobile" aria-label="Menu">
+    <div class="nhsuk-header__navigation-container nhsuk-width-container nihr-dashboard">
+      <ul class="nhsuk-header__navigation-list">
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="home" {% if currentPage == "Home" %}aria-current="true"{% endif %}>Home</a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="create-start" {% if currentPage == "Create pre-screener" %}aria-current="true"{% endif %}><strong class="nhsuk-header__navigation-item-current-fallback">Create pre-screener</strong></a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="manage-start" {% if currentPage == "Manage pre-screeners" %}aria-current="true"{% endif %}>Manage pre-screeners</a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="#" {% if currentPage == "Help" %}aria-current="true"{% endif %}>Help</a>
+        </li>
+        <li class="nhsuk-header__menu" hidden>
+          <button class="nhsuk-header__menu-toggle nhsuk-header__navigation-link" id="toggle-menu" aria-expanded="false">
+            <span class="nhsuk-u-visually-hidden">Browse </span>More
+          </button>
+        </li>
+      </ul>
+    </div>
+   </nav>
 </header>
 {% endblock %}
 
