@@ -17,7 +17,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "" %}
+{% set pageName = "Enter your study information" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -38,12 +38,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/v1/">Home</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/create-pre-screener/">Create pre-screener</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/manage-pre-screener/">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -54,96 +54,54 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-<h1>Welcome to Recruit Registry Volunteers</h1>
-
-{{ summaryList({
-  rows: [
-    {
-      key: {
-        text: "Title"
-      },
-      value: {
-        text: "Mrs"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "title"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "First name"
-      },
-      value: {
-        text: "Jane"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "first name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Last name"
-      },
-      value: {
-        text: "Doe"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "last name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Email address"
-      },
-      value: {
-        text: "Jane.Doe@birmingham.ac.uk"
-      },
-      actions: {
-        items: [
-          {
-            href: "#",
-            text: "Change",
-            visuallyHiddenText: "email address"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Organisation"
-      },
-      value: {
-        text: "Birmingham University"
-      }
-    },
-    {
-      key: {
-        text: "Role"
-      },
-      value: {
-        text: "Researcher"
-      }
-    }
-  ]
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
+
+<form action="/{{folder}}/{{subfolder}}/create-study-details" method="post" novalidate>
+{% call fieldset({
+  legend: {
+    text: "Enter your study information",
+    classes: "nhsuk-fieldset__legend--xl",
+    isPageHeading: true
+  }
+}) %}
+
+  {{ input({
+    label: {
+      text: "Full study name"
+    },
+    id: "studyName",
+    name: "studyName",
+    classes: "nhsuk-input--width-20"
+  }) }}
+
+  {{ input({
+    label: {
+      text: "Study ID"
+    },
+    id: "studyID",
+    name: "studyID",
+    classes: "nhsuk-input--width-10"
+  }) }}
+
+  {{ input({
+    label: {
+      text: "Research arm or subset (optional)"
+    },
+    id: "researchArmSubset",
+    name: "researchArmSubset",
+    classes: "nhsuk-input--width-20"
+  }) }}
+
+{% endcall %}
+
+{{ button({
+  text: "Save and continue"
+}) }}
+</form>
 
     </div>
   </div>

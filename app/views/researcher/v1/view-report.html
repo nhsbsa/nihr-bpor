@@ -38,12 +38,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/">Home</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/create-pre-screener/">Create pre-screener</a></li>
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/v1/manage-pre-screener/">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -70,7 +70,7 @@
     {{ button({
       text: "Show filters",
       classes: "nhsuk-button--secondary",
-      href: "view-report"
+      href: "view-report-filters"
     }) }}
 
   </div>
@@ -89,12 +89,6 @@
 
   </div>
 </div>
-
-{{ card({
-  heading: "Filter",
-  headingClasses: "nhsuk-heading-s",
-  description: "Card description text goes here"
-}) }}
 
 {{ table({
   responsive: false,

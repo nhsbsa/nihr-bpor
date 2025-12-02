@@ -17,7 +17,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Set your inclusion and exclusion criteria" %}
+{% set pageName = "Manage collaborators" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -38,12 +38,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/">Home</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/v1/create-pre-screener/">Create pre-screener</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/manage-pre-screener/">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -60,55 +60,30 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<form action="inclusion-exclusion-criteria" method="post" novalidate>
-
-<label class="nhsuk-label" for="my-autocomplete">Condition</label>
-<div id="my-autocomplete-container" class="nhsuk-input--width-20 nhsuk-u-margin-bottom-5"></div>
-
-{{ button({
-  text: "Save and continue"
+{{ warningCallout({
+  heading: "You are about to remove a collaborator",
+  text: "This action cannot be undone. Once a collaborator is removed they will have to be re-invited to regain access to this pre-screener report.",
+  classes: "nhsuk-u-margin-top-5"
 }) }}
 
-</form>
+<p>Are you sure you want to remove <strong>Dr. Emily Carter</strong> as a collaborator?</p>
+
+
+<div class="nhsuk-button-group">
+  {{ button({
+    text: "Remove collaborator",
+    classes: "nhsuk-button--warning",
+    href: "collaborator-removed"
+  }) }}
+
+  {{ button({
+    text: "Back to manage collaborators",
+    classes: "nhsuk-button--secondary",
+    href: "manage-collaborators"
+  }) }}
+</div>
+
 
     </div>
   </div>
-{% endblock %}
-
-{% block pageScripts %}
-<script src="/js/health-conditions.js"></script>
-<script type="text/javascript">
-  function customSuggest (query, syncResults) {
-    syncResults(query
-      ? health_conditions.filter(function (result) {
-          var resultContains = result.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
-          var endonymContains = result.endonym.toLowerCase().indexOf(query.toLowerCase()) !== -1
-          return resultContains || endonymContains
-        })
-      : []
-    )
-  }
-
-  function inputValueTemplate (result) {
-    return result && result.name
-  }
-
-  function suggestionTemplate (result) {
-    return result && result.name
-  }
-
-  element = document.querySelector('#my-autocomplete-container')
-  id = 'myAutocomplete'
-  accessibleAutocomplete({
-    element: element,
-    id: id,
-    source: customSuggest,
-    templates: {
-      inputValue: inputValueTemplate,
-      suggestion: suggestionTemplate
-    }
-  })
-
-
-</script>
 {% endblock %}

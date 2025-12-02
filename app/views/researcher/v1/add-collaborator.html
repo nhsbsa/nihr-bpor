@@ -17,7 +17,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Set your inclusion and exclusion criteria" %}
+{% set pageName = "Add a collaborator" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -38,12 +38,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/">Home</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/researcher/v1/create-pre-screener/">Create pre-screener</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="/researcher/v1/manage-pre-screener/">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -60,87 +60,43 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<form action="inclusion-exclusion-criteria" method="post" novalidate>
 {% call fieldset({
   legend: {
-    text: "Set your inclusion and exclusion criteria",
+    text: "Add a collaborator",
     classes: "nhsuk-fieldset__legend--xl",
     isPageHeading: true
   }
 }) %}
 
 {{ hint({
-  text: "Select one or more options."
+  text: "Enter the person's full name and email address. They will receive an email with access to view and edit the pre-screener report."
 }) }}
 
-{{ checkboxes({
-  idPrefix: "addhealthConditions",
-  name: "addhealthConditions",
-  fieldset: {
-    legend: {
-      text: "Add health conditions",
-      classes: "nhsuk-fieldset__legend--m"
-    }
-  },
-  items: [
-    {
-      value: "recruitHealthCondition",
-      text: "Recruit by health condition"
+
+  {{ input({
+    label: {
+      text: "Collaborator full name"
     },
-    {
-      value: "excludeHealthCondition",
-      text: "Exclude by health condition"
-    }
-  ]
-}) }}
+    id: "collaboratorFullname",
+    name: "collaboratorFullname",
+    classes: "nhsuk-input--width-20"
+  }) }}
 
-{{ checkboxes({
-  idPrefix: "addMedications",
-  name: "addMedications",
-  fieldset: {
-    legend: {
-      text: "Add medications",
-      classes: "nhsuk-fieldset__legend--m"
-    }
-  },
-  items: [
-    {
-      value: "recruitMedication",
-      text: "Recruit by medication"
+  {{ input({
+    label: {
+      text: "Collaborator email address"
     },
-    {
-      value: "excludeMedication",
-      text: "Exclude by medication"
-    }
-  ]
-}) }}
-
-{{ checkboxes({
-  idPrefix: "addAddionalQuestion",
-  name: "addAddionalQuestion",
-  fieldset: {
-    legend: {
-      text: "Add additional questions",
-      classes: "nhsuk-fieldset__legend--m"
-    }
-  },
-  hint: {
-    text: "You can add up to 5 additional questions if you’d like to pre-screen volunteers further. Any questions you add must have a yes or no answer."
-  },
-  items: [
-    {
-      value: "additionalQuestion",
-      text: "I’d like to add additional questions"
-    }
-  ]
-}) }}
+    id: "collaboratorEmailAddress",
+    name: "collaboratorEmailAddress",
+    classes: "nhsuk-input--width-20"
+  }) }}
 
 {% endcall %}
 
 {{ button({
-  text: "Save and continue"
+  text: "Send an invite",
+  href: "invitation-sent"
 }) }}
-</form>
 
     </div>
   </div>

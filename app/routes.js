@@ -40,9 +40,7 @@ router.use('/', (req, res, next) => {
 // Route File Versions
 // ****************************************
 
-// router.use('/researcher', require('./views/researcher/_routes'));
-
-router.use('/researcher/v1/create-pre-screener', require('./views/researcher/v1/create-pre-screener/_routes'));
+router.use('/researcher/v1', require('./views/researcher/v1/_routes'));
 
 router.use('/volunteer/v1', require('./views/volunteer/v1/_routes'));
 

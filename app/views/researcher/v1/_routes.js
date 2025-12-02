@@ -1,21 +1,22 @@
 // ********************************
-// Researcher
+// RESEARCHER
 // ********************************
 
 // External dependencies
 const express = require('express');
 const router = express.Router();
 
+// ********************
+// Create Pre-Screener
+// ********************
 
-// Routes
+router.post('/create-start', function (req, res) {
 
-router.post('/index', function (req, res) {
-
-  res.redirect('study-details');
+  res.redirect('create-study-details');
 
 });
 
-router.post('/study-details', function (req, res) {
+router.post('/create-study-details', function (req, res) {
 
     var studyName = req.session.data['studyName'];
     var studyID = req.session.data['studyID'];
@@ -23,16 +24,16 @@ router.post('/study-details', function (req, res) {
 
     if (studyName && studyID) {
 
-        res.redirect('inclusion-exclusion-criteria');
+        res.redirect('create-inclusion-exclusion-criteria');
 
     } else {
 
-        res.redirect('study-details');
+        res.redirect('create-study-details');
 
     }
 })
 
-router.post('/inclusion-exclusion-criteria', function (req, res) {
+router.post('/create-inclusion-exclusion-criteria', function (req, res) {
 
     var addhealthConditions = req.session.data['addhealthConditions'];
     var addMedications = req.session.data['addMedications'];
@@ -40,7 +41,7 @@ router.post('/inclusion-exclusion-criteria', function (req, res) {
 
     console.log(addhealthConditions)
 
-    res.redirect('recruit-health-condition');
+    res.redirect('create-recruit-health-condition');
 
 })
 

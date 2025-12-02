@@ -15,3 +15,24 @@ $nihr-colour: #193E72;
 .nihr-dashboard {
     max-width: 1200px; // Larger width required for dashboard features e.g. tables etc...
 }
+
+.nhsuk-header__navigation {
+    background-color: $nihr-colour;
+}
+
+// Mobile Specific Styles
+
+.hide-on-mobile {
+  @include nhsuk-media-query($until: desktop) {
+    display: none !important;
+  }
+}
+
+.show-on-mobile {
+  // default: visible everywhere
+  display: block;
+
+  @include nhsuk-media-query($from: desktop) {
+    display: none !important;
+  }
+}
