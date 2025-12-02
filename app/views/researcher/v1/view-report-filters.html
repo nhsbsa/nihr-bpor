@@ -99,234 +99,318 @@
 }) }}
 
 {{ table({
-  responsive: false,
+  responsive: true,
   panel: false,
   firstCellIsHeader: true,
   head: [
-    {
-      text: "Volunteer details"
-    },
-    {
-      text: "Date submitted"
-    },
-    {
-      text: "Match to study"
-    },
-    {
-      text: "Status"
-    }
+    { text: "Volunteer name" },
+    { text: "Email address" },
+    { text: "Phone number" },
+    { text: "Date submitted" },
+    { text: "Match to study" },
+    { text: "Status" }
   ],
   rows: [
-[
-  {
-    html: 'Dr Lila Hammond<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Lila.Hammond@example.com<br>Phone: 07123 445678</span>'
-  },
-  { text: "04 March 2025" },
-  { text: "Complete match" },
-  {
-    html: '
-<div class="nhsuk-form-group">
-  <select class="nhsuk-select" id="sort-by" name="sortBy">
-    <option value="1" selected>Awaiting contact</option>
-    <option value="2">Attempted contact</option>
-    <option value="3">Successfully contacted</option>
-    <option value="4">Recruited / Enrolled</option>
-    <option value="5">Not eligible</option>
-    <option value="6">Volunteer declined</option>
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Lila Hammond"
+      },
+      {
+        header: "Email address",
+        text: "lila.hammond@example.com"
+      },
+      {
+        header: "Phone number",
+        text: "07123 445678"
+      },
+      { header: "Date submitted", text: "04 March 2025" },
+      { header: "Match to study", text: "Complete match" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-1' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Attempted contact</option>
+    <option value='3'>Successfully contacted</option>
+    <option value='4'>Recruited / Enrolled</option>
+    <option value='5'>Not eligible</option>
+    <option value='6'>Volunteer declined</option>
   </select>
-</div>
-    '
-  }
-],
-[
-  {
-    html: 'Prof Mark Densley<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Mark.Densley@example.com<br>Phone: 07988 112390</span>'
-  },
-  { text: "19 April 2025" },
-  { text: "Partial match" },
-  {
-    html: '
-<div class="nhsuk-form-group">
-  <select class="nhsuk-select" id="sort-by" name="sortBy">
-    <option value="1">Awaiting contact</option>
-    <option value="2" selected>Attempted contact</option>
-    <option value="3">Successfully contacted</option>
-    <option value="4">Recruited / Enrolled</option>
-    <option value="5">Not eligible</option>
-    <option value="6">Volunteer declined</option>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Prof Mark Densley"
+      },
+      {
+        header: "Email address",
+        text: "mark.densley@example.com"
+      },
+      {
+        header: "Phone number",
+        text: "07988 112390"
+      },
+      { header: "Date submitted", text: "19 April 2025" },
+      { header: "Match to study", text: "Partial match" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-2' name='sortBy'>
+    <option value='1'>Awaiting contact</option>
+    <option value='2' selected>Attempted contact</option>
+    <option value='3'>Successfully contacted</option>
+    <option value='4'>Recruited / Enrolled</option>
+    <option value='5'>Not eligible</option>
+    <option value='6'>Volunteer declined</option>
   </select>
-</div>
-    '
-  }
-],
-[
-  {
-    html: 'Dr Amira Patel<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Amira.Patel@example.com<br>Phone: 07211 998234</span>'
-  },
-  { text: "07 May 2025" },
-  { text: "Complete match" },
-  {
-    html: '
-<div class="nhsuk-form-group">
-  <select class="nhsuk-select" id="sort-by" name="sortBy">
-    <option value="1" selected>Awaiting contact</option>
-    <option value="2">Attempted contact</option>
-    <option value="3">Successfully contacted</option>
-    <option value="4">Recruited / Enrolled</option>
-    <option value="5">Not eligible</option>
-    <option value="6">Volunteer declined</option>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Amira Patel"
+      },
+      {
+        header: "Email address",
+        text: "amira.patel@example.com"
+      },
+      {
+        header: "Phone number",
+        text: "07211 998234"
+      },
+      { header: "Date submitted", text: "07 May 2025" },
+      { header: "Match to study", text: "Complete match" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-3' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Attempted contact</option>
+    <option value='3'>Successfully contacted</option>
+    <option value='4'>Recruited / Enrolled</option>
+    <option value='5'>Not eligible</option>
+    <option value='6'>Volunteer declined</option>
   </select>
-</div>
-    '
-  }
-],
-[
-  {
-    html: 'Dr Henri Clarke<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Henri.Clarke@example.com<br>Phone: 07854 100921</span>'
-  },
-  { text: "22 June 2025" },
-  { text: "No match" },
-  {
-    html: '
-<div class="nhsuk-form-group">
-  <select class="nhsuk-select" id="sort-by" name="sortBy">
-    <option value="1">Awaiting contact</option>
-    <option value="2">Attempted contact</option>
-    <option value="3" selected>Successfully contacted</option>
-    <option value="4">Recruited / Enrolled</option>
-    <option value="5">Not eligible</option>
-    <option value="6">Volunteer declined</option>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Henri Clarke"
+      },
+      {
+        header: "Email address",
+        text: "henri.clarke@example.com"
+      },
+      {
+        header: "Phone number",
+        text: "07854 100921"
+      },
+      { header: "Date submitted", text: "22 June 2025" },
+      { header: "Match to study", text: "No match" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-4' name='sortBy'>
+    <option value='1'>Awaiting contact</option>
+    <option value='2'>Attempted contact</option>
+    <option value='3' selected>Successfully contacted</option>
+    <option value='4'>Recruited / Enrolled</option>
+    <option value='5'>Not eligible</option>
+    <option value='6'>Volunteer declined</option>
   </select>
-</div>
-    '
-  }
-],
-[
-  {
-    html: 'Dr Sofia Martinez<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Sofia.Martinez@example.com<br>Phone: 07199 347812</span>'
-  },
-  { text: "09 July 2025" },
-  { text: "Complete match" },
-  {
-    html: '
-<div class="nhsuk-form-group">
-  <select class="nhsuk-select" id="sort-by" name="sortBy">
-    <option value="1" selected>Awaiting contact</option>
-    <option value="2">Attempted contact</option>
-    <option value="3">Successfully contacted</option>
-    <option value="4">Recruited / Enrolled</option>
-    <option value="5">Not eligible</option>
-    <option value="6">Volunteer declined</option>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Sofia Martinez"
+      },
+      {
+        header: "Email address",
+        text: "sofia.martinez@example.com"
+      },
+      {
+        header: "Phone number",
+        text: "07199 347812"
+      },
+      { header: "Date submitted", text: "09 July 2025" },
+      { header: "Match to study", text: "Complete match" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-5' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Attempted contact</option>
+    <option value='3'>Successfully contacted</option>
+    <option value='4'>Recruited / Enrolled</option>
+    <option value='5'>Not eligible</option>
+    <option value='6'>Volunteer declined</option>
   </select>
-</div>
-    '
-  }
-],
-[
-  {
-    html: 'Prof Daniel Whittaker<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Daniel.Whittaker@example.com<br>Phone: 07654 332871</span>'
-  },
-  { text: "15 August 2025" },
-  { text: "Partial match" },
-  {
-    html: '
-<div class="nhsuk-form-group">
-  <select class="nhsuk-select" id="sort-by" name="sortBy">
-    <option value="1">Awaiting contact</option>
-    <option value="2">Attempted contact</option>
-    <option value="3">Successfully contacted</option>
-    <option value="4" selected>Recruited / Enrolled</option>
-    <option value="5">Not eligible</option>
-    <option value="6">Volunteer declined</option>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Prof Daniel Whittaker"
+      },
+      {
+        header: "Email address",
+        text: "daniel.whittaker@example.com"
+      },
+      {
+        header: "Phone number",
+        text: "07654 332871"
+      },
+      { header: "Date submitted", text: "15 August 2025" },
+      { header: "Match to study", text: "Partial match" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-6' name='sortBy'>
+    <option value='1'>Awaiting contact</option>
+    <option value='2'>Attempted contact</option>
+    <option value='3'>Successfully contacted</option>
+    <option value='4' selected>Recruited / Enrolled</option>
+    <option value='5'>Not eligible</option>
+    <option value='6'>Volunteer declined</option>
   </select>
-</div>
-    '
-  }
-],
-[
-  {
-    html: 'Dr Jasmine O’Neill<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Jasmine.ONeill@example.com<br>Phone: 07510 883462</span>'
-  },
-  { text: "28 August 2025" },
-  { text: "No match" },
-  {
-    html: '
-<div class="nhsuk-form-group">
-  <select class="nhsuk-select" id="sort-by" name="sortBy">
-    <option value="1">Awaiting contact</option>
-    <option value="2" selected>Attempted contact</option>
-    <option value="3">Successfully contacted</option>
-    <option value="4">Recruited / Enrolled</option>
-    <option value="5">Not eligible</option>
-    <option value="6">Volunteer declined</option>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Jasmine O’Neill"
+      },
+      {
+        header: "Email address",
+        text: "jasmine.oneill@example.com"
+      },
+      {
+        header: "Phone number",
+        text: "07510 883462"
+      },
+      { header: "Date submitted", text: "28 August 2025" },
+      { header: "Match to study", text: "No match" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-7' name='sortBy'>
+    <option value='1'>Awaiting contact</option>
+    <option value='2' selected>Attempted contact</option>
+    <option value='3'>Successfully contacted</option>
+    <option value='4'>Recruited / Enrolled</option>
+    <option value='5'>Not eligible</option>
+    <option value='6'>Volunteer declined</option>
   </select>
-</div>
-    '
-  }
-],
-[
-  {
-    html: 'Dr Oliver Bennet<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Oliver.Bennet@example.com<br>Phone: 07345 667902</span>'
-  },
-  { text: "02 September 2025" },
-  { text: "Complete match" },
-  {
-    html: '
-<div class="nhsuk-form-group">
-  <select class="nhsuk-select" id="sort-by" name="sortBy">
-    <option value="1" selected>Awaiting contact</option>
-    <option value="2">Attempted contact</option>
-    <option value="3">Successfully contacted</option>
-    <option value="4">Recruited / Enrolled</option>
-    <option value="5">Not eligible</option>
-    <option value="6">Volunteer declined</option>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Oliver Bennett"
+      },
+      {
+        header: "Email address",
+        text: "oliver.bennett@example.com"
+      },
+      {
+        header: "Phone number",
+        text: "07345 667902"
+      },
+      { header: "Date submitted", text: "02 September 2025" },
+      { header: "Match to study", text: "Complete match" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-8' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Attempted contact</option>
+    <option value='3'>Successfully contacted</option>
+    <option value='4'>Recruited / Enrolled</option>
+    <option value='5'>Not eligible</option>
+    <option value='6'>Volunteer declined</option>
   </select>
-</div>
-    '
-  }
-],
-[
-  {
-    html: 'Prof Emily Carter<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Emily.Carter@example.com<br>Phone: 07901 234578</span>'
-  },
-  { text: "14 October 2025" },
-  { text: "Partial match" },
-  {
-    html: '
-<div class="nhsuk-form-group">
-  <select class="nhsuk-select" id="sort-by" name="sortBy">
-    <option value="1">Awaiting contact</option>
-    <option value="2">Attempted contact</option>
-    <option value="3" selected>Successfully contacted</option>
-    <option value="4">Recruited / Enrolled</option>
-    <option value="5">Not eligible</option>
-    <option value="6">Volunteer declined</option>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Prof Emily Carter"
+      },
+      {
+        header: "Email address",
+        text: "emily.carter@example.com"
+      },
+      {
+        header: "Phone number",
+        text: "07901 234578"
+      },
+      { header: "Date submitted", text: "14 October 2025" },
+      { header: "Match to study", text: "Partial match" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-9' name='sortBy'>
+    <option value='1'>Awaiting contact</option>
+    <option value='2'>Attempted contact</option>
+    <option value='3' selected>Successfully contacted</option>
+    <option value='4'>Recruited / Enrolled</option>
+    <option value='5'>Not eligible</option>
+    <option value='6'>Volunteer declined</option>
   </select>
-</div>
-    '
-  }
-],
-[
-  {
-    html: 'Dr Nathan Li<br><span class="nhsuk-body-s nhsuk-u-font-weight-normal">Email: Nathan.Li@example.com<br>Phone: 07422 991003</span>'
-  },
-  { text: "30 November 2025" },
-  { text: "Complete match" },
-  {
-    html: '
-<div class="nhsuk-form-group">
-  <select class="nhsuk-select" id="sort-by" name="sortBy">
-    <option value="1" selected>Awaiting contact</option>
-    <option value="2">Attempted contact</option>
-    <option value="3">Successfully contacted</option>
-    <option value="4">Recruited / Enrolled</option>
-    <option value="5">Not eligible</option>
-    <option value="6">Volunteer declined</option>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Nathan Li"
+      },
+      {
+        header: "Email address",
+        text: "nathan.li@example.com"
+      },
+      {
+        header: "Phone number",
+        text: "07422 991003"
+      },
+      { header: "Date submitted", text: "30 November 2025" },
+      { header: "Match to study", text: "Complete match" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-10' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Attempted contact</option>
+    <option value='3'>Successfully contacted</option>
+    <option value='4'>Recruited / Enrolled</option>
+    <option value='5'>Not eligible</option>
+    <option value='6'>Volunteer declined</option>
   </select>
-</div>
-    '
-  }
-]
+</div>"
+      }
+    ]
   ]
 }) }}
 

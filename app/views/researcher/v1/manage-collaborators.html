@@ -65,9 +65,9 @@
 <h1 class="nhsuk-heading-xl">Manage collaborators</h1>
 
 {{ table({
-  responsive: false,
+  responsive: true,
   panel: false,
-  firstCellIsHeader: true,
+  firstCellIsHeader: false,
   head: [
     {
       text: "Name"
@@ -85,29 +85,37 @@
   rows: [
     [
       {
+        header: "Name",
         text: "Jane Doe"
       },
       {
+        header: "Email address",
         text: "Jane.Doe@birmingham.ac.uk"
       },
       {
+        header: "Role",
         text: "Owner"
       },
       {
-        html: ''
+        header: "Actions",
+        html: 'None'
       }
     ],
     [
       {
+        header: "Name",
         text: "Dr. Emily Carter"
       },
       {
+        header: "Email address",
         text: "Emily.Carter@birmingham.ac.uk"
       },
       {
+        header: "Role",
         text: "Collaborator"
       },
       {
+        header: "Actions",
         html: '<a href="remove-collaborator">Remove</a>'
       }
     ]
