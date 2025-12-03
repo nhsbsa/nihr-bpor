@@ -20,12 +20,6 @@
 <!-- For adding a breadcrumb or back link -->
 <!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
 {% block beforeContent %}
-
-{{ backLink({
-    "href": "javascript:history.go(-1)",
-    "text": "Back"
-}) }}
-
 {% endblock %}
 
 <!-- For adding page content -->
@@ -35,39 +29,11 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<h1>Forgot password</h1>
+<h1>Your account has been deleted</h1>
 
-<p>If you’ve forgotten your password, enter your email address and we’ll send you a link to reset it.</p>
+<p>This means you no longer have Recruit Registry Volunteers access. Any data or study information linked to your account may be deleted.</p>
+<p>If you need access in the future you will need to re-register with Recruit Registry Volunteers.</p>
 
-<form action="/{{folder}}/{{subfolder}}/reset-your-password" method="post" novalidate>
-  
-{{ passwordInput({
-  label: {
-    text: "Enter your password"
-  },
-  id: "password1",
-  name: "password1",
-  classes: "nhsuk-input--width-20"
-}) }}
-
-{{ passwordInput({
-  label: {
-    text: "Confirm your password"
-  },
-  id: "password2",
-  name: "password2",
-  classes: "nhsuk-input--width-20"
-}) }}
-
-<div class="nhsuk-button-group">
-  {{ button({
-    text: "Reset your password"
-  }) }}
-
-  <a href="/{{folder}}/{{subfolder}}/researcher-login" class="nhsuk-link">Back to login</a>
-</div>
-
-</form>
 
     </div>
   </div>

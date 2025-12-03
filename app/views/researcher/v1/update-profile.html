@@ -56,94 +56,119 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-<h1>Welcome to Recruit Registry Volunteers</h1>
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
 
-{{ summaryList({
-  rows: [
+<h1>Your profile</h1>
+
+<form action="/{{folder}}/{{subfolder}}/update-profile" method="post" novalidate>
+
+{% set previousTitle = data.title or "Mrs" %}
+
+{{ select({
+  label: {
+    text: "Title"
+  },
+  id: "title",
+  name: "title",
+  items: [
     {
-      key: {
-        text: "Title"
-      },
-      value: {
-        text: data['title'] | default('Mrs')
-      },
-      actions: {
-        items: [
-          {
-            href: "/researcher/v1/update-profile#title",
-            text: "Change",
-            visuallyHiddenText: "title"
-          }
-        ]
-      }
+      value: "Mr",
+      text: "Mr",
+      selected: previousTitle == "Mr"
     },
     {
-      key: {
-        text: "First name"
-      },
-      value: {
-        text: data['firstName'] | default('Jane')
-      },
-      actions: {
-        items: [
-          {
-            href: "/researcher/v1/update-profile#firstName",
-            text: "Change",
-            visuallyHiddenText: "first name"
-          }
-        ]
-      }
+      value: "Mrs",
+      text: "Mrs",
+      selected: previousTitle == "Mrs"
     },
     {
-      key: {
-        text: "Last name"
-      },
-      value: {
-        text: data['lastName'] | default('Doe')
-      },
-      actions: {
-        items: [
-          {
-            href: "/researcher/v1/update-profile#lastName",
-            text: "Change",
-            visuallyHiddenText: "last name"
-          }
-        ]
-      }
+      value: "Ms",
+      text: "Ms",
+      selected: previousTitle == "Ms"
     },
     {
-      key: {
-        text: "Email address"
-      },
-      value: {
-        text: "Jane.Doe@birmingham.ac.uk"
-      }
+      value: "Miss",
+      text: "Miss",
+      selected: previousTitle == "Miss"
     },
     {
-      key: {
-        text: "Organisation"
-      },
-      value: {
-        text: "University of Birmingham"
-      }
+      value: "Mx",
+      text: "Mx",
+      selected: previousTitle == "Mx"
     },
     {
-      key: {
-        text: "Role"
-      },
-      value: {
-        text: "Researcher"
-      }
+      value: "Dr",
+      text: "Dr",
+      selected: previousTitle == "Dr"
+    },
+    {
+      value: "Prof",
+      text: "Prof",
+      selected: previousTitle == "Prof"
+    },
+    {
+      value: "Sir",
+      text: "Sir",
+      selected: previousTitle == "Sir"
+    },
+    {
+      value: "Dame",
+      text: "Dame",
+      selected: previousTitle == "Dame"
+    },
+    {
+      value: "Lady",
+      text: "Lady",
+      selected: previousTitle == "Lady"
+    },
+    {
+      value: "Lord",
+      text: "Lord",
+      selected: previousTitle == "Lord"
     }
   ]
 }) }}
 
-<form action="/{{folder}}/{{subfolder}}/home" method="post" novalidate>
-
-{{ button({
-  text: "Delete account",
-  classes: "nhsuk-button--warning"
+{{ input({
+  id: "firstName",
+  name: "firstName",
+  classes: "nhsuk-input--width-20",
+  value: data.firstName or "Jane",
+  label: {
+    text: "First name"
+  }
 }) }}
+
+{{ input({
+  id: "lastName",
+  name: "lastName",
+  classes: "nhsuk-input--width-20",
+  value: data.lastName or "Doe",
+  label: {
+    text: "Last name"
+  }
+}) }}
+
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Email address</p>
+<p>Jane.Doe@birmingham.ac.uk</p>
+
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Organisation</p>
+<p>University of Birmingham</p>
+
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
+<p>Researcher</p>
+
+<div class="nhsuk-button-group">
+  {{ button({
+    text: "Confirm"
+  }) }}
+
+  <a href="/{{folder}}/{{subfolder}}/home" class="nhsuk-link">Cancel</a>
+</div>
 
 </form>
 

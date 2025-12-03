@@ -1,6 +1,6 @@
 <!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
 
-{% set currentPage = "Manage pre-screeners" %}
+{% set currentPage = "Home" %}
 
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Manage collaborators" %}
+{% set pageName = "" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -40,12 +40,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="home">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -62,67 +62,32 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<h1 class="nhsuk-heading-xl">Manage collaborators</h1>
+<h1>Confirm request to delete account</h1>
 
-{{ table({
-  responsive: true,
-  panel: false,
-  firstCellIsHeader: false,
-  head: [
-    {
-      text: "Name"
-    },
-    {
-      text: "Email address"
-    },
-    {
-      text: "Role"
-    },
-    {
-      text: "Actions"
-    }
-  ],
-  rows: [
-    [
-      {
-        header: "Name",
-        text: "Jane Doe"
-      },
-      {
-        header: "Email address",
-        text: "Jane.Doe@birmingham.ac.uk"
-      },
-      {
-        header: "Role",
-        text: "Owner"
-      },
-      {
-        header: "Actions",
-        html: 'Not applicable',
-        classes: "nhsuk-u-secondary-text-colour"
-      }
-    ],
-    [
-      {
-        header: "Name",
-        text: "Dr. Emily Carter"
-      },
-      {
-        header: "Email address",
-        text: "Emily.Carter@birmingham.ac.uk"
-      },
-      {
-        header: "Role",
-        text: "Collaborator"
-      },
-      {
-        header: "Actions",
-        html: '<a href="remove-collaborator">Remove</a>'
-      }
-    ]
-  ]
+{{ characterCount({
+  name: "deleteAccount",
+  id: "deleteAccount",
+  maxwords: 150,
+  label: {
+    text: "Enter the reason for deleting your account (optional)"
+  }
 }) }}
 
+<p>Once your account is deleted, you won't be able to access this service or manage any studies.</p>
+<p>You’ll receive an email confirming the account has been deleted.</p>
+
+<form action="/{{folder}}/{{subfolder}}/delete-account" method="post" novalidate>
+
+<div class="nhsuk-button-group">
+  {{ button({
+    text: "Yes, delete my account",
+    classes: "nhsuk-button--warning"
+  }) }}
+
+  <a href="/{{folder}}/{{subfolder}}/home" class="nhsuk-link">Cancel</a>
+</div>
+
+</form>
 
     </div>
   </div>

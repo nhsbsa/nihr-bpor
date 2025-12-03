@@ -115,6 +115,43 @@ if (password1 && password2 && password1 === password2) {
 
 });
 
+router.post('/home', function (req, res) {
+
+    res.redirect('delete-account-active-studies');
+
+});
+
+router.post('/update-profile', function (req, res) {
+
+    var title = req.session.data['title'];
+    var firstName = req.session.data['firstName'];
+    var lastName = req.session.data['lastName'];
+
+
+if (title && firstName && lastName) {
+    
+    res.redirect('home');
+
+} else {
+
+    res.redirect('update-profile');
+
+}
+
+});
+
+router.post('/delete-account-active-studies', function (req, res) {
+
+    res.redirect('delete-account');
+
+});
+
+router.post('/delete-account', function (req, res) {
+
+    res.redirect('account-deleted');
+
+});
+
 // ********************
 // Create Pre-Screener
 // ********************

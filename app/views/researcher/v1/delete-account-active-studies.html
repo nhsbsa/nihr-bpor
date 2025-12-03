@@ -1,6 +1,6 @@
 <!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
 
-{% set currentPage = "Manage pre-screeners" %}
+{% set currentPage = "Home" %}
 
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Manage collaborators" %}
+{% set pageName = "" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -40,12 +40,12 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="home">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Study management</h2>
         <ul class="nhsuk-list app-side-nav__list">
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -62,67 +62,83 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<h1 class="nhsuk-heading-xl">Manage collaborators</h1>
+<h1>Confirm request to delete account</h1>
+
+{{ warningCallout({
+  heading: "Are you sure you want to delete your account?",
+  html: '<p>You’re currently assigned to active studies.</p><p>If you delete your account, you should make sure there’s another researcher connected to these studies. If not, you may lose any data that’s connected to the studies or your account</p><p>If you are the only researcher on a study, you should nominate a replacement or ask an administrator to assign one before you continue.</p>'
+}) }}
 
 {{ table({
   responsive: true,
-  panel: false,
-  firstCellIsHeader: false,
   head: [
     {
-      text: "Name"
-    },
-    {
-      text: "Email address"
+      text: "Study"
     },
     {
       text: "Role"
     },
     {
-      text: "Actions"
+      text: "Status"
     }
   ],
   rows: [
     [
       {
-        header: "Name",
-        text: "Jane Doe"
-      },
-      {
-        header: "Email address",
-        text: "Jane.Doe@birmingham.ac.uk"
+        header: "Study",
+        text: "Study A - Diabetes in adults"
       },
       {
         header: "Role",
         text: "Owner"
       },
       {
-        header: "Actions",
-        html: 'Not applicable',
-        classes: "nhsuk-u-secondary-text-colour"
+        header: "Status",
+        text: "Active"
       }
     ],
     [
       {
-        header: "Name",
-        text: "Dr. Emily Carter"
+        header: "Study",
+        text: "Study B - Long COVID"
       },
       {
-        header: "Email address",
-        text: "Emily.Carter@birmingham.ac.uk"
+        header: "Role",
+        text: "Owner"
+      },
+      {
+        header: "Status",
+        text: "Active"
+      }
+    ],
+    [
+      {
+        header: "Study",
+        text: "Study C - Sleep and recognition"
       },
       {
         header: "Role",
         text: "Collaborator"
       },
       {
-        header: "Actions",
-        html: '<a href="remove-collaborator">Remove</a>'
+        header: "Status",
+        text: "Active"
       }
     ]
   ]
 }) }}
 
+<form action="/{{folder}}/{{subfolder}}/delete-account-active-studies" method="post" novalidate>
+
+<div class="nhsuk-button-group">
+  {{ button({
+    text: "Continue"
+  }) }}
+
+  <a href="/{{folder}}/{{subfolder}}/home" class="nhsuk-link">Cancel</a>
+</div>
+
+</form>
 
     </div>
   </div>
