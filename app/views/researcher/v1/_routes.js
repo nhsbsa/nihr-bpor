@@ -130,7 +130,7 @@ router.post('/update-profile', function (req, res) {
 
 if (title && firstName && lastName) {
     
-    res.redirect('home');
+    res.redirect('home-profile-updated');
 
 } else {
 
