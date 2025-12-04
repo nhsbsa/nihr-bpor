@@ -294,32 +294,36 @@ router.post('/create-recruit-condition-answers', function (req, res) {
 
     if (recruitAnotherCondition == "Yes") {
 
-        res.redirect('create-recruit-medication');
+        res.redirect('create-recruit-health-condition');
 
     } else if (recruitAnotherCondition == "No") {
 
         if (addhealthConditions) {
             if (addhealthConditions.includes('Exclude by health condition')) {
-                // Handle Exclude by health condition
-                console.log('Exclude by health condition selected');
+ 
+                res.redirect('create-exclude-health-condition');
+
             }
         }
 
         if (addMedications) {
             if (addMedications.includes('Recruit by medication')) {
-                // Handle Recruit by medication
-                console.log('Recruit by medication selected');
+                
+                res.redirect('create-recruit-medication');
+
             }
             if (addMedications.includes('Exclude by medication')) {
-                // Handle Exclude by medication
-                console.log('Exclude by medication selected');
+
+                res.redirect('create-exclude-medication');
+
             }
         }
 
         if (addAdditionalQuestion) {
             if (addAdditionalQuestion.includes('I’d like to add additional questions')) {
-                // Handle additional questions
-                console.log('Additional questions requested');
+
+                res.redirect('create-additional-questions');
+
             }
         }
 
@@ -396,15 +400,17 @@ router.post('/create-recruit-medication-answers', function (req, res) {
 
         if (addMedications) {
             if (addMedications.includes('Exclude by medication')) {
-                // Handle Exclude by medication
-                console.log('Exclude by medication selected');
+
+                res.redirect('create-exclude-medication');
+
             }
         }
 
         if (addAdditionalQuestion) {
             if (addAdditionalQuestion.includes('I’d like to add additional questions')) {
-                // Handle additional questions
-                console.log('Additional questions requested');
+
+                res.redirect('create-additional-questions');
+
             }
         }
 
