@@ -12,7 +12,47 @@ const router = express.Router();
 
 router.post('/index', function (req, res) {
 
-    res.redirect('create-an-account');
+    res.redirect('login-type-of-account');
+
+});
+
+router.post('/create-type-of-account', function (req, res) {
+
+    var createTypeAccount = req.session.data['createTypeAccount'];
+
+    if (createTypeAccount == "Create a GOV.UK One Login account") {
+
+        res.redirect('https://govuk-one-login-prototype-6d2545e2d700.herokuapp.com/page-index/authentication/create-account');
+
+    } else if (createTypeAccount == "Create an account with email and password") {
+
+        res.redirect('create-an-account');
+
+    } else {
+
+        res.redirect('create-type-of-account');
+
+    }
+
+});
+
+router.post('/login-type-of-account', function (req, res) {
+
+    var loginTypeAccount = req.session.data['loginTypeAccount'];
+
+    if (loginTypeAccount == "Sign in with GOV.UK One Login account") {
+
+        res.redirect('https://govuk-one-login-prototype-6d2545e2d700.herokuapp.com/page-index/authentication/create-account');
+
+    } else if (loginTypeAccount == "Sign in with email and password") {
+
+        res.redirect('researcher-login');
+
+    } else {
+
+        res.redirect('login-type-of-account');
+
+    }
 
 });
 

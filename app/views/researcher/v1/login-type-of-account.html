@@ -20,6 +20,12 @@
 <!-- For adding a breadcrumb or back link -->
 <!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
 {% block beforeContent %}
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back"
+}) }}
+
 {% endblock %}
 
 <!-- For adding page content -->
@@ -29,28 +35,41 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<h1>Recruit Registry Volunteers: Overview</h1>
+<form action="/{{folder}}/{{subfolder}}/login-type-of-account" method="post" novalidate>
 
-<p>Setting up an account on Recruit Registry Volunteers will enable you to create a pre-screener to send to potential volunteers for your study</p>
-<p>This is an overview of the platform:</p>
-
-<ul>
-  <li>While creating the pre-screener, you will be able to save it at any point and continue later.</li>
-  <li>Once submitted, your pre-screener will be sent to our admins for approval.</li>
-</ul>
-
-<p>Once approved, a link to pre-screener will be sent to volunteers by email.</p>
-<p>After your volunteers fill out the pre-screener and submit it, you will be able to see the results on this platform.</p>
-
-<form action="/{{folder}}/{{subfolder}}/index" method="post" novalidate>
+{{ radios({
+  idPrefix: "loginTypeAccount",
+  name: "loginTypeAccount",
+  fieldset: {
+    legend: {
+      text: "How do you want to sign in to your account?",
+        size: "l",
+      isPageHeading: true
+    }
+  },
+  items: [
+    {
+      value: "Sign in with GOV.UK One Login account",
+      text: "Sign in with GOV.UK One Login account",
+      hint: {
+        text: "GOV.UK One Login lets you sign in and prove your identity so you can access the service quickly and easily."
+      }
+    },
+    {
+      value: "Sign in with email and password",
+      text: "Sign in with email and password",
+      hint: {
+        text: "Login with your seperate email and password"
+      }
+    }
+  ]
+}) }}
 
 {{ button({
-  text: "Sign in"
+  text: "Continue"
 }) }}
 
 </form>
-
-<p>Don't have an account? <a href="/{{folder}}/{{subfolder}}/create-type-of-account">Register now</a></p>
 
     </div>
   </div>
