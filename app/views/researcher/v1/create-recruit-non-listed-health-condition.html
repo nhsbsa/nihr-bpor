@@ -61,7 +61,7 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<form action="/{{folder}}/{{subfolder}}/create-recruit-health-condition" method="post" novalidate>
+<form action="/{{folder}}/{{subfolder}}/create-recruit-non-listed-health-condition" method="post" novalidate>
 
 {{ fieldset({
   legend: {
@@ -73,15 +73,18 @@
 
 <p>Add one or more health conditions to your inclusion criteria.</p>
 
-<label class="nhsuk-label nhsuk-label--m" for="myAutocomplete">Condition</label>
-
-{{ hint({
-  html: '<p>Start typing the name of the condition you’d like to add. The conditions in our database follow UK naming standards.</p>'
+{{ input({
+  label: {
+    text: "Non-listed condition",
+    classes: "nhsuk-label--m"
+  },
+    hint: {
+    html: "<p>Enter the name of one or more conditions that are not listed in our database. Check each condition before you submit them - they’ll appear to potential participants exactly as you’ve entered them.</p>"
+  },
+  id: "nonListedCondition",
+  name: "nonListedCondition",
+  classes: "nhsuk-input--width-20"
 }) }}
-
-<div id="my-autocomplete-container" class="nhsuk-input--width-20 nhsuk-u-margin-bottom-5"></div>
-
-<p><a href="/{{folder}}/{{subfolder}}/create-recruit-non-listed-health-condition">Add a condition that is not listed</a></p>
 
 {{ button({
   text: "Save and continue"
@@ -91,42 +94,4 @@
 
     </div>
   </div>
-{% endblock %}
-
-{% block pageScripts %}
-<script src="/js/health-conditions.js"></script>
-<script type="text/javascript">
-  function customSuggest (query, syncResults) {
-    syncResults(query
-      ? health_conditions.filter(function (result) {
-          var resultContains = result.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
-          var endonymContains = result.endonym.toLowerCase().indexOf(query.toLowerCase()) !== -1
-          return resultContains || endonymContains
-        })
-      : []
-    )
-  }
-
-  function inputValueTemplate (result) {
-    return result && result.name
-  }
-
-  function suggestionTemplate (result) {
-    return result && result.name
-  }
-
-  element = document.querySelector('#my-autocomplete-container')
-  id = 'myAutocomplete'
-  accessibleAutocomplete({
-    element: element,
-    id: id,
-    source: customSuggest,
-    templates: {
-      inputValue: inputValueTemplate,
-      suggestion: suggestionTemplate
-    }
-  })
-
-
-</script>
 {% endblock %}
