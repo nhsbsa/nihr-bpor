@@ -253,7 +253,7 @@ router.post('/create-inclusion-exclusion-criteria', function (req, res) {
 
 })
 
-router.post('/create-recruit-condition', function (req, res) {
+router.post('/create-recruit-health-condition', function (req, res) {
 
     var listedCondition = req.session.data['listedCondition'];
 
@@ -269,7 +269,7 @@ router.post('/create-recruit-condition', function (req, res) {
     res.redirect('create-recruit-condition-answers');
 });
 
-router.post('/create-recruit-non-listed-condition', function (req, res) {
+router.post('/create-recruit-non-listed-health-condition', function (req, res) {
 
     var nonListedCondition = req.session.data['nonListedCondition'];
 
