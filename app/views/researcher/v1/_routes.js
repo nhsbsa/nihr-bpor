@@ -227,11 +227,11 @@ router.post('/create-inclusion-exclusion-criteria', function (req, res) {
 
     if (addhealthConditions && addhealthConditions.includes("Recruit by health condition")) {
 
-        res.redirect('create-recruit-condition');
+        res.redirect('create-recruit-health-condition');
 
     } else if (addhealthConditions && addhealthConditions.includes("Exclude by health condition")) {
 
-        res.redirect('create-exclude-condition');
+        res.redirect('create-exclude-health-condition');
 
     } else if (addMedications && addMedications.includes("Recruit by medication")) {
 
