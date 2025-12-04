@@ -116,10 +116,12 @@
   }
 
   element = document.querySelector('#my-autocomplete-container')
-  id = 'myAutocomplete'
+  id = 'listedCondition',
+  name = 'listedCondition',
   accessibleAutocomplete({
     element: element,
     id: id,
+    name: name,
     source: customSuggest,
     templates: {
       inputValue: inputValueTemplate,

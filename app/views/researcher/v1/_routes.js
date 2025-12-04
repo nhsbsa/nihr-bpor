@@ -248,14 +248,14 @@ router.post('/create-inclusion-exclusion-criteria', function (req, res) {
     } else {
 
         res.redirect('create-inclusion-exclusion-criteria');
-        
+
     }
 
 })
 
 router.post('/create-recruit-health-condition', function (req, res) {
 
-    var listedCondition = req.session.data['input-autocomplete'];
+    var listedCondition = req.session.data['listedCondition'];
 
     // Make sure the 'conditions' array exists
     if (!req.session.data['conditions']) {
@@ -298,26 +298,29 @@ router.post('/create-recruit-condition-answers', function (req, res) {
 
     } else if (recruitAnotherCondition == "No") {
 
-        if (addhealthConditions && addhealthConditions.includes("Exclude by health condition")) {
+        if (addhealthConditions) {
+            if (addhealthConditions.includes('Exclude by health condition')) {
+                // Handle Exclude by health condition
+                console.log('Exclude by health condition selected');
+            }
+        }
 
-            res.redirect('create-exclude-health-condition');
+        if (addMedications) {
+            if (addMedications.includes('Recruit by medication')) {
+                // Handle Recruit by medication
+                console.log('Recruit by medication selected');
+            }
+            if (addMedications.includes('Exclude by medication')) {
+                // Handle Exclude by medication
+                console.log('Exclude by medication selected');
+            }
+        }
 
-        } else if (addMedications && addMedications.includes("Recruit by medication")) {
-
-            res.redirect('create-recruit-medication');
-
-        } else if (addMedications && addMedications.includes("Exclude by medication")) {
-
-            res.redirect('create-exclude-medication');
-
-        } else if (addAdditionalQuestion && addAdditionalQuestion.includes("I’d like to add additional questions")) {
-
-            res.redirect('create-additional-questions');
-
-        } else {
-
-            res.redirect('create-recruit-condition-answers');
-
+        if (addAdditionalQuestion) {
+            if (addAdditionalQuestion.includes('I’d like to add additional questions')) {
+                // Handle additional questions
+                console.log('Additional questions requested');
+            }
         }
 
     } else {
