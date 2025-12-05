@@ -61,18 +61,18 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<h1>List of medications to recruit for</h1>
+<h1>List of medications to exclude for</h1>
 
 <h2 class="nhsuk-heading-s">
   Medications
 </h2>
 
-{% set rows3 = [] %}
+{% set rows4 = [] %}
 
-{% for medication in data.medications %}
-  {% set _ = rows3.push({
+{% for medicationExclude in data.medicationsExclude %}
+  {% set _ = rows4.push({
     key: { text: "Medication " ~ loop.index },  
-    value: { text: medication },
+    value: { text: medicationExclude },
     actions: {
       items: [
         {
@@ -85,9 +85,9 @@
   }) %}
 {% endfor %}
 
-{{ summaryList({ rows: rows3 }) }}
+{{ summaryList({ rows: rows4 }) }}
 
-<form action="/{{folder}}/{{subfolder}}/create-recruit-medication-answers" method="post" novalidate>
+<form action="/{{folder}}/{{subfolder}}/create-exclude-medication-answers" method="post" novalidate>
 
 {{ radios({
   idPrefix: "recruitAnotherMedication",
