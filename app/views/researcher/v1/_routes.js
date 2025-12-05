@@ -337,7 +337,7 @@ router.post('/create-recruit-condition-answers', function (req, res) {
 
 });
 
-// EXCLUDE BY CONDITION
+// EXCLUDE BY HEALTH CONDITION
 
 router.post('/create-exclude-health-condition', function (req, res) {
 
@@ -357,7 +357,7 @@ router.post('/create-exclude-health-condition', function (req, res) {
 
 router.post('/create-exclude-non-listed-health-condition', function (req, res) {
 
-    var nonListedCondition = req.session.data['nonListedCondition'];
+    var nonListedConditionExclude = req.session.data['nonListedConditionExclude'];
 
     // Make sure the 'conditionsExclude' array exists
     if (!req.session.data['conditionsExclude']) {
@@ -365,7 +365,7 @@ router.post('/create-exclude-non-listed-health-condition', function (req, res) {
     }
 
     // Add the new condition to the array
-    req.session.data['conditionsExclude'].push(nonListedCondition);
+    req.session.data['conditionsExclude'].push(nonListedConditionExclude);
 
     // Redirect to the next page
     res.redirect('create-exclude-condition-answers');
@@ -482,8 +482,6 @@ router.post('/create-recruit-medication-answers', function (req, res) {
     }
 
 });
-
-// EXCLUDE BY MEDICATION
 
 // EXCLUDE BY MEDICATION
 

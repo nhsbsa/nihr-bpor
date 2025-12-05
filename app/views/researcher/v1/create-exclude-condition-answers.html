@@ -69,10 +69,10 @@
 
 {% set rows2 = [] %}
 
-{% for conditionExclude in data.conditionsExclude %}
+{% for conditionsExclude in data.conditionsExclude %}
   {% set _ = rows2.push({
     key: { text: "Condition " ~ loop.index },  
-    value: { text: conditionExclude },
+    value: { text: conditionsExclude },
     actions: {
       items: [
         {
