@@ -329,6 +329,8 @@ router.post('/create-recruit-condition-answers', function (req, res) {
             }
         }
 
+        res.redirect('create-check-answers');
+
     } else {
 
         res.redirect('create-recruit-condition-answers');
@@ -405,6 +407,8 @@ router.post('/create-exclude-condition-answers', function (req, res) {
             }
         }
 
+        res.redirect('create-check-answers');
+
     } else {
 
         res.redirect('create-exclude-condition-answers');
@@ -475,6 +479,8 @@ router.post('/create-recruit-medication-answers', function (req, res) {
             }
         }
 
+        res.redirect('create-check-answers');
+
     } else {
 
         res.redirect('create-recruit-medication-answers');
@@ -536,6 +542,8 @@ router.post('/create-exclude-medication-answers', function (req, res) {
 
             }
         }
+
+        res.redirect('create-check-answers');
 
     } else {
 
