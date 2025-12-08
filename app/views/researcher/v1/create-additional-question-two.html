@@ -52,7 +52,6 @@
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Help</a></li>
         </ul>
       </nav>
-
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
@@ -62,90 +61,128 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<form action="/{{folder}}/{{subfolder}}/create-inclusion-exclusion-criteria" method="post" novalidate>
+<h1>Add additional questions</h1>
+
+<p>You can add up to 5 further questions.</p>
+
+<p>Before you submit these, you should check:</p>
+
+<ul>
+  <li>the order they’re in</li>
+  <li>the wording, spelling and punctuation - they’ll appear to potential participants exactly as you enter them</li>
+  <li>if you want to set one of the questions as a soft fail</li>
+</ul>
+
+{% call details({
+  summaryText: "What is a soft fail question?"
+}) %}
+  <p>You can choose to set one of your questions as a soft fail.</p>
+  <p>A soft fail question will not exclude any potential participants. If they meet all of the other criteria for your study, their answer will mean they either:</p>
+  <ul>
+    <li>continue to the next phase</li>
+    <li>go onto a waiting list -  you can choose to contact them later if you do not get enough participants </li>
+  </ul>
+  <p>Any other questions you add will be hard fails.</p>
+  <p>You do not need to add a soft fail.</p>
+{% endcall %}
+
+{% call details({
+  summaryText: "Collecting potential participants' data"
+}) %}
+  <p>You should only collect data that’s relevant to your study. </p>
+  <p>Any questions you ask must comply with the data retention policies for Recruit Registry Volunteers.</p>
+{% endcall %}
+
+{{ warningCallout({
+  heading: "Important",
+  text: "You can only enter questions with a yes or no answer"
+}) }}
+
+<form action="/{{folder}}/{{subfolder}}/create-additional-question-two" method="post" novalidate>
 
 {% call fieldset({
   legend: {
-    text: "Set your inclusion and exclusion criteria",
-    classes: "nhsuk-fieldset__legend--xl",
+    text: "Question 2",
+    classes: "nhsuk-fieldset__legend--l",
     isPageHeading: true
   }
 }) %}
 
-{{ hint({
-  text: "Select one or more options."
+{{ characterCount({
+  name: "question2Text",
+  id: "question2Text",
+  maxwords: 200,
+  label: {
+    text: "Enter your question"
+  }
 }) }}
 
-{{ checkboxes({
-  idPrefix: "addhealthConditions",
-  name: "addhealthConditions",
-  values: data.addhealthConditions or [],
+{{ radios({
+  idPrefix: "question2Answer",
+  name: "question2Answer",
+  classes: "nhsuk-radios--inline",
   fieldset: {
     legend: {
-      text: "Add health conditions",
-      classes: "nhsuk-fieldset__legend--m"
-    }
-  },
-  items: [
-    {
-      value: "Recruit by health condition",
-      text: "Recruit by health condition"
-    },
-    {
-      value: "Exclude by health condition",
-      text: "Exclude by health condition"
-    }
-  ]
-}) }}
-
-{{ checkboxes({
-  idPrefix: "addMedications",
-  name: "addMedications",
-  values: data.addMedications or [],
-  fieldset: {
-    legend: {
-      text: "Add medications",
-      classes: "nhsuk-fieldset__legend--m"
-    }
-  },
-  items: [
-    {
-      value: "Recruit by medication",
-      text: "Recruit by medication"
-    },
-    {
-      value: "Exclude by medication",
-      text: "Exclude by medication"
-    }
-  ]
-}) }}
-
-{{ checkboxes({
-  idPrefix: "addAdditionalQuestion",
-  name: "addAdditionalQuestion",
-  values: data.addAdditionalQuestion or [],
-  fieldset: {
-    legend: {
-      text: "Add additional questions",
-      classes: "nhsuk-fieldset__legend--m"
+      text: "Which answer should be given to continue to the next phase?",
+      size: "m"
     }
   },
   hint: {
-    text: "You can add up to 5 additional questions if you’d like to pre-screen volunteers further. Any questions you add must have a yes or no answer."
+    text: "Select the answer needed to continue to the next stage."
   },
   items: [
     {
-      value: "I’d like to add additional questions",
-      text: "I’d like to add additional questions"
+      value: "Yes",
+      text: "Yes"
+    },
+    {
+      value: "No",
+      text: "No"
     }
   ]
 }) }}
+
+{% if not (
+    data.question1SoftFail == "Yes"
+    or data.question2SoftFail == "Yes"
+    or data.question3SoftFail == "Yes"
+    or data.question4SoftFail == "Yes"
+    or data.question5SoftFail == "Yes"
+) %}
+
+  {{ radios({
+    idPrefix: "question2SoftFail",
+    name: "question2SoftFail",
+    classes: "nhsuk-radios--inline",
+    fieldset: {
+      legend: {
+        text: "Is this a soft fail?",
+        size: "m"
+      }
+    },
+    hint: {
+      text: "You can only add one soft fail."
+    },
+    items: [
+      {
+        value: "Yes",
+        text: "Yes"
+      },
+      {
+        value: "No",
+        text: "No"
+      }
+    ]
+  }) }}
+
+{% endif %}
+
+{% endcall %}
 
 {{ button({
   text: "Save and continue"
 }) }}
 
-{% endcall %}
 </form>
 
     </div>

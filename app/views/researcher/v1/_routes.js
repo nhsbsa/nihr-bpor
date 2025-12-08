@@ -243,7 +243,7 @@ router.post('/create-inclusion-exclusion-criteria', function (req, res) {
 
     } else if (addAdditionalQuestion && addAdditionalQuestion.includes("I’d like to add additional questions")) {
 
-        res.redirect('create-additional-questions');
+        res.redirect('create-additional-question-one');
 
     } else {
 
@@ -324,7 +324,7 @@ router.post('/create-recruit-condition-answers', function (req, res) {
         if (addAdditionalQuestion) {
             if (addAdditionalQuestion.includes('I’d like to add additional questions')) {
 
-                res.redirect('create-additional-questions');
+                res.redirect('create-additional-question-one');
 
             }
         }
@@ -402,7 +402,7 @@ router.post('/create-exclude-condition-answers', function (req, res) {
         if (addAdditionalQuestion) {
             if (addAdditionalQuestion.includes('I’d like to add additional questions')) {
 
-                res.redirect('create-additional-questions');
+                res.redirect('create-additional-question-one');
 
             }
         }
@@ -474,7 +474,7 @@ router.post('/create-recruit-medication-answers', function (req, res) {
         if (addAdditionalQuestion) {
             if (addAdditionalQuestion.includes('I’d like to add additional questions')) {
 
-                res.redirect('create-additional-questions');
+                res.redirect('create-additional-question-one');
 
             }
         }
@@ -538,7 +538,7 @@ router.post('/create-exclude-medication-answers', function (req, res) {
         if (addAdditionalQuestion) {
             if (addAdditionalQuestion.includes('I’d like to add additional questions')) {
 
-                res.redirect('create-additional-questions');
+                res.redirect('create-additional-question-one');
 
             }
         }
@@ -550,6 +550,132 @@ router.post('/create-exclude-medication-answers', function (req, res) {
         res.redirect('create-exclude-medication-answers');
 
     }
+
+});
+
+// Additional Questions
+
+router.post('/create-additional-question-one', function (req, res) {
+
+    var question1Text = req.session.data['question1Text'];
+    var question1Answer = req.session.data['question1Answer'];
+    var question1SoftFail = req.session.data['question1SoftFail'];
+
+    if (question1Text && question1Answer) {
+
+        res.redirect('create-additional-question-answers');
+
+    } else {
+
+        res.redirect('create-additional-question-one');
+
+    }
+})
+
+router.post('/create-additional-question-two', function (req, res) {
+
+    var question2Text = req.session.data['question2Text'];
+    var question2Answer = req.session.data['question2Answer'];
+    var question2SoftFail = req.session.data['question2SoftFail'];
+
+    if (question2Text && question2Answer) {
+
+        res.redirect('create-additional-question-answers');
+
+    } else {
+
+        res.redirect('create-additional-question-two');
+
+    }
+})
+
+router.post('/create-additional-question-three', function (req, res) {
+
+    var question3Text = req.session.data['question3Text'];
+    var question3Answer = req.session.data['question3Answer'];
+    var question3SoftFail = req.session.data['question3SoftFail'];
+
+    if (question3Text && question3Answer) {
+
+        res.redirect('create-additional-question-answers');
+
+    } else {
+
+        res.redirect('create-additional-question-three');
+
+    }
+})
+
+router.post('/create-additional-question-four', function (req, res) {
+
+    var question4Text = req.session.data['question4Text'];
+    var question4Answer = req.session.data['question4Answer'];
+    var question4SoftFail = req.session.data['question4SoftFail'];
+
+    if (question4Text && question4Answer) {
+
+        res.redirect('create-additional-question-answers');
+
+    } else {
+
+        res.redirect('create-additional-question-four');
+
+    }
+})
+
+router.post('/create-additional-question-five', function (req, res) {
+
+    var question5Text = req.session.data['question5Text'];
+    var question5Answer = req.session.data['question5Answer'];
+    var question5SoftFail = req.session.data['question5SoftFail'];
+
+    if (question5Text && question5Answer) {
+
+        res.redirect('create-additional-question-answers');
+
+    } else {
+
+        res.redirect('create-additional-question-five');
+
+    }
+})
+
+router.post('/create-additional-question-answers', function (req, res) {
+
+    var anotherQuestion = req.session.data['anotherQuestion'];
+    var question1Text = req.session.data['question1Text'];
+    var question2Text = req.session.data['question2Text'];
+    var question3Text = req.session.data['question3Text'];
+    var question4Text = req.session.data['question4Text'];
+    var question5Text = req.session.data['question5Text'];
+
+    if (anotherQuestion !== "Yes") {
+        res.redirect('create-check-answers');
+    }
+
+    // Go to the next unanswered question
+    if (!question1Text) {
+        res.redirect('create-additional-question-one');
+    } 
+
+    if (!question2Text) {
+        res.redirect('create-additional-question-two');
+    }
+
+    if (!question3Text) {
+        res.redirect('create-additional-question-three');
+    }
+
+    if (!question4Text) {
+        res.redirect('create-additional-question-four');
+    }
+
+    if (!question5Text) {
+        res.redirect('create-additional-question-five');
+    }
+
+    // All questions answered
+    res.redirect('create-additional-question-answers');
 
 });
 

@@ -61,162 +61,7 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<h1>Check your answers</h1>
-
-<h2 class="nhsuk-heading-s">
-  Study details
-</h2>
-
-<dl class="nhsuk-summary-list">
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Full study name
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-        {% if data['studyName'] %}{{ data['studyName'] }}{% else %}Cognitive therapy in Dementia{% endif %}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-study-details#studyName">Change<span class="nhsuk-u-visually-hidden"> full study name</span></a>
-      </dd>
-   </div>
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Study ID
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-        {% if data['studyID'] %}{{ data['studyID'] }}{% else %}ABC-1234{% endif %}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-study-details#studyID">Change<span class="nhsuk-u-visually-hidden"> study ID</span></a>
-      </dd>
-   </div>
-   {% if data['researchArmSubset'] %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Research arm or subset
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-        {{ data['researchArmSubset'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-study-details#researchArmSubset">Change<span class="nhsuk-u-visually-hidden"> research arm or subset</span></a>
-      </dd>
-   </div>
-   {% endif %}
-</dl>
-
-{% if data.addhealthConditions and "Recruit by health condition" in data.addhealthConditions %}
-
-  <h2 class="nhsuk-heading-s">
-    Conditions to include
-  </h2>
-
-  {% set rows = [] %}
-
-  {% for condition in data.conditions %}
-    {% set _ = rows.push({
-      key: { text: "Condition " ~ loop.index },  
-      value: { text: condition },
-      actions: {
-        items: [
-          {
-            href: "/change-condition/" ~ (loop.index0),  
-            text: "Remove",
-            visuallyHiddenText: "condition " ~ loop.index
-          }
-        ]
-      }
-    }) %}
-  {% endfor %}
-
-  {{ summaryList({ rows: rows }) }}
-
-{% endif %}
-
-{% if data.addhealthConditions and "Exclude by health condition" in data.addhealthConditions %}
-
-  <h2 class="nhsuk-heading-s">
-    Conditions to exclude
-  </h2>
-
-  {% set rows2 = [] %}
-
-  {% for conditionsExclude in data.conditionsExclude %}
-    {% set _ = rows2.push({
-      key: { text: "Condition " ~ loop.index },  
-      value: { text: conditionsExclude },
-      actions: {
-        items: [
-          {
-            href: "/change-condition/" ~ (loop.index0),  
-            text: "Remove",
-            visuallyHiddenText: "condition " ~ loop.index
-          }
-        ]
-      }
-    }) %}
-  {% endfor %}
-
-  {{ summaryList({ rows: rows2 }) }}
-
-
-{% endif %}
-
-{% if data.addMedications and "Recruit by medication" in data.addMedications %}
-
-  <h2 class="nhsuk-heading-s">
-    Medications to include
-  </h2>
-
-  {% set rows3 = [] %}
-
-  {% for medication in data.medications %}
-    {% set _ = rows3.push({
-      key: { text: "Medication " ~ loop.index },  
-      value: { text: medication },
-      actions: {
-        items: [
-          {
-            href: "/change-medication/" ~ (loop.index0),  
-            text: "Remove",
-            visuallyHiddenText: "medication " ~ loop.index
-          }
-        ]
-      }
-    }) %}
-  {% endfor %}
-
-  {{ summaryList({ rows: rows3 }) }}
-
-{% endif %}
-
-{% if data.addMedications and "Exclude by medication" in data.addMedications %}
-
-  <h2 class="nhsuk-heading-s">
-    Medications to exclude
-  </h2>
-
-  {% set rows4 = [] %}
-
-  {% for medicationExclude in data.medicationsExclude %}
-    {% set _ = rows4.push({
-      key: { text: "Medication " ~ loop.index },  
-      value: { text: medicationExclude },
-      actions: {
-        items: [
-          {
-            href: "/change-medication/" ~ (loop.index0),  
-            text: "Remove",
-            visuallyHiddenText: "medication " ~ loop.index
-          }
-        ]
-      }
-    }) %}
-  {% endfor %}
-
-  {{ summaryList({ rows: rows4 }) }}
-
-{% endif %}
+<h1>List of additional questions</h1>
 
 {% if data['question1Text'] %}
 
@@ -438,17 +283,40 @@
 
 {% endif %}
 
-<h2 class="nhsuk-heading-s">Now submit your pre-screener</h2>
+{% if not (data.question5Text) %}
 
-<p>You can check the how your pre-screener will appear to volunteers.</p>
+<form action="/{{folder}}/{{subfolder}}/create-additional-question-answers" method="post" novalidate>
 
-<p>After you submit it, it’ll be sent to our admin team for review.</p>
-
-{{ button({
-  text: "Confirm and submit",
-  href: "create-submitted"
+{{ radios({
+  idPrefix: "anotherQuestion",
+  name: "anotherQuestion",
+  classes: "nhsuk-radios--inline",
+  fieldset: {
+    legend: {
+      text: "Do you want to add another question?",
+      size: "m",
+      isPageHeading: true
+    }
+  },
+  items: [
+    {
+      value: "Yes",
+      text: "Yes"
+    },
+    {
+      value: "No",
+      text: "No"
+    }
+  ]
 }) }}
 
+{{ button({
+  text: "Continue"
+}) }}
+
+</form>
+
+{% endif %}
 
 
     </div>

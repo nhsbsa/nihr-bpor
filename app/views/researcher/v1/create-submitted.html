@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Set your inclusion and exclusion criteria" %}
+{% set pageName = "Create a pre-screener for your study" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -52,16 +52,22 @@
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Help</a></li>
         </ul>
       </nav>
+
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-{{ backLink({
-    "href": "javascript:history.go(-1)",
-    "text": "Back",
-    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
-}) }}
+    {{ panel({
+      titleText: "Pre-screener submitted"
+    }) }}
 
-<h1>ADDITIONAL QUESTIONS</h1>
+    <p>We’ll review your pre-screener and email you to either:</p>
+
+    <ul>
+      <li>confirm it’s ready to be sent out</li>
+      <li>ask you to make some changes and resubmit it for another review</li>
+    </ul>
+
+    <p>You can also download a copy of your pre-screener.</p>
 
     </div>
   </div>
