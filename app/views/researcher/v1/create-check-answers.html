@@ -454,10 +454,18 @@
 
 <p>After you submit it, it’ll be sent to our admin team for review.</p>
 
-{{ button({
-  text: "Confirm and submit",
-  href: "create-submitted"
-}) }}
+<div class="nhsuk-button-group">
+  {{ button({
+    text: "Confirm and submit",
+    href: "create-submitted"
+  }) }}
+
+  {{ button({
+    text: "Volunteer view",
+    href: "create-check-volunteer-view",
+    classes: "nhsuk-button--secondary"
+  }) }}
+</div>
 
 
 
