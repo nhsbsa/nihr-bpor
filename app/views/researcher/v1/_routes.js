@@ -198,6 +198,8 @@ router.post('/delete-account', function (req, res) {
 
 router.post('/create-start', function (req, res) {
 
+    req.session.destroy()
+
     res.redirect('create-study-details');
 
 });
