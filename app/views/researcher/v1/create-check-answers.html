@@ -63,7 +63,7 @@
 
 <h1>Check your answers</h1>
 
-<h2 class="nhsuk-heading-s">
+<h2 class="nhsuk-heading-m">
   Study details
 </h2>
 
@@ -81,153 +81,160 @@
    </div>
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Study ID
+         Be Part of Research study ID
       </dt>
       <dd class="nhsuk-summary-list__value">
-        {% if data['studyID'] %}{{ data['studyID'] }}{% else %}ABC-1234{% endif %}
+        {% if data['studyID'] %}{{ data['studyID'] }}{% else %}BPOR001234{% endif %}
       </dd>
       <dd class="nhsuk-summary-list__actions">
          <a class="nhsuk-link" href="create-study-details#studyID">Change<span class="nhsuk-u-visually-hidden"> study ID</span></a>
       </dd>
    </div>
-   {% if data['researchArmSubset'] %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Research arm or subset
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-        {{ data['researchArmSubset'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-study-details#researchArmSubset">Change<span class="nhsuk-u-visually-hidden"> research arm or subset</span></a>
-      </dd>
-   </div>
-   {% endif %}
 </dl>
 
-{% if data.addhealthConditions and "Recruit by health condition" in data.addhealthConditions %}
-
-  <h2 class="nhsuk-heading-s">
-    Conditions to include
-  </h2>
-
-  {% set rows = [] %}
-
-  {% for condition in data.conditions %}
-    {% set _ = rows.push({
-      key: { text: "Condition " ~ loop.index },  
-      value: { text: condition },
-      actions: {
-        items: [
-          {
-            href: "/change-condition/" ~ (loop.index0),  
-            text: "Remove",
-            visuallyHiddenText: "condition " ~ loop.index
-          }
-        ]
-      }
-    }) %}
-  {% endfor %}
-
-  {{ summaryList({ rows: rows }) }}
-
-{% endif %}
-
-{% if data.addhealthConditions and "Exclude by health condition" in data.addhealthConditions %}
-
-  <h2 class="nhsuk-heading-s">
-    Conditions to exclude
-  </h2>
-
-  {% set rows2 = [] %}
-
-  {% for conditionsExclude in data.conditionsExclude %}
-    {% set _ = rows2.push({
-      key: { text: "Condition " ~ loop.index },  
-      value: { text: conditionsExclude },
-      actions: {
-        items: [
-          {
-            href: "/change-condition/" ~ (loop.index0),  
-            text: "Remove",
-            visuallyHiddenText: "condition " ~ loop.index
-          }
-        ]
-      }
-    }) %}
-  {% endfor %}
-
-  {{ summaryList({ rows: rows2 }) }}
-
-
-{% endif %}
-
-{% if data.addMedications and "Recruit by medication" in data.addMedications %}
-
-  <h2 class="nhsuk-heading-s">
-    Medications to include
-  </h2>
-
-  {% set rows3 = [] %}
-
-  {% for medication in data.medications %}
-    {% set _ = rows3.push({
-      key: { text: "Medication " ~ loop.index },  
-      value: { text: medication },
-      actions: {
-        items: [
-          {
-            href: "/change-medication/" ~ (loop.index0),  
-            text: "Remove",
-            visuallyHiddenText: "medication " ~ loop.index
-          }
-        ]
-      }
-    }) %}
-  {% endfor %}
-
-  {{ summaryList({ rows: rows3 }) }}
-
-{% endif %}
-
-{% if data.addMedications and "Exclude by medication" in data.addMedications %}
-
-  <h2 class="nhsuk-heading-s">
-    Medications to exclude
-  </h2>
-
-  {% set rows4 = [] %}
-
-  {% for medicationExclude in data.medicationsExclude %}
-    {% set _ = rows4.push({
-      key: { text: "Medication " ~ loop.index },  
-      value: { text: medicationExclude },
-      actions: {
-        items: [
-          {
-            href: "/change-medication/" ~ (loop.index0),  
-            text: "Remove",
-            visuallyHiddenText: "medication " ~ loop.index
-          }
-        ]
-      }
-    }) %}
-  {% endfor %}
-
-  {{ summaryList({ rows: rows4 }) }}
-
-{% endif %}
-
-{% if data['question1Text'] %}
-
-<h2 class="nhsuk-heading-s">
-  Question 1
+<h2 class="nhsuk-heading-m">
+  Inclusion and exclusion criteria details
 </h2>
 
 <dl class="nhsuk-summary-list">
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         First question
+         Criteria selected
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+         {% if data.addhealthConditions %}
+         {{ data.addhealthConditions | join('<br>') | safe }}
+         <br>
+         {% endif %}
+         {% if data.addMedications %}
+         {{ data.addMedications | join('<br>') | safe }}
+         <br>
+         {% endif %}
+         {% if data.addAdditionalQuestion %}
+         {{ data.addAdditionalQuestion | join('<br>') | safe }}
+         {% endif %}
+      </dd>
+      <dd class="nhsuk-summary-list__actions">
+         <a class="nhsuk-link" href="create-inclusion-exclusion-criteria#addhealthConditions">Change<span class="nhsuk-u-visually-hidden"> inclusion and exclusion criteria</span></a>
+      </dd>
+   </div>
+</dl>
+
+{% if 'Recruit by health condition' in data.addhealthConditions or 'Exclude by health condition' in data.addhealthConditions %}
+
+  <h2 class="nhsuk-heading-m">
+    Health condition details
+  </h2>
+
+{% endif %}
+
+{% if 'Recruit by health condition' in data.addhealthConditions %}
+
+  <dl class="nhsuk-summary-list">
+   <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+         Recruit by health condition
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+         {% for condition in data.conditions %}
+         {{ condition }}
+         <br>
+         {% endfor %}
+      </dd>
+      <dd class="nhsuk-summary-list__actions">
+         <a class="nhsuk-link" href="create-recruit-condition-answers#recruitAnotherCondition">Change<span class="nhsuk-u-visually-hidden"> health conditions to recruit for</span></a>
+      </dd>
+   </div>
+</dl>
+
+{% endif %}
+
+{% if 'Exclude by health condition' in data.addhealthConditions %}
+
+  <dl class="nhsuk-summary-list">
+   <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+         Exclude by health condition
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+         {% for conditionsExclude in data.conditionsExclude %}
+         {{ conditionsExclude }}
+         <br>
+         {% endfor %}
+      </dd>
+      <dd class="nhsuk-summary-list__actions">
+         <a class="nhsuk-link" href="create-exclude-condition-answers#excludeAnotherCondition">Change<span class="nhsuk-u-visually-hidden"> health conditions to exclude for</span></a>
+      </dd>
+   </div>
+</dl>
+
+{% endif %}
+
+{% if 'Recruit by medication' in data.addMedications or 'Exclude by medication' in data.addMedications %}
+
+  <h2 class="nhsuk-heading-m">
+    Medication details
+  </h2>
+
+{% endif %}
+
+{% if 'Recruit by medication' in data.addMedications %}
+
+  <dl class="nhsuk-summary-list">
+   <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+         Recruit by medication
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+         {% for medication in data.medications %}
+         {{ medication }}
+         <br>
+         {% endfor %}
+      </dd>
+      <dd class="nhsuk-summary-list__actions">
+         <a class="nhsuk-link" href="create-recruit-medication-answers#recruitAnotherMedication">Change<span class="nhsuk-u-visually-hidden"> medications to recruit for</span></a>
+      </dd>
+   </div>
+</dl>
+
+{% endif %}
+
+{% if 'Exclude by medication' in data.addMedications %}
+
+  <dl class="nhsuk-summary-list">
+   <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+         Exclude by medication
+      </dt>
+      <dd class="nhsuk-summary-list__value">
+         {% for medicationExclude in data.medicationsExclude %}
+         {{ medicationExclude }}
+         <br>
+         {% endfor %}
+      </dd>
+      <dd class="nhsuk-summary-list__actions">
+         <a class="nhsuk-link" href="create-exclude-medication-answers#recruitAnotherMedication">Change<span class="nhsuk-u-visually-hidden"> medications to exclude for</span></a>
+      </dd>
+   </div>
+</dl>
+
+{% endif %}
+
+{% if data.addAdditionalQuestion %}
+
+<h2 class="nhsuk-heading-m">
+  Additional questions
+</h2>
+
+{% endif %}
+
+<dl class="nhsuk-summary-list">
+
+   {% if data['question1Text'] %}
+
+   <div class="nhsuk-summary-list__row">
+      <dt class="nhsuk-summary-list__key">
+         Question 1
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question1Text'] }}
@@ -247,33 +254,14 @@
          <a class="nhsuk-link" href="create-additional-question-one#question1Answer">Change<span class="nhsuk-u-visually-hidden"> question one</span></a>
       </dd>
    </div>
-   {% if data['question1SoftFail'] == "Yes" %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Soft fail
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question1SoftFail'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-one#question1SoftFail">Change<span class="nhsuk-u-visually-hidden"> question one</span></a>
-      </dd>
-   </div>
+
    {% endif %}
-</dl>
 
-{% endif %}
+   {% if data['question2Text'] %}
 
-{% if data['question2Text'] %}
-
-<h2 class="nhsuk-heading-s">
-  Question 2
-</h2>
-
-<dl class="nhsuk-summary-list">
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Second question
+         Question 2
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question2Text'] }}
@@ -293,33 +281,14 @@
          <a class="nhsuk-link" href="create-additional-question-two#question2Answer">Change<span class="nhsuk-u-visually-hidden"> question two</span></a>
       </dd>
    </div>
-   {% if data['question2SoftFail'] == "Yes" %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Soft fail
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question2SoftFail'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-two#question2SoftFail">Change<span class="nhsuk-u-visually-hidden"> question two</span></a>
-      </dd>
-   </div>
+
    {% endif %}
-</dl>
 
-{% endif %}
+   {% if data['question3Text'] %}
 
-{% if data['question3Text'] %}
-
-<h2 class="nhsuk-heading-s">
-  Question 3
-</h2>
-
-<dl class="nhsuk-summary-list">
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Third question
+         Question 3
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question3Text'] }}
@@ -339,33 +308,14 @@
          <a class="nhsuk-link" href="create-additional-question-three#question3Answer">Change<span class="nhsuk-u-visually-hidden"> question three</span></a>
       </dd>
    </div>
-   {% if data['question3SoftFail'] %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Soft fail
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question3SoftFail'] == "Yes" }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-three#question3SoftFail">Change<span class="nhsuk-u-visually-hidden"> question three</span></a>
-      </dd>
-   </div>
+
    {% endif %}
-</dl>
 
-{% endif %}
+   {% if data['question4Text'] %}
 
-{% if data['question4Text'] %}
-
-<h2 class="nhsuk-heading-s">
-  Question 4
-</h2>
-
-<dl class="nhsuk-summary-list">
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Fourth question
+         Question 4
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question4Text'] }}
@@ -385,33 +335,14 @@
          <a class="nhsuk-link" href="create-additional-question-four#question4Answer">Change<span class="nhsuk-u-visually-hidden"> question four</span></a>
       </dd>
    </div>
-   {% if data['question4SoftFail'] == "Yes" %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Soft fail
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question4SoftFail'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-four#question4SoftFail">Change<span class="nhsuk-u-visually-hidden"> question four</span></a>
-      </dd>
-   </div>
+
    {% endif %}
-</dl>
 
-{% endif %}
+   {% if data['question4Text'] %}
 
-{% if data['question5Text'] %}
-
-<h2 class="nhsuk-heading-s">
-  Question 5
-</h2>
-
-<dl class="nhsuk-summary-list">
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Fifth question
+         Question 5
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question5Text'] }}
@@ -431,43 +362,21 @@
          <a class="nhsuk-link" href="create-additional-question-five#question5Answer">Change<span class="nhsuk-u-visually-hidden"> question five</span></a>
       </dd>
    </div>
-   {% if data['question5SoftFail'] == "Yes" %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Soft fail
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question5SoftFail'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-five#question5SoftFail">Change<span class="nhsuk-u-visually-hidden"> question five</span></a>
-      </dd>
-   </div>
+
    {% endif %}
+
 </dl>
 
-{% endif %}
+<h2 class="nhsuk-heading-m">Now submit your pre-screener</h2>
 
-<h2 class="nhsuk-heading-s">Now submit your pre-screener</h2>
-
-<p>You can check the how your pre-screener will appear to volunteers.</p>
+<p>You can <a href="create-check-volunteer-view">check the how your pre-screener will appear to volunteers</a>.</p>
 
 <p>After you submit it, it’ll be sent to our admin team for review.</p>
 
-<div class="nhsuk-button-group">
   {{ button({
-    text: "Confirm and submit",
+    text: "Submit",
     href: "create-submitted"
   }) }}
-
-  {{ button({
-    text: "Volunteer view",
-    href: "create-check-volunteer-view",
-    classes: "nhsuk-button--secondary"
-  }) }}
-</div>
-
-
 
     </div>
   </div>

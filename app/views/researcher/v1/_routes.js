@@ -208,7 +208,6 @@ router.post('/create-study-details', function (req, res) {
 
     var studyName = req.session.data['studyName'];
     var studyID = req.session.data['studyID'];
-    var researchArmSubset = req.session.data['researchArmSubset'];
 
     if (studyName && studyID) {
 

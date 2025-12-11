@@ -75,7 +75,7 @@
          Question
          </th>
          <th scope="col" class="nhsuk-table__header">
-         Matching answer
+         Required answer
          </th>
       </tr>
    </thead>
@@ -112,7 +112,7 @@
          Question
          </th>
          <th scope="col" class="nhsuk-table__header">
-         Matching answer
+         Required answer
          </th>
       </tr>
    </thead>
@@ -149,7 +149,7 @@
          Question
          </th>
          <th scope="col" class="nhsuk-table__header">
-         Matching answer
+         Required answer
          </th>
       </tr>
    </thead>
@@ -196,17 +196,11 @@
 
 {% endif %}
 
-<div class="nhsuk-button-group">
   {{ button({
     text: "Researcher view",
+    classes: "nhsuk-button--secondary",
     href: "create-check-answers"
   }) }}
-
-  {{ button({
-    text: "Export pre-screener",
-    classes: "nhsuk-button--secondary"
-  }) }}
-</div>
 
     </div>
   </div>
