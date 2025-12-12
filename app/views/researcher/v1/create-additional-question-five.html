@@ -93,7 +93,8 @@
   label: {
     text: "Question 5",
     classes: "nhsuk-label--l"
-  }
+  },
+  value: data.question5Text
 }) }}
 
 {{ radios({
@@ -112,11 +113,13 @@
   items: [
     {
       value: "Yes",
-      text: "Yes"
+      text: "Yes",
+      checked: checked("question5Answer", "Yes")
     },
     {
       value: "No",
-      text: "No"
+      text: "No",
+      checked: checked("question5Answer", "No")
     }
   ]
 }) }}
