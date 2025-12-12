@@ -2,40 +2,18 @@
 
 {% set currentPage = "Create pre-screener" %}
 
-<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
-
-<!-- Extends the layout from /app/views/layout.html -->
 {% extends 'layout-researcher-nihr-logged-in.html' %}
-<!--
-  In /app/views/layout.html you can:
-    - change the header and footer
-    - add custom CSS and JavaScript
--->
 
-<!--
-  Use this to set the page name which will appear at the
-  start of the <title> tag, followed by the service name.
-  This is often not needed on the homepage, where only the
-  service name is needed. You can also reuse this variable
-  within the <h1>, where they are the same.
--->
 {% set pageName = "Set your inclusion and exclusion criteria" %}
-
 {% set containerClasses = "nihr-dashboard" %}
 
-<!-- For adding a breadcrumb or back link -->
-<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
 {% block beforeContent %}
 {% endblock %}
 
-<!-- For adding page content -->
-<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
 {% block content %}
 
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
-
-      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
 
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
@@ -79,6 +57,7 @@
          <a class="nhsuk-link" href="create-study-details#studyName">Change<span class="nhsuk-u-visually-hidden"> full study name</span></a>
       </dd>
    </div>
+
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
          Be Part of Research study ID
@@ -120,16 +99,22 @@
    </div>
 </dl>
 
-{% if 'Recruit by health condition' in data.addhealthConditions or 'Exclude by health condition' in data.addhealthConditions %}
-
+{% if data.addhealthConditions 
+      and data.addhealthConditions | length 
+      and (
+          'Recruit by health condition' in data.addhealthConditions or
+          'Exclude by health condition' in data.addhealthConditions
+      )
+%}
   <h2 class="nhsuk-heading-m">
     Health condition details
   </h2>
-
 {% endif %}
 
-{% if 'Recruit by health condition' in data.addhealthConditions %}
-
+{% if data.addhealthConditions 
+      and data.addhealthConditions | length 
+      and 'Recruit by health condition' in data.addhealthConditions 
+%}
   <dl class="nhsuk-summary-list">
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
@@ -137,20 +122,20 @@
       </dt>
       <dd class="nhsuk-summary-list__value">
          {% for condition in data.conditions %}
-         {{ condition }}
-         <br>
+         {{ condition }}<br>
          {% endfor %}
       </dd>
       <dd class="nhsuk-summary-list__actions">
          <a class="nhsuk-link" href="create-recruit-condition-answers#recruitAnotherCondition">Change<span class="nhsuk-u-visually-hidden"> health conditions to recruit for</span></a>
       </dd>
    </div>
-</dl>
-
+  </dl>
 {% endif %}
 
-{% if 'Exclude by health condition' in data.addhealthConditions %}
-
+{% if data.addhealthConditions 
+      and data.addhealthConditions | length 
+      and 'Exclude by health condition' in data.addhealthConditions 
+%}
   <dl class="nhsuk-summary-list">
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
@@ -158,28 +143,32 @@
       </dt>
       <dd class="nhsuk-summary-list__value">
          {% for conditionsExclude in data.conditionsExclude %}
-         {{ conditionsExclude }}
-         <br>
+         {{ conditionsExclude }}<br>
          {% endfor %}
       </dd>
       <dd class="nhsuk-summary-list__actions">
          <a class="nhsuk-link" href="create-exclude-condition-answers#excludeAnotherCondition">Change<span class="nhsuk-u-visually-hidden"> health conditions to exclude for</span></a>
       </dd>
    </div>
-</dl>
-
+  </dl>
 {% endif %}
 
-{% if 'Recruit by medication' in data.addMedications or 'Exclude by medication' in data.addMedications %}
-
+{% if data.addMedications 
+      and data.addMedications | length 
+      and (
+          'Recruit by medication' in data.addMedications or
+          'Exclude by medication' in data.addMedications
+      )
+%}
   <h2 class="nhsuk-heading-m">
     Medication details
   </h2>
-
 {% endif %}
 
-{% if 'Recruit by medication' in data.addMedications %}
-
+{% if data.addMedications 
+      and data.addMedications | length 
+      and 'Recruit by medication' in data.addMedications 
+%}
   <dl class="nhsuk-summary-list">
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
@@ -187,20 +176,20 @@
       </dt>
       <dd class="nhsuk-summary-list__value">
          {% for medication in data.medications %}
-         {{ medication }}
-         <br>
+         {{ medication }}<br>
          {% endfor %}
       </dd>
       <dd class="nhsuk-summary-list__actions">
          <a class="nhsuk-link" href="create-recruit-medication-answers#recruitAnotherMedication">Change<span class="nhsuk-u-visually-hidden"> medications to recruit for</span></a>
       </dd>
    </div>
-</dl>
-
+  </dl>
 {% endif %}
 
-{% if 'Exclude by medication' in data.addMedications %}
-
+{% if data.addMedications 
+      and data.addMedications | length 
+      and 'Exclude by medication' in data.addMedications 
+%}
   <dl class="nhsuk-summary-list">
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
@@ -208,163 +197,108 @@
       </dt>
       <dd class="nhsuk-summary-list__value">
          {% for medicationExclude in data.medicationsExclude %}
-         {{ medicationExclude }}
-         <br>
+         {{ medicationExclude }}<br>
          {% endfor %}
       </dd>
       <dd class="nhsuk-summary-list__actions">
          <a class="nhsuk-link" href="create-exclude-medication-answers#recruitAnotherMedication">Change<span class="nhsuk-u-visually-hidden"> medications to exclude for</span></a>
       </dd>
    </div>
-</dl>
-
+  </dl>
 {% endif %}
 
 {% if data.addAdditionalQuestion %}
-
 <h2 class="nhsuk-heading-m">
   Additional questions
 </h2>
-
 {% endif %}
 
 <dl class="nhsuk-summary-list">
 
    {% if data['question1Text'] %}
-
    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Question 1
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question1Text'] }}
-      </dd>
+      <dt class="nhsuk-summary-list__key">Question 1</dt>
+      <dd class="nhsuk-summary-list__value">{{ data['question1Text'] }}</dd>
       <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-one#question1Text">Change<span class="nhsuk-u-visually-hidden"> question one</span></a>
+        <a class="nhsuk-link" href="create-additional-question-one#question1Text">Change<span class="nhsuk-u-visually-hidden"> question one</span></a>
       </dd>
    </div>
    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Required answer
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question1Answer'] }}
-      </dd>
+      <dt class="nhsuk-summary-list__key">Matching answer 1</dt>
+      <dd class="nhsuk-summary-list__value">{{ data['question1Answer'] }}</dd>
       <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-one#question1Answer">Change<span class="nhsuk-u-visually-hidden"> question one</span></a>
+        <a class="nhsuk-link" href="create-additional-question-one#question1Answer">Change<span class="nhsuk-u-visually-hidden"> question one</span></a>
       </dd>
    </div>
-
    {% endif %}
 
    {% if data['question2Text'] %}
-
    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Question 2
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question2Text'] }}
-      </dd>
+      <dt class="nhsuk-summary-list__key">Question 2</dt>
+      <dd class="nhsuk-summary-list__value">{{ data['question2Text'] }}</dd>
       <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-two#question2Text">Change<span class="nhsuk-u-visually-hidden"> question two</span></a>
+        <a class="nhsuk-link" href="create-additional-question-two#question2Text">Change<span class="nhsuk-u-visually-hidden"> question two</span></a>
       </dd>
    </div>
    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Required answer
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question2Answer'] }}
-      </dd>
+      <dt class="nhsuk-summary-list__key">Matching answer 2</dt>
+      <dd class="nhsuk-summary-list__value">{{ data['question2Answer'] }}</dd>
       <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-two#question2Answer">Change<span class="nhsuk-u-visually-hidden"> question two</span></a>
+        <a class="nhsuk-link" href="create-additional-question-two#question2Answer">Change<span class="nhsuk-u-visually-hidden"> question two</span></a>
       </dd>
    </div>
-
    {% endif %}
 
    {% if data['question3Text'] %}
-
    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Question 3
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question3Text'] }}
-      </dd>
+      <dt class="nhsuk-summary-list__key">Question 3</dt>
+      <dd class="nhsuk-summary-list__value">{{ data['question3Text'] }}</dd>
       <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-three#question3Text">Change<span class="nhsuk-u-visually-hidden"> question three</span></a>
+        <a class="nhsuk-link" href="create-additional-question-three#question3Text">Change<span class="nhsuk-u-visually-hidden"> question three</span></a>
       </dd>
    </div>
    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Required answer
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question3Answer'] }}
-      </dd>
+      <dt class="nhsuk-summary-list__key">Matching answer 3</dt>
+      <dd class="nhsuk-summary-list__value">{{ data['question3Answer'] }}</dd>
       <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-three#question3Answer">Change<span class="nhsuk-u-visually-hidden"> question three</span></a>
+        <a class="nhsuk-link" href="create-additional-question-three#question3Answer">Change<span class="nhsuk-u-visually-hidden"> question three</span></a>
       </dd>
    </div>
-
    {% endif %}
 
    {% if data['question4Text'] %}
-
    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Question 4
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question4Text'] }}
-      </dd>
+      <dt class="nhsuk-summary-list__key">Question 4</dt>
+      <dd class="nhsuk-summary-list__value">{{ data['question4Text'] }}</dd>
       <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-four#question4Text">Change<span class="nhsuk-u-visually-hidden"> question four</span></a>
+        <a class="nhsuk-link" href="create-additional-question-four#question4Text">Change<span class="nhsuk-u-visually-hidden"> question four</span></a>
       </dd>
    </div>
    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Required answer
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question4Answer'] }}
-      </dd>
+      <dt class="nhsuk-summary-list__key">Matching answer 4</dt>
+      <dd class="nhsuk-summary-list__value">{{ data['question4Answer'] }}</dd>
       <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-four#question4Answer">Change<span class="nhsuk-u-visually-hidden"> question four</span></a>
+        <a class="nhsuk-link" href="create-additional-question-four#question4Answer">Change<span class="nhsuk-u-visually-hidden"> question four</span></a>
       </dd>
    </div>
-
    {% endif %}
 
-   {% if data['question4Text'] %}
-
+   {% if data['question5Text'] %}
    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Question 5
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question5Text'] }}
-      </dd>
+      <dt class="nhsuk-summary-list__key">Question 5</dt>
+      <dd class="nhsuk-summary-list__value">{{ data['question5Text'] }}</dd>
       <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-five#question5Text">Change<span class="nhsuk-u-visually-hidden"> question five</span></a>
+        <a class="nhsuk-link" href="create-additional-question-five#question5Text">Change<span class="nhsuk-u-visually-hidden"> question five</span></a>
       </dd>
    </div>
    <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Required answer
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question5Answer'] }}
-      </dd>
+      <dt class="nhsuk-summary-list__key">Matching answer 5</dt>
+      <dd class="nhsuk-summary-list__value">{{ data['question5Answer'] }}</dd>
       <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-five#question5Answer">Change<span class="nhsuk-u-visually-hidden"> question five</span></a>
+        <a class="nhsuk-link" href="create-additional-question-five#question5Answer">Change<span class="nhsuk-u-visually-hidden"> question five</span></a>
       </dd>
    </div>
-
    {% endif %}
-
 </dl>
 
 <h2 class="nhsuk-heading-m">Now submit your pre-screener</h2>
@@ -373,11 +307,12 @@
 
 <p>After you submit it, it’ll be sent to our admin team for review.</p>
 
-  {{ button({
-    text: "Submit",
-    href: "create-submitted"
-  }) }}
+{{ button({
+  text: "Submit",
+  href: "create-submitted"
+}) }}
 
     </div>
   </div>
+
 {% endblock %}

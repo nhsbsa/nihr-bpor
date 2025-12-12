@@ -63,16 +63,13 @@
 
 <h1>List of additional questions</h1>
 
-{% if data['question1Text'] %}
 
-<h2 class="nhsuk-heading-s">
-  Question 1
-</h2>
 
 <dl class="nhsuk-summary-list">
+   {% if data['question1Text'] %}
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         First question
+         Question 1
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question1Text'] }}
@@ -83,7 +80,7 @@
    </div>
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Required answer
+         Matching answer 1
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question1Answer'] }}
@@ -92,33 +89,11 @@
          <a class="nhsuk-link" href="create-additional-question-one#question1Answer">Change<span class="nhsuk-u-visually-hidden"> question one</span></a>
       </dd>
    </div>
-   {% if data['question1SoftFail'] == "Yes" %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Soft fail
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question1SoftFail'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-one#question1SoftFail">Change<span class="nhsuk-u-visually-hidden"> question one</span></a>
-      </dd>
-   </div>
    {% endif %}
-</dl>
-
-{% endif %}
-
-{% if data['question2Text'] %}
-
-<h2 class="nhsuk-heading-s">
-  Question 2
-</h2>
-
-<dl class="nhsuk-summary-list">
+   {% if data['question2Text'] %}
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Second question
+         Question 2
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question2Text'] }}
@@ -129,7 +104,7 @@
    </div>
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Required answer
+         Matching answer 2
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question2Answer'] }}
@@ -138,33 +113,11 @@
          <a class="nhsuk-link" href="create-additional-question-two#question2Answer">Change<span class="nhsuk-u-visually-hidden"> question two</span></a>
       </dd>
    </div>
-   {% if data['question2SoftFail'] == "Yes" %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Soft fail
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question2SoftFail'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-two#question2SoftFail">Change<span class="nhsuk-u-visually-hidden"> question two</span></a>
-      </dd>
-   </div>
    {% endif %}
-</dl>
-
-{% endif %}
-
-{% if data['question3Text'] %}
-
-<h2 class="nhsuk-heading-s">
-  Question 3
-</h2>
-
-<dl class="nhsuk-summary-list">
+   {% if data['question3Text'] %}
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Third question
+         Question 3
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question3Text'] }}
@@ -175,7 +128,7 @@
    </div>
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Required answer
+         Matching answer 3
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question3Answer'] }}
@@ -184,33 +137,11 @@
          <a class="nhsuk-link" href="create-additional-question-three#question3Answer">Change<span class="nhsuk-u-visually-hidden"> question three</span></a>
       </dd>
    </div>
-   {% if data['question3SoftFail'] == "Yes" %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Soft fail
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question3SoftFail'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-three#question3SoftFail">Change<span class="nhsuk-u-visually-hidden"> question three</span></a>
-      </dd>
-   </div>
    {% endif %}
-</dl>
-
-{% endif %}
-
-{% if data['question4Text'] %}
-
-<h2 class="nhsuk-heading-s">
-  Question 4
-</h2>
-
-<dl class="nhsuk-summary-list">
+   {% if data['question4Text'] %}
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Fourth question
+         Question 4
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question4Text'] }}
@@ -221,7 +152,7 @@
    </div>
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Required answer
+         Matching answer 4
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question4Answer'] }}
@@ -230,33 +161,11 @@
          <a class="nhsuk-link" href="create-additional-question-four#question4Answer">Change<span class="nhsuk-u-visually-hidden"> question four</span></a>
       </dd>
    </div>
-   {% if data['question4SoftFail'] == "Yes" %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Soft fail
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question4SoftFail'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-four#question4SoftFail">Change<span class="nhsuk-u-visually-hidden"> question four</span></a>
-      </dd>
-   </div>
    {% endif %}
-</dl>
-
-{% endif %}
-
-{% if data['question5Text'] %}
-
-<h2 class="nhsuk-heading-s">
-  Question 5
-</h2>
-
-<dl class="nhsuk-summary-list">
+   {% if data['question5Text'] %}
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Fifth question
+         Question 5
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question5Text'] }}
@@ -267,7 +176,7 @@
    </div>
    <div class="nhsuk-summary-list__row">
       <dt class="nhsuk-summary-list__key">
-         Required answer
+         Matching answer 5
       </dt>
       <dd class="nhsuk-summary-list__value">
          {{ data['question5Answer'] }}
@@ -276,22 +185,8 @@
          <a class="nhsuk-link" href="create-additional-question-five#question5Answer">Change<span class="nhsuk-u-visually-hidden"> question five</span></a>
       </dd>
    </div>
-   {% if data['question5SoftFail'] == "Yes" %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Soft fail
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question5SoftFail'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-five#question5SoftFail">Change<span class="nhsuk-u-visually-hidden"> question five</span></a>
-      </dd>
-   </div>
    {% endif %}
 </dl>
-
-{% endif %}
 
 {% if not (data.question5Text) %}
 
