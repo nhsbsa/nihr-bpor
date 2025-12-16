@@ -127,14 +127,14 @@
 
    {% for medications in data.medications %}
    <tr class="nhsuk-table__row">
-      <td class="nhsuk-table__cell">Do you currently take {{ medications }}?</td>
+      <td class="nhsuk-table__cell">Do you currently take {{ medications.drugName }}?</td>
       <td class="nhsuk-table__cell">Yes</td>
    </tr>
    {% endfor %}
 
    {% for medicationsExclude in data.medicationsExclude %}
    <tr class="nhsuk-table__row">
-      <td class="nhsuk-table__cell">Do you currently take {{ medicationsExclude }}?</td>
+      <td class="nhsuk-table__cell">Do you currently take {{ medicationsExclude.drugName }}?</td>
       <td class="nhsuk-table__cell">No</td>
    </tr>
    {% endfor %}
