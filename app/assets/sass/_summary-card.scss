@@ -1,0 +1,88 @@
+  // Additional block for the summary card
+  .nhsuk-summary-card {
+    @include nhsuk-responsive-margin(6, "bottom");
+    border: 1px solid nhsuk-colour("grey-4");
+  }
+
+  .nhsuk-summary-card__title-wrapper {
+    padding: nhsuk-spacing(3);
+
+    // Ensures the card header appears separate to the summary list in forced
+    // colours mode
+    border-bottom: 1px solid transparent;
+    background-color: nhsuk-colour("grey-4");
+
+    @include nhsuk-media-query($from: tablet) {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      padding: nhsuk-spacing(3) nhsuk-spacing(4);
+    }
+  }
+
+  .nhsuk-summary-card__title {
+    @include nhsuk-font($size: 19, $weight: bold);
+    @include nhsuk-text-colour;
+    margin: nhsuk-spacing(1) nhsuk-spacing(4) nhsuk-spacing(2) 0;
+
+    @include nhsuk-media-query($from: tablet) {
+      margin-bottom: nhsuk-spacing(1);
+    }
+  }
+
+  .nhsuk-summary-card__actions {
+    @include nhsuk-font-size($size: 19);
+    @include nhsuk-typography-weight-bold;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    margin: nhsuk-spacing(1) 0;
+    padding: 0;
+    list-style: none;
+
+    @include nhsuk-media-query($from: tablet) {
+      justify-content: right;
+      text-align: right;
+    }
+  }
+
+  .nhsuk-summary-card__action {
+    display: inline;
+
+    // We use the following media query to target IE11 and 10 only to add margin
+    // between actions.
+    //
+    // We do this because we're using row-gap to create space between actions on
+    // more evergreen browsers which IE doesn't support. @supports currently isn't
+    // a viable solution, see https://github.com/w3c/csswg-drafts/issues/3559.
+    //
+    // Solution taken from https://stackoverflow.com/questions/11173106/apply-style-only-on-ie#answer-36448860
+    // which also includes an explanation of why this works
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      margin-bottom: nhsuk-spacing(1);
+    }
+  }
+
+  .nhsuk-summary-card__action:last-child {
+    // See above comment for why this is here
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      margin-bottom: 0;
+    }
+  }
+
+  .nhsuk-summary-card__content {
+    padding: nhsuk-spacing(3) nhsuk-spacing(3) 0;
+
+    @include nhsuk-media-query($from: tablet) {
+      padding: nhsuk-spacing(3) nhsuk-spacing(4);
+    }
+
+    .nhsuk-summary-list {
+      margin-bottom: 0;
+    }
+
+    .nhsuk-summary-list__row:last-of-type {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+  }

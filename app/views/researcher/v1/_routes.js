@@ -424,13 +424,49 @@ router.post('/create-recruit-medication', function (req, res) {
 
     var listedMedication = req.session.data['listedMedication'];
 
+    var friendlyNames = [
+        "Dreamella",
+        "Neuroflux",
+        "Serenitide",
+        "Chronodine",
+        "Sleeptril",
+        "Viralux",
+        "Immunoboost X",
+        "Euphorium",
+        "Vortexil",
+        "Calmora",
+        "Metaburn",
+        "Revitalin",
+        "Imaginex",
+        "Luminex",
+        "Psychotranquil",
+        "Mindblend",
+        "Nexaclear",
+        "Ferroplaz",
+        "Subvibe",
+        "Neurozone"
+    ];
+
+    // Random number between 1 and 5
+    var count = Math.floor(Math.random() * 5) + 1;
+
+    // Shuffle the array and take the first `count` items
+    var randomFriendlyNames = [...friendlyNames]
+    .sort(() => 0.5 - Math.random())
+    .slice(0, count)
+    .join(", ");
+
     // Make sure the 'medications' array exists
     if (!req.session.data['medications']) {
         req.session.data['medications'] = [];
     }
 
-    // Add the new medication to the array
-    req.session.data['medications'].push(listedMedication);
+    // Push the new medication OBJECT
+    req.session.data['medications'].push({
+        drugName: listedMedication,
+        friendlyName: randomFriendlyNames,
+        listedMedication: true
+    });
 
     // Redirect to the next page
     res.redirect('create-recruit-medication-answers');
@@ -445,10 +481,31 @@ router.post('/create-recruit-non-listed-medication', function (req, res) {
         req.session.data['medications'] = [];
     }
 
-    // Add the new medication to the array
-    req.session.data['medications'].push(nonListedMedication);
+    // The index will be the current length (before push)
+    const newIndex = req.session.data['medications'].length;
+
+    // Push the new medication OBJECT
+    req.session.data['medications'].push({
+        drugName: nonListedMedication,
+        friendlyName: null,
+        listedMedication: false
+    });
+
+    // Store the index for later routes to use
+    req.session.data['currentMedicationIndex'] = newIndex;
 
     // Redirect to the next page
+    res.redirect('create-recruit-medication-other-name');
+});
+
+router.post('/create-recruit-medication-other-name', function (req, res) {
+
+    const friendlyName = req.session.data['friendlyName'];
+    const recruitIndex = req.session.data['currentMedicationIndex'];
+
+    // Update the object within the array
+    req.session.data['medications'][recruitIndex].friendlyName = friendlyName;
+
     res.redirect('create-recruit-medication-answers');
 });
 
@@ -496,17 +553,54 @@ router.post('/create-exclude-medication', function (req, res) {
 
     var listedMedicationExclude = req.session.data['listedMedicationExclude'];
 
+    var friendlyNames = [
+        "Dreamella",
+        "Neuroflux",
+        "Serenitide",
+        "Chronodine",
+        "Sleeptril",
+        "Viralux",
+        "Immunoboost X",
+        "Euphorium",
+        "Vortexil",
+        "Calmora",
+        "Metaburn",
+        "Revitalin",
+        "Imaginex",
+        "Luminex",
+        "Psychotranquil",
+        "Mindblend",
+        "Nexaclear",
+        "Ferroplaz",
+        "Subvibe",
+        "Neurozone"
+    ];
+
+    // Random number between 1 and 5
+    var count = Math.floor(Math.random() * 5) + 1;
+
+    // Shuffle and select friendly names
+    var randomFriendlyNames = [...friendlyNames]
+        .sort(() => 0.5 - Math.random())
+        .slice(0, count)
+        .join(", ");
+
     // Make sure the 'medicationsExclude' array exists
     if (!req.session.data['medicationsExclude']) {
         req.session.data['medicationsExclude'] = [];
     }
 
-    // Add the new medication to the array
-    req.session.data['medicationsExclude'].push(listedMedicationExclude);
+    // Push the new medication OBJECT
+    req.session.data['medicationsExclude'].push({
+        drugName: listedMedicationExclude,
+        friendlyName: randomFriendlyNames,
+        listedMedication: true
+    });
 
     // Redirect to the next page
     res.redirect('create-exclude-medication-answers');
 });
+
 
 router.post('/create-exclude-non-listed-medication', function (req, res) {
 
@@ -517,12 +611,35 @@ router.post('/create-exclude-non-listed-medication', function (req, res) {
         req.session.data['medicationsExclude'] = [];
     }
 
-    // Add the new medication to the array
-    req.session.data['medicationsExclude'].push(nonListedMedicationExclude);
+    // The index will be the current length (before push)
+    const newIndex = req.session.data['medicationsExclude'].length;
+
+    // Push the new medication OBJECT
+    req.session.data['medicationsExclude'].push({
+        drugName: nonListedMedicationExclude,
+        friendlyName: null,
+        listedMedication: false
+    });
+
+    // Store the index for later routes to use
+    req.session.data['currentExcludeMedicationIndex'] = newIndex;
 
     // Redirect to the next page
+    res.redirect('create-exclude-medication-other-name');
+});
+
+
+router.post('/create-exclude-medication-other-name', function (req, res) {
+
+    const friendlyNameExclude = req.session.data['friendlyNameExclude'];
+    const excludeIndex = req.session.data['currentExcludeMedicationIndex'];
+
+    // Update the object within the array
+    req.session.data['medicationsExclude'][excludeIndex].friendlyName = friendlyNameExclude;
+
     res.redirect('create-exclude-medication-answers');
 });
+
 
 router.post('/create-exclude-medication-answers', function (req, res) {
 

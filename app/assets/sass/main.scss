@@ -11,6 +11,8 @@ $nihr-colour: #193E72;
 @import "side-nav";
 @import "email";
 @import "autocomplete";
+@import "summary-card";
+
 
 .nihr-dashboard {
     max-width: 1200px; // Larger width required for dashboard features e.g. tables etc...

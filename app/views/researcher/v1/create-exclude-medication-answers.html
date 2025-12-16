@@ -67,25 +67,54 @@
   Medications
 </h2>
 
-{% set rows4 = [] %}
+{% for medicationsExclude in data.medicationsExclude %}
 
-{% for medicationExclude in data.medicationsExclude %}
-  {% set _ = rows4.push({
-    key: { text: "Medication " ~ loop.index },  
-    value: { text: medicationExclude },
-    actions: {
-      items: [
-        {
-          href: "/change-medication/" ~ (loop.index0),  
-          text: "Remove",
-          visuallyHiddenText: "medication " ~ loop.index
-        }
-      ]
-    }
-  }) %}
+<div class="nhsuk-summary-card">
+  <div class="nhsuk-summary-card__title-wrapper">
+    <h2 class="nhsuk-summary-card__title">
+      Medication {{ loop.index }}
+    </h2>
+    <ul class="nhsuk-summary-card__actions">
+      <li class="nhsuk-summary-card__action">
+        <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> Medication {{ loop.index }}</span></a>
+      </li>
+    </ul>
+  </div>
+  <div class="nhsuk-summary-card__content">
+    <dl class="nhsuk-summary-list">
+      <div class="nhsuk-summary-list__row">
+        <dt class="nhsuk-summary-list__key">
+          Drug name
+        </dt>
+        <dd class="nhsuk-summary-list__value">
+          {{ medicationsExclude.drugName }}
+        </dd>
+        <dd class="nhsuk-summary-list__actions">
+          <a class="nhsuk-link" href="#">
+          Change<span class="nhsuk-u-visually-hidden"> {{ medicationsExclude.drugName }}</span>
+          </a>
+        </dd>
+      </div>
+      <div class="nhsuk-summary-list__row">
+        <dt class="nhsuk-summary-list__key">
+          Other names
+        </dt>
+        <dd class="nhsuk-summary-list__value">
+          {{ medicationsExclude.friendlyName or "None" }}
+        </dd>
+        <dd class="nhsuk-summary-list__actions">
+        {% if medicationsExclude.listedMedication == false %}
+                <a class="nhsuk-link" href="/change-medication/{{ loop.index0 }}">
+                  Change<span class="nhsuk-u-visually-hidden"> medication {{ loop.index }}</span>
+                </a>
+        {% endif %}
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
 {% endfor %}
-
-{{ summaryList({ rows: rows4 }) }}
 
 <form action="/{{folder}}/{{subfolder}}/create-exclude-medication-answers" method="post" novalidate>
 
