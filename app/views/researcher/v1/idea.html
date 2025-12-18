@@ -62,7 +62,7 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<span class="nhsuk-caption-xl">{% if data['studyName'] %}{{ data['studyName'] | truncate(120) }}{% else %}Study name{% endif %}</span>
+<span class="nhsuk-caption-xl">{% if data['studyName'] %}{{ data['studyName'] | truncateWords(150) }}{% else %}Study name{% endif %}</span>
 <h1 class="nhsuk-heading-xl">Create pre-screener</h1>
 
 

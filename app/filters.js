@@ -35,6 +35,23 @@ module.exports = function (env) {
 
   ------------------------------------------------------------------ */
 
+  filters.truncateWords = function (str, maxLen = 100, ellipsis = '…') {
+    if (!str || typeof str !== 'string' || str.length <= maxLen) {
+      return str
+    }
+
+    // Trim to max length
+    let truncated = str.slice(0, maxLen)
+
+    // Ensure we don't cut a word in half
+    const lastSpace = truncated.lastIndexOf(' ')
+    if (lastSpace > 0) {
+      truncated = truncated.slice(0, lastSpace)
+    }
+
+    return truncated + ellipsis
+  }
+
   /* keep the following line to return your filters to the app  */
   return filters
 }
