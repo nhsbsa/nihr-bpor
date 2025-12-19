@@ -1,0 +1,76 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-out.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back"
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<form action="/{{folder}}/{{subfolder}}/create-type-of-account" method="post" novalidate>
+
+{{ radios({
+  idPrefix: "createTypeAccount",
+  name: "createTypeAccount",
+  fieldset: {
+    legend: {
+      text: "How do you want to create your account?",
+        size: "l",
+      isPageHeading: true
+    }
+  },
+  items: [
+    {
+      value: "Create a GOV.UK One Login account",
+      text: "Create a GOV.UK One Login account",
+      hint: {
+        text: "GOV.UK One Login lets you sign in and prove your identity so you can access the service quickly and easily."
+      }
+    },
+    {
+      value: "Create an account with email and password",
+      text: "Create an account with a seperate email and password",
+      hint: {
+        text: "Sign up with a seperate email and password"
+      }
+    }
+  ]
+}) }}
+
+{{ button({
+  text: "Continue"
+}) }}
+
+</form>
+
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,267 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Create pre-screener" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-in.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Enter your study information" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Study management</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Help</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+<span class="nhsuk-caption-xl">{% if data['studyName'] %}{{ data['studyName'] | truncateWords(150) }}{% else %}Study name{% endif %}</span>
+<h1 class="nhsuk-heading-xl">Create pre-screener</h1>
+
+<p></p>
+
+<p>You can’t submit your pre-screener until you have completed all the sections.</p>
+
+{# Set Default Statuses #}
+
+{% set studyDetailsSTATUS = {
+  tag: {
+    text: "Incomplete",
+    classes: "nhsuk-tag--blue"
+  }
+} %}
+
+{% set inclusionExclusionCriteriaSTATUS = {
+  tag: {
+    text: "Incomplete",
+    classes: "nhsuk-tag--blue"
+  }
+} %}
+
+{% set healthConditionsSTATUS = {
+  tag: {
+    text: "Incomplete",
+    classes: "nhsuk-tag--blue"
+  }
+} %}
+
+{% set medicationsSTATUS = {
+  tag: {
+    text: "Incomplete",
+    classes: "nhsuk-tag--blue"
+  }
+} %}
+
+{% set additionalQuestionsSTATUS = {
+  tag: {
+    text: "Incomplete",
+    classes: "nhsuk-tag--blue"
+  }
+} %}
+
+{% set reviewAndSubmitSTATUS = {
+  text: "Cannot start yet",
+  classes: "nhsuk-task-list__status--cannot-start-yet"
+} %}
+
+{# Override if studyDetailsSTATUS data exists #}
+{% if data.studyDetailsSTATUS == "Completed" %}
+  {% set studyDetailsSTATUS = {
+    text: "Completed",
+    classes: "nhsuk-task-list__status--completed"
+  } %}
+{% elseif data.inclusionExclusionCriteriaSTATUS == "Cannot start yet" %}
+  {% set inclusionExclusionCriteriaSTATUS = {
+    text: "Cannot start yet",
+    classes: "nhsuk-task-list__status--cannot-start-yet"
+  } %}
+{% endif %}
+
+{# Override if inclusionExclusionCriteriaSTATUS data exists #}
+{% if data.inclusionExclusionCriteriaSTATUS == "Completed" %}
+  {% set inclusionExclusionCriteriaSTATUS = {
+    text: "Completed",
+    classes: "nhsuk-task-list__status--completed"
+  } %}
+{% elseif data.inclusionExclusionCriteriaSTATUS == "Cannot start yet" %}
+  {% set inclusionExclusionCriteriaSTATUS = {
+    text: "Cannot start yet",
+    classes: "nhsuk-task-list__status--cannot-start-yet"
+  } %}
+{% endif %}
+
+{# Override if healthConditionsSTATUS data exists #}
+{% if data.healthConditionsSTATUS == "Completed" %}
+  {% set healthConditionsSTATUS = {
+    text: "Completed",
+    classes: "nhsuk-task-list__status--completed"
+  } %}
+{% elseif data.healthConditionsSTATUS == "Cannot start yet" %}
+  {% set healthConditionsSTATUS = {
+    text: "Cannot start yet",
+    classes: "nhsuk-task-list__status--cannot-start-yet"
+  } %}
+{% endif %}
+
+{# Override if medicationsSTATUS data exists #}
+{% if data.medicationsSTATUS == "Completed" %}
+  {% set medicationsSTATUS = {
+    text: "Completed",
+    classes: "nhsuk-task-list__status--completed"
+  } %}
+{% elseif data.medicationsSTATUS == "Cannot start yet" %}
+  {% set medicationsSTATUS = {
+    text: "Cannot start yet",
+    classes: "nhsuk-task-list__status--cannot-start-yet"
+  } %}
+{% endif %}
+
+{# Override if additionalQuestionsSTATUS data exists #}
+{% if data.additionalQuestionsSTATUS == "Completed" %}
+  {% set additionalQuestionsSTATUS = {
+    text: "Completed",
+    classes: "nhsuk-task-list__status--completed"
+  } %}
+{% elseif data.additionalQuestionsSTATUS == "Cannot start yet" %}
+  {% set additionalQuestionsSTATUS = {
+    text: "Cannot start yet",
+    classes: "nhsuk-task-list__status--cannot-start-yet"
+  } %}
+{% endif %}
+
+{# Override if reviewAndSubmitSTATUS data exists #}
+{% if data.reviewAndSubmitSTATUS == "Completed" %}
+  {% set reviewAndSubmitSTATUS = {
+    text: "Completed",
+    classes: "nhsuk-task-list__status--completed"
+  } %}
+{% elseif data.reviewAndSubmitSTATUS == "Incomplete" %}
+  {% set reviewAndSubmitSTATUS = {
+    tag: {
+      text: "Incomplete",
+      classes: "nhsuk-tag--blue"
+    }
+  } %}
+{% endif %}
+
+{% set items = [] %}
+
+{# Always include this row #}
+{% set items = items.concat([
+  { title: { text: "Study information" }, href: "create-study-details", status: studyDetailsSTATUS }
+]) %}
+
+{% set items = items.concat([
+   { title: { text: "Add inclusion and exclusion criteria" }, href: "create-inclusion-exclusion-criteria", status: inclusionExclusionCriteriaSTATUS }
+]) %}
+
+{# Conditionally include rows #}
+
+{% if data.addhealthConditions %}
+
+  {# default #}
+  {% set href = "create-recruit-health-condition" %}
+
+  {# if the only selected value is "Exclude by health condition" #}
+  {% if data.addhealthConditions | length == 1
+        and data.addhealthConditions[0] == "Exclude by health condition" %}
+    {% set href = "create-exclude-health-condition" %}
+  {% endif %}
+
+  {% set items = items.concat([
+    { title: { text: "Health conditions" }, hint: { text: "Recruit or exclude by health conditions" }, href: href, status: healthConditionsSTATUS }
+  ]) %}
+{% endif %}
+
+{% if data.addMedications %}
+
+  {# default #}
+  {% set href = "create-recruit-medication" %}
+
+  {# if the only selected value is "Exclude by medication" #}
+  {% if data.addMedications | length == 1
+        and data.addMedications[0] == "Exclude by medication" %}
+    {% set href = "create-exclude-medication" %}
+  {% endif %}
+
+  {% set items = items.concat([
+    { title: { text: "Medications" }, hint: { text: "Recruit or exclude by medications" }, href: href, status: medicationsSTATUS }
+  ]) %}
+{% endif %}
+
+{% if data.addAdditionalQuestion %}
+  {% set items = items.concat([
+    { title: { text: "Additional questions" }, hint: { text: "Additional questions for your pre-screener" }, href: "create-additional-question-one", status: additionalQuestionsSTATUS }
+  ]) %}
+{% endif %}
+
+{% if data.reviewAndSubmitSTATUS == "Incomplete" %}
+
+{% set items = items.concat([
+  { title: { text: "Review and submit pre-screener" }, href: "create-check-answers", status: reviewAndSubmitSTATUS }
+]) %}
+
+{% else %}
+
+{% set items = items.concat([
+  { title: { text: "Review and submit pre-screener" }, status: reviewAndSubmitSTATUS }
+]) %}
+
+{% endif %}
+
+{{ taskList({
+  idPrefix: "your-health",
+  items: items
+}) }}
+
+
+    </div>
+  </div>
+{% endblock %}

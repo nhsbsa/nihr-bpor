@@ -41,6 +41,7 @@ router.use('/', (req, res, next) => {
 // ****************************************
 
 router.use('/researcher/v1', require('./views/researcher/v1/_routes'));
+router.use('/researcher/v2', require('./views/researcher/v2/_routes'));
 
 router.use('/volunteer/v1', require('./views/volunteer/v1/_routes'));
 

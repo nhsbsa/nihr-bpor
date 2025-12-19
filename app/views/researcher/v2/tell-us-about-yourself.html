@@ -1,0 +1,194 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-out.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back"
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<h1>Tell us about yourself</h1>
+
+<form action="/{{folder}}/{{subfolder}}/tell-us-about-yourself" method="post" novalidate>
+
+{{ select({
+  label: {
+    text: "Title"
+  },
+  id: "title",
+  name: "title",
+  items: [
+    {
+      value: "Mr",
+      text: "Mr"
+    },
+    {
+      value: "Mrs",
+      text: "Mrs"
+    },
+    {
+      value: "Ms",
+      text: "Ms"
+    },
+    {
+      value: "Miss",
+      text: "Miss"
+    },
+    {
+      value: "Mx",
+      text: "Mx"
+    },
+    {
+      value: "Dr",
+      text: "Dr"
+    },
+    {
+      value: "Prof",
+      text: "Prof"
+    },
+    {
+      value: "Sir",
+      text: "Sir"
+    },
+    {
+      value: "Dame",
+      text: "Dame"
+    },
+    {
+      value: "Lady",
+      text: "Lady"
+    },
+    {
+      value: "Lord",
+      text: "Lord"
+    }
+  ],
+  value: data.title
+}) }}
+
+{{ input({
+  id: "firstName",
+  name: "firstName",
+  classes: "nhsuk-input--width-20",
+  value: data.firstName,
+  label: {
+    text: "First name"
+  }
+}) }}
+
+{{ input({
+  id: "lastName",
+  name: "lastName",
+  classes: "nhsuk-input--width-20",
+  value: data.lastName,
+  label: {
+    text: "Last name"
+  }
+}) }}
+
+{{ input({
+  id: "emailAddress",
+  name: "emailAddress",
+  classes: "nhsuk-input--width-20",
+  type: "email",
+  value: data.emailAddress,
+  label: {
+    text: "Email address"
+  }
+}) }}
+
+{{ select({
+  label: {
+    text: "Organisation"
+  },
+  id: "organisation",
+  name: "organisation",
+  items: [
+    {
+      value: "University of Oxford",
+      text: "University of Oxford"
+    },
+    {
+      value: "University of Cambridge",
+      text: "University of Cambridge"
+    },
+    {
+      value: "University of Birmingham",
+      text: "University of Birmingham"
+    },
+    {
+      value: "Imperial College London",
+      text: "Imperial College London"
+    },
+    {
+      value: "University of Edinburgh",
+      text: "University of Edinburgh"
+    }
+  ],
+  value: data.organisation
+}) }}
+
+{{ checkboxes({
+  formGroup: {
+    classes: "nhsuk-u-margin-bottom-3"
+  },
+  idPrefix: "termsConditions",
+  name: "termsConditions",
+  items: [
+    {
+      value: "I agree to the terms and conditions",
+      text: "I agree to the terms and conditions",
+      checked: checked("termsConditions", "I agree to the terms and conditions")
+    }
+  ]
+}) }}
+
+{{ checkboxes({
+  idPrefix: "privacyNotice",
+  name: "privacyNotice",
+  items: [
+    {
+      value: "I consent to use of my data as described in the privacy notice",
+      text: "I consent to use of my data as described in the privacy notice",
+      checked: checked("privacyNotice", "I consent to use of my data as described in the privacy notice")
+    }
+  ]
+}) }}
+
+{{ button({
+  text: "Continue"
+}) }}
+
+</form>
+
+    </div>
+  </div>
+{% endblock %}

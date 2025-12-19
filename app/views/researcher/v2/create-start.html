@@ -1,0 +1,97 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Create pre-screener" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-in.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Create a pre-screener for your study" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Study management</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Help</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+      <h1>Create a pre-screener for your study</h1>
+
+      <p>You can use this service to set pre-screening criteria for potential study participants.</p>
+      
+      <p>You can include or exclude people by:</p>
+      
+      <ul>
+        <li>health condition</li>
+        <li>medication</li>
+        <li>other pre-screening requirements</li>
+      </ul>
+
+      <h2>Before you start</h2>
+
+      <p>We’ll ask for your:</p>
+      
+      <ul>
+        <li>full study name</li>
+        <li>Be Part of Research study ID</li>
+      </ul>
+
+      {% set insetTextHtml %}
+        <p>When you’ve created your pre-screener, we’ll review it before it goes live.</p>
+        <p>We’ll keep you updated using the email address linked to your Be Part of Research account.</p>
+      {% endset %}
+
+      {{ insetText({
+        html: insetTextHtml
+      }) }}
+
+      <form action="/{{folder}}/{{subfolder}}/create-start" method="post" novalidate>
+      {{ button({
+        text: "Start now"
+      }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

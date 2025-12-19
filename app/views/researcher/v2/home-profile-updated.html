@@ -1,0 +1,163 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Home" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-in.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Study management</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Help</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{% set profileUpdated %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Your details have been updated
+  </h3>
+{% endset %}
+
+{{ notificationBanner({
+  html: profileUpdated,
+  type: "success"
+}) }}
+
+<h1>Welcome to Recruit Registry Volunteers</h1>
+
+{{ summaryList({
+  rows: [
+    {
+      key: {
+        text: "Title"
+      },
+      value: {
+        text: data['title'] | default('Mrs')
+      },
+      actions: {
+        items: [
+          {
+            href: "/researcher/v2/update-profile#title",
+            text: "Change",
+            visuallyHiddenText: "title"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "First name"
+      },
+      value: {
+        text: data['firstName'] | default('Jane')
+      },
+      actions: {
+        items: [
+          {
+            href: "/researcher/v2/update-profile#firstName",
+            text: "Change",
+            visuallyHiddenText: "first name"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Last name"
+      },
+      value: {
+        text: data['lastName'] | default('Doe')
+      },
+      actions: {
+        items: [
+          {
+            href: "/researcher/v2/update-profile#lastName",
+            text: "Change",
+            visuallyHiddenText: "last name"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Email address"
+      },
+      value: {
+        text: "Jane.Doe@birmingham.ac.uk"
+      }
+    },
+    {
+      key: {
+        text: "Organisation"
+      },
+      value: {
+        text: "University of Birmingham"
+      }
+    },
+    {
+      key: {
+        text: "Role"
+      },
+      value: {
+        text: "Researcher"
+      }
+    }
+  ]
+}) }}
+
+<form action="/{{folder}}/{{subfolder}}/home" method="post" novalidate>
+
+{{ button({
+  text: "Delete account",
+  classes: "nhsuk-button--warning"
+}) }}
+
+</form>
+
+    </div>
+  </div>
+{% endblock %}

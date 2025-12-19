@@ -1,0 +1,177 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Home" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-in.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Study management</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Help</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+<h1>Your profile</h1>
+
+<form action="/{{folder}}/{{subfolder}}/update-profile" method="post" novalidate>
+
+{% set previousTitle = data.title or "Mrs" %}
+
+{{ select({
+  label: {
+    text: "Title"
+  },
+  id: "title",
+  name: "title",
+  items: [
+    {
+      value: "Mr",
+      text: "Mr",
+      selected: previousTitle == "Mr"
+    },
+    {
+      value: "Mrs",
+      text: "Mrs",
+      selected: previousTitle == "Mrs"
+    },
+    {
+      value: "Ms",
+      text: "Ms",
+      selected: previousTitle == "Ms"
+    },
+    {
+      value: "Miss",
+      text: "Miss",
+      selected: previousTitle == "Miss"
+    },
+    {
+      value: "Mx",
+      text: "Mx",
+      selected: previousTitle == "Mx"
+    },
+    {
+      value: "Dr",
+      text: "Dr",
+      selected: previousTitle == "Dr"
+    },
+    {
+      value: "Prof",
+      text: "Prof",
+      selected: previousTitle == "Prof"
+    },
+    {
+      value: "Sir",
+      text: "Sir",
+      selected: previousTitle == "Sir"
+    },
+    {
+      value: "Dame",
+      text: "Dame",
+      selected: previousTitle == "Dame"
+    },
+    {
+      value: "Lady",
+      text: "Lady",
+      selected: previousTitle == "Lady"
+    },
+    {
+      value: "Lord",
+      text: "Lord",
+      selected: previousTitle == "Lord"
+    }
+  ]
+}) }}
+
+{{ input({
+  id: "firstName",
+  name: "firstName",
+  classes: "nhsuk-input--width-20",
+  value: data.firstName or "Jane",
+  label: {
+    text: "First name"
+  }
+}) }}
+
+{{ input({
+  id: "lastName",
+  name: "lastName",
+  classes: "nhsuk-input--width-20",
+  value: data.lastName or "Doe",
+  label: {
+    text: "Last name"
+  }
+}) }}
+
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Email address</p>
+<p>Jane.Doe@birmingham.ac.uk</p>
+
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Organisation</p>
+<p>University of Birmingham</p>
+
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
+<p>Researcher</p>
+
+<div class="nhsuk-button-group">
+  {{ button({
+    text: "Confirm"
+  }) }}
+
+  <a href="/{{folder}}/{{subfolder}}/home" class="nhsuk-link">Cancel</a>
+</div>
+
+</form>
+
+    </div>
+  </div>
+{% endblock %}

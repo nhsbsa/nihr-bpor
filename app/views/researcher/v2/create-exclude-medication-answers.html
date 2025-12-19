@@ -1,0 +1,153 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Create pre-screener" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-in.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Set your inclusion and exclusion criteria" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Study management</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Help</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+<h1>List of medications to exclude for</h1>
+
+<h2 class="nhsuk-heading-s">
+  Medications
+</h2>
+
+{% for medicationsExclude in data.medicationsExclude %}
+
+<div class="nhsuk-summary-card">
+  <div class="nhsuk-summary-card__title-wrapper">
+    <h2 class="nhsuk-summary-card__title">
+      Medication {{ loop.index }}
+    </h2>
+    <ul class="nhsuk-summary-card__actions">
+      <li class="nhsuk-summary-card__action">
+        <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> Medication {{ loop.index }}</span></a>
+      </li>
+    </ul>
+  </div>
+  <div class="nhsuk-summary-card__content">
+    <dl class="nhsuk-summary-list">
+      <div class="nhsuk-summary-list__row">
+        <dt class="nhsuk-summary-list__key">
+          Drug name
+        </dt>
+        <dd class="nhsuk-summary-list__value">
+          {{ medicationsExclude.drugName }}
+        </dd>
+        <dd class="nhsuk-summary-list__actions">
+          <a class="nhsuk-link" href="#">
+          Change<span class="nhsuk-u-visually-hidden"> {{ medicationsExclude.drugName }}</span>
+          </a>
+        </dd>
+      </div>
+      <div class="nhsuk-summary-list__row">
+        <dt class="nhsuk-summary-list__key">
+          Other names
+        </dt>
+        <dd class="nhsuk-summary-list__value">
+          {{ medicationsExclude.friendlyName or "None" }}
+        </dd>
+        <dd class="nhsuk-summary-list__actions">
+        {% if medicationsExclude.listedMedication == false %}
+                <a class="nhsuk-link" href="/change-medication/{{ loop.index0 }}">
+                  Change<span class="nhsuk-u-visually-hidden"> medication {{ loop.index }}</span>
+                </a>
+        {% endif %}
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+{% endfor %}
+
+<form action="/{{folder}}/{{subfolder}}/create-exclude-medication-answers" method="post" novalidate>
+
+{{ radios({
+  idPrefix: "recruitAnotherMedication",
+  name: "recruitAnotherMedication",
+  classes: "nhsuk-radios--inline",
+  fieldset: {
+    legend: {
+      text: "Do you want to add another medication?",
+      size: "m",
+      isPageHeading: true
+    }
+  },
+  items: [
+    {
+      value: "Yes",
+      text: "Yes"
+    },
+    {
+      value: "No",
+      text: "No"
+    }
+  ]
+}) }}
+
+{{ button({
+  text: "Continue"
+}) }}
+
+</form>
+
+
+    </div>
+  </div>
+{% endblock %}

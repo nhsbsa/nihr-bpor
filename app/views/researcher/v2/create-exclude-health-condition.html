@@ -1,0 +1,134 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Create pre-screener" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-in.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Set your inclusion and exclusion criteria" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Study management</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Help</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+<form action="/{{folder}}/{{subfolder}}/create-exclude-health-condition" method="post" novalidate>
+
+{{ fieldset({
+  legend: {
+    text: "Exclude by health condition",
+    classes: "nhsuk-fieldset__legend--xl",
+    isPageHeading: true
+  }
+}) }}
+
+<p>Add one or more specific health conditions that exclude a volunteer from taking part.</p>
+
+<label class="nhsuk-label nhsuk-label--m" for="myAutocomplete">Condition</label>
+
+{{ hint({
+  html: '<p>Start typing the name of the condition you’d like to add. The conditions in our database follow UK naming standards.</p>'
+}) }}
+
+<div id="my-autocomplete-container" class="nhsuk-input--width-20 nhsuk-u-margin-bottom-5"></div>
+
+<p><a href="/{{folder}}/{{subfolder}}/create-exclude-non-listed-health-condition">Add a condition that is not listed</a></p>
+
+{{ button({
+  text: "Save and continue"
+}) }}
+
+</form>
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block pageScripts %}
+<script src="/js/health-conditions.js"></script>
+<script type="text/javascript">
+  function customSuggest (query, syncResults) {
+    syncResults(query
+      ? health_conditions.filter(function (result) {
+          var resultContains = result.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+          var endonymContains = result.endonym.toLowerCase().indexOf(query.toLowerCase()) !== -1
+          return resultContains || endonymContains
+        })
+      : []
+    )
+  }
+
+  function inputValueTemplate (result) {
+    return result && result.name
+  }
+
+  function suggestionTemplate (result) {
+    return result && result.name
+  }
+
+  element = document.querySelector('#my-autocomplete-container')
+  id = 'listedConditionExclude',
+  name = 'listedConditionExclude',
+  accessibleAutocomplete({
+    element: element,
+    id: id,
+    name: name,
+    source: customSuggest,
+    templates: {
+      inputValue: inputValueTemplate,
+      suggestion: suggestionTemplate
+    }
+  })
+
+
+</script>
+{% endblock %}
