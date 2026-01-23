@@ -38,42 +38,100 @@
   </div>
   <div class="nhsuk-grid-column-two-thirds">
     <h2>Versions</h2>
+
+    <h3>Researcher</h3>
+
+    <details class="nhsuk-details nhsuk-expander">
+      <summary class="nhsuk-details__summary">
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-two-thirds">
+            <span class="nhsuk-details__summary-text">
+              Account / Dashboard
+            </span>
+          </div>
+          <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
+            <strong class="nhsuk-tag nhsuk-tag--green">DEV</strong>
+          </div>
+        </div>
+      </summary>
+      <div class="nhsuk-details__text">
+        <h3 class="nhsuk-heading-s">User research</h3>
+        <p class="nhsuk-u-font-weight-bold">...</p>
+        <h3 class="nhsuk-heading-s">Changes from previous iteration</h3>
+        <ul>
+          <li>...</li>
+        </ul>
+        <hr>
+        <p><a href="/researcher/v1/">Start Page</a></p>
+        <p><a href="/researcher/v1/create-type-of-account">Create an account</a></p>
+        <p><a href="/researcher/v1/login-type-of-account">Sign In</a></p>
+        <p><a href="/researcher/v1/home">Dashboard</a></p>
+        {{ actionLink({
+          classes: "nhsuk-u-margin-bottom-3",
+          text: "View user journey",
+          href: "#",
+          openInNewWindow: true
+        }) }}
+      </div>
+    </details>
     
     <details class="nhsuk-details nhsuk-expander">
       <summary class="nhsuk-details__summary">
         <div class="nhsuk-grid-row">
           <div class="nhsuk-grid-column-two-thirds">
             <span class="nhsuk-details__summary-text">
-              Pre-Screener (Researcher View)
+              Pre-Screener  
             </span>
           </div>
           <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
-            <strong class="nhsuk-tag nhsuk-tag--yellow">UR</strong>
+            <strong class="nhsuk-tag nhsuk-tag--green">DEV</strong>
           </div>
         </div>
       </summary>
       <div class="nhsuk-details__text">
-        <h3 class="nhsuk-heading-s">Handover Notes</h3>
-        <p>In addition to design iterations from user research there were further business requirements that came up during the design process.</p>
-        <p>It was decided that researchers would not be permitted to download files containing personally identifiable information as this would not pass the DPIA. Instead the ‘add collaborator’ feature was deemed necessary so that researchers can work on studies together.</p>
-        <p>We were part way through preparing for research when the team entered a handover period. Valuable work and co-design took place in Figma. Subsequently they were asked to transfer the work to html as part of handover obligations.</p>
+        <h3 class="nhsuk-heading-s">User research</h3>
+        <p class="nhsuk-u-font-weight-bold">...</p>
         <h3 class="nhsuk-heading-s">Changes from previous iteration</h3>
         <ul>
           <li>...</li>
         </ul>
         <hr>
-        <p><a href="/researcher/v1">Account Login</a></p>
         {{ button({
-          "text": "View prototype",
-          "href": "/researcher/v1/home"
+          "text": "Create pre-screener",
+          "href": "/researcher/v1/create-start"
         }) }}
         <br/>
         {{ actionLink({
           classes: "nhsuk-u-margin-bottom-3",
           text: "View user journey",
-          href: "https://www.figma.com/design/jK5OzJmRhqAQzpmCWSGzZ4/Pre-screener-MVP?node-id=1465-28506&p=f&t=uuauhffX61HZUdE0-0",
+          href: "#",
           openInNewWindow: true
         }) }}
+      </div>
+    </details>
+
+    <h3>Admin</h3>
+
+    <details class="nhsuk-details nhsuk-expander">
+      <summary class="nhsuk-details__summary">
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-two-thirds">
+            <span class="nhsuk-details__summary-text">
+              Account / Dashboard
+            </span>
+          </div>
+          <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
+            <strong class="nhsuk-tag nhsuk-tag--green">DEV</strong>
+          </div>
+        </div>
+      </summary>
+      <div class="nhsuk-details__text">
+        <h3 class="nhsuk-heading-s">User research</h3>
+        <p class="nhsuk-u-font-weight-bold">...</p>
+        <h3 class="nhsuk-heading-s">Changes from previous iteration</h3>
+        <ul>
+          <li>...</li>
+        </ul>
       </div>
     </details>
 
@@ -82,7 +140,7 @@
         <div class="nhsuk-grid-row">
           <div class="nhsuk-grid-column-two-thirds">
             <span class="nhsuk-details__summary-text">
-              Pre-Screener (Admin View)
+              Pre-Screener
             </span>
           </div>
           <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
@@ -106,18 +164,20 @@
         {{ actionLink({
           classes: "nhsuk-u-margin-bottom-3",
           text: "View user journey",
-          href: "https://www.figma.com/design/jK5OzJmRhqAQzpmCWSGzZ4/Pre-screener-MVP?node-id=1465-28507&p=f&t=uuauhffX61HZUdE0-0",
+          href: "#",
           openInNewWindow: true
         }) }}
       </div>
     </details>
+
+    <h3>Volunteer</h3>
 
     <details class="nhsuk-details nhsuk-expander">
       <summary class="nhsuk-details__summary">
         <div class="nhsuk-grid-row">
           <div class="nhsuk-grid-column-two-thirds">
             <span class="nhsuk-details__summary-text">
-              Pre-Screener (Volunteer View)
+              Pre-Screener
             </span>
           </div>
           <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
@@ -126,10 +186,8 @@
         </div>
       </summary>
       <div class="nhsuk-details__text">
-        <h3 class="nhsuk-heading-s">Handover Notes</h3>
-        <p>The team kicked off the volunteer journey work on 15th September 2025.</p>
-        <p>We drafted the journey on Lucid and have transferred a draft version to html. The handover period for the Hippo team commenced while this work was in progress and we pivoted to focus on the requested handover requirements.</p>
-        <p>In line with delivery constraints we have considered options for user testing now vs in the future. It was decided that volunteer research should go ahead in order to de-risk the work. Decision made by Nicola and Tom.</p>
+        <h3 class="nhsuk-heading-s">User research</h3>
+        <p class="nhsuk-u-font-weight-bold">...</p>
         <h3 class="nhsuk-heading-s">Changes from previous iteration</h3>
         <ul>
           <li>...</li>
