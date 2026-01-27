@@ -1,0 +1,76 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-blank.html' %}
+
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Admin MVP - User Flows" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+
+{% set bodyClasses = "nihr-login" %}
+{% set mainClasses = "nihr-login-main" %}
+
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+<div class="viewport">
+  <div class="page">
+    <header class="header">
+      <img src="/images/NIHR-logo.svg" alt="NIHR Logo" class="logo" />
+    </header>
+
+    <main class="card">
+      <h1>Sign In</h1>
+
+      <label for="email">Email</label>
+      <div class="input-wrapper">
+        <span class="icon">👤</span>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email address"
+        />
+      </div>
+
+      <a href="home"><button class="primary-btn">Continue</button></a>
+
+      <p class="link-text">
+        Don't have an account?
+        <a href="#">Register</a>
+      </p>
+
+      <p class="link-text">
+        Require support?
+        <a href="#">Help</a>
+      </p>
+    </main>
+
+    <footer class="footer">
+      <p>© NIHR 2026</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms and Conditions</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Accessibility Statement</a>
+      </div>
+    </footer>
+  </div>
+  </div>
+  {% endblock %}
