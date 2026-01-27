@@ -66,6 +66,7 @@
         <p><a href="/researcher/v1/create-type-of-account">Create an account</a></p>
         <p><a href="/researcher/v1/login-type-of-account">Sign In</a></p>
         <p><a href="/researcher/v1/home">Dashboard</a></p>
+        <hr>
         {{ actionLink({
           classes: "nhsuk-u-margin-bottom-3",
           text: "View user journey",
@@ -95,11 +96,9 @@
           <li>...</li>
         </ul>
         <hr>
-        {{ button({
-          "text": "Create pre-screener",
-          "href": "/researcher/v1/create-start"
-        }) }}
-        <br/>
+        <p><a href="/researcher/v1/create-start">Create pre-screener</a></p>
+        <p><a href="/researcher/v1/manage-start">Manage pre-screener</a></p>
+        <hr>
         {{ actionLink({
           classes: "nhsuk-u-margin-bottom-3",
           text: "View user journey",
@@ -131,8 +130,14 @@
           <li>...</li>
         </ul>
         <hr>
-        <p><a href="/admin/v1/">Start Page</a></p>
+        <p><a href="/admin/v1">Start Page</a></p>
         <p><a href="/admin/v1/login">Sign In</a></p>
+        <hr>
+        {{ actionLink({
+          classes: "nhsuk-u-margin-bottom-3",
+          text: "View user journey",
+          href: "/admin/v1/user-journey"
+        }) }}
       </div>
     </details>
 
@@ -157,11 +162,8 @@
           <li>...</li>
         </ul>
         <hr>
-        {{ button({
-          "text": "View prototype",
-          "href": "/admin/v1/home"
-        }) }}
-        <br/>
+        <p><a href="/admin/v1/home">Dashboard</a></p>
+        <hr>
         {{ actionLink({
           classes: "nhsuk-u-margin-bottom-3",
           text: "View user journey",
@@ -195,11 +197,8 @@
         <hr>
         <p><a href="/volunteer/v1/email">Invitation Email</a></p>
         <p><a href="/volunteer/v1/study-overview">Study Overview</a></p>
-        {{ button({
-          "text": "View Pre-Screener",
-          "href": "/volunteer/v1/start"
-        }) }}
-        <br/>
+        <p><a href="/volunteer/v1/start">Submit pre-screener</a></p>
+        <hr>
         {{ actionLink({
           classes: "nhsuk-u-margin-bottom-3",
           text: "View user journey",
