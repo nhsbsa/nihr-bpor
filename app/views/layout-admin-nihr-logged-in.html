@@ -31,7 +31,7 @@
             {% if data['firstName'] and data['lastName'] %}{{ data['firstName'] }} {{ data['lastName'] }}{% else %}Joe Bloggs{% endif %}
          </li>
          <li class="nhsuk-header__account-item">
-            <a class="nhsuk-header__account-link" href="#">
+            <a class="nhsuk-header__account-link" href="/{{folder}}/{{subfolder}}/logged-out">
                Log out
             </a>
          </li>
