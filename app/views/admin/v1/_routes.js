@@ -9,7 +9,11 @@ const router = express.Router();
 
 // Routes
 
+router.post('/index', function (req, res) {
 
+    res.redirect('login');
+
+});
 
 // End Routes
 
