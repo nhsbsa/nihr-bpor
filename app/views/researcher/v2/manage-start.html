@@ -58,6 +58,33 @@
 
 <h1>Manage pre-screeners</h1>
 
+{% set actionsMenu %}
+  {{ buttonMenu({
+    items: [
+      {
+        text: "Copy link",
+        href: "#",
+        classes: "nhsuk-button--small"
+      },
+      {
+        text: "View report",
+        href: "#",
+        classes: "nhsuk-button--small"
+      },
+      {
+        text: "Volunteer view",
+        href: "#",
+        classes: "nhsuk-button--small"
+      }
+    ],
+    button: {
+      text: "Actions",
+      classes: "nhsuk-button--small"
+    },
+    alignMenu: "right"
+  }) }}
+{% endset %}
+
 {{ table({
   responsive: true,
   panel: false,
@@ -89,7 +116,7 @@
       },
       {
         header: 'Actions',
-        html: '<p><a href="view-report">View report</a></p>'
+        html: actionsMenu
       }
     ],
     [
@@ -111,7 +138,7 @@
       },
       {
         header: 'Actions',
-        html: '<p><a href="review-requested-changes">Review changes</a></p>'
+        html: actionsMenu
       }
     ],
     [
@@ -133,7 +160,7 @@
       },
       {
         header: 'Actions',
-        html: '<p><a href="#">Volunteer view</a></p>'
+        html: actionsMenu
       }
     ],
     [
