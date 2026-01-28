@@ -58,7 +58,41 @@
 
 <h1>Manage pre-screeners</h1>
 
-{% set actionsMenu %}
+{% set actionsMenu1 %}
+  {{ buttonMenu({
+    items: [
+      {
+        text: "Volunteer view",
+        href: "#",
+        classes: "nhsuk-button--small"
+      }
+    ],
+    button: {
+      text: "Actions",
+      classes: "nhsuk-button--small"
+    },
+    alignMenu: "right"
+  }) }}
+{% endset %}
+
+{% set actionsMenu2 %}
+  {{ buttonMenu({
+    items: [
+      {
+        text: "Review changes",
+        href: "#",
+        classes: "nhsuk-button--small"
+      }
+    ],
+    button: {
+      text: "Actions",
+      classes: "nhsuk-button--small"
+    },
+    alignMenu: "right"
+  }) }}
+{% endset %}
+
+{% set actionsMenu3 %}
   {{ buttonMenu({
     items: [
       {
@@ -116,7 +150,7 @@
       },
       {
         header: 'Actions',
-        html: actionsMenu
+        html: actionsMenu3
       }
     ],
     [
@@ -138,7 +172,7 @@
       },
       {
         header: 'Actions',
-        html: actionsMenu
+        html: actionsMenu2
       }
     ],
     [
@@ -160,7 +194,7 @@
       },
       {
         header: 'Actions',
-        html: actionsMenu
+        html: actionsMenu1
       }
     ],
     [
