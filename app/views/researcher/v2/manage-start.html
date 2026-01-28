@@ -58,41 +58,7 @@
 
 <h1>Manage pre-screeners</h1>
 
-{% set actionsMenu1 %}
-  {{ buttonMenu({
-    items: [
-      {
-        text: "Volunteer view",
-        href: "#",
-        classes: "nhsuk-button--small"
-      }
-    ],
-    button: {
-      text: "Actions",
-      classes: "nhsuk-button--small"
-    },
-    alignMenu: "right"
-  }) }}
-{% endset %}
-
-{% set actionsMenu2 %}
-  {{ buttonMenu({
-    items: [
-      {
-        text: "Review changes",
-        href: "#",
-        classes: "nhsuk-button--small"
-      }
-    ],
-    button: {
-      text: "Actions",
-      classes: "nhsuk-button--small"
-    },
-    alignMenu: "right"
-  }) }}
-{% endset %}
-
-{% set actionsMenu3 %}
+{% set actionsMenuApproved %}
   {{ buttonMenu({
     items: [
       {
@@ -102,13 +68,65 @@
       },
       {
         text: "View report",
-        href: "#",
+        href: "view-report",
         classes: "nhsuk-button--small"
       },
       {
         text: "Volunteer view",
         href: "#",
         classes: "nhsuk-button--small"
+      }
+    ],
+    button: {
+      text: "Actions",
+      classes: "nhsuk-button--small"
+    },
+    alignMenu: "right"
+  }) }}
+{% endset %}
+
+{% set actionsMenuChangesRequested %}
+  {{ buttonMenu({
+    items: [
+      {
+        text: "Review changes",
+        href: "review-requested-changes",
+        classes: "nhsuk-button--small"
+      },
+      {
+        text: "Hidden",
+        href: "#",
+        classes: "nhsuk-u-visually-hidden",
+        attributes: {
+          "aria-hidden": "true",
+          "tabindex": "-1"
+        }
+      }
+    ],
+    button: {
+      text: "Actions",
+      classes: "nhsuk-button--small"
+    },
+    alignMenu: "right"
+  }) }}
+{% endset %}
+
+{% set actionsMenuInReview %}
+  {{ buttonMenu({
+    items: [
+      {
+        text: "Volunteer view",
+        href: "#",
+        classes: "nhsuk-button--small"
+      },
+      {
+        text: "Hidden",
+        href: "#",
+        classes: "nhsuk-u-visually-hidden",
+        attributes: {
+          "aria-hidden": "true",
+          "tabindex": "-1"
+        }
       }
     ],
     button: {
@@ -150,7 +168,7 @@
       },
       {
         header: 'Actions',
-        html: actionsMenu3
+        html: actionsMenuApproved
       }
     ],
     [
@@ -172,7 +190,7 @@
       },
       {
         header: 'Actions',
-        html: actionsMenu2
+        html: actionsMenuChangesRequested
       }
     ],
     [
@@ -194,7 +212,7 @@
       },
       {
         header: 'Actions',
-        html: actionsMenu1
+        html: actionsMenuInReview
       }
     ],
     [
