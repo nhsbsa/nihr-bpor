@@ -24,6 +24,13 @@
 <!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
 {% block beforeContent %}
 
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service. Help us improve it and <a href="#">give your feedback by email</a>.'
+}) }}
+
 {{ backLink({
     "href": "javascript:history.go(-1)",
     "text": "Back"
