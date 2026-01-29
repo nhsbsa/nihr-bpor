@@ -35,14 +35,18 @@
     100% 100%,
     $scrollableShadowSize 100%;
 
+  /*  
   &:focus {
     @include nhsuk-focused-box;
   }
+  */
 }
 
+/*
 @include nhsuk-media-query($until: 1020px) {
   .moj-scrollable-pane .nhsuk-table__header,
   .moj-scrollable-pane .nhsuk-table__cell {
     white-space: nowrap;
   }
 }
+*/
