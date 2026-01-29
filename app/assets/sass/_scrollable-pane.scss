@@ -1,0 +1,48 @@
+.moj-scrollable-pane {
+  // stylelint-disable scss/dollar-variable-pattern
+  $scrollableBgColor: $nhsuk-body-background-colour;
+  $scrollableTransparentColor: rgba(255, 255, 255, 0);
+  $scrollableShadowColor: rgba(0, 0, 0, 0.2);
+  $scrollableShadowSize: 0.75em;
+  // stylelint-enable scss/dollar-variable-pattern
+
+  .nhsuk-table__row:hover {
+    background-color: transparent;
+  }
+
+  overflow-x: scroll;
+  background:
+    linear-gradient(
+      to right,
+      $scrollableBgColor,
+      $scrollableBgColor,
+      $scrollableTransparentColor calc($scrollableShadowSize * 2)
+    ),
+    radial-gradient(farthest-side at 0 50%, $scrollableShadowColor, $scrollableTransparentColor),
+    linear-gradient(
+      to left,
+      $scrollableBgColor,
+      $scrollableBgColor,
+      $scrollableTransparentColor calc($scrollableShadowSize * 2)
+    ),
+    radial-gradient(farthest-side at 100% 50%, $scrollableShadowColor, $scrollableTransparentColor) 100%;
+  background-color: $scrollableBgColor;
+  background-repeat: no-repeat;
+  background-attachment: local, scroll, local, scroll;
+  background-size:
+    100% 100%,
+    $scrollableShadowSize 100%,
+    100% 100%,
+    $scrollableShadowSize 100%;
+
+  &:focus {
+    @include nhsuk-focused-box;
+  }
+}
+
+@include nhsuk-media-query($until: 1020px) {
+  .moj-scrollable-pane .nhsuk-table__header,
+  .moj-scrollable-pane .nhsuk-table__cell {
+    white-space: nowrap;
+  }
+}
