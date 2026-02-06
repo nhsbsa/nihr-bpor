@@ -1,6 +1,6 @@
 // List of conditions confirmed by NIHR PO's on 1st December 2025
 
-var health_conditions = [
+export const health_conditions = [
   { endonym: "AAA", name: "AAA" },
   { endonym: "AAA screening", name: "AAA screening" },
   { endonym: "Abdominal aortic aneurysm", name: "Abdominal aortic aneurysm" },

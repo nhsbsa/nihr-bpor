@@ -1,6 +1,6 @@
 // List of drugs from the National Institute for Health and Care Excellence (NICE) - British National Formulary (BNF) database
 
-var drug_names = [
+export const drug_names = [
   {"endonym": "Abacavir", "name": "Abacavir"},
   {"endonym": "Abacavir with dolutegravir and lamivudine", "name": "Abacavir with dolutegravir and lamivudine"},
   {"endonym": "Abacavir with lamivudine", "name": "Abacavir with lamivudine"},

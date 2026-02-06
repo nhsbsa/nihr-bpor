@@ -102,41 +102,29 @@
 {% endblock %}
 
 {% block pageScripts %}
-<script src="/js/drug_names.js"></script>
-<script type="text/javascript">
+<script type="module">
+  import accessibleAutocomplete from '/assets/javascript/accessible-autocomplete.min.js'
+  import { drug_names } from '/assets/javascript/drug_names.js'
+
   function customSuggest (query, syncResults) {
     syncResults(query
-      ? drug_names.filter(function (result) {
-          var resultContains = result.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
-          var endonymContains = result.endonym.toLowerCase().indexOf(query.toLowerCase()) !== -1
-          return resultContains || endonymContains
-        })
+      ? drug_names.filter(result =>
+          result.name.toLowerCase().includes(query.toLowerCase()) ||
+          result.endonym.toLowerCase().includes(query.toLowerCase())
+        )
       : []
     )
   }
 
-  function inputValueTemplate (result) {
-    return result && result.name
-  }
-
-  function suggestionTemplate (result) {
-    return result && result.name
-  }
-
-  element = document.querySelector('#my-autocomplete-container')
-  id = 'listedMedication',
-  name = 'listedMedication',
   accessibleAutocomplete({
-    element: element,
-    id: id,
-    name: name,
+    element: document.querySelector('#my-autocomplete-container'),
+    id: 'listedMedication',
+    name: 'listedMedication',
     source: customSuggest,
     templates: {
-      inputValue: inputValueTemplate,
-      suggestion: suggestionTemplate
+      inputValue: r => r && r.name,
+      suggestion: r => r && r.name
     }
   })
-
-
 </script>
 {% endblock %}

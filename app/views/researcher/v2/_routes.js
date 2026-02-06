@@ -257,7 +257,7 @@ router.post('/create-recruit-health-condition', function (req, res) {
     req.session.data['conditions'].push(listedCondition);
 
     // Redirect to the next page
-    res.redirect('create-recruit-condition-answers');
+    return res.redirect('create-recruit-condition-answers');
 });
 
 router.post('/create-recruit-non-listed-health-condition', function (req, res) {
@@ -285,14 +285,14 @@ router.post('/create-recruit-condition-answers', function (req, res) {
 
     if (recruitAnotherCondition == "Yes") {
 
-        res.redirect('create-recruit-health-condition');
+        return res.redirect('create-recruit-health-condition');
 
     } else if (recruitAnotherCondition == "No") {
 
         if (addhealthConditions) {
             if (addhealthConditions.includes('Exclude by health condition')) {
  
-                res.redirect('create-exclude-health-condition');
+                return res.redirect('create-exclude-health-condition');
 
             }
         }
@@ -302,14 +302,14 @@ router.post('/create-recruit-condition-answers', function (req, res) {
 
                 req.session.data['healthConditionsSTATUS'] = "Completed";
 
-                res.redirect('idea');
+                return res.redirect('idea');
 
             }
             if (addMedications.includes('Exclude by medication')) {
 
                 req.session.data['healthConditionsSTATUS'] = "Completed";
 
-                res.redirect('idea');
+                return res.redirect('idea');
 
             }
         }
@@ -319,7 +319,7 @@ router.post('/create-recruit-condition-answers', function (req, res) {
 
                 req.session.data['healthConditionsSTATUS'] = "Completed";
 
-                res.redirect('idea');
+                return res.redirect('idea');
 
             }
         }
@@ -327,11 +327,11 @@ router.post('/create-recruit-condition-answers', function (req, res) {
         req.session.data['healthConditionsSTATUS'] = "Completed";
         req.session.data['reviewAndSubmitSTATUS'] = "Incomplete";
 
-        res.redirect('idea');
+        return res.redirect('idea');
 
     } else {
 
-        res.redirect('create-recruit-condition-answers');
+        return res.redirect('create-recruit-condition-answers');
 
     }
 
@@ -380,7 +380,7 @@ router.post('/create-exclude-condition-answers', function (req, res) {
 
     if (excludeAnotherCondition == "Yes") {
 
-        res.redirect('create-exclude-health-condition');
+        return res.redirect('create-exclude-health-condition');
 
     } else if (excludeAnotherCondition == "No") {
 
@@ -389,14 +389,14 @@ router.post('/create-exclude-condition-answers', function (req, res) {
 
                 req.session.data['healthConditionsSTATUS'] = "Completed";
                 
-                res.redirect('idea');
+                return res.redirect('idea');
 
             }
             if (addMedications.includes('Exclude by medication')) {
 
                 req.session.data['healthConditionsSTATUS'] = "Completed";
 
-                res.redirect('idea');
+                return res.redirect('idea');
 
             }
         }
@@ -406,7 +406,7 @@ router.post('/create-exclude-condition-answers', function (req, res) {
 
                 req.session.data['healthConditionsSTATUS'] = "Completed";
 
-                res.redirect('idea');
+                return res.redirect('idea');
 
             }
         }
@@ -414,11 +414,11 @@ router.post('/create-exclude-condition-answers', function (req, res) {
         req.session.data['healthConditionsSTATUS'] = "Completed";
         req.session.data['reviewAndSubmitSTATUS'] = "Incomplete";
 
-        res.redirect('idea');
+        return res.redirect('idea');
 
     } else {
 
-        res.redirect('create-exclude-condition-answers');
+        return res.redirect('create-exclude-condition-answers');
 
     }
 
@@ -523,7 +523,7 @@ router.post('/create-recruit-medication-answers', function (req, res) {
 
     if (recruitAnotherMedication == "Yes") {
 
-        res.redirect('create-recruit-medication');
+        return res.redirect('create-recruit-medication');
 
     } else if (recruitAnotherMedication == "No") {
 
@@ -534,7 +534,7 @@ router.post('/create-recruit-medication-answers', function (req, res) {
 
                 req.session.data['medicationsSTATUS'] = "Completed";
 
-                res.redirect('create-exclude-medication');
+                return res.redirect('create-exclude-medication');
 
             }
         }
@@ -544,7 +544,7 @@ router.post('/create-recruit-medication-answers', function (req, res) {
 
                 req.session.data['medicationsSTATUS'] = "Completed";
 
-                res.redirect('idea');
+                return res.redirect('idea');
 
             }
         }
@@ -552,11 +552,11 @@ router.post('/create-recruit-medication-answers', function (req, res) {
         req.session.data['medicationsSTATUS'] = "Completed";
         req.session.data['reviewAndSubmitSTATUS'] = "Incomplete";
 
-        res.redirect('idea');
+        return res.redirect('idea');
 
     } else {
 
-        res.redirect('create-recruit-medication-answers');
+        return res.redirect('create-recruit-medication-answers');
 
     }
 
@@ -664,7 +664,7 @@ router.post('/create-exclude-medication-answers', function (req, res) {
 
     if (recruitAnotherMedication == "Yes") {
 
-        res.redirect('create-exclude-medication');
+        return res.redirect('create-exclude-medication');
 
     } else if (recruitAnotherMedication == "No") {
 
@@ -673,7 +673,7 @@ router.post('/create-exclude-medication-answers', function (req, res) {
 
                 req.session.data['medicationsSTATUS'] = "Completed";
 
-                res.redirect('idea');
+                return res.redirect('idea');
 
             }
         }
@@ -681,11 +681,11 @@ router.post('/create-exclude-medication-answers', function (req, res) {
         req.session.data['medicationsSTATUS'] = "Completed";
         req.session.data['reviewAndSubmitSTATUS'] = "Incomplete";
 
-        res.redirect('idea');
+        return res.redirect('idea');
 
     } else {
 
-        res.redirect('create-exclude-medication-answers');
+        return res.redirect('create-exclude-medication-answers');
 
     }
 
@@ -792,33 +792,33 @@ router.post('/create-additional-question-answers', function (req, res) {
         req.session.data['additionalQuestionsSTATUS'] = "Completed";
         req.session.data['reviewAndSubmitSTATUS'] = "Incomplete";
 
-        res.redirect('idea');
+        return res.redirect('idea');
     }
 
     // Go to the next unanswered question
     if (!question1Text) {
-        res.redirect('create-additional-question-one');
+        return res.redirect('create-additional-question-one');
     } 
 
     if (!question2Text) {
-        res.redirect('create-additional-question-two');
+        return res.redirect('create-additional-question-two');
     }
 
     if (!question3Text) {
-        res.redirect('create-additional-question-three');
+        return res.redirect('create-additional-question-three');
     }
 
     if (!question4Text) {
-        res.redirect('create-additional-question-four');
+        return res.redirect('create-additional-question-four');
     }
 
     if (!question5Text) {
-        res.redirect('create-additional-question-five');
+        return res.redirect('create-additional-question-five');
     }
 
     // All questions answered
 
-    res.redirect('create-additional-question-answers');
+    return res.redirect('create-additional-question-answers');
 
 });
 

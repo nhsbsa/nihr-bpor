@@ -102,16 +102,18 @@
 {% endblock %}
 
 {% block pageScripts %}
-<script src="/js/health-conditions.js"></script>
-<script type="text/javascript">
+<script type="module">
+  import accessibleAutocomplete from '/assets/javascript/accessible-autocomplete.min.js'
+  import { health_conditions } from '/assets/javascript/health-conditions.js'
+
   function customSuggest (query, syncResults) {
-    syncResults(query
-      ? health_conditions.filter(function (result) {
-          var resultContains = result.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
-          var endonymContains = result.endonym.toLowerCase().indexOf(query.toLowerCase()) !== -1
-          return resultContains || endonymContains
-        })
-      : []
+    syncResults(
+      query
+        ? health_conditions.filter(result =>
+            result.name.toLowerCase().includes(query.toLowerCase()) ||
+            result.endonym.toLowerCase().includes(query.toLowerCase())
+          )
+        : []
     )
   }
 
@@ -123,20 +125,17 @@
     return result && result.name
   }
 
-  element = document.querySelector('#my-autocomplete-container')
-  id = 'listedConditionExclude',
-  name = 'listedConditionExclude',
+  const element = document.querySelector('#my-autocomplete-container')
+
   accessibleAutocomplete({
     element: element,
-    id: id,
-    name: name,
+    id: 'listedConditionExclude',
+    name: 'listedConditionExclude',
     source: customSuggest,
     templates: {
       inputValue: inputValueTemplate,
       suggestion: suggestionTemplate
     }
   })
-
-
 </script>
 {% endblock %}
