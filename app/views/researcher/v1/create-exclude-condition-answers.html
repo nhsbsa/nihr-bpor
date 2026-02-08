@@ -71,29 +71,49 @@
 
 <h1>List of health conditions to exclude for</h1>
 
+<!--
 <h2 class="nhsuk-heading-s">
   Conditions
 </h2>
-
-{% set rows2 = [] %}
+-->
 
 {% for conditionsExclude in data.conditionsExclude %}
-  {% set _ = rows2.push({
-    key: { text: "Condition " ~ loop.index },  
-    value: { text: conditionsExclude },
-    actions: {
-      items: [
-        {
-          href: "/change-condition/" ~ (loop.index0),  
-          text: "Remove",
-          visuallyHiddenText: "condition " ~ loop.index
+  {{ summaryList({
+    card: {
+      heading: "Condition " ~ loop.index,
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "/change-condition/" ~ loop.index0
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: {
+          text: "Condition name"
+        },
+        value: {
+          text: conditionsExclude
+        },
+        actions: {
+          items: [
+            {
+              href: "/change-condition/" ~ loop.index0,
+              text: "Change",
+              visuallyHiddenText: "condition " ~ loop.index
+            }
+          ]
         }
-      ]
-    }
-  }) %}
+      }
+    ]
+  }) }}
 {% endfor %}
 
-{{ summaryList({ rows: rows2 }) }}
 
 <form action="/{{folder}}/{{subfolder}}/create-exclude-condition-answers" method="post" novalidate>
 

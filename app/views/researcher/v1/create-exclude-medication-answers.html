@@ -77,50 +77,64 @@
 
 {% for medicationsExclude in data.medicationsExclude %}
 
-<div class="nhsuk-summary-card">
-  <div class="nhsuk-summary-card__title-wrapper">
-    <h2 class="nhsuk-summary-card__title">
-      Medication {{ loop.index }}
-    </h2>
-    <ul class="nhsuk-summary-card__actions">
-      <li class="nhsuk-summary-card__action">
-        <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> Medication {{ loop.index }}</span></a>
-      </li>
-    </ul>
-  </div>
-  <div class="nhsuk-summary-card__content">
-    <dl class="nhsuk-summary-list">
-      <div class="nhsuk-summary-list__row">
-        <dt class="nhsuk-summary-list__key">
-          Drug name
-        </dt>
-        <dd class="nhsuk-summary-list__value">
-          {{ medicationsExclude.drugName }}
-        </dd>
-        <dd class="nhsuk-summary-list__actions">
-          <a class="nhsuk-link" href="#">
-          Change<span class="nhsuk-u-visually-hidden"> {{ medicationsExclude.drugName }}</span>
-          </a>
-        </dd>
-      </div>
-      <div class="nhsuk-summary-list__row">
-        <dt class="nhsuk-summary-list__key">
-          Other names
-        </dt>
-        <dd class="nhsuk-summary-list__value">
-          {{ medicationsExclude.friendlyName or "None" }}
-        </dd>
-        <dd class="nhsuk-summary-list__actions">
-        {% if medicationsExclude.listedMedication == false %}
-                <a class="nhsuk-link" href="/change-medication/{{ loop.index0 }}">
-                  Change<span class="nhsuk-u-visually-hidden"> medication {{ loop.index }}</span>
-                </a>
-        {% endif %}
-        </dd>
-      </div>
-    </dl>
-  </div>
-</div>
+  {% if medicationsExclude.listedMedication == false %}
+    {% set otherNameActions = {
+      items: [
+        {
+          text: "Change",
+          href: "/change-medication/" ~ loop.index0,
+          visuallyHiddenText: "medication " ~ loop.index
+        }
+      ]
+    } %}
+  {% else %}
+    {% set otherNameActions = {} %}
+  {% endif %}
+
+  {{ summaryList({
+    card: {
+      heading: "Medication " ~ loop.index,
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "/change-medication/" ~ loop.index0,
+            visuallyHiddenText: "medication " ~ loop.index
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: {
+          text: "Drug name"
+        },
+        value: {
+          text: medicationsExclude.drugName
+        },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/change-medication/" ~ loop.index0,
+              visuallyHiddenText: medicationsExclude.drugName
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: {
+          text: "Other names"
+        },
+        value: {
+          text: medicationsExclude.friendlyName or "None"
+        },
+        actions: otherNameActions
+      }
+    ]
+  }) }}
 
 {% endfor %}
 

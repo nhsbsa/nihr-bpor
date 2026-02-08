@@ -92,442 +92,298 @@
             </dd>
          </div>
       </dl>
-      {% if data.addhealthConditions 
-      and data.addhealthConditions | length 
-      and (
-      'Recruit by health condition' in data.addhealthConditions or
-      'Exclude by health condition' in data.addhealthConditions
-      )
-      %}
-      <h2 class="nhsuk-heading-m">
-         Health condition details
-      </h2>
-      {% endif %}
-      {% if data.addhealthConditions 
-      and data.addhealthConditions | length 
-      and 'Recruit by health condition' in data.addhealthConditions 
-      %}
-      <h3 class="nhsuk-heading-s">
-         Recruit by health condition
-      </h3>
-      {% for condition in data.conditions %}
-      <div class="nhsuk-summary-card">
-         <div class="nhsuk-summary-card__title-wrapper">
-            <h2 class="nhsuk-summary-card__title">
-               Health condition {{ loop.index }}
-            </h2>
-            <ul class="nhsuk-summary-card__actions">
-               <li class="nhsuk-summary-card__action">
-                  <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> health condition {{ loop.index }}</span></a>
-               </li>
-            </ul>
-         </div>
-         <div class="nhsuk-summary-card__content">
-            <dl class="nhsuk-summary-list">
-               <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key">
-                     Health condition
-                  </dt>
-                  <dd class="nhsuk-summary-list__value">
-                     {{ condition }}
-                  </dd>
-                  <dd class="nhsuk-summary-list__actions">
-                     <a class="nhsuk-link" href="#">
-                     Change<span class="nhsuk-u-visually-hidden"> {{ condition }}</span>
-                     </a>
-                  </dd>
-               </div>
-            </dl>
-         </div>
-      </div>
-      {% endfor %}
-      {% endif %}
-      {% if data.addhealthConditions 
-      and data.addhealthConditions | length 
-      and 'Exclude by health condition' in data.addhealthConditions 
-      %}
-      <h3 class="nhsuk-heading-s">
-         Exclude by health condition
-      </h3>
-      {% for conditionsExclude in data.conditionsExclude %}
-      <div class="nhsuk-summary-card">
-         <div class="nhsuk-summary-card__title-wrapper">
-            <h2 class="nhsuk-summary-card__title">
-               Health condition {{ loop.index }}
-            </h2>
-            <ul class="nhsuk-summary-card__actions">
-               <li class="nhsuk-summary-card__action">
-                  <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> health condition {{ loop.index }}</span></a>
-               </li>
-            </ul>
-         </div>
-         <div class="nhsuk-summary-card__content">
-            <dl class="nhsuk-summary-list">
-               <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key">
-                     Health condition
-                  </dt>
-                  <dd class="nhsuk-summary-list__value">
-                     {{ conditionsExclude }}
-                  </dd>
-                  <dd class="nhsuk-summary-list__actions">
-                     <a class="nhsuk-link" href="#">
-                     Change<span class="nhsuk-u-visually-hidden"> {{ conditionsExclude }}</span>
-                     </a>
-                  </dd>
-               </div>
-            </dl>
-         </div>
-      </div>
-      {% endfor %}
-      {% endif %}
-      {% if data.addMedications 
-      and data.addMedications | length 
-      and (
-      'Recruit by medication' in data.addMedications or
-      'Exclude by medication' in data.addMedications
-      )
-      %}
-      <h2 class="nhsuk-heading-m">
-         Medication details
-      </h2>
-      {% endif %}
-      {% if data.addMedications 
-      and data.addMedications | length 
-      and 'Recruit by medication' in data.addMedications 
-      %}
-      <h3 class="nhsuk-heading-s">
-         Recruit by medication
-      </h3>
-      {% for medication in data.medications %}
-      <div class="nhsuk-summary-card">
-         <div class="nhsuk-summary-card__title-wrapper">
-            <h2 class="nhsuk-summary-card__title">
-               Medication {{ loop.index }}
-            </h2>
-            <ul class="nhsuk-summary-card__actions">
-               <li class="nhsuk-summary-card__action">
-                  <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> Medication {{ loop.index }}</span></a>
-               </li>
-            </ul>
-         </div>
-         <div class="nhsuk-summary-card__content">
-            <dl class="nhsuk-summary-list">
-               <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key">
-                     Drug name
-                  </dt>
-                  <dd class="nhsuk-summary-list__value">
-                     {{ medication.drugName }}
-                  </dd>
-                  <dd class="nhsuk-summary-list__actions">
-                     <a class="nhsuk-link" href="#">
-                     Change<span class="nhsuk-u-visually-hidden"> {{ medication.drugName }}</span>
-                     </a>
-                  </dd>
-               </div>
-               <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key">
-                     Other names
-                  </dt>
-                  <dd class="nhsuk-summary-list__value">
-                     {{ medication.friendlyName or "None" }}
-                  </dd>
-                  <dd class="nhsuk-summary-list__actions">
-                     {% if medication.listedMedication == false %}
-                     <a class="nhsuk-link" href="/change-medication/{{ loop.index0 }}">
-                     Change<span class="nhsuk-u-visually-hidden"> medication {{ loop.index }}</span>
-                     </a>
-                     {% endif %}
-                  </dd>
-               </div>
-            </dl>
-         </div>
-      </div>
-      {% endfor %}
-      {% endif %}
-      {% if data.addMedications 
-      and data.addMedications | length 
-      and 'Exclude by medication' in data.addMedications 
-      %}
-      <h3 class="nhsuk-heading-s">
-         Exclude by medication
-      </h3>
-      {% for medicationExclude in data.medicationsExclude %}
-      <div class="nhsuk-summary-card">
-         <div class="nhsuk-summary-card__title-wrapper">
-            <h2 class="nhsuk-summary-card__title">
-               Medication {{ loop.index }}
-            </h2>
-            <ul class="nhsuk-summary-card__actions">
-               <li class="nhsuk-summary-card__action">
-                  <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> Medication {{ loop.index }}</span></a>
-               </li>
-            </ul>
-         </div>
-         <div class="nhsuk-summary-card__content">
-            <dl class="nhsuk-summary-list">
-               <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key">
-                     Drug name
-                  </dt>
-                  <dd class="nhsuk-summary-list__value">
-                     {{ medicationExclude.drugName }}
-                  </dd>
-                  <dd class="nhsuk-summary-list__actions">
-                     <a class="nhsuk-link" href="#">
-                     Change<span class="nhsuk-u-visually-hidden"> {{ medicationExclude.drugName }}</span>
-                     </a>
-                  </dd>
-               </div>
-               <div class="nhsuk-summary-list__row">
-                  <dt class="nhsuk-summary-list__key">
-                     Other names
-                  </dt>
-                  <dd class="nhsuk-summary-list__value">
-                     {{ medicationExclude.friendlyName or "None" }}
-                  </dd>
-                  <dd class="nhsuk-summary-list__actions">
-                     {% if medicationExclude.listedMedication == false %}
-                     <a class="nhsuk-link" href="/change-medication/{{ loop.index0 }}">
-                     Change<span class="nhsuk-u-visually-hidden"> medication {{ loop.index }}</span>
-                     </a>
-                     {% endif %}
-                     </a>
-                  </dd>
-               </div>
-            </dl>
-         </div>
-      </div>
-      {% endfor %}
-      {% endif %}
-      {% if data.addAdditionalQuestion %}
-      <h2 class="nhsuk-heading-m">
-         Additional questions
-      </h2>
-      {% endif %}
-      <dl class="nhsuk-summary-list">
-         {% if data['question1Text'] %}
-         <div class="nhsuk-summary-card">
-            <div class="nhsuk-summary-card__title-wrapper">
-               <h2 class="nhsuk-summary-card__title">
-                  Question 1
-               </h2>
-               <ul class="nhsuk-summary-card__actions">
-                  <li class="nhsuk-summary-card__action">
-                     <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> question one</span></a>
-                  </li>
-               </ul>
-            </div>
-            <div class="nhsuk-summary-card__content">
-               <dl class="nhsuk-summary-list">
-                  <div class="nhsuk-summary-list__row">
-                     <dt class="nhsuk-summary-list__key">
-                        Question
-                     </dt>
-                     <dd class="nhsuk-summary-list__value">
-                        {{ data['question1Text'] }}
-                     </dd>
-                     <dd class="nhsuk-summary-list__actions">
-                        <a class="nhsuk-link" href="#">
-                        Change<span class="nhsuk-u-visually-hidden"> question one</span>
-                        </a>
-                     </dd>
-                  </div>
-                  <div class="nhsuk-summary-list__row">
-                     <dt class="nhsuk-summary-list__key">
-                        Matching answer
-                     </dt>
-                     <dd class="nhsuk-summary-list__value">
-                        {{ data['question1Answer'] }}
-                     </dd>
-                     <dd class="nhsuk-summary-list__actions">
-                        <a class="nhsuk-link" href="#">
-                        Change<span class="nhsuk-u-visually-hidden"> question one</span>
-                        </a>
-                     </dd>
-                  </div>
-               </dl>
-            </div>
-         </div>
-         {% endif %}
-         {% if data['question2Text'] %}
-         <div class="nhsuk-summary-card">
-            <div class="nhsuk-summary-card__title-wrapper">
-               <h2 class="nhsuk-summary-card__title">
-                  Question 2
-               </h2>
-               <ul class="nhsuk-summary-card__actions">
-                  <li class="nhsuk-summary-card__action">
-                     <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> question two</span></a>
-                  </li>
-               </ul>
-            </div>
-            <div class="nhsuk-summary-card__content">
-               <dl class="nhsuk-summary-list">
-                  <div class="nhsuk-summary-list__row">
-                     <dt class="nhsuk-summary-list__key">
-                        Question
-                     </dt>
-                     <dd class="nhsuk-summary-list__value">
-                        {{ data['question2Text'] }}
-                     </dd>
-                     <dd class="nhsuk-summary-list__actions">
-                        <a class="nhsuk-link" href="#">
-                        Change<span class="nhsuk-u-visually-hidden"> question two</span>
-                        </a>
-                     </dd>
-                  </div>
-                  <div class="nhsuk-summary-list__row">
-                     <dt class="nhsuk-summary-list__key">
-                        Matching answer
-                     </dt>
-                     <dd class="nhsuk-summary-list__value">
-                        {{ data['question2Answer'] }}
-                     </dd>
-                     <dd class="nhsuk-summary-list__actions">
-                        <a class="nhsuk-link" href="#">
-                        Change<span class="nhsuk-u-visually-hidden"> question two</span>
-                        </a>
-                     </dd>
-                  </div>
-               </dl>
-            </div>
-         </div>
-         {% endif %}
-         {% if data['question3Text'] %}
-         <div class="nhsuk-summary-card">
-            <div class="nhsuk-summary-card__title-wrapper">
-               <h2 class="nhsuk-summary-card__title">
-                  Question 3
-               </h2>
-               <ul class="nhsuk-summary-card__actions">
-                  <li class="nhsuk-summary-card__action">
-                     <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> question three</span></a>
-                  </li>
-               </ul>
-            </div>
-            <div class="nhsuk-summary-card__content">
-               <dl class="nhsuk-summary-list">
-                  <div class="nhsuk-summary-list__row">
-                     <dt class="nhsuk-summary-list__key">
-                        Question
-                     </dt>
-                     <dd class="nhsuk-summary-list__value">
-                        {{ data['question3Text'] }}
-                     </dd>
-                     <dd class="nhsuk-summary-list__actions">
-                        <a class="nhsuk-link" href="#">
-                        Change<span class="nhsuk-u-visually-hidden"> question three</span>
-                        </a>
-                     </dd>
-                  </div>
-                  <div class="nhsuk-summary-list__row">
-                     <dt class="nhsuk-summary-list__key">
-                        Matching answer
-                     </dt>
-                     <dd class="nhsuk-summary-list__value">
-                        {{ data['question3Answer'] }}
-                     </dd>
-                     <dd class="nhsuk-summary-list__actions">
-                        <a class="nhsuk-link" href="#">
-                        Change<span class="nhsuk-u-visually-hidden"> question three</span>
-                        </a>
-                     </dd>
-                  </div>
-               </dl>
-            </div>
-         </div>
-         {% endif %}
-         {% if data['question4Text'] %}
-         <div class="nhsuk-summary-card">
-            <div class="nhsuk-summary-card__title-wrapper">
-               <h2 class="nhsuk-summary-card__title">
-                  Question 4
-               </h2>
-               <ul class="nhsuk-summary-card__actions">
-                  <li class="nhsuk-summary-card__action">
-                     <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> question four</span></a>
-                  </li>
-               </ul>
-            </div>
-            <div class="nhsuk-summary-card__content">
-               <dl class="nhsuk-summary-list">
-                  <div class="nhsuk-summary-list__row">
-                     <dt class="nhsuk-summary-list__key">
-                        Question
-                     </dt>
-                     <dd class="nhsuk-summary-list__value">
-                        {{ data['question4Text'] }}
-                     </dd>
-                     <dd class="nhsuk-summary-list__actions">
-                        <a class="nhsuk-link" href="#">
-                        Change<span class="nhsuk-u-visually-hidden"> question four</span>
-                        </a>
-                     </dd>
-                  </div>
-                  <div class="nhsuk-summary-list__row">
-                     <dt class="nhsuk-summary-list__key">
-                        Matching answer
-                     </dt>
-                     <dd class="nhsuk-summary-list__value">
-                        {{ data['question4Answer'] }}
-                     </dd>
-                     <dd class="nhsuk-summary-list__actions">
-                        <a class="nhsuk-link" href="#">
-                        Change<span class="nhsuk-u-visually-hidden"> question four</span>
-                        </a>
-                     </dd>
-                  </div>
-               </dl>
-            </div>
-         </div>
-         {% endif %}
-         {% if data['question5Text'] %}
-         <div class="nhsuk-summary-card">
-            <div class="nhsuk-summary-card__title-wrapper">
-               <h2 class="nhsuk-summary-card__title">
-                  Question 5
-               </h2>
-               <ul class="nhsuk-summary-card__actions">
-                  <li class="nhsuk-summary-card__action">
-                     <a class="nhsuk-link" href="#">Remove<span class="nhsuk-u-visually-hidden"> question five</span></a>
-                  </li>
-               </ul>
-            </div>
-            <div class="nhsuk-summary-card__content">
-               <dl class="nhsuk-summary-list">
-                  <div class="nhsuk-summary-list__row">
-                     <dt class="nhsuk-summary-list__key">
-                        Question
-                     </dt>
-                     <dd class="nhsuk-summary-list__value">
-                        {{ data['question5Text'] }}
-                     </dd>
-                     <dd class="nhsuk-summary-list__actions">
-                        <a class="nhsuk-link" href="#">
-                        Change<span class="nhsuk-u-visually-hidden"> question five</span>
-                        </a>
-                     </dd>
-                  </div>
-                  <div class="nhsuk-summary-list__row">
-                     <dt class="nhsuk-summary-list__key">
-                        Matching answer
-                     </dt>
-                     <dd class="nhsuk-summary-list__value">
-                        {{ data['question5Answer'] }}
-                     </dd>
-                     <dd class="nhsuk-summary-list__actions">
-                        <a class="nhsuk-link" href="#">
-                        Change<span class="nhsuk-u-visually-hidden"> question five</span>
-                        </a>
-                     </dd>
-                  </div>
-               </dl>
-            </div>
-         </div>
-         {% endif %}
-      </dl>
+{# ------------------------------------------------------------
+   HEALTH CONDITIONS
+------------------------------------------------------------ #}
+
+{% if data.addhealthConditions
+  and data.addhealthConditions | length
+  and (
+    'Recruit by health condition' in data.addhealthConditions or
+    'Exclude by health condition' in data.addhealthConditions
+  )
+%}
+<h2 class="nhsuk-heading-m">Health condition details</h2>
+{% endif %}
+
+{% if data.addhealthConditions
+  and data.addhealthConditions | length
+  and 'Recruit by health condition' in data.addhealthConditions
+%}
+<h3 class="nhsuk-heading-s">Recruit by health condition</h3>
+
+{% for condition in data.conditions %}
+  {{ summaryList({
+    card: {
+      heading: "Health condition " ~ loop.index,
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "/remove-condition/" ~ loop.index0,
+            visuallyHiddenText: "health condition " ~ loop.index
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Health condition" },
+        value: { text: condition },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/change-condition/" ~ loop.index0,
+              visuallyHiddenText: condition
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endfor %}
+{% endif %}
+
+{% if data.addhealthConditions
+  and data.addhealthConditions | length
+  and 'Exclude by health condition' in data.addhealthConditions
+%}
+<h3 class="nhsuk-heading-s">Exclude by health condition</h3>
+
+{% for condition in data.conditionsExclude %}
+  {{ summaryList({
+    card: {
+      heading: "Health condition " ~ loop.index,
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "/remove-condition-exclude/" ~ loop.index0,
+            visuallyHiddenText: "health condition " ~ loop.index
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Health condition" },
+        value: { text: condition },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/change-condition-exclude/" ~ loop.index0,
+              visuallyHiddenText: condition
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endfor %}
+{% endif %}
+
+
+{# ------------------------------------------------------------
+   MEDICATIONS
+------------------------------------------------------------ #}
+
+{% if data.addMedications
+  and data.addMedications | length
+  and (
+    'Recruit by medication' in data.addMedications or
+    'Exclude by medication' in data.addMedications
+  )
+%}
+<h2 class="nhsuk-heading-m">Medication details</h2>
+{% endif %}
+
+{% if data.addMedications
+  and data.addMedications | length
+  and 'Recruit by medication' in data.addMedications
+%}
+<h3 class="nhsuk-heading-s">Recruit by medication</h3>
+
+{% for medication in data.medications %}
+
+  {% if medication.listedMedication == false %}
+    {% set otherNameActions = {
+      items: [
+        {
+          text: "Change",
+          href: "/change-medication/" ~ loop.index0,
+          visuallyHiddenText: "medication " ~ loop.index
+        }
+      ]
+    } %}
+  {% else %}
+    {% set otherNameActions = {} %}
+  {% endif %}
+
+  {{ summaryList({
+    card: {
+      heading: "Medication " ~ loop.index,
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "/remove-medication/" ~ loop.index0,
+            visuallyHiddenText: "medication " ~ loop.index
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Drug name" },
+        value: { text: medication.drugName },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/change-medication/" ~ loop.index0,
+              visuallyHiddenText: medication.drugName
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Other names" },
+        value: { text: medication.friendlyName or "None" },
+        actions: otherNameActions
+      }
+    ]
+  }) }}
+
+{% endfor %}
+{% endif %}
+
+{% if data.addMedications
+  and data.addMedications | length
+  and 'Exclude by medication' in data.addMedications
+%}
+<h3 class="nhsuk-heading-s">Exclude by medication</h3>
+
+{% for medication in data.medicationsExclude %}
+
+  {% if medication.listedMedication == false %}
+    {% set otherNameActions = {
+      items: [
+        {
+          text: "Change",
+          href: "/change-medication-exclude/" ~ loop.index0,
+          visuallyHiddenText: "medication " ~ loop.index
+        }
+      ]
+    } %}
+  {% else %}
+    {% set otherNameActions = {} %}
+  {% endif %}
+
+  {{ summaryList({
+    card: {
+      heading: "Medication " ~ loop.index,
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "/remove-medication-exclude/" ~ loop.index0,
+            visuallyHiddenText: "medication " ~ loop.index
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Drug name" },
+        value: { text: medication.drugName },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "/change-medication-exclude/" ~ loop.index0,
+              visuallyHiddenText: medication.drugName
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Other names" },
+        value: { text: medication.friendlyName or "None" },
+        actions: otherNameActions
+      }
+    ]
+  }) }}
+
+{% endfor %}
+{% endif %}
+
+
+{# ------------------------------------------------------------
+   ADDITIONAL QUESTIONS
+------------------------------------------------------------ #}
+
+{% if data.addAdditionalQuestion %}
+<h2 class="nhsuk-heading-m">Additional questions</h2>
+{% endif %}
+
+{% for i in [1,2,3,4,5] %}
+  {% if data["question" ~ i ~ "Text"] %}
+    {{ summaryList({
+      card: {
+        heading: "Question " ~ i,
+        headingSize: "s",
+        actions: {
+          items: [
+            {
+              text: "Remove",
+              href: "/remove-additional-question-" ~ i,
+              visuallyHiddenText: "question " ~ i
+            }
+          ]
+        }
+      },
+      rows: [
+        {
+          key: { text: "Question" },
+          value: { text: data["question" ~ i ~ "Text"] },
+          actions: {
+            items: [
+              {
+                text: "Change",
+                href: "/create-additional-question-" ~ i ~ "#question" ~ i ~ "Text",
+                visuallyHiddenText: "question " ~ i
+              }
+            ]
+          }
+        },
+        {
+          classes: "nhsuk-summary-list__row--no-border",
+          key: { text: "Matching answer" },
+          value: { text: data["question" ~ i ~ "Answer"] },
+          actions: {
+            items: [
+              {
+                text: "Change",
+                href: "/create-additional-question-" ~ i ~ "#question" ~ i ~ "Answer",
+                visuallyHiddenText: "question " ~ i
+              }
+            ]
+          }
+        }
+      ]
+    }) }}
+  {% endif %}
+{% endfor %}
       <h2 class="nhsuk-heading-m">Now submit your pre-screener</h2>
       <p>You can <a href="create-check-volunteer-view">check the how your pre-screener will appear to volunteers</a>.</p>
       <p>After you submit it, it’ll be sent to our admin team for review.</p>
