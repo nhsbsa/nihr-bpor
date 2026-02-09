@@ -71,130 +71,240 @@
 
 <h1>List of additional questions</h1>
 
+{% if data.question1Text %}
+  {{ summaryList({
+    card: {
+      heading: "Question 1",
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "remove-additional-question-one",
+            visuallyHiddenText: "question one"
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Question" },
+        value: { text: data.question1Text },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-one#question1Text",
+              visuallyHiddenText: "question one"
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Matching answer" },
+        value: { text: data.question1Answer },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-one#question1Answer",
+              visuallyHiddenText: "question one"
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endif %}
 
+{% if data.question2Text %}
+  {{ summaryList({
+    card: {
+      heading: "Question 2",
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "remove-additional-question-two",
+            visuallyHiddenText: "question two"
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Question" },
+        value: { text: data.question2Text },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-two#question2Text",
+              visuallyHiddenText: "question two"
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Matching answer" },
+        value: { text: data.question2Answer },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-two#question2Answer",
+              visuallyHiddenText: "question two"
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endif %}
 
-<dl class="nhsuk-summary-list">
-   {% if data['question1Text'] %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Question 1
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question1Text'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-one#question1Text">Change<span class="nhsuk-u-visually-hidden"> question one</span></a>
-      </dd>
-   </div>
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Matching answer 1
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question1Answer'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-one#question1Answer">Change<span class="nhsuk-u-visually-hidden"> question one</span></a>
-      </dd>
-   </div>
-   {% endif %}
-   {% if data['question2Text'] %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Question 2
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question2Text'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-two#question2Text">Change<span class="nhsuk-u-visually-hidden"> question two</span></a>
-      </dd>
-   </div>
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Matching answer 2
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question2Answer'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-two#question2Answer">Change<span class="nhsuk-u-visually-hidden"> question two</span></a>
-      </dd>
-   </div>
-   {% endif %}
-   {% if data['question3Text'] %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Question 3
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question3Text'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-three#question3Text">Change<span class="nhsuk-u-visually-hidden"> question three</span></a>
-      </dd>
-   </div>
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Matching answer 3
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question3Answer'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-three#question3Answer">Change<span class="nhsuk-u-visually-hidden"> question three</span></a>
-      </dd>
-   </div>
-   {% endif %}
-   {% if data['question4Text'] %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Question 4
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question4Text'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-four#question4Text">Change<span class="nhsuk-u-visually-hidden"> question four</span></a>
-      </dd>
-   </div>
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Matching answer 4
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question4Answer'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-four#question4Answer">Change<span class="nhsuk-u-visually-hidden"> question four</span></a>
-      </dd>
-   </div>
-   {% endif %}
-   {% if data['question5Text'] %}
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Question 5
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question5Text'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-five#question5Text">Change<span class="nhsuk-u-visually-hidden"> question five</span></a>
-      </dd>
-   </div>
-   <div class="nhsuk-summary-list__row">
-      <dt class="nhsuk-summary-list__key">
-         Matching answer 5
-      </dt>
-      <dd class="nhsuk-summary-list__value">
-         {{ data['question5Answer'] }}
-      </dd>
-      <dd class="nhsuk-summary-list__actions">
-         <a class="nhsuk-link" href="create-additional-question-five#question5Answer">Change<span class="nhsuk-u-visually-hidden"> question five</span></a>
-      </dd>
-   </div>
-   {% endif %}
-</dl>
+{% if data.question3Text %}
+  {{ summaryList({
+    card: {
+      heading: "Question 3",
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "remove-additional-question-three",
+            visuallyHiddenText: "question three"
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Question" },
+        value: { text: data.question3Text },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-three#question3Text",
+              visuallyHiddenText: "question three"
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Matching answer" },
+        value: { text: data.question3Answer },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-three#question3Answer",
+              visuallyHiddenText: "question three"
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endif %}
+
+{% if data.question4Text %}
+  {{ summaryList({
+    card: {
+      heading: "Question 4",
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "remove-additional-question-four",
+            visuallyHiddenText: "question four"
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Question" },
+        value: { text: data.question4Text },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-four#question4Text",
+              visuallyHiddenText: "question four"
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Matching answer" },
+        value: { text: data.question4Answer },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-four#question4Answer",
+              visuallyHiddenText: "question four"
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endif %}
+
+{% if data.question5Text %}
+  {{ summaryList({
+    card: {
+      heading: "Question 5",
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "remove-additional-question-five",
+            visuallyHiddenText: "question five"
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Question" },
+        value: { text: data.question5Text },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-five#question5Text",
+              visuallyHiddenText: "question five"
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Matching answer" },
+        value: { text: data.question5Answer },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-five#question5Answer",
+              visuallyHiddenText: "question five"
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endif %}
 
 {% if not (data.question5Text) %}
 

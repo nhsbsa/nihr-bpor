@@ -71,29 +71,48 @@
 
 <h1>List of health conditions to recruit for</h1>
 
-<h2 class="nhsuk-heading-s">
+<!--
+<h2 class="nhsuk-heading-l">
   Conditions
 </h2>
-
-{% set rows = [] %}
+-->
 
 {% for condition in data.conditions %}
-  {% set _ = rows.push({
-    key: { text: "Condition " ~ loop.index },  
-    value: { text: condition },
-    actions: {
-      items: [
-        {
-          href: "/change-condition/" ~ (loop.index0),  
-          text: "Remove",
-          visuallyHiddenText: "condition " ~ loop.index
+  {{ summaryList({
+    card: {
+      heading: "Condition " ~ loop.index,
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "/change-condition/" ~ loop.index0
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: {
+          text: "Condition name"
+        },
+        value: {
+          text: condition
+        },
+        actions: {
+          items: [
+            {
+              href: "/change-condition/" ~ loop.index0,
+              text: "Change",
+              visuallyHiddenText: "condition " ~ loop.index
+            }
+          ]
         }
-      ]
-    }
-  }) %}
+      }
+    ]
+  }) }}
 {% endfor %}
-
-{{ summaryList({ rows: rows }) }}
 
 <form action="/{{folder}}/{{subfolder}}/create-recruit-condition-answers" method="post" novalidate>
 
