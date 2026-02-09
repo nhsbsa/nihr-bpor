@@ -66,94 +66,28 @@
 
 <h1>Recruit Registry Volunteers</h1>
 
-{{ summaryList({
-  rows: [
-    {
-      key: {
-        text: "Title"
-      },
-      value: {
-        text: data['title'] | default('Mrs')
-      },
-      actions: {
-        items: [
-          {
-            href: "/researcher/v2/update-profile#title",
-            text: "Change",
-            visuallyHiddenText: "title"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "First name"
-      },
-      value: {
-        text: data['firstName'] | default('Jane')
-      },
-      actions: {
-        items: [
-          {
-            href: "/researcher/v2/update-profile#firstName",
-            text: "Change",
-            visuallyHiddenText: "first name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Last name"
-      },
-      value: {
-        text: data['lastName'] | default('Doe')
-      },
-      actions: {
-        items: [
-          {
-            href: "/researcher/v2/update-profile#lastName",
-            text: "Change",
-            visuallyHiddenText: "last name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Email address"
-      },
-      value: {
-        text: "Jane.Doe@birmingham.ac.uk"
-      }
-    },
-    {
-      key: {
-        text: "Organisation"
-      },
-      value: {
-        text: "University of Birmingham"
-      }
-    },
-    {
-      key: {
-        text: "Role"
-      },
-      value: {
-        text: "Researcher"
-      }
-    }
-  ]
-}) }}
-
-<form action="/{{folder}}/{{subfolder}}/home" method="post" novalidate>
-
-{{ button({
-  text: "Delete account",
-  classes: "nhsuk-button--warning"
-}) }}
-
-</form>
+      <ul class="nhsuk-grid-row nhsuk-card-group">
+        <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+          {{ card({
+            primary: "true",
+            clickable: "true",
+            href: "create-start",
+            heading: 'Create pre-screener',
+            headingClasses: "nhsuk-heading-m",
+            description: 'Set pre-screening criteria for potential study participants'
+          }) }}
+        </li>
+        <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
+          {{ card({
+            primary: "true",
+            clickable: "true",
+            href: "manage-start",
+            heading: 'Manage pre-screeners',
+            headingClasses: "nhsuk-heading-m",
+            description: 'Manage pre-screeners for potential study participants'
+          }) }}
+        </li>
+      </ul>
 
     </div>
   </div>
