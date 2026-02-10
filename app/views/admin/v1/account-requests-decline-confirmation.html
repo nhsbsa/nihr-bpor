@@ -1,6 +1,6 @@
 <!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
 
-{% set currentPage = "Home" %}
+{% set currentPage = "Account requests" %}
 
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
@@ -48,11 +48,11 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="home">Home</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Account management</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Account requests</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="account-requests">Account requests</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">User account management</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Create administrator accounts</a></li>
         </ul>
@@ -70,28 +70,144 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-      <h1>Recruit Registry Volunteers</h1>
+{% set html %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Account declined
+  </h3>
+  <p>The account has been sent an email to confirm this.</p>
+{% endset %}
 
-      <ul class="nhsuk-grid-row nhsuk-card-group">
-        <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
-          {{ card({
-            href: "account-requests",
-            primary: "true",
-            clickable: "true",
-            headingHtml: '<strong class="nhsuk-tag nhsuk-tag--red nhsuk-u-font-size-19 nhsuk-u-margin-bottom-3">5 NEW</strong><h2 class="nhsuk-card__heading nhsuk-heading-m"><a class="nhsuk-card__link" href="account-requests">Account requests</a></h2>',
-            description: 'Approve new requests for a Recruit Registry Volunteer account'
-          }) }}
-        </li>
-        <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
-          {{ card({
-            href: "#",
-            primary: "true",
-            clickable: "true",
-            headingHtml: '<strong class="nhsuk-tag nhsuk-tag--red nhsuk-u-font-size-19 nhsuk-u-margin-bottom-3">2 NEW</strong><h2 class="nhsuk-card__heading nhsuk-heading-m"><a class="nhsuk-card__link" href="#">Pre-screener approvals</a></h2>',
-            description: "Review new pre-screener requests from researchers"
-          }) }}
-        </li>
-      </ul>
+{{ notificationBanner({
+  html: html
+}) }}
+
+      <h1>Account requests</h1>
+
+{{ table({
+  responsive: true,
+  panel: false,
+  head: [
+    { text: 'Name' },
+    { text: 'Organisation' },
+    { text: 'Date submitted' },
+    { text: 'Role' },
+    { text: 'Actions' }
+  ],
+  rows: [
+    [
+      {
+        header: 'Name',
+        text: 'Jasper Reyes'
+      },
+      {
+        header: 'Organisation',
+        text: 'NIHR'
+      },
+      {
+        header: 'Date submitted',
+        text: '3 February 2026'
+      },
+      {
+        header: 'Role',
+        html: 'Researcher'
+      },
+      {
+        header: 'Actions',
+        html: '<p><a href="#">View request</a></p>'
+      }
+    ],
+    [
+      {
+        header: 'Name',
+        text: 'Lina Novak'
+      },
+      {
+        header: 'Organisation',
+        text: 'NIHR'
+      },
+      {
+        header: 'Date submitted',
+        text: '2 February 2026'
+      },
+      {
+        header: 'Role',
+        html: 'Researcher'
+      },
+      {
+        header: 'Actions',
+        html: '<p><a href="#">View request</a></p>'
+      }
+    ],
+    [
+      {
+        header: 'Name',
+        text: 'Theo Holloway'
+      },
+      {
+        header: 'Organisation',
+        text: 'NIHR'
+      },
+      {
+        header: 'Date submitted',
+        text: '1 February 2026'
+      },
+      {
+        header: 'Role',
+        html: 'Administrator'
+      },
+      {
+        header: 'Actions',
+        html: '<p><a href="#">View request</a></p>'
+      }
+    ],
+    [
+      {
+        header: 'Name',
+        text: 'Michael Smith'
+      },
+      {
+        header: 'Organisation',
+        text: 'NIHR'
+      },
+      {
+        header: 'Date submitted',
+        text: '31 January 2026'
+      },
+      {
+        header: 'Role',
+        html: 'Administrator'
+      },
+      {
+        header: 'Actions',
+        html: '<p><a href="#">View request</a></p>'
+      }
+    ]
+  ]
+}) }}
+
+
+<p>Showing 10 of 28 result(s)</p>
+
+{{ pagination({
+  next: {
+    href: "#"
+  },
+  items: [
+    {
+      number: 1,
+      href: '#',
+      current: true
+    },
+    {
+      number: 2,
+      href: '#'
+    },
+    {
+      number: 3,
+      href: '#'
+    }
+  ]
+}) }}
 
     </div>
   </div>

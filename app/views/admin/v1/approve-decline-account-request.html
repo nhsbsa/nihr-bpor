@@ -1,6 +1,6 @@
 <!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
 
-{% set currentPage = "Home" %}
+{% set currentPage = "Account requests" %}
 
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
@@ -48,11 +48,11 @@
       <nav class="app-side-nav">
         <h2 class="app-side-nav__heading">Dashboard</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="home">Home</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Account management</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Account requests</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="account-requests">Account requests</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">User account management</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Create administrator accounts</a></li>
         </ul>
@@ -70,28 +70,65 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-      <h1>Recruit Registry Volunteers</h1>
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
 
-      <ul class="nhsuk-grid-row nhsuk-card-group">
-        <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
-          {{ card({
-            href: "account-requests",
-            primary: "true",
-            clickable: "true",
-            headingHtml: '<strong class="nhsuk-tag nhsuk-tag--red nhsuk-u-font-size-19 nhsuk-u-margin-bottom-3">5 NEW</strong><h2 class="nhsuk-card__heading nhsuk-heading-m"><a class="nhsuk-card__link" href="account-requests">Account requests</a></h2>',
-            description: 'Approve new requests for a Recruit Registry Volunteer account'
-          }) }}
-        </li>
-        <li class="nhsuk-grid-column-one-half nhsuk-card-group__item">
-          {{ card({
-            href: "#",
-            primary: "true",
-            clickable: "true",
-            headingHtml: '<strong class="nhsuk-tag nhsuk-tag--red nhsuk-u-font-size-19 nhsuk-u-margin-bottom-3">2 NEW</strong><h2 class="nhsuk-card__heading nhsuk-heading-m"><a class="nhsuk-card__link" href="#">Pre-screener approvals</a></h2>',
-            description: "Review new pre-screener requests from researchers"
-          }) }}
-        </li>
-      </ul>
+      <h1>Account requests</h1>
+
+      <p>Review the information provided is compatible with the Recruit Registry Volunteers rules.</p>
+
+{{ summaryList({
+  rows: [
+    {
+      key: {
+        text: "Name"
+      },
+      value: {
+        text: "Serena Whitmore"
+      }
+    },
+    {
+      key: {
+        text: "Email"
+      },
+      value: {
+        text: "serena.whitmore@nihr.ac.uk"
+      }
+    },
+    {
+      key: {
+        text: "Organisation"
+      },
+      value: {
+        text: "NIHR"
+      }
+    },
+    {
+      key: {
+        text: "Justification for using the platform"
+      },
+      value: {
+        text: "I have been given authority by my superior to use this platform as I am planning to conduct research studies on behalf of NIHR."
+      }
+    },
+    {
+      key: {
+        text: "Role"
+      },
+      value: {
+        text: "Researcher"
+      }
+    }
+  ]
+}) }}
+
+<div class="nhsuk-button-group">
+  <a href="approve-check" class="nhsuk-button">Approve</a>
+  <a href="decline-check" class="nhsuk-button nhsuk-button--warning">Decline</a>
+</div>
 
     </div>
   </div>
