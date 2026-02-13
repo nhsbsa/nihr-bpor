@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Manage pre-screeners" %}
+{% set pageName = "Pre-screener summary report for Cognitive therapy in Dementia" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -64,89 +64,76 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-<h1>Manage pre-screeners</h1>
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
 
-{{ table({
-  responsive: true,
-  panel: false,
-  head: [
-    { text: 'Full study name' },
-    { text: 'Screener ID' },
-    { text: 'Owner' },
-    { text: 'Status' },
-    { text: 'Actions' }
-  ],
-  rows: [
-    [
-      {
-        header: 'Full study name',
-        text: 'Cognitive therapy in Dementia'
+<form action="/{{folder}}/{{subfolder}}/view-report-update-status" method="post" novalidate>
+
+{{ radios({
+  idPrefix: "updateContactedStatus",
+  name: "updateContactedStatus",
+  fieldset: {
+    legend: {
+      text: "Update Lila Hammond’s status",
+      size: "l",
+      isPageHeading: true
+    }
+  },
+  hint: {
+    text: "Select one status"
+  },
+  items: [
+    {
+      value: "Awaiting contact",
+      text: "Awaiting contact",
+      hint: {
+        text: "You have not contacted the volunteer yet"
       },
-      {
-        header: 'Screener ID',
-        text: 'DR-333121'
+      checked: (data.updateContactedStatus == "Awaiting contact") 
+               or (not data.updateContactedStatus)
+    },
+    {
+      value: "Contacted",
+      text: "Contacted",
+      hint: {
+        text: "You have contacted the volunteer"
       },
-      {
-        header: 'Owner',
-        text: 'Jane Doe'
+      checked: data.updateContactedStatus == "Contacted"
+    },
+    {
+      value: "Recruited",
+      text: "Recruited",
+      hint: {
+        text: "The volunteer has been recruited to the study"
       },
-      {
-        header: 'Status',
-        html: '<strong class="nhsuk-tag nhsuk-tag--green">Approved</strong>'
+      checked: data.updateContactedStatus == "Recruited"
+    },
+    {
+      value: "Withdrawn",
+      text: "Withdrawn",
+      hint: {
+        text: "The volunteer has withdrawn from the study"
       },
-      {
-        header: 'Actions',
-        html: '<p><a href="view-report">View report</a></p>'
-      }
-    ],
-    [
-      {
-        header: 'Full study name',
-        text: 'Exploring the effects of art therapy on memory retention in older adults'
-      },
-      {
-        header: 'Screener ID',
-        text: 'DR-847281'
-      },
-      {
-        header: 'Owner',
-        text: 'Jane Doe'
-      },
-      {
-        header: 'Status',
-        html: '<strong class="nhsuk-tag nhsuk-tag--blue">In review</strong>'
-      },
-      {
-        header: 'Actions',
-        html: '<p><a href="#">Volunteer view</a></p>'
-      }
-    ],
-    [
-      {
-        header: 'Full study name',
-        text: 'Exploring the effects of healthy eating on middle aged men'
-      },
-      {
-        header: 'Screener ID',
-        text: 'DR-827231'
-      },
-      {
-        header: 'Owner',
-        text: 'Jane Doe'
-      },
-      {
-        header: 'Status',
-        html: '<strong class="nhsuk-tag nhsuk-tag--purple">Archived</strong>'
-      },
-      {
-        header: 'Actions',
-        html: '<p class="nhsuk-hint">No Actions</p>'
-      }
-    ]
+      checked: data.updateContactedStatus == "Withdrawn"
+    }
   ]
 }) }}
 
-<p>Showing 2 of 2 result(s)</p>
+
+<div class="nhsuk-button-group">
+
+  {{ button({
+    text: "Continue"
+  }) }}
+
+  <a href="view-report" class="nhsuk-link">Cancel</a>
+</div>
+
+</form>
+
 
 
     </div>

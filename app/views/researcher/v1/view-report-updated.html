@@ -70,6 +70,18 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
+{% set html %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Status updated
+  </h3>
+  <p>Lila Hammond's status has been updated.</p>
+{% endset %}
+
+{{ notificationBanner({
+  html: html,
+  type: "success"
+}) }}
+
 <span class="nhsuk-caption-xl">Cognitive therapy in Dementia</span>
 <h1 class="nhsuk-heading-xl">Pre-screener summary report</h1>
 

@@ -797,6 +797,24 @@ router.post('/create-additional-question-answers', function (req, res) {
 
 });
 
+router.post('/view-report-update-status', function (req, res) {
+
+    var updateContactedStatus = req.session.data['updateContactedStatus'];
+
+    console.log(updateContactedStatus);
+
+    if (updateContactedStatus) {
+
+        res.redirect('view-report-updated');
+
+    } else {
+
+        res.redirect('view-report-update-status');
+
+    }
+
+});
+
 // End Routes
 
 module.exports = router;

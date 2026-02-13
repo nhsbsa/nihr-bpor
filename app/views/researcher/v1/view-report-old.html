@@ -1,0 +1,386 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Manage pre-screeners" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-in.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Pre-screener summary report for Cognitive therapy in Dementia" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="#">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Study management</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch@nihr.ac.uk">Help</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+<h1>Pre-screener summary report for Cognitive therapy in Dementia</h1>
+
+<p class="nhsuk-body-l">This report shows the current status of pre-screeners that have been completed</p>
+
+
+<!--
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-one-half">
+    
+    {{ button({
+      text: "Show filters",
+      classes: "nhsuk-button--secondary",
+      href: "view-report-filters"
+    }) }}
+
+  </div>
+  <div class="nhsuk-grid-column-one-half nhsuk-u-text-align-right">
+
+    <div class="nhsuk-button-group">
+      <a href="manage-collaborators" class="nhsuk-link">Manage collaborators</a>
+
+      {{ button({
+        text: "Add a collaborator",
+        classes: "nhsuk-button--secondary",
+        href: "add-collaborator"
+      }) }}
+      
+    </div>    
+
+  </div>
+</div>
+-->
+
+{{ table({
+  responsive: true,
+  panel: false,
+  head: [
+    { text: "Volunteer name" },
+    { text: "Contact details" },
+    { text: "Participant ID" },
+    { text: "Date submitted" },
+    { text: "Status" }
+  ],
+  rows: [
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Lila Hammond"
+      },
+      {
+        header: "Contact details",
+        html: "lila.hammond@example.com<br>07123 445678"
+      },
+      { header: "Participant ID", text: "905173824" },
+      { header: "Date submitted", text: "04 March 2025" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-10' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Contacted</option>
+    <option value='3'>Recruited</option>
+    <option value='4'>Withdrawn</option>
+  </select>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Prof Mark Densley"
+      },
+      {
+        header: "Contact details",
+        html: "mark.densley@example.com<br>07123 445679"
+      },
+      { header: "Participant ID", text: "48291736" },
+      { header: "Date submitted", text: "19 April 2025" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-10' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Contacted</option>
+    <option value='3'>Recruited</option>
+    <option value='4'>Withdrawn</option>
+  </select>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Amira Patel"
+      },
+      {
+        header: "Contact details",
+        html: "amira.patel@example.com<br>07123 445680"
+      },
+      { header: "Participant ID", text: "7612049851" },
+      { header: "Date submitted", text: "07 May 2025" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-10' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Contacted</option>
+    <option value='3'>Recruited</option>
+    <option value='4'>Withdrawn</option>
+  </select>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Henri Clarke"
+      },
+      {
+        header: "Contact details",
+        html: "henri.clarke@example.com<br>07123 445681"
+      },
+      { header: "Participant ID", text: "63985017" },
+      { header: "Date submitted", text: "22 June 2025" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-10' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Contacted</option>
+    <option value='3'>Recruited</option>
+    <option value='4'>Withdrawn</option>
+  </select>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Sofia Martinez"
+      },
+      {
+        header: "Contact details",
+        html: "sofia.martinez@example.com<br>07123 445682"
+      },
+      { header: "Participant ID", text: "284790631" },
+      { header: "Date submitted", text: "09 July 2025" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-10' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Contacted</option>
+    <option value='3'>Recruited</option>
+    <option value='4'>Withdrawn</option>
+  </select>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Prof Daniel Whittaker"
+      },
+      {
+        header: "Contact details",
+        html: "daniel.whittaker@example.com<br>07123 445683"
+      },
+      { header: "Participant ID", text: "9183746502" },
+      { header: "Date submitted", text: "15 August 2025" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-10' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Contacted</option>
+    <option value='3'>Recruited</option>
+    <option value='4'>Withdrawn</option>
+  </select>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Jasmine O’Neill"
+      },
+      {
+        header: "Contact details",
+        html: "jasmine.oneill@example.com<br>07123 445684"
+      },
+      { header: "Participant ID", text: "57016248" },
+      { header: "Date submitted", text: "28 August 2025" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-10' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Contacted</option>
+    <option value='3'>Recruited</option>
+    <option value='4'>Withdrawn</option>
+  </select>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Oliver Bennett"
+      },
+      {
+        header: "Contact details",
+        html: "oliver.bennett@example.com<br>07123 445685"
+      },
+      { header: "Participant ID", text: "836491705" },
+      { header: "Date submitted", text: "02 September 2025" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-10' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Contacted</option>
+    <option value='3'>Recruited</option>
+    <option value='4'>Withdrawn</option>
+  </select>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Prof Emily Carter"
+      },
+      {
+        header: "Contact details",
+        html: "emily.carter@example.com<br>07123 445686"
+      },
+      { header: "Participant ID", text: "1049582763" },
+      { header: "Date submitted", text: "14 October 2025" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-10' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Contacted</option>
+    <option value='3'>Recruited</option>
+    <option value='4'>Withdrawn</option>
+  </select>
+</div>"
+      }
+    ],
+    [
+      {
+        header: "Volunteer name",
+        text: "Dr Nathan Li"
+      },
+      {
+        header: "Contact details",
+        html: "nathan.li@example.com<br>07123 445687"
+      },
+      { header: "Participant ID", text: "692740815" },
+      { header: "Date submitted", text: "30 November 2025" },
+      {
+        header: "Status",
+        html: "
+<div class='nhsuk-form-group'>
+  <select class='nhsuk-select' id='status-10' name='sortBy'>
+    <option value='1' selected>Awaiting contact</option>
+    <option value='2'>Contacted</option>
+    <option value='3'>Recruited</option>
+    <option value='4'>Withdrawn</option>
+  </select>
+</div>"
+      }
+    ]
+  ]
+}) }}
+
+<p>Showing 10 of 51 result(s)</p>
+
+{{ pagination({
+  next: {
+    href: "#"
+  },
+  items: [
+    {
+      number: 1,
+      href: '#',
+      current: true
+    },
+    {
+      number: 2,
+      href: '#'
+    },
+    {
+      number: 3,
+      href: '#'
+    }
+  ]
+}) }}
+
+
+    </div>
+  </div>
+{% endblock %}
