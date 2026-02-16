@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Set your inclusion and exclusion criteria" %}
+{% set pageName = "Exclude volunteers by health condition" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -57,7 +57,7 @@
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch@nihr.ac.uk">Help</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch@nihr.ac.uk">Email us</a></li>
         </ul>
       </nav>
     </div>
@@ -73,18 +73,18 @@
 
 {{ fieldset({
   legend: {
-    text: "Exclude by health condition",
+    text: "Exclude volunteers by health condition",
     classes: "nhsuk-fieldset__legend--xl",
     isPageHeading: true
   }
 }) }}
 
-<p>Add one or more specific health conditions that exclude a volunteer from taking part.</p>
+<p>You can add any health conditions that exclude a volunteer from taking part.</p>
 
-<label class="nhsuk-label nhsuk-label--m" for="myAutocomplete">Condition</label>
+<label class="nhsuk-label nhsuk-label--m" for="myAutocomplete">Health condition</label>
 
 {{ hint({
-  html: '<p>Start typing the name of the condition you’d like to add. The conditions in our database follow UK naming standards.</p>'
+  html: '<p>Start typing the name of the health condition you’d like to add. The health conditions in our database follow UK naming standards.</p>'
 }) }}
 
 <div id="my-autocomplete-container" class="nhsuk-input--width-20 nhsuk-u-margin-bottom-5"></div>

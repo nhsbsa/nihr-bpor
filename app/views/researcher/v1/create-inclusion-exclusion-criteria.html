@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Set your inclusion and exclusion criteria" %}
+{% set pageName = "Select your inclusion and exclusion criteria" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -57,7 +57,7 @@
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch@nihr.ac.uk">Help</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch@nihr.ac.uk">Email us</a></li>
         </ul>
       </nav>
 
@@ -74,18 +74,16 @@
 
 {% call fieldset({
   legend: {
-    text: "Set your inclusion and exclusion criteria",
+    text: "Select your inclusion and exclusion criteria",
     classes: "nhsuk-fieldset__legend--xl",
     isPageHeading: true
   }
 }) %}
 
-<p>We collect volunteers' personal data such as age, location and sex at birth when they create their Be Part of Research account.</p>
-
-<p>We use this to match volunteers to your study so you do not need to add these demographic criteria to your pre-screener.</p>
+<p>We use volunteers' demographic data (including age, location and sex at birth) to match them to your study before you pre-screen them.</p>
 
 {{ hint({
-  text: "Select one or more options."
+  text: "Select one or more pre-screening criteria."
 }) }}
 
 {{ checkboxes({
@@ -94,18 +92,18 @@
   values: data.addhealthConditions or [],
   fieldset: {
     legend: {
-      text: "Add health conditions",
+      text: "Pre-screen by health condition",
       classes: "nhsuk-fieldset__legend--m"
     }
   },
   items: [
     {
-      value: "Recruit by health condition",
-      text: "Recruit by health condition"
+      value: "Include volunteers with certain health conditions",
+      text: "Include volunteers with certain health conditions"
     },
     {
-      value: "Exclude by health condition",
-      text: "Exclude by health condition"
+      value: "Exclude volunteers with certain health conditions",
+      text: "Exclude volunteers with certain health conditions"
     }
   ]
 }) }}
@@ -116,18 +114,18 @@
   values: data.addMedications or [],
   fieldset: {
     legend: {
-      text: "Add medications",
+      text: "Pre-screen by medication",
       classes: "nhsuk-fieldset__legend--m"
     }
   },
   items: [
     {
-      value: "Recruit by medication",
-      text: "Recruit by medication"
+      value: "Include volunteers taking certain medications",
+      text: "Include volunteers taking certain medications"
     },
     {
-      value: "Exclude by medication",
-      text: "Exclude by medication"
+      value: "Exclude volunteers taking certain medications",
+      text: "Exclude volunteers taking certain medications"
     }
   ]
 }) }}

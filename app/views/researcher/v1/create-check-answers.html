@@ -1,7 +1,7 @@
 <!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
 {% set currentPage = "Create pre-screener" %}
 {% extends 'layout-researcher-nihr-logged-in.html' %}
-{% set pageName = "Set your inclusion and exclusion criteria" %}
+{% set pageName = "Check your answers before submitting your pre-screener" %}
 {% set containerClasses = "nihr-dashboard" %}
 {% block beforeContent %}
 
@@ -28,7 +28,7 @@
          </ul>
          <h2 class="app-side-nav__heading">Support</h2>
          <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch@nihr.ac.uk">Help</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch@nihr.ac.uk">Email us</a></li>
          </ul>
       </nav>
    </div>
@@ -38,9 +38,9 @@
       "text": "Back",
       classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
       }) }}
-      <h1>Check your answers</h1>
+      <h1>Check your answers before submitting your pre-screener</h1>
       <h2 class="nhsuk-heading-m">
-         Study details
+         Study information details
       </h2>
       <dl class="nhsuk-summary-list">
          <div class="nhsuk-summary-list__row">
@@ -99,8 +99,8 @@
 {% if data.addhealthConditions
   and data.addhealthConditions | length
   and (
-    'Recruit by health condition' in data.addhealthConditions or
-    'Exclude by health condition' in data.addhealthConditions
+    'Include volunteers with certain health conditions' in data.addhealthConditions or
+    'Exclude volunteers with certain health conditions' in data.addhealthConditions
   )
 %}
 <h2 class="nhsuk-heading-m">Health condition details</h2>
@@ -108,9 +108,9 @@
 
 {% if data.addhealthConditions
   and data.addhealthConditions | length
-  and 'Recruit by health condition' in data.addhealthConditions
+  and 'Include volunteers with certain health conditions' in data.addhealthConditions
 %}
-<h3 class="nhsuk-heading-s">Recruit by health condition</h3>
+<h3 class="nhsuk-heading-s">Include volunteers by health condition</h3>
 
 {% for condition in data.conditions %}
   {{ summaryList({
@@ -149,9 +149,9 @@
 
 {% if data.addhealthConditions
   and data.addhealthConditions | length
-  and 'Exclude by health condition' in data.addhealthConditions
+  and 'Exclude volunteers with certain health conditions' in data.addhealthConditions
 %}
-<h3 class="nhsuk-heading-s">Exclude by health condition</h3>
+<h3 class="nhsuk-heading-s">Exclude volunteers with certain health conditions</h3>
 
 {% for condition in data.conditionsExclude %}
   {{ summaryList({
@@ -196,8 +196,8 @@
 {% if data.addMedications
   and data.addMedications | length
   and (
-    'Recruit by medication' in data.addMedications or
-    'Exclude by medication' in data.addMedications
+    'Include volunteers taking certain medications' in data.addMedications or
+    'Exclude volunteers taking certain medications' in data.addMedications
   )
 %}
 <h2 class="nhsuk-heading-m">Medication details</h2>
@@ -205,9 +205,9 @@
 
 {% if data.addMedications
   and data.addMedications | length
-  and 'Recruit by medication' in data.addMedications
+  and 'Include volunteers taking certain medications' in data.addMedications
 %}
-<h3 class="nhsuk-heading-s">Recruit by medication</h3>
+<h3 class="nhsuk-heading-s">Include volunteers taking certain medications</h3>
 
 {% for medication in data.medications %}
 
@@ -267,9 +267,9 @@
 
 {% if data.addMedications
   and data.addMedications | length
-  and 'Exclude by medication' in data.addMedications
+  and 'Exclude volunteers taking certain medications' in data.addMedications
 %}
-<h3 class="nhsuk-heading-s">Exclude by medication</h3>
+<h3 class="nhsuk-heading-s">Exclude volunteers taking certain medications</h3>
 
 {% for medication in data.medicationsExclude %}
 
@@ -384,9 +384,8 @@
     }) }}
   {% endif %}
 {% endfor %}
-      <h2 class="nhsuk-heading-m">Now submit your pre-screener</h2>
-      <p>You can <a href="create-check-volunteer-view">check the how your pre-screener will appear to volunteers</a>.</p>
-      <p>After you submit it, it’ll be sent to our admin team for review.</p>
+      <p>After you submit your pre-screener, it’ll be sent to our team for review.</p>
+
       {{ button({
       text: "Submit",
       href: "create-submitted"

@@ -226,19 +226,19 @@ router.post('/create-inclusion-exclusion-criteria', function (req, res) {
     var addMedications = req.session.data['addMedications'];
     var addAdditionalQuestion = req.session.data['addAdditionalQuestion'];
 
-    if (addhealthConditions && addhealthConditions.includes("Recruit by health condition")) {
+    if (addhealthConditions && addhealthConditions.includes("Include volunteers with certain health conditions")) {
 
         res.redirect('create-recruit-health-condition');
 
-    } else if (addhealthConditions && addhealthConditions.includes("Exclude by health condition")) {
+    } else if (addhealthConditions && addhealthConditions.includes("Exclude volunteers with certain health conditions")) {
 
         res.redirect('create-exclude-health-condition');
 
-    } else if (addMedications && addMedications.includes("Recruit by medication")) {
+    } else if (addMedications && addMedications.includes("Include volunteers taking certain medications")) {
 
         res.redirect('create-recruit-medication');
 
-    } else if (addMedications && addMedications.includes("Exclude by medication")) {
+    } else if (addMedications && addMedications.includes("Exclude volunteers taking certain medications")) {
 
         res.redirect('create-exclude-medication');
 
@@ -302,7 +302,7 @@ router.post('/create-recruit-condition-answers', function (req, res) {
     } else if (recruitAnotherCondition == "No") {
 
         if (addhealthConditions) {
-            if (addhealthConditions.includes('Exclude by health condition')) {
+            if (addhealthConditions.includes('Exclude volunteers with certain health conditions')) {
  
                 return res.redirect('create-exclude-health-condition');
 
@@ -310,12 +310,12 @@ router.post('/create-recruit-condition-answers', function (req, res) {
         }
 
         if (addMedications) {
-            if (addMedications.includes('Recruit by medication')) {
+            if (addMedications.includes('Include volunteers taking certain medications')) {
                 
                 return res.redirect('create-recruit-medication');
 
             }
-            if (addMedications.includes('Exclude by medication')) {
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
 
                 return res.redirect('create-exclude-medication');
 
@@ -388,12 +388,12 @@ router.post('/create-exclude-condition-answers', function (req, res) {
     } else if (excludeAnotherCondition == "No") {
 
         if (addMedications) {
-            if (addMedications.includes('Recruit by medication')) {
+            if (addMedications.includes('Include volunteers taking certain medications')) {
                 
                 return res.redirect('create-recruit-medication');
 
             }
-            if (addMedications.includes('Exclude by medication')) {
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
 
                 return res.redirect('create-exclude-medication');
 
@@ -522,7 +522,7 @@ router.post('/create-recruit-medication-answers', function (req, res) {
     } else if (recruitAnotherMedication == "No") {
 
         if (addMedications) {
-            if (addMedications.includes('Exclude by medication')) {
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
 
                 return res.redirect('create-exclude-medication');
 
