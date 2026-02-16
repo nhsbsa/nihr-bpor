@@ -1,0 +1,78 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+{% set currentPage = "Create pre-screener" %}
+{% extends 'layout-researcher-nihr-logged-in.html' %}
+{% set pageName = "Do you want to remove [health condition / medication]?" %}
+{% set containerClasses = "nihr-dashboard" %}
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="#">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+{% block content %}
+<div class="nhsuk-grid-row">
+   <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+      <nav class="app-side-nav">
+         <h2 class="app-side-nav__heading">Dashboard</h2>
+         <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+         </ul>
+         <h2 class="app-side-nav__heading">Study management</h2>
+         <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+         </ul>
+         <h2 class="app-side-nav__heading">Support</h2>
+         <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch@nihr.ac.uk">Help</a></li>
+         </ul>
+      </nav>
+   </div>
+   <div class="nhsuk-grid-column-three-quarters">
+      {{ backLink({
+      "href": "javascript:history.go(-1)",
+      "text": "Back",
+      classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+      }) }}
+
+{{ radios({
+  idPrefix: "createCheckAnswersRemove",
+  name: "createCheckAnswersRemove",
+  classes: "nhsuk-radios--inline",
+  fieldset: {
+    legend: {
+      text: "Do you want to remove [health condition / medication]?",
+      size: "l",
+      isPageHeading: true
+    }
+  },
+  hint: {
+    html: '
+    <div class="nhsuk-inset-text nhsuk-u-margin-top-5">
+      <p style="color: #212B32;">Name of [Health Conditon / Medication]</p>
+    </div>
+'
+  },
+  items: [
+    {
+      value: "Yes",
+      text: "Yes"
+    },
+    {
+      value: "No",
+      text: "No"
+    }
+  ]
+}) }}
+
+{{ button({
+  text: "Continue"
+}) }}
+
+   </div>
+</div>
+{% endblock %}
