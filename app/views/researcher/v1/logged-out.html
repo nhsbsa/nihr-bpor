@@ -15,7 +15,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "" %}
+{% set pageName = "You have logged out" %}
 
 <!-- For adding a breadcrumb or back link -->
 <!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
@@ -37,16 +37,12 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<h1>You have signed out</h1>
+<h1>You have logged out</h1>
 
-<p>You have left the Recruit Registry Volunteers service.</p>
+<p>Log in to your account again to access Recruit registry volunteers.</p>
 
-<p>You can:</p>
+<p><a href="/{{folder}}/{{subfolder}}/index" class="nhsuk-button">Continue</a></p>
 
-<ul>
-  <li><a href="/{{folder}}/{{subfolder}}/login-type-of-account">sign in again</a></li>
-  <li><a href="/{{folder}}/{{subfolder}}/index">go to the Recruit Registry Volunteers start page</a></li>
-</ul>
 
     </div>
   </div>
