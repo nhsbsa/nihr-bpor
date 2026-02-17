@@ -15,7 +15,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "" %}
+{% set pageName = "Log in to Recruit registry volunteers" %}
 
 <!-- For adding a breadcrumb or back link -->
 <!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
@@ -38,7 +38,7 @@
     <div class="nhsuk-grid-column-two-thirds">
 
 <h1>
-  <span>Recruit Registry Volunteers
+  <span>Log in to Recruit registry volunteers
     <span class="nhsuk-caption-xl nhsuk-caption--bottom">
       <span class="nhsuk-u-visually-hidden">-</span>
         (Administrators)
@@ -46,9 +46,9 @@
   </span>
 </h1>
 
-<p>Manage accounts and recruitment requests for the Recruit Registry Volunteers service.</p>
+<p>Log in to manage accounts and requests for Recruit registry volunteers.</p>
 
-<p>Sign in with your NIHR Google ID to access the researcher management dashboard.</p>
+<p>You need to use your NIHR Google ID to log in to this service.</p>
 
 <form action="/{{folder}}/{{subfolder}}/index" method="post" novalidate>
 
@@ -59,10 +59,10 @@
 </form>
 
 {% call details({
-  summaryText: "How do I request access?"
+  summaryText: "Can’t log in to the service?"
 }) %}
-  <p>You must be an approved member of staff to use this service.</p>
-  <p>If you need access, email <a href="mailto:ed.park@nihr.ac.uk">ed.park@nihr.ac.uk</a></p>
+  <p>Only approved NIHR staff can use this service.</p>
+  <p>You should <a href="mailto:ed.park@nihr.ac.uk">email us</a> if you need access.</p>
 {% endcall %}
 
     </div>
