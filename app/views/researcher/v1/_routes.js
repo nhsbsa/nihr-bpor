@@ -424,49 +424,13 @@ router.post('/create-recruit-medication', function (req, res) {
 
     var listedMedication = req.session.data['listedMedication'];
 
-    var friendlyNames = [
-        "Dreamella",
-        "Neuroflux",
-        "Serenitide",
-        "Chronodine",
-        "Sleeptril",
-        "Viralux",
-        "Immunoboost X",
-        "Euphorium",
-        "Vortexil",
-        "Calmora",
-        "Metaburn",
-        "Revitalin",
-        "Imaginex",
-        "Luminex",
-        "Psychotranquil",
-        "Mindblend",
-        "Nexaclear",
-        "Ferroplaz",
-        "Subvibe",
-        "Neurozone"
-    ];
-
-    // Random number between 1 and 5
-    var count = Math.floor(Math.random() * 5) + 1;
-
-    // Shuffle the array and take the first `count` items
-    var randomFriendlyNames = [...friendlyNames]
-    .sort(() => 0.5 - Math.random())
-    .slice(0, count)
-    .join(", ");
-
     // Make sure the 'medications' array exists
     if (!req.session.data['medications']) {
         req.session.data['medications'] = [];
     }
 
-    // Push the new medication OBJECT
-    req.session.data['medications'].push({
-        drugName: listedMedication,
-        friendlyName: randomFriendlyNames,
-        listedMedication: true
-    });
+    // Push the new medication
+    req.session.data['medications'].push(listedMedication);
 
     // Redirect to the next page
     res.redirect('create-recruit-medication-answers');
@@ -553,49 +517,13 @@ router.post('/create-exclude-medication', function (req, res) {
 
     var listedMedicationExclude = req.session.data['listedMedicationExclude'];
 
-    var friendlyNames = [
-        "Dreamella",
-        "Neuroflux",
-        "Serenitide",
-        "Chronodine",
-        "Sleeptril",
-        "Viralux",
-        "Immunoboost X",
-        "Euphorium",
-        "Vortexil",
-        "Calmora",
-        "Metaburn",
-        "Revitalin",
-        "Imaginex",
-        "Luminex",
-        "Psychotranquil",
-        "Mindblend",
-        "Nexaclear",
-        "Ferroplaz",
-        "Subvibe",
-        "Neurozone"
-    ];
-
-    // Random number between 1 and 5
-    var count = Math.floor(Math.random() * 5) + 1;
-
-    // Shuffle and select friendly names
-    var randomFriendlyNames = [...friendlyNames]
-        .sort(() => 0.5 - Math.random())
-        .slice(0, count)
-        .join(", ");
-
     // Make sure the 'medicationsExclude' array exists
     if (!req.session.data['medicationsExclude']) {
         req.session.data['medicationsExclude'] = [];
     }
 
-    // Push the new medication OBJECT
-    req.session.data['medicationsExclude'].push({
-        drugName: listedMedicationExclude,
-        friendlyName: randomFriendlyNames,
-        listedMedication: true
-    });
+    // Push the new medication
+    req.session.data['medicationsExclude'].push(listedMedicationExclude);
 
     // Redirect to the next page
     res.redirect('create-exclude-medication-answers');

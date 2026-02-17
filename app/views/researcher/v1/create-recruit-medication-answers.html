@@ -109,31 +109,22 @@
     },
     rows: [
       {
+        classes: "nhsuk-summary-list__row--no-border",
         key: {
           text: "Drug name"
         },
         value: {
-          text: medication.drugName
+          text: medication
         },
         actions: {
           items: [
             {
               text: "Change",
               href: "/change-medication/" ~ loop.index0,
-              visuallyHiddenText: medication.drugName
+              visuallyHiddenText: medication
             }
           ]
         }
-      },
-      {
-        classes: "nhsuk-summary-list__row--no-border",
-        key: {
-          text: "Other names"
-        },
-        value: {
-          text: medication.friendlyName or "None"
-        },
-        actions: otherNameActions
       }
     ]
   }) }}

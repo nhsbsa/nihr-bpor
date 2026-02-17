@@ -75,17 +75,17 @@
                Criteria selected
             </dt>
             <dd class="nhsuk-summary-list__value">
-               {% if data.addhealthConditions %}
-               {{ data.addhealthConditions | join('<br>') | safe }}
-               <br>
-               {% endif %}
-               {% if data.addMedications %}
-               {{ data.addMedications | join('<br>') | safe }}
-               <br>
-               {% endif %}
-               {% if data.addAdditionalQuestion %}
-               {{ data.addAdditionalQuestion | join('<br>') | safe }}
-               {% endif %}
+              {% if data.addhealthConditions and data.addhealthConditions|length > 0 %}
+                {{ data.addhealthConditions | join('<br>') | safe }}<br>
+              {% endif %}
+
+              {% if data.addMedications and data.addMedications|length > 0 %}
+                {{ data.addMedications | join('<br>') | safe }}<br>
+              {% endif %}
+
+              {% if data.addAdditionalQuestion and data.addAdditionalQuestion|length > 0 %}
+                {{ data.addAdditionalQuestion | join('<br>') | safe }}
+              {% endif %}
             </dd>
             <dd class="nhsuk-summary-list__actions">
                <a class="nhsuk-link" href="create-inclusion-exclusion-criteria#addhealthConditions">Change<span class="nhsuk-u-visually-hidden"> inclusion and exclusion criteria</span></a>
@@ -112,39 +112,29 @@
 %}
 <h3 class="nhsuk-heading-s">Include volunteers by health condition</h3>
 
-{% for condition in data.conditions %}
-  {{ summaryList({
-    card: {
-      heading: "Health condition " ~ loop.index,
-      headingSize: "s",
+{{ summaryList({
+  classes: "nhsuk-summary-list--no-border",
+  rows: [
+    {
+      key: {
+        text: "Health condition"
+      },
+      value: {
+        html: data.conditions | join("<br>")
+      },
       actions: {
         items: [
           {
-            text: "Remove",
-            href: "/remove-condition/" ~ loop.index0,
-            visuallyHiddenText: "health condition " ~ loop.index
+            href: "create-recruit-health-condition",
+            text: "Change",
+            visuallyHiddenText: "health condition"
           }
         ]
       }
-    },
-    rows: [
-      {
-        classes: "nhsuk-summary-list__row--no-border",
-        key: { text: "Health condition" },
-        value: { text: condition },
-        actions: {
-          items: [
-            {
-              text: "Change",
-              href: "/change-condition/" ~ loop.index0,
-              visuallyHiddenText: condition
-            }
-          ]
-        }
-      }
-    ]
-  }) }}
-{% endfor %}
+    }
+  ]
+}) }}
+
 {% endif %}
 
 {% if data.addhealthConditions
@@ -153,39 +143,29 @@
 %}
 <h3 class="nhsuk-heading-s">Exclude volunteers with certain health conditions</h3>
 
-{% for condition in data.conditionsExclude %}
-  {{ summaryList({
-    card: {
-      heading: "Health condition " ~ loop.index,
-      headingSize: "s",
+{{ summaryList({
+  classes: "nhsuk-summary-list--no-border",
+  rows: [
+    {
+      key: {
+        text: "Health condition"
+      },
+      value: {
+        html: data.conditionsExclude | join("<br>")
+      },
       actions: {
         items: [
           {
-            text: "Remove",
-            href: "/remove-condition-exclude/" ~ loop.index0,
-            visuallyHiddenText: "health condition " ~ loop.index
+            href: "create-exclude-health-condition",
+            text: "Change",
+            visuallyHiddenText: "health condition"
           }
         ]
       }
-    },
-    rows: [
-      {
-        classes: "nhsuk-summary-list__row--no-border",
-        key: { text: "Health condition" },
-        value: { text: condition },
-        actions: {
-          items: [
-            {
-              text: "Change",
-              href: "/change-condition-exclude/" ~ loop.index0,
-              visuallyHiddenText: condition
-            }
-          ]
-        }
-      }
-    ]
-  }) }}
-{% endfor %}
+    }
+  ]
+}) }}
+
 {% endif %}
 
 
@@ -209,60 +189,29 @@
 %}
 <h3 class="nhsuk-heading-s">Include volunteers taking certain medications</h3>
 
-{% for medication in data.medications %}
-
-  {% if medication.listedMedication == false %}
-    {% set otherNameActions = {
-      items: [
-        {
-          text: "Change",
-          href: "/change-medication/" ~ loop.index0,
-          visuallyHiddenText: "medication " ~ loop.index
-        }
-      ]
-    } %}
-  {% else %}
-    {% set otherNameActions = {} %}
-  {% endif %}
-
-  {{ summaryList({
-    card: {
-      heading: "Medication " ~ loop.index,
-      headingSize: "s",
+{{ summaryList({
+  classes: "nhsuk-summary-list--no-border",
+  rows: [
+    {
+      key: {
+        text: "Medication"
+      },
+      value: {
+        html: data.medications | join("<br>")
+      },
       actions: {
         items: [
           {
-            text: "Remove",
-            href: "/remove-medication/" ~ loop.index0,
-            visuallyHiddenText: "medication " ~ loop.index
+            href: "create-recruit-medication",
+            text: "Change",
+            visuallyHiddenText: "medication"
           }
         ]
       }
-    },
-    rows: [
-      {
-        key: { text: "Drug name" },
-        value: { text: medication.drugName },
-        actions: {
-          items: [
-            {
-              text: "Change",
-              href: "/change-medication/" ~ loop.index0,
-              visuallyHiddenText: medication.drugName
-            }
-          ]
-        }
-      },
-      {
-        classes: "nhsuk-summary-list__row--no-border",
-        key: { text: "Other names" },
-        value: { text: medication.friendlyName or "None" },
-        actions: otherNameActions
-      }
-    ]
-  }) }}
+    }
+  ]
+}) }}
 
-{% endfor %}
 {% endif %}
 
 {% if data.addMedications
@@ -271,60 +220,29 @@
 %}
 <h3 class="nhsuk-heading-s">Exclude volunteers taking certain medications</h3>
 
-{% for medication in data.medicationsExclude %}
-
-  {% if medication.listedMedication == false %}
-    {% set otherNameActions = {
-      items: [
-        {
-          text: "Change",
-          href: "/change-medication-exclude/" ~ loop.index0,
-          visuallyHiddenText: "medication " ~ loop.index
-        }
-      ]
-    } %}
-  {% else %}
-    {% set otherNameActions = {} %}
-  {% endif %}
-
-  {{ summaryList({
-    card: {
-      heading: "Medication " ~ loop.index,
-      headingSize: "s",
+{{ summaryList({
+  classes: "nhsuk-summary-list--no-border",
+  rows: [
+    {
+      key: {
+        text: "Medication"
+      },
+      value: {
+        html: data.medicationsExclude | join("<br>")
+      },
       actions: {
         items: [
           {
-            text: "Remove",
-            href: "/remove-medication-exclude/" ~ loop.index0,
-            visuallyHiddenText: "medication " ~ loop.index
+            href: "create-exclude-medication",
+            text: "Change",
+            visuallyHiddenText: "medication"
           }
         ]
       }
-    },
-    rows: [
-      {
-        key: { text: "Drug name" },
-        value: { text: medication.drugName },
-        actions: {
-          items: [
-            {
-              text: "Change",
-              href: "/change-medication-exclude/" ~ loop.index0,
-              visuallyHiddenText: medication.drugName
-            }
-          ]
-        }
-      },
-      {
-        classes: "nhsuk-summary-list__row--no-border",
-        key: { text: "Other names" },
-        value: { text: medication.friendlyName or "None" },
-        actions: otherNameActions
-      }
-    ]
-  }) }}
+    }
+  ]
+}) }}
 
-{% endfor %}
 {% endif %}
 
 
