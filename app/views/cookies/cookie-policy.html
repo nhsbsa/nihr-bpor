@@ -1,0 +1,213 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-out.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Cookies on Recruit registry volunteers" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="#">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back"
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<h1>Cookies on Recruit registry volunteers</h1>
+
+<h2>What are cookies?</h2>
+
+<p>Cookies are files saved on your phone, tablet or computer when you visit a website.</p>
+<p>They store information about how you use the website, such as the pages you visit.</p>
+<p>Cookies are not viruses or computer programs. They are very small so do not take up much space.</p>
+
+<h2>How we use cookies</h2>
+
+<p>We use cookies to:</p>
+
+<ul>
+  <li>make our website work, for example by keeping it secure</li>
+  <li>recognise your device, so you do not need to enter the same information more than once</li>
+  <li>measure how many people are using the services we provide, so we can make them easier and faster to use</li>
+  <li>measure how you use our website, such as the links you click on</li>
+</ul>
+
+<p>Cookies cannot be used to identify you personally. Find out <a href="https://allaboutcookies.org/">more about cookies and how to manage them</a>.</p>
+
+
+{% set cookiesTable %}
+
+<h2 class="nhsuk-heading-m">Cookies needed for Recruit registry volunteers to work</h2>
+<p>These are known as essential cookies and our service will not work without them.</p>
+
+{{ table({
+  responsive: true,
+  head: [
+    {
+      text: "Cookie name"
+    },
+    {
+      text: "Purpose"
+    },
+    {
+      text: "Expiry"
+    }
+  ],
+  rows: [
+    [
+      {
+        header: "Cookie name",
+        text: "???"
+      },
+      {
+        header: "Purpose",
+        text: "???"
+      },
+      {
+        header: "Expiry",
+        text: "???"
+      }
+    ],
+    [
+      {
+        header: "Cookie name",
+        text: "???"
+      },
+      {
+        header: "Purpose",
+        text: "???"
+      },
+      {
+        header: "Expiry",
+        text: "???"
+      }
+    ],
+    [
+      {
+        header: "Cookie name",
+        text: "???"
+      },
+      {
+        header: "Purpose",
+        text: "???"
+      },
+      {
+        header: "Expiry",
+        text: "???"
+      }
+    ]
+  ]
+}) }}
+
+<h2 class="nhsuk-heading-m">Additional cookies to help us improve Recruit register volunteers</h2>
+<p>You can choose whether or not you accept additional cookies. We use these to understand more about how people use Recruit registry volunteers and how we can make it better.</p>
+
+{{ table({
+  responsive: true,
+  head: [
+    {
+      text: "Cookie name"
+    },
+    {
+      text: "Purpose"
+    },
+    {
+      text: "Expiry"
+    }
+  ],
+  rows: [
+    [
+      {
+        header: "Cookie name",
+        text: "???"
+      },
+      {
+        header: "Purpose",
+        text: "???"
+      },
+      {
+        header: "Expiry",
+        text: "???"
+      }
+    ],
+    [
+      {
+        header: "Cookie name",
+        text: "???"
+      },
+      {
+        header: "Purpose",
+        text: "???"
+      },
+      {
+        header: "Expiry",
+        text: "???"
+      }
+    ],
+    [
+      {
+        header: "Cookie name",
+        text: "???"
+      },
+      {
+        header: "Purpose",
+        text: "???"
+      },
+      {
+        header: "Expiry",
+        text: "???"
+      }
+    ]
+  ]
+}) }}
+
+
+{% endset %}
+
+{{ details({
+  summaryText: "Check which cookies we use on Recruit registry volunteers",
+  html: cookiesTable
+}) }}
+
+<h2>Change your cookies settings</h2>
+
+<p>Some cookies, like those used to measure how you use our website, are not needed for our website to work.</p>
+<p>These additional cookies help us make our website better, but we’ll only use them if you say it’s OK.</p>
+<p><a href="/{{folder}}/more-information-about-cookies">Choose which cookies we use</a>.</p>
+
+<h2>How we use the information we collect</h2>
+
+<p>You can find out more about how we collect, store and use information about you or your visit in our <a href="https://www.nihr.ac.uk/nihr-privacy-policy">privacy policy</a>.</p>
+
+    </div>
+  </div>
+{% endblock %}

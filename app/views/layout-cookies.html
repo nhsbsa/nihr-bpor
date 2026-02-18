@@ -20,6 +20,51 @@
 <!-- Edit the header -->
 <!-- Header code examples can be found at https://service-manual.nhs.uk/design-system/components/header -->
 {% block header %}
+<div id="nhsuk-cookie-banner" data-nosnippet>
+  <div class="nhsuk-cookie-banner" id="cookie-banner">
+    <div class="nhsuk-width-container">
+      <h2 class="nhsuk-heading-s">Cookies on Recruit registry volunteers</h2>
+
+      <p>We use some cookies to make this service work.</p>
+
+      <p>
+        Help us improve Recruit registry volunteers by accepting additional cookies.
+      </p>
+
+      <div class="nhsuk-button-group nhsuk-u-margin-bottom-0">
+
+         <button class="nhsuk-button" data-module="nhsuk-button" type="button" data-consent="accept">
+            Accept additional cookies
+         </button>
+
+         <button class="nhsuk-button" data-module="nhsuk-button" type="button" data-consent="reject">  	
+            Reject additional cookies
+         </button>
+
+      </div>
+
+      <p class="nhsuk-u-margin-top-1">
+        <a href="/{{folder}}/more-information-about-cookies">More information about cookies</a>
+      </p>
+
+    </div>
+  </div>
+
+  <div
+    class="nhsuk-success-banner is-hidden"
+    id="cookie-confirmation"
+    role="status"
+    aria-live="polite"
+  >
+    <div class="nhsuk-width-container">
+      <p class="nhsuk-u-margin-bottom-0">
+        You can change your cookie settings at any time using our
+        <a href="/{{folder}}/more-information-about-cookies">cookies page</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
 <header class="nhsuk-header nhsuk-header--white" role="banner" data-module="nhsuk-header" data-nhsuk-header-init="">
    <div class="nhsuk-header__container nhsuk-width-container">
       <div class="nhsuk-header__service">
@@ -124,5 +169,6 @@
   {{ super() }}
   <script type="module" src="/assets/javascript/main.js"></script>
   <script type="module" src="/assets/javascript/button-menu.js"></script>
+  <script type="module" src="/assets/javascript/cookies.js"></script>
   {% block pageScripts %}{% endblock %}
 {% endblock %}

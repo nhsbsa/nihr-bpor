@@ -1,0 +1,61 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-cookies.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="#">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<h1>Recruit Registry Volunteers</h1>
+
+<p>Setting up an account on Recruit Registry Volunteers will enable you to create a pre-screener to send to potential volunteers for your study</p>
+<p>This is an overview of the platform:</p>
+
+<ul>
+  <li>While creating the pre-screener, you will be able to save it at any point and continue later.</li>
+  <li>Once submitted, your pre-screener will be sent to our admins for approval.</li>
+</ul>
+
+<p>Once approved, a link to pre-screener will be sent to volunteers by email.</p>
+<p>After your volunteers fill out the pre-screener and submit it, you will be able to see the results on this platform.</p>
+
+{{ button({
+  text: "Sign in"
+}) }}
+
+<p>Don't have an account? <a href="#">Register now</a></p>
+
+    </div>
+  </div>
+{% endblock %}

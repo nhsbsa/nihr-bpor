@@ -1,0 +1,36 @@
+/* Base */
+#nhsuk-cookie-banner {
+  font-family: Frutiger W01, Arial, sans-serif;
+  color: #212b32;
+}
+
+/* Utility */
+.is-hidden {
+  display: none;
+}
+
+/* Cookie banner */
+.nhsuk-cookie-banner {
+  // background: nhsuk-colour("grey-5");
+  background: nhsuk-colour("white");
+  padding: 24px 0 0;
+  // box-shadow: 0 0 4px 0 #212b32;
+  border-bottom: 1px solid $nhsuk-border-colour;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Confirmation banner */
+.nhsuk-success-banner {
+  background-color: $nhsuk-success-colour;
+  color: #fff;
+  padding: 8px 0;
+}
+
+.nhsuk-success-banner a {
+  color: #fff;
+}
+
+.nhsuk-success-banner a:hover {
+  color: #212b32;
+}

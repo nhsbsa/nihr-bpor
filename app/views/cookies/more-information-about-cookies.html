@@ -1,0 +1,89 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-out.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "More information about cookies" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="#">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back"
+}) }}
+
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<h1>More information about cookies</h1>
+
+<p>Cookies are files stored on your device when visiting a website.</p>
+<p>They store information about how you use our website, such as the pages you visit.</p>
+<p>You can find detailed information about the cookies we use in our <a href="/{{folder}}/cookie-policy">cookies policy</a>.</p>
+
+<form action="/{{folder}}/more-information-about-cookies" method="post" novalidate>
+
+{{ radios({
+  idPrefix: "cookies",
+  name: "cookies",
+  fieldset: {
+    legend: {
+      text: "Choose which cookies we can use",
+      size: "l"
+    }
+  },
+  hint: {
+    html: '
+      <p>We need to use essential cookies to make this service work.</p>
+      <p>You can choose whether to use additional cookies. These help us understand how you use the service and how we can improve it. </p>
+    '
+  },
+  items: [
+    {
+      value: "Use additional cookies",
+      text: "Use additional cookies"
+    },
+    {
+      value: "Do not use additional cookies",
+      text: "Do not use additional cookies"
+    }
+  ]
+}) }}
+
+{{ button({
+  text: "Save my cookie settings"
+}) }}
+
+</form>
+
+    </div>
+  </div>
+{% endblock %}
