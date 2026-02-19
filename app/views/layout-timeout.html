@@ -11,6 +11,8 @@
 
 {%- from '_components/button-menu/macro.njk' import buttonMenu %}
 {%- from '_components/phase-banner/macro.njk' import nhsukPhaseBanner %}
+{%- from '_components/session-timeout-warning/macro.njk' import sessionTimeoutWarning %}
+
 
 {% block head %}
   <!-- Add your custom CSS or Sass in /app/assets/sass/main.scss -->
@@ -20,14 +22,55 @@
 <!-- Edit the header -->
 <!-- Header code examples can be found at https://service-manual.nhs.uk/design-system/components/header -->
 {% block header %}
-<header class="nhsuk-header nhsuk-header--white" role="banner" data-module="nhsuk-header" data-nhsuk-header-init="">
-   <div class="nhsuk-header__container nhsuk-width-container">
+<header class="nhsuk-header nhsuk-header--white" role="banner" data-module="nhsuk-header">
+   <div class="nhsuk-header__container nhsuk-width-container nihr-dashboard">
       <div class="nhsuk-header__service">
          <a class="nhsuk-header__service-logo" href="/" aria-label="National Institute for Health and Care Research Logo  homepage">
          <img class="nhsuk-header__organisation-logo" src="/assets/images/NIHR-logo.svg" width="280" alt="National Institute for Health and Care Research Logo">
          </a>
       </div>
+      <nav class="nhsuk-header__account" aria-label="Account">
+         <ul class="nhsuk-header__account-list">
+         <li class="nhsuk-header__account-item">
+            <svg class="nhsuk-icon nhsuk-icon--user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" focusable="false" aria-hidden="true">
+               <path d="M12 1a11 11 0 1 1 0 22 11 11 0 0 1 0-22Zm0 2a9 9 0 0 0-5 16.5V18a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1.5A9 9 0 0 0 12 3Zm0 3a3.5 3.5 0 1 1-3.5 3.5A3.4 3.4 0 0 1 12 6Z" />
+            </svg>
+            {% if data['firstName'] and data['lastName'] %}<a href="/{{folder}}/{{subfolder}}/view-profile">{{ data['firstName'] }} {{ data['lastName'] }}</a>{% else %}<a href="/{{folder}}/{{subfolder}}/view-profile">Jane Doe</a>{% endif %}
+         </li>
+         <li class="nhsuk-header__account-item">
+            <a class="nhsuk-header__account-link" href="/{{folder}}/{{subfolder}}/logged-out">
+               Log out
+            </a>
+         </li>
+         </ul>
+      </nav>
    </div>
+
+   <!-- Use "nhsuk-header__navigation-item--current" class on <li> for selected state -->
+
+   <nav class="nhsuk-header__navigation show-on-mobile" aria-label="Menu">
+    <div class="nhsuk-header__navigation-container nhsuk-width-container nihr-dashboard">
+      <ul class="nhsuk-header__navigation-list">
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="home" {% if currentPage == "Home" %}aria-current="true"{% endif %}>{% if currentPage == "Home" %}<strong class="nhsuk-header__navigation-item-current-fallback">Home</strong>{% else %}Home{% endif %}</a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="create-start" {% if currentPage == "Create pre-screener" %}aria-current="true"{% endif %}>{% if currentPage == "Create pre-screener" %}<strong class="nhsuk-header__navigation-item-current-fallback">Create pre-screener</strong>{% else %}Create pre-screener{% endif %}</a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="manage-start" {% if currentPage == "Manage pre-screeners" %}aria-current="true"{% endif %}>{% if currentPage == "Manage pre-screeners" %}<strong class="nhsuk-header__navigation-item-current-fallback">Manage pre-screeners</strong>{% else %}Manage pre-screeners{% endif %}</a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="mailto:bepartofresearch@nihr.ac.uk" {% if currentPage == "Email us" %}aria-current="true"{% endif %}>Email us</a>
+        </li>
+        <li class="nhsuk-header__menu" hidden>
+          <button class="nhsuk-header__menu-toggle nhsuk-header__navigation-link" id="toggle-menu" aria-expanded="false">
+            <span class="nhsuk-u-visually-hidden">Browse </span>More
+          </button>
+        </li>
+      </ul>
+    </div>
+   </nav>
 </header>
 {% endblock %}
 
@@ -35,7 +78,7 @@
 <!-- Footer code examples can be found at https://service-manual.nhs.uk/design-system/components/footer -->
 {% block footer %}
 <footer class="nhsuk-footer nihr-footer" role="contentinfo">
-   <div class="nhsuk-width-container">
+   <div class="nhsuk-width-container nihr-dashboard">
       <div class="nhsuk-footer__navigation nhsuk-grid-row">
          <div class="nhsuk-grid-column-one-quarter">
             <h2 class="nhsuk-footer__heading nhsuk-heading-s">Useful links</h2>
@@ -124,5 +167,6 @@
   {{ super() }}
   <script type="module" src="/assets/javascript/main.js"></script>
   <script type="module" src="/assets/javascript/button-menu.js"></script>
+  <script type="module" src="/assets/javascript/timeout.js"></script>
   {% block pageScripts %}{% endblock %}
 {% endblock %}
