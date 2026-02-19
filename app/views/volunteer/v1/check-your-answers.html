@@ -79,34 +79,142 @@
           rows: [
             {
               key: {
-                text: "Do you have type 2 diabetes?"
+                text: "Do you currently have Diabetes (type 2)?"
               },
               value: {
-                text: data['conditionQuestion']
+                text: data['conditionQuestion1']
               },
               actions: {
                 items: [
                   {
-                    href: "condition#conditionQuestion",
+                    href: "condition-1#conditionQuestion1",
                     text: "Change",
-                    visuallyHiddenText: "if you have type 2 diabetes"
+                    visuallyHiddenText: "if you have Diabetes (type 2)"
                   }
                 ]
               }
             },
             {
               key: {
-                text: "Do you currently take Metformin?"
+                text: "Do you currently have Congenital heart disease?"
               },
               value: {
-                text: data['medicationQuestion']
+                text: data['conditionQuestion2']
               },
               actions: {
                 items: [
                   {
-                    href: "medication#medicationQuestion",
+                    href: "condition-2#conditionQuestion2",
                     text: "Change",
-                    visuallyHiddenText: "if you currently take Metformin"
+                    visuallyHiddenText: "if you have Congenital heart disease"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Do you currently have Stroke?"
+              },
+              value: {
+                text: data['conditionQuestion3']
+              },
+              actions: {
+                items: [
+                  {
+                    href: "condition-3#conditionQuestion3",
+                    text: "Change",
+                    visuallyHiddenText: "if you have Stroke"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Do you currently take Metformin hydrochloride?"
+              },
+              value: {
+                text: data['medicationQuestion1']
+              },
+              actions: {
+                items: [
+                  {
+                    href: "medication-1#medicationQuestion1",
+                    text: "Change",
+                    visuallyHiddenText: "if you currently take Metformin hydrochloride"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Do you currently take Semaglutide?"
+              },
+              value: {
+                text: data['medicationQuestion2']
+              },
+              actions: {
+                items: [
+                  {
+                    href: "medication-2#medicationQuestion2",
+                    text: "Change",
+                    visuallyHiddenText: "if you currently take Semaglutide"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Do you currently take Insulin?"
+              },
+              value: {
+                text: data['medicationQuestion3']
+              },
+              actions: {
+                items: [
+                  {
+                    href: "medication-3#medicationQuestion3",
+                    text: "Change",
+                    visuallyHiddenText: "if you currently take Insulin"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+
+<!--
+        {{ summaryList({
+          rows: [
+            {
+              key: {
+                text: "Do you have Diabetes (type 2)?"
+              },
+              value: {
+                text: data['conditionQuestion1']
+              },
+              actions: {
+                items: [
+                  {
+                    href: "condition-1#conditionQuestion1",
+                    text: "Change",
+                    visuallyHiddenText: "if you have Diabetes (type 2)"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Do you currently take Metformin hydrochloride?"
+              },
+              value: {
+                text: data['medicationQuestion1']
+              },
+              actions: {
+                items: [
+                  {
+                    href: "medication-1#medicationQuestion1",
+                    text: "Change",
+                    visuallyHiddenText: "if you currently take Metformin hydrochloride"
                   }
                 ]
               }
@@ -147,7 +255,7 @@
             },
             {
               key: {
-                text: "How long have you taken Metformin?"
+                text: "How long have you taken Metformin hydrochloride?"
               },
               value: {
                 text: data['metforminHowLongQuestion']
@@ -157,7 +265,7 @@
                   {
                     href: "how-long-metformin#metforminHowLongQuestion",
                     text: "Change",
-                    visuallyHiddenText: "how long have you taken Metformin"
+                    visuallyHiddenText: "how long have you taken Metformin hydrochloride"
                   }
                 ]
               }
@@ -198,6 +306,8 @@
             }
           ]
         }) }}
+
+-->
 
         <h2 class="nhsuk-heading-s">
           Now submit your details

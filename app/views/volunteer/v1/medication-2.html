@@ -18,7 +18,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Do you currently take Metformin?" %}
+{% set pageName = "Do you currently take Semaglutide?" %}
 
 <!-- For adding a breadcrumb or back link -->
 <!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
@@ -44,15 +44,15 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<form action="medication" method="post" novalidate>
+<form action="medication-2" method="post" novalidate>
 
 {{ radios({
-  idPrefix: "medicationQuestion",
-  name: "medicationQuestion",
+  idPrefix: "medicationQuestion2",
+  name: "medicationQuestion2",
   classes: "nhsuk-radios--inline",
   fieldset: {
     legend: {
-      text: "Do you currently take Metformin?",
+      text: "Do you currently take Semaglutide?",
       classes: "nhsuk-fieldset__legend--xl",
       isPageHeading: true
     }
@@ -61,12 +61,12 @@
     {
       value: "Yes",
       text: "Yes",
-      checked: data.medicationQuestion == "Yes"
+      checked: data.medicationQuestion2 == "Yes"
     },
     {
       value: "No",
       text: "No",
-      checked: data.medicationQuestion == "No"
+      checked: data.medicationQuestion2 == "No"
     }
   ]
 }) }}

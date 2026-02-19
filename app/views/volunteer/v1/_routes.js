@@ -10,40 +10,102 @@ const router = express.Router();
 
 router.post('/start', function (req, res) {
  
-    res.redirect('condition');
+    res.redirect('condition-1');
 
 })
 
-router.post('/condition', function (req, res) {
 
-    var conditionQuestion = req.session.data['conditionQuestion'];
+router.post('/condition-1', function (req, res) {
 
-    if (conditionQuestion == "Yes") {
-        res.redirect('medication');
-    } else if (conditionQuestion == "No") {
+    var conditionQuestion1 = req.session.data['conditionQuestion1'];
+
+    if (conditionQuestion1 == "Yes") {
+        res.redirect('condition-2');
+    } else if (conditionQuestion1 == "No") {
         res.redirect('no-match');
     } else {
-        res.redirect('condition');
+        res.redirect('condition-1');
 
     }
 
 })
 
-router.post('/medication', function (req, res) {
+router.post('/condition-2', function (req, res) {
 
-    var medicationQuestion = req.session.data['medicationQuestion'];
+    var conditionQuestion2 = req.session.data['conditionQuestion2'];
 
-    if (medicationQuestion == "Yes") {
-        res.redirect('diagnosis');
-    } else if (medicationQuestion == "No") {
+    if (conditionQuestion2 == "Yes") {
+        res.redirect('condition-3');
+    } else if (conditionQuestion2 == "No") {
         res.redirect('no-match');
     } else {
-        res.redirect('medication');
+        res.redirect('condition-2');
 
     }
 
 })
 
+router.post('/condition-3', function (req, res) {
+
+    var conditionQuestion3 = req.session.data['conditionQuestion3'];
+
+    if (conditionQuestion3 == "Yes") {
+        res.redirect('medication-1');
+    } else if (conditionQuestion3 == "No") {
+        res.redirect('no-match');
+    } else {
+        res.redirect('condition-3');
+
+    }
+
+})
+
+router.post('/medication-1', function (req, res) {
+
+    var medicationQuestion1 = req.session.data['medicationQuestion1'];
+
+    if (medicationQuestion1 == "Yes") {
+        res.redirect('medication-2');
+    } else if (medicationQuestion1 == "No") {
+        res.redirect('no-match');
+    } else {
+        res.redirect('medication-1');
+
+    }
+
+})
+
+router.post('/medication-2', function (req, res) {
+
+    var medicationQuestion2 = req.session.data['medicationQuestion2'];
+
+    if (medicationQuestion2 == "Yes") {
+        res.redirect('medication-3');
+    } else if (medicationQuestion2 == "No") {
+        res.redirect('no-match');
+    } else {
+        res.redirect('medication-2');
+
+    }
+
+})
+
+router.post('/medication-3', function (req, res) {
+
+    var medicationQuestion3 = req.session.data['medicationQuestion3'];
+
+    if (medicationQuestion3 == "Yes") {
+        res.redirect('review-details');
+    } else if (medicationQuestion3 == "No") {
+        res.redirect('no-match');
+    } else {
+        res.redirect('medication-3');
+
+    }
+
+})
+
+/*
 router.post('/diagnosis', function (req, res) {
 
     var diagnosisQuestion = req.session.data['diagnosisQuestion'];
@@ -119,6 +181,8 @@ router.post('/consent-target-medication', function (req, res) {
 
 })
 
+*/
+
 router.post('/review-details', function (req, res) {
 
     var phoneNumber = req.session.data['phoneNumber'];
@@ -129,15 +193,15 @@ router.post('/review-details', function (req, res) {
 
 router.post('/check-your-answers', function (req, res) {
 
-    var conditionQuestion = req.session.data['conditionQuestion'];
-    var medicationQuestion = req.session.data['medicationQuestion'];
+    var conditionQuestion1 = req.session.data['conditionQuestion1'];
+    var medicationQuestion1 = req.session.data['medicationQuestion1'];
     var diagnosisQuestion = req.session.data['diagnosisQuestion'];
     var hospitalQuestion = req.session.data['hospitalQuestion'];
     var metforminHowLongQuestion = req.session.data['metforminHowLongQuestion'];
     var womanQuestion = req.session.data['womanQuestion'];
     var consentTargetMedicationQuestion = req.session.data['consentTargetMedicationQuestion'];
 
-    if (conditionQuestion === "Yes" && medicationQuestion === "Yes" && diagnosisQuestion === "Yes" && hospitalQuestion === "Yes" && metforminHowLongQuestion === "Yes" && womanQuestion === "Yes" && consentTargetMedicationQuestion === "Yes") {
+    if (conditionQuestion1 === "Yes" && medicationQuestion1 === "Yes") {
         res.redirect('match');
     } else if (hospitalQuestion === "Yes" || hospitalQuestion === "No") {
         res.redirect('partial-match');
