@@ -1,6 +1,6 @@
 <!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
 
-{% set currentPage = "Review account requests" %}
+{% set currentPage = "Review pending pre-screeners" %}
 
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "" %}
+{% set pageName = "Review pending pre-screeners" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -52,13 +52,13 @@
         </ul>
         <h2 class="app-side-nav__heading">Manage accounts</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Manage accounts</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Create administrator accounts</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Manage studies</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">View approved pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
@@ -76,59 +76,81 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-      <h1>Account requests</h1>
+<span class="nhsuk-caption-xl">Cognitive therapy in Dementia</span>
+<h1 class="nhsuk-heading-xl">Pre-screener overview</h1>
 
-      <p>Review the information provided is compatible with the Recruit Registry Volunteers rules.</p>
+<p>This view shows:</p>
+<ul>
+  <li>the order the questions will appear in</li>
+  <li>which answers volunteers need to give to take part in the study</li>
+</ul>
 
-{{ summaryList({
-  rows: [
+{{ table({
+  head: [
     {
-      key: {
-        text: "Name"
-      },
-      value: {
-        text: "Serena Whitmore"
-      }
+      text: "Health condition questions"
     },
     {
-      key: {
-        text: "Email"
-      },
-      value: {
-        text: "serena.whitmore@nihr.ac.uk"
-      }
-    },
-    {
-      key: {
-        text: "Organisation"
-      },
-      value: {
-        text: "NIHR"
-      }
-    },
-    {
-      key: {
-        text: "Justification for using the platform"
-      },
-      value: {
-        text: "I have been given authority by my superior to use this platform as I am planning to conduct research studies on behalf of NIHR."
-      }
-    },
-    {
-      key: {
-        text: "Role"
-      },
-      value: {
-        text: "Researcher"
-      }
+      text: "Required answer"
     }
+  ],
+  rows: [
+    [
+      {
+        text: "Do you have Dementia (frontotemporal)?"
+      },
+      {
+        text: "Yes"
+      }
+    ],
+    [
+      {
+        text: "Do you have Dementia (vascular)?"
+      },
+      {
+        text: "No"
+      }
+    ]
   ]
 }) }}
 
-<div class="nhsuk-button-group">
-  <a href="approve-check" class="nhsuk-button">Approve</a>
-  <a href="decline-check" class="nhsuk-button nhsuk-button--warning">Decline</a>
-</div>
+{{ table({
+  head: [
+    {
+      text: "Medication questions"
+    },
+    {
+      text: "Required answer"
+    }
+  ],
+  rows: [
+    [
+      {
+        text: "Do you take Donepezil hydrochloride?"
+      },
+      {
+        text: "Yes"
+      }
+    ],
+    [
+      {
+        text: "Do you take Rivastigmine?"
+      },
+      {
+        text: "No"
+      }
+    ]
+  ]
+}) }}
+
+{{ button({
+  text: "Back to pre-screener review",
+  classes: "nhsuk-button--secondary",
+  href: "review-pre-screener"
+}) }}
+
+
+
 
     </div>
   </div>

@@ -1,6 +1,6 @@
 <!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
 
-{% set currentPage = "Review account requests" %}
+{% set currentPage = "Review pending pre-screeners" %}
 
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "" %}
+{% set pageName = "Review pending pre-screeners" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -52,13 +52,13 @@
         </ul>
         <h2 class="app-side-nav__heading">Manage accounts</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Manage accounts</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Create administrator accounts</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Manage studies</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">View approved pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
@@ -76,58 +76,147 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-      <h1>Account requests</h1>
-
-      <p>Review the information provided is compatible with the Recruit Registry Volunteers rules.</p>
+<span class="nhsuk-caption-xl">Cognitive therapy in Dementia</span>
+<h1 class="nhsuk-heading-xl">Review pre-screener</h1>
 
 {{ summaryList({
+  card: {
+    heading: "Study information",
+    headingSize: "m",
+    actions: {
+      items: [
+        {
+          text: "Check pre-screener",
+          href: "pre-screener-overview"
+        }
+      ]
+    }
+  },
   rows: [
     {
       key: {
-        text: "Name"
+        text: "Study name"
       },
       value: {
-        text: "Serena Whitmore"
+        text: "Cognitive therapy in Dementia"
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "study name"
+          }
+        ]
       }
     },
     {
       key: {
-        text: "Email"
+        text: "Be Part of Research study ID"
       },
       value: {
-        text: "serena.whitmore@nihr.ac.uk"
+        text: "BPOR00123"
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "Be Part of Research study ID"
+          }
+        ]
       }
     },
     {
       key: {
-        text: "Organisation"
+        text: "Admin name"
       },
       value: {
-        text: "NIHR"
+        text: "Joe Bloggs"
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "admin name"
+          }
+        ]
       }
     },
     {
       key: {
-        text: "Justification for using the platform"
+        text: "Status"
       },
       value: {
-        text: "I have been given authority by my superior to use this platform as I am planning to conduct research studies on behalf of NIHR."
+        text: "Ready for review"
+      },
+      actions: {
+        items: [
+          {
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "status"
+          }
+        ]
       }
     },
     {
       key: {
-        text: "Role"
+        text: "Date submitted"
       },
       value: {
-        text: "Researcher"
+        text: "2 March 2026"
+      }
+    },
+    {
+      key: {
+        text: "Researcher name"
+      },
+      value: {
+        text: "Jane Doe"
+      }
+    },
+    {
+      key: {
+        text: "Researcher email"
+      },
+      value: {
+        text: "Jane.Doe@birmingham.ac.uk"
+      }
+    },
+    {
+      classes: "nhsuk-summary-list__row--no-border",
+      key: {
+        text: "Screener ID"
+      },
+      value: {
+        text: "DR-333121"
       }
     }
   ]
 }) }}
 
-<div class="nhsuk-button-group">
-  <a href="approve-check" class="nhsuk-button">Approve</a>
-  <a href="decline-check" class="nhsuk-button nhsuk-button--warning">Decline</a>
+<h2 class="nhsuk-heading-m">Approve this pre-screener</h2>
+
+<p>Make sure the following information is correct before you approve this study:</p>
+
+<ul>
+  <li>study name</li>
+  <li>Be Part of Research study ID</li>
+  <li>assignee</li>
+  <li>status</li>
+</ul>
+
+<div class="nhsuk-button-group nhsuk-button-group--small">
+  {{ button({
+    text: "Approve"
+  }) }}
+
+  {{ button({
+    text: "Reject",
+    classes: "nhsuk-button--warning"
+  }) }}
 </div>
 
     </div>
