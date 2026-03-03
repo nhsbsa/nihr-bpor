@@ -21,6 +21,24 @@ router.post('/update-study-name', function (req, res) {
 
 });
 
+router.post('/update-study-id', function (req, res) {
+
+    res.redirect('review-pre-screener');
+
+});
+
+router.post('/select-administrator', function (req, res) {
+
+    res.redirect('review-pre-screener');
+
+});
+
+router.post('/update-pre-screener-status', function (req, res) {
+
+    res.redirect('review-pre-screener');
+
+});
+
 // End Routes
 
 module.exports = router;

@@ -70,23 +70,22 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
+{% set updateStudyName = data['update-study-name'] | default('Cognitive therapy in Dementia') %}
+{% set updateStudyID = data['update-study-id'] | default('BPOR00123') %}
+{% set updateAdminName = data['select-administrator'] | default('Joe Bloggs') %}
+{% set updatePreScreenerStatus = data['update-pre-screener-status'] | default('Ready for review') %}
+
+{% set updatePreScreenerStatus %}
+  {% if data['update-pre-screener-status'] == "On hold" %}
+    <strong class="nhsuk-tag nhsuk-tag--yellow">On hold</strong>
+  {% else %}
+    <strong class="nhsuk-tag nhsuk-tag--blue">Ready for review</strong>
+  {% endif %}
+{% endset %}
+
+{% set today = "now" | date("D MMMM YYYY") %}
+
 <h1>Review pending pre-screeners</h1>
-
-{% set updateStudyName %}
-  {% if data['update-study-name'] %}
-    {{ data['update-study-name'] }}
-  {% else %}
-    Cognitive therapy in Dementia
-  {% endif %}
-{% endset %}
-
-{% set updateAdminName %}
-  {% if data['update-admin-name'] %}
-    {{ data['update-admin-name'] }}
-  {% else %}
-    Joe Bloggs
-  {% endif %}
-{% endset %}
 
 {{ table({
   responsive: true,
@@ -96,31 +95,10 @@
     { text: 'Researcher name' },
     { text: 'Last updated' },
     { text: 'Admin name' },
+    { text: 'Status' },
     { text: 'Actions' }
   ],
   rows: [
-    [
-      {
-        header: 'Study name',
-        html: updateStudyName
-      },
-      {
-        header: 'Researcher name',
-        text: 'Jane Doe'
-      },
-      {
-        header: 'Last updated',
-        text: '2 March 2026'
-      },
-      {
-        header: 'Admin name',
-        html: updateAdminName
-      },
-      {
-        header: 'Actions',
-        html: '<p><a href="review-pre-screener">Review pre-screener</a></p>'
-      }
-    ],
     [
       {
         header: 'Study name',
@@ -137,6 +115,10 @@
       {
         header: 'Admin name',
         text: 'Joe Bloggs'
+      },
+      {
+        header: 'Status',
+        html: '<strong class="nhsuk-tag nhsuk-tag--blue">Ready for review</strong>'
       },
       {
         header: 'Actions',
@@ -161,6 +143,10 @@
         text: 'Joe Bloggs'
       },
       {
+        header: 'Status',
+        html: '<strong class="nhsuk-tag nhsuk-tag--yellow">On hold</strong>'
+      },
+      {
         header: 'Actions',
         html: '<p><a href="#">Review pre-screener</a></p>'
       }
@@ -168,7 +154,7 @@
   ]
 }) }}
 
-<p>Showing 3 of 3 result(s)</p>
+<p>Showing 2 of 2 result(s)</p>
 
     </div>
   </div>

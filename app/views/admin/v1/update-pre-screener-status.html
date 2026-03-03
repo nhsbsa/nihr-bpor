@@ -77,156 +77,38 @@
 }) }}
 
 {% set updateStudyName = data['update-study-name'] | default('Cognitive therapy in Dementia') %}
-{% set updateStudyID = data['update-study-id'] | default('BPOR00123') %}
-{% set updateAdminName = data['select-administrator'] | default('Joe Bloggs') %}
 {% set updatePreScreenerStatus = data['update-pre-screener-status'] | default('Ready for review') %}
 
-{% set today = "now" | date("D MMMM YYYY") %}
+<h1>Update pre-screener status</h1>
 
-<span class="nhsuk-caption-xl">{{ updateStudyName }}</span>
-<h1 class="nhsuk-heading-xl">Review pre-screener</h1>
+<p>The pre-screener for {{ updateStudyName }} is currently <strong>{{ updatePreScreenerStatus }}</strong>.</p>
 
-{{ summaryList({
-  card: {
-    heading: "Study information",
-    headingSize: "m",
-    actions: {
-      items: [
-        {
-          text: "Check pre-screener",
-          href: "pre-screener-overview"
-        }
-      ]
-    }
+<form action="/{{folder}}/{{subfolder}}/update-pre-screener-status" method="post" novalidate>
+
+{{ select({
+  label: {
+    text: "Update the pre-screener status for this study"
   },
-  rows: [
+  id: "update-pre-screener-status",
+  name: "update-pre-screener-status",
+  value: updatePreScreenerStatus,
+  items: [
     {
-      key: {
-        text: "Study name"
-      },
-      value: {
-        html: updateStudyName
-      },
-      actions: {
-        items: [
-          {
-            href: "update-study-name#update-study-name",
-            text: "Change",
-            visuallyHiddenText: "study name"
-          }
-        ]
-      }
+      value: "Ready for review",
+      text: "Ready for review"
     },
     {
-      key: {
-        text: "Be Part of Research study ID"
-      },
-      value: {
-        html: updateStudyID
-      },
-      actions: {
-        items: [
-          {
-            href: "update-study-id#update-study-id",
-            text: "Change",
-            visuallyHiddenText: "Be Part of Research study ID"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Admin name"
-      },
-      value: {
-        html: updateAdminName
-      },
-      actions: {
-        items: [
-          {
-            href: "select-administrator#select-administrator",
-            text: "Change",
-            visuallyHiddenText: "admin name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Status"
-      },
-      value: {
-        html: updatePreScreenerStatus
-      },
-      actions: {
-        items: [
-          {
-            href: "update-pre-screener-status#update-pre-screener-status",
-            text: "Change",
-            visuallyHiddenText: "status"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Date submitted"
-      },
-      value: {
-        html: today
-      }
-    },
-    {
-      key: {
-        text: "Researcher name"
-      },
-      value: {
-        text: "Jane Doe"
-      }
-    },
-    {
-      key: {
-        text: "Researcher email"
-      },
-      value: {
-        text: "Jane.Doe@birmingham.ac.uk"
-      }
-    },
-    {
-      classes: "nhsuk-summary-list__row--no-border",
-      key: {
-        text: "Screener ID"
-      },
-      value: {
-        text: "DR-333121"
-      }
+      value: "On hold",
+      text: "On hold"
     }
   ]
 }) }}
 
-<h2 class="nhsuk-heading-m">Approve this pre-screener</h2>
+{{ button({
+  text: "Submit"
+}) }}
+</form>
 
-<p>Make sure the following information is correct before you approve this study:</p>
-
-<ul>
-  <li>study name</li>
-  <li>Be Part of Research study ID</li>
-  <li>assignee</li>
-  <li>status</li>
-</ul>
-
-<div class="nhsuk-button-group nhsuk-button-group--small">
-  {{ button({
-    text: "Approve",
-    href: "pre-screener-approved"
-  }) }}
-
-  {{ button({
-    text: "Reject",
-    href: "pre-screener-rejected",
-    classes: "nhsuk-button--warning"
-  }) }}
-</div>
 
     </div>
   </div>
