@@ -1,0 +1,53 @@
+.scrollable-list {
+  max-height: 150px;
+  overflow-y: auto;
+  border: 2px solid #212b327b;
+  padding: 0.5rem;
+  background-color: #fff;
+  margin-top: 0; /* default for JS disabled */
+}
+
+/* When JS is enabled, keep your original margin */
+.js-enabled .scrollable-list {
+  margin-top: -1.08rem;
+}
+
+
+.js-only {
+  display: none;
+}
+
+.js-enabled .js-only {
+  display: block;
+}
+
+.js-enabled [data-js-hidden="true"] {
+  display: none;
+}
+
+.js-enabled [data-js-hidden="true"].is-visible {
+  display: block;
+}
+
+.selected-medication-container {
+  background-color: #F0F4F5;
+  padding: 0.5rem;
+  border-radius: 1px;
+}
+
+.nhsuk-tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  color: #212B32;
+  border: 1px solid #4C6272;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+}
+
+.nhsuk-tag button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
