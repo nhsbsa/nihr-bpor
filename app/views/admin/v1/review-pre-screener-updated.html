@@ -76,12 +76,43 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
+{% set studyNameUpdated %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Study name updated
+  </h3>
+  <p>The name of this study is now <strong>{% if data['update-study-name'] %}{{ data['update-study-name'] }}{% else %}Cognitive therapy in Dementia{% endif %}</strong>.</p>
+{% endset %}
+
+{% set studyIDUpdated %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Be Part of Research study ID updated
+  </h3>
+  <p>The Be Part of Research study ID for {% if data['update-study-name'] %}{{ data['update-study-name'] }}{% else %}Cognitive therapy in Dementia{% endif %} is now <strong>{% if data['update-study-id'] %}{{ data['update-study-id'] }}{% else %}BPOR00123{% endif %}</strong>.</p>
+{% endset %}
+
+{% set adminNameUpdated %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Administrator selected
+  </h3>
+  <p>The administrator for {% if data['update-study-name'] %}{{ data['update-study-name'] }}{% else %}Cognitive therapy in Dementia{% endif %} is now <strong>{% if data['update-admin-name'] %}{{ data['update-admin-name'] }}{% else %}Joe Bloggs{% endif %}</strong>.</p>
+{% endset %}
+
+{% set preScreenerStatusUpdated %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Pre-screener status updated
+  </h3>
+  <p>The pre-screener for {% if data['update-study-name'] %}{{ data['update-study-name'] }}{% else %}Cognitive therapy in Dementia{% endif %} is now <strong>{% if data['update-pre-screener-status'] %}{{ data['update-pre-screener-status'] }}{% else %}Ready for review{% endif %}</strong>.</p>
+{% endset %}
+
+{{ notificationBanner({
+  html: studyNameUpdated,
+  type: "success"
+}) }}
+
 {% set updateStudyName = data['update-study-name'] | default('Cognitive therapy in Dementia') %}
 {% set updateStudyID = data['update-study-id'] | default('BPOR00123') %}
 {% set updateAdminName = data['update-admin-name'] | default('Joe Bloggs') %}
 {% set updatePreScreenerStatus = data['update-pre-screener-status'] | default('Ready for review') %}
-
-{% set today = "now" | date("D MMMM YYYY") %}
 
 <span class="nhsuk-caption-xl">{{ updateStudyName }}</span>
 <h1 class="nhsuk-heading-xl">Review pre-screener</h1>
@@ -110,7 +141,7 @@
       actions: {
         items: [
           {
-            href: "update-study-name#update-study-name",
+            href: "update-study-name",
             text: "Change",
             visuallyHiddenText: "study name"
           }
@@ -173,7 +204,7 @@
         text: "Date submitted"
       },
       value: {
-        html: today
+        text: "2 March 2026"
       }
     },
     {

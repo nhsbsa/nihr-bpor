@@ -15,6 +15,12 @@ router.post('/index', function (req, res) {
 
 });
 
+router.post('/update-study-name', function (req, res) {
+
+    res.redirect('review-pre-screener');
+
+});
+
 // End Routes
 
 module.exports = router;

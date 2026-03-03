@@ -52,6 +52,20 @@ module.exports = function (env) {
     return truncated + ellipsis
   }
 
+  /* DATE FILTER */
+
+    env.addFilter('date', function (value, format = 'D MMMM YYYY') {
+    const date = value === 'now' ? new Date() : new Date(value)
+
+    const options = {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }
+
+    return date.toLocaleDateString('en-GB', options)
+  })
+
   /* keep the following line to return your filters to the app  */
   return filters
 }
