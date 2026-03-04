@@ -1,15 +1,18 @@
 .scrollable-list {
   max-height: 150px;
   overflow-y: auto;
-  border: 2px solid #212b327b;
+  border: 2px solid $nhsuk-input-border-colour;
   padding: 0.5rem;
   background-color: #fff;
   margin-top: 0; /* default for JS disabled */
 }
+.searchable-item {
+  margin-left: 0.5rem;
+}
 
 /* When JS is enabled, keep your original margin */
 .js-enabled .scrollable-list {
-  margin-top: -1.08rem;
+  margin: 0 !important;
 }
 
 
@@ -29,10 +32,9 @@
   display: block;
 }
 
-.selected-medication-container {
-  background-color: #F0F4F5;
-  padding: 0.5rem;
-  border-radius: 1px;
+.selected-container {
+  background-color: nhsuk-colour("grey-4");
+  padding: 1rem;
 }
 
 /*

@@ -71,30 +71,27 @@
 
 <form action="/{{folder}}/{{subfolder}}/create-recruit-health-condition" method="post" novalidate>
 
-{{ fieldset({
+{% call fieldset({
   legend: {
     text: "Include volunteers by health condition",
-    classes: "nhsuk-fieldset__legend--xl",
+    size: "xl",
     isPageHeading: true
   }
-}) }}
+}) %}
 
 <p>You can add one or more health conditions to your inclusion criteria.</p>
 
-<label class="nhsuk-label nhsuk-label--m" for="myAutocomplete">Health condition</label>
-
-{{ hint({
-  html: '<p>Start typing the name of the health condition you’d like to add. The health conditions in our database follow UK naming standards.</p>'
-}) }}
-
-<!--
-<p><a href="/{{folder}}/{{subfolder}}/create-recruit-non-listed-health-condition">Add a condition that is not listed</a></p>
--->
-
 {{ searchableCheckboxes({
-  id: "listedCondition",
-  name: "listedCondition",
+  label: {
+    text: "Health condition",
+    size: "m"
+  },
   classes: "nhsuk-checkboxes--small",
+  hint: {
+    text: "Start typing the name of the health condition you’d like to add. The health conditions in our database follow UK naming standards."
+  },
+  id: "listedConditions",
+  name: "listedConditions",
   selectedLabel: "Selected health conditions",
   items: data.health_conditions
 }) }}
@@ -102,6 +99,8 @@
 {{ button({
   text: "Continue"
 }) }}
+
+{% endcall %}
 
 </form>
 
