@@ -34,9 +34,18 @@
   </div>
 
   <!-- Selected tags (JS only) -->
-  <div class="nhsuk-u-margin-top-4 selected-medication-container js-only">
-    <strong>{{ params.selectedLabel | default("Selected") }} (<span id="{{ params.id }}-tags-count">0</span>)</strong>
-    <ul class="nhsuk-list" id="{{ params.id }}-tags"></ul>
+  <div class="nhsuk-card nhsuk-u-margin-top-4 selected-medication-container js-only">
+    <div class="nhsuk-card__content">
+      <h2 class="nhsuk-card__heading nhsuk-heading-s">
+        {{ params.selectedLabel | default("Selected") }} (<span id="{{ params.id }}-tags-count">0</span>)
+      </h2>
+    <div class="nhsuk-card__description">
+      <p id="{{ params.id }}-none" class="nhsuk-hint nhsuk-u-margin-bottom-0">
+        {{ params.noneText | default("None added") }}
+      </p>
+      <ul class="nhsuk-list nhsuk-u-margin-bottom-0" id="{{ params.id }}-tags"></ul>
+    </div>
+    </div>
   </div>
 
 </div>

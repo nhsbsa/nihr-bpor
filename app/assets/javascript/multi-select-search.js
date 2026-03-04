@@ -7,22 +7,23 @@
   modules.forEach(function (container) {
     if (!(container instanceof HTMLElement)) return;
 
-    var searchInputEl = container.querySelector('input[type="text"]');
-    if (!(searchInputEl instanceof HTMLInputElement)) return;
-    var searchInput = searchInputEl;
+    var searchInput = container.querySelector('input[type="text"]');
+    if (!(searchInput instanceof HTMLInputElement)) return;
 
-    var listElRaw = container.querySelector('[data-js-hidden]');
-    if (!(listElRaw instanceof HTMLElement)) return;
-    var listEl = listElRaw;
+    var listEl = container.querySelector('[data-js-hidden]');
+    if (!(listEl instanceof HTMLElement)) return;
+
+    var tagsList = container.querySelector('ul[id$="-tags"]');
+    if (!(tagsList instanceof HTMLElement)) return;
+
+    var noneTextEl = container.querySelector('p[id$="-none"]');
+    if (!(noneTextEl instanceof HTMLElement)) return;
 
     var tagsId = container.getAttribute('data-tags-id');
     if (!tagsId) return;
 
-    var tagsListEl = document.getElementById(tagsId);
-    if (!(tagsListEl instanceof HTMLElement)) return;
-    var tagsList = tagsListEl;
-
     var items = container.querySelectorAll('.searchable-item');
+    var checkboxes = container.querySelectorAll('input[type="checkbox"]');
 
     /* ------------------------------
        SHOW / FILTER LIST
@@ -44,22 +45,18 @@
     });
 
     /* ------------------------------
-       ✅ ESC KEY = EXIT LIST
+       ESC KEY = EXIT LIST
     ------------------------------ */
-
     function closeListAndReturnFocus() {
       listEl.classList.remove('is-visible');
 
-      // return focus to search so user is not trapped
       searchInput.focus();
 
-      // optional: move cursor to end
       var val = searchInput.value;
       searchInput.value = '';
       searchInput.value = val;
     }
 
-    // When focus is inside search
     searchInput.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         e.preventDefault();
@@ -67,7 +64,6 @@
       }
     });
 
-    // When focus is inside checkbox list
     listEl.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         e.preventDefault();
@@ -84,9 +80,18 @@
 
       var checked = container.querySelectorAll('input[type="checkbox"]:checked');
 
-      var countEl = document.getElementById(tagsId + '-count');
+      var countEl = container.querySelector('[id$="-tags-count"]');
       if (countEl instanceof HTMLElement) {
         countEl.textContent = String(checked.length);
+      }
+
+      // Toggle empty state
+      if (checked.length === 0) {
+        noneTextEl.style.display = '';
+        tagsList.style.display = 'none';
+      } else {
+        noneTextEl.style.display = 'none';
+        tagsList.style.display = '';
       }
 
       checked.forEach(function (checkbox) {
@@ -96,17 +101,19 @@
         if (!(labelEl instanceof HTMLLabelElement)) return;
 
         var li = document.createElement('li');
-        li.className = 'nhsuk-tag';
+        li.className = 'nhsuk-tag nhsuk-u-margin-right-2';
         li.textContent = labelEl.textContent + ' ';
 
         var btn = document.createElement('button');
         btn.type = 'button';
+        // btn.className = 'nhsuk-button--secondary';
+        // btn.setAttribute('aria-label', 'Remove ' + labelEl.textContent);
         btn.textContent = '×';
 
         btn.addEventListener('click', function () {
           checkbox.checked = false;
           renderTags();
-          searchInput.focus(); // accessibility improvement
+          searchInput.focus();
         });
 
         li.appendChild(btn);
@@ -117,7 +124,6 @@
     /* ------------------------------
        CHECKBOX CHANGE
     ------------------------------ */
-    var checkboxes = container.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(function (cb) {
       if (cb instanceof HTMLInputElement) {
         cb.addEventListener('change', renderTags);
