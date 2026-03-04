@@ -272,6 +272,11 @@ router.post('/create-recruit-health-condition', function (req, res) {
     res.redirect('create-recruit-condition-answers');
 });
 
+router.post('/example', function (req, res) {
+    // Redirect to the next page
+    res.redirect('create-recruit-condition-answers');
+});
+
 router.post('/create-recruit-non-listed-health-condition', function (req, res) {
 
     var nonListedCondition = req.session.data['nonListedCondition'];

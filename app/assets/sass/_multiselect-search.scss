@@ -37,6 +37,29 @@
   padding: 1rem;
 }
 
+/* Ensure filter tags align correctly */
+.nhsuk-tag--filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Reset button styling inside tags */
+.nhsuk-tag__remove {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Improve focus visibility */
+.nhsuk-tag__remove:focus {
+  outline: 3px solid #ffeb3b;
+  outline-offset: 2px;
+}
+
 /*
 .nhsuk-tag {
   display: inline-flex;

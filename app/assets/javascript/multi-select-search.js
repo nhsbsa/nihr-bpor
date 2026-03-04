@@ -75,52 +75,66 @@
     /* ------------------------------
        RENDER TAGS + COUNT
     ------------------------------ */
-    function renderTags() {
-      tagsList.innerHTML = '';
+function renderTags() {
+  tagsList.innerHTML = '';
 
-      var checked = container.querySelectorAll('input[type="checkbox"]:checked');
+  var checked = container.querySelectorAll('input[type="checkbox"]:checked');
 
-      var countEl = container.querySelector('[id$="-tags-count"]');
-      if (countEl instanceof HTMLElement) {
-        countEl.textContent = String(checked.length);
-      }
+  var countEl = container.querySelector('[id$="-tags-count"]');
+  if (countEl instanceof HTMLElement) {
+    countEl.textContent = String(checked.length);
+  }
 
-      // Toggle empty state
-      if (checked.length === 0) {
-        noneTextEl.style.display = '';
-        tagsList.style.display = 'none';
-      } else {
-        noneTextEl.style.display = 'none';
-        tagsList.style.display = '';
-      }
+  // Toggle empty state
+  if (checked.length === 0) {
+    noneTextEl.style.display = '';
+    tagsList.style.display = 'none';
+  } else {
+    noneTextEl.style.display = 'none';
+    tagsList.style.display = '';
+  }
 
-      checked.forEach(function (checkbox) {
-        if (!(checkbox instanceof HTMLInputElement)) return;
+  checked.forEach(function (checkbox) {
+    if (!(checkbox instanceof HTMLInputElement)) return;
 
-        var labelEl = container.querySelector('label[for="' + checkbox.id + '"]');
-        if (!(labelEl instanceof HTMLLabelElement)) return;
+    var labelEl = container.querySelector('label[for="' + checkbox.id + '"]');
+    if (!(labelEl instanceof HTMLLabelElement)) return;
 
-        var li = document.createElement('li');
-        li.className = 'nhsuk-tag nhsuk-u-margin-right-2';
-        li.textContent = labelEl.textContent + ' ';
+    var li = document.createElement('li');
+    li.className = 'nhsuk-tag nhsuk-tag--blue nhsuk-tag--filter nhsuk-u-margin-right-2';
 
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        // btn.className = 'nhsuk-button--secondary';
-        // btn.setAttribute('aria-label', 'Remove ' + labelEl.textContent);
-        btn.textContent = '×';
+    var text = document.createElement('span');
+    text.className = 'nhsuk-tag__text';
+    text.textContent = labelEl.textContent;
 
-        btn.addEventListener('click', function () {
-          checkbox.checked = false;
-          renderTags();
-          searchInput.focus();
-        });
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'nhsuk-tag__remove';
+    btn.setAttribute('aria-label', 'Remove ' + labelEl.textContent);
 
-        li.appendChild(btn);
-        tagsList.appendChild(li);
-      });
-    }
+    btn.innerHTML = `
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="16"
+        height="16"
+        aria-hidden="true"
+        focusable="false">
+        <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 1 0 5.7 7.12L10.59 12l-4.9 4.89a1 1 0 0 0 1.42 1.41L12 13.41l4.89 4.9a1 1 0 0 0 1.41-1.42L13.41 12l4.9-4.89a1 1 0 0 0-.01-1.4z"></path>
+      </svg>
+    `;
 
+    btn.addEventListener('click', function () {
+      checkbox.checked = false;
+      renderTags();
+      searchInput.focus();
+    });
+
+    li.appendChild(text);
+    li.appendChild(btn);
+    tagsList.appendChild(li);
+  });
+}
     /* ------------------------------
        CHECKBOX CHANGE
     ------------------------------ */
