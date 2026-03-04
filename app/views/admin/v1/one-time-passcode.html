@@ -37,29 +37,20 @@
     </header>
 
     <main class="card">
-      <h1>Sign In</h1>
+      <h1>Email Verification</h1>
 
-      <label for="email">Email</label>
+      <label for="email">Enter the code sent to your email address (joe*********@nihr.ac.uk)</label>
       <div class="input-wrapper">
-        <span class="icon">👤</span>
         <input
-          type="email"
-          id="email"
-          placeholder="Enter your email address"
+          type="one-time-passcode"
+          id="one-time-passcode"
         />
       </div>
 
-      <a href="one-time-passcode"><button class="primary-btn">Continue</button></a>
+      <p><a href="home"><button class="primary-btn">Continue</button></a></p>
 
-      <p class="link-text">
-        Don't have an account?
-        <a href="#">Register</a>
-      </p>
+      <p><a href="#"><button class="secondary-btn">Resend code</button></a></p>
 
-      <p class="link-text">
-        Require support?
-        <a href="#">Help</a>
-      </p>
     </main>
 
     <footer class="footer">

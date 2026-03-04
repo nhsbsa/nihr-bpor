@@ -90,6 +90,22 @@ label {
   background: #18335a;
 }
 
+.secondary-btn {
+  width: 100%;
+  background: #E0E1E2;
+  color: #212121;
+  border: none;
+  border-radius: 999px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background: #BEBFC0;
+}
+
 .link-text {
   margin-top: 16px;
   font-size: 14px;
