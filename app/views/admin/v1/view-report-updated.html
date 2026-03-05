@@ -1,0 +1,335 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Review pending pre-screeners" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-admin-nihr-logged-in.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "View pre-screeners" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="#">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Manage accounts</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Manage accounts</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Create administrator accounts</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Manage studies</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch@nihr.ac.uk">Email us</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+{% set html %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Status updated
+  </h3>
+  <p>Lila Hammond's status has been updated.</p>
+{% endset %}
+
+{{ notificationBanner({
+  html: html,
+  type: "success"
+}) }}
+
+<span class="nhsuk-caption-xl">The impact of physical activity on cognitive decline in older adults</span>
+<h1 class="nhsuk-heading-xl">Pre-screener summary report</h1>
+
+<p class="nhsuk-body-l">This report shows the current status of pre-screeners that have been completed</p>
+
+<!--
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-one-half">
+    
+    {{ button({
+      text: "Show filters",
+      classes: "nhsuk-button--secondary",
+      href: "view-report-filters"
+    }) }}
+
+  </div>
+  <div class="nhsuk-grid-column-one-half nhsuk-u-text-align-right">
+
+    <div class="nhsuk-button-group">
+      <a href="manage-collaborators" class="nhsuk-link">Manage collaborators</a>
+
+      {{ button({
+        text: "Add a collaborator",
+        classes: "nhsuk-button--secondary",
+        href: "add-collaborator"
+      }) }}
+      
+    </div>    
+
+  </div>
+</div>
+-->
+
+{% set statusTag %}
+  {% if data['updateContactedStatus'] == "Contacted" %}
+    <strong class="nhsuk-tag nhsuk-tag--blue">Contacted</strong>
+  {% elseif data['updateContactedStatus'] == "Recruited" %}
+    <strong class="nhsuk-tag nhsuk-tag--green">Recruited</strong>
+  {% elseif data['updateContactedStatus'] == "Withdrawn" %}
+    <strong class="nhsuk-tag nhsuk-tag--yellow">Withdrawn</strong>
+  {% else %}
+    <strong class="nhsuk-tag nhsuk-tag--grey">Awaiting contact</strong>
+  {% endif %}
+{% endset %}
+
+{{ table({
+  responsive: true,
+  panel: false,
+  head: [
+    { text: "Volunteer details" },
+    { text: "Participant ID" },
+    { text: "Date submitted" },
+    { text: "Status" },
+    { text: "Actions" }
+  ],
+  rows: [
+    [
+      {
+        header: "Volunteer details",
+        html: '<p>Lila Hammond<br/><span class="nhsuk-body-s">lila.hammond@example.com<br/>07123 445678</span></p>'
+      },
+      { header: "Participant ID", text: "905173824" },
+      { header: "Date submitted", text: "04 March 2025" },
+      {
+        header: "Status",
+        html: statusTag
+      },
+      {
+        header: "Actions",
+        html: '<p><a href="view-report-update-status">Update status</a></p>'
+      }
+    ],
+    [
+      {
+        header: "Volunteer details",
+        html: '<p>Marcus Lee<br/><span class="nhsuk-body-s">marcus.lee@example.com</span></p>'
+      },
+      { header: "Participant ID", text: "905173825" },
+      { header: "Date submitted", text: "05 March 2025" },
+      {
+        header: "Status",
+        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Awaiting contact</strong>'
+      },
+      {
+        header: "Actions",
+        html: '<p><a href="#">Update status</a></p>'
+      }
+    ],
+    [
+      {
+        header: "Volunteer details",
+        html: '<p>Aisha Rahman<br/><span class="nhsuk-body-s">aisha.rahman@example.com<br/>07345 667890</span></p>'
+      },
+      { header: "Participant ID", text: "905173826" },
+      { header: "Date submitted", text: "06 March 2025" },
+      {
+        header: "Status",
+        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Awaiting contact</strong>'
+      },
+      {
+        header: "Actions",
+        html: '<p><a href="#">Update status</a></p>'
+      }
+    ],
+    [
+      {
+        header: "Volunteer details",
+        html: '<p>Daniel O\'Connor<br/><span class="nhsuk-body-s">daniel.oconnor@example.com</span></p>'
+      },
+      { header: "Participant ID", text: "905173827" },
+      { header: "Date submitted", text: "07 March 2025" },
+      {
+        header: "Status",
+        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Awaiting contact</strong>'
+      },
+      {
+        header: "Actions",
+        html: '<p><a href="#">Update status</a></p>'
+      }
+    ],
+    [
+      {
+        header: "Volunteer details",
+        html: '<p>Sophie Williams<br/><span class="nhsuk-body-s">sophie.williams@example.com<br/>07567 889012</span></p>'
+      },
+      { header: "Participant ID", text: "905173828" },
+      { header: "Date submitted", text: "08 March 2025" },
+      {
+        header: "Status",
+        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Awaiting contact</strong>'
+      },
+      {
+        header: "Actions",
+        html: '<p><a href="#">Update status</a></p>'
+      }
+    ],
+    [
+      {
+        header: "Volunteer details",
+        html: '<p>Tom Bradley<br/><span class="nhsuk-body-s">tom.bradley@example.com</span></p>'
+      },
+      { header: "Participant ID", text: "905173829" },
+      { header: "Date submitted", text: "09 March 2025" },
+      {
+        header: "Status",
+        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Awaiting contact</strong>'
+      },
+      {
+        header: "Actions",
+        html: '<p><a href="#">Update status</a></p>'
+      }
+    ],
+    [
+      {
+        header: "Volunteer details",
+        html: '<p>Emily Chen<br/><span class="nhsuk-body-s">emily.chen@example.com<br/>07789 101234</span></p>'
+      },
+      { header: "Participant ID", text: "905173830" },
+      { header: "Date submitted", text: "10 March 2025" },
+      {
+        header: "Status",
+        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Awaiting contact</strong>'
+      },
+      {
+        header: "Actions",
+        html: '<p><a href="#">Update status</a></p>'
+      }
+    ],
+    [
+      {
+        header: "Volunteer details",
+        html: '<p>James Patel<br/><span class="nhsuk-body-s">james.patel@example.com</span></p>'
+      },
+      { header: "Participant ID", text: "905173831" },
+      { header: "Date submitted", text: "11 March 2025" },
+      {
+        header: "Status",
+        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Awaiting contact</strong>'
+      },
+      {
+        header: "Actions",
+        html: '<p><a href="#">Update status</a></p>'
+      }
+    ],
+    [
+      {
+        header: "Volunteer details",
+        html: '<p>Olivia Brown<br/><span class="nhsuk-body-s">olivia.brown@example.com<br/>07901 323456</span></p>'
+      },
+      { header: "Participant ID", text: "905173832" },
+      { header: "Date submitted", text: "12 March 2025" },
+      {
+        header: "Status",
+        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Awaiting contact</strong>'
+      },
+      {
+        header: "Actions",
+        html: '<p><a href="#">Update status</a></p>'
+      }
+    ],
+    [
+      {
+        header: "Volunteer details",
+        html: '<p>Henry Thompson<br/><span class="nhsuk-body-s">henry.thompson@example.com</span></p>'
+      },
+      { header: "Participant ID", text: "905173833" },
+      { header: "Date submitted", text: "13 March 2025" },
+      {
+        header: "Status",
+        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Awaiting contact</strong>'
+      },
+      {
+        header: "Actions",
+        html: '<p><a href="#">Update status</a></p>'
+      }
+    ]
+  ]
+}) }}
+
+<p>Showing 10 of 51 result(s)</p>
+
+{{ pagination({
+  next: {
+    href: "#"
+  },
+  items: [
+    {
+      number: 1,
+      href: '#',
+      current: true
+    },
+    {
+      number: 2,
+      href: '#'
+    },
+    {
+      number: 3,
+      href: '#'
+    }
+  ]
+}) }}
+
+    </div>
+  </div>
+{% endblock %}
