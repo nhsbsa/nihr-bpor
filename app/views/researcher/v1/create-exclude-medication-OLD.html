@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Exclude volunteers by health condition" %}
+{% set pageName = "Exclude volunteers by medication" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -69,38 +69,31 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<form action="/{{folder}}/{{subfolder}}/create-exclude-health-condition" method="post" novalidate>
+<form action="/{{folder}}/{{subfolder}}/create-exclude-medication" method="post" novalidate>
 
-{% call fieldset({
+{{ fieldset({
   legend: {
-    text: "Exclude volunteers by health condition",
-    size: "xl",
+    text: "Exclude volunteers by medication",
+    classes: "nhsuk-fieldset__legend--xl",
     isPageHeading: true
   }
-}) %}
-
-<p>Add any health conditions that exclude a volunteer from taking part.</p>
-
-{{ searchableCheckboxes({
-  label: {
-    text: "Health condition",
-    size: "m"
-  },
-  classes: "nhsuk-checkboxes--small",
-  hint: {
-    text: "Start typing the name of the health condition you’d like to add. The health conditions in our database follow UK naming standards."
-  },
-  id: "conditionsExclude",
-  name: "conditionsExclude",
-  selectedLabel: "Selected health conditions",
-  items: data.health_conditions
 }) }}
+
+<p>Add any medications that exclude a volunteer from taking part.</p>
+
+<label class="nhsuk-label nhsuk-label--m" for="myAutocomplete">Medication</label>
+
+{{ hint({
+  html: '<p><p>Start typing the name of the medication you’d like to add. The medications in our database follow <a href="https://bnf.nice.org.uk/" target="_blank">UK naming standards (opens in a new tab)</a>.</p></p>'
+}) }}
+
+<div id="my-autocomplete-container" class="nhsuk-input--width-20 nhsuk-u-margin-bottom-5"></div>
+
+<!-- <p><a href="/{{folder}}/{{subfolder}}/create-exclude-non-listed-medication">Add a medication that is not listed</a></p> -->
 
 {{ button({
   text: "Continue"
 }) }}
-
-{% endcall %}
 
 </form>
 
@@ -109,4 +102,40 @@
 {% endblock %}
 
 {% block pageScripts %}
+<script type="module">
+  import accessibleAutocomplete from '/assets/javascript/accessible-autocomplete.min.js'
+  import { drug_names } from '/assets/javascript/drug_names.js'
+
+  function customSuggest (query, syncResults) {
+    syncResults(
+      query
+        ? drug_names.filter(result =>
+            result.name.toLowerCase().includes(query.toLowerCase()) ||
+            result.endonym.toLowerCase().includes(query.toLowerCase())
+          )
+        : []
+    )
+  }
+
+  function inputValueTemplate (result) {
+    return result && result.name
+  }
+
+  function suggestionTemplate (result) {
+    return result && result.name
+  }
+
+  const element = document.querySelector('#my-autocomplete-container')
+
+  accessibleAutocomplete({
+    element: element,
+    id: 'listedMedicationExclude',
+    name: 'listedMedicationExclude',
+    source: customSuggest,
+    templates: {
+      inputValue: inputValueTemplate,
+      suggestion: suggestionTemplate
+    }
+  })
+</script>
 {% endblock %}

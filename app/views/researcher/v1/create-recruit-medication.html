@@ -71,29 +71,36 @@
 
 <form action="/{{folder}}/{{subfolder}}/create-recruit-medication" method="post" novalidate>
 
-{{ fieldset({
+{% call fieldset({
   legend: {
     text: "Include volunteers by medication",
-    classes: "nhsuk-fieldset__legend--xl",
+    size: "xl",
     isPageHeading: true
   }
-}) }}
+}) %}
 
 <p>You can add one or more medications to your inclusion criteria.</p>
 
-<label class="nhsuk-label nhsuk-label--m" for="myAutocomplete">Medication</label>
-
-{{ hint({
-  html: '<p>Start typing the name of the medication you’d like to add. The medications in our database follow <a href="https://bnf.nice.org.uk/" target="_blank">UK naming standards (opens in a new tab)</a>.</p>'
+{{ searchableCheckboxes({
+  label: {
+    text: "Medication",
+    size: "m"
+  },
+  classes: "nhsuk-checkboxes--small",
+  hint: {
+    html: 'Start typing the name of the medication you’d like to add. The medications in our database follow <a href="https://bnf.nice.org.uk/" target="_blank">UK naming standards (opens in a new tab)</a>.'
+  },
+  id: "medications",
+  name: "medications",
+  selectedLabel: "Selected medication",
+  items: data.drug_names
 }) }}
-
-<div id="my-autocomplete-container" class="nhsuk-input--width-20 nhsuk-u-margin-bottom-5"></div>
-
-<!-- <p><a href="/{{folder}}/{{subfolder}}/create-recruit-non-listed-medication">Add a medication that is not listed</a></p> -->
 
 {{ button({
   text: "Continue"
 }) }}
+
+{% endcall %}
 
 </form>
 
@@ -102,29 +109,4 @@
 {% endblock %}
 
 {% block pageScripts %}
-<script type="module">
-  import accessibleAutocomplete from '/assets/javascript/accessible-autocomplete.min.js'
-  import { drug_names } from '/assets/javascript/drug_names.js'
-
-  function customSuggest (query, syncResults) {
-    syncResults(query
-      ? drug_names.filter(result =>
-          result.name.toLowerCase().includes(query.toLowerCase()) ||
-          result.endonym.toLowerCase().includes(query.toLowerCase())
-        )
-      : []
-    )
-  }
-
-  accessibleAutocomplete({
-    element: document.querySelector('#my-autocomplete-container'),
-    id: 'listedMedication',
-    name: 'listedMedication',
-    source: customSuggest,
-    templates: {
-      inputValue: r => r && r.name,
-      suggestion: r => r && r.name
-    }
-  })
-</script>
 {% endblock %}

@@ -258,6 +258,53 @@ router.post('/create-inclusion-exclusion-criteria', function (req, res) {
 
 router.post('/create-recruit-health-condition', function (req, res) {
 
+    var conditions = req.session.data['conditions'];
+    var addhealthConditions = req.session.data['addhealthConditions'];
+    var addMedications = req.session.data['addMedications'];
+
+    if (!conditions) {
+        return res.redirect('create-recruit-health-condition');
+    }
+
+    if (!Array.isArray(conditions)) {
+        conditions = [conditions];
+    }
+
+    // Remove the placeholder values added by the JS
+    conditions = conditions.filter(c => c !== '_unchecked');
+
+    if (conditions.length > 5) {
+        return res.redirect('create-recruit-health-condition');
+    }
+
+        if (addhealthConditions) {
+            if (addhealthConditions.includes('Exclude volunteers with certain health conditions')) {
+ 
+                return res.redirect('create-exclude-health-condition');
+
+            }
+        }
+
+        if (addMedications) {
+            if (addMedications.includes('Include volunteers taking certain medications')) {
+                
+                return res.redirect('create-recruit-medication');
+
+            }
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
+
+                return res.redirect('create-exclude-medication');
+
+            }
+        }
+
+        return res.redirect('create-check-answers');
+
+});
+
+/*
+router.post('/create-recruit-health-condition', function (req, res) {
+
     var listedCondition = req.session.data['listedCondition'];
 
     // Make sure the 'conditions' array exists
@@ -267,16 +314,6 @@ router.post('/create-recruit-health-condition', function (req, res) {
 
     // Add the new condition to the array
     req.session.data['conditions'].push(listedCondition);
-
-    // Redirect to the next page
-    res.redirect('create-recruit-condition-answers');
-});
-
-router.post('/example', function (req, res) {
-
-    var listedCondition = req.body['listedCondition[]']; 
-
-    console.log(listedCondition);
 
     // Redirect to the next page
     res.redirect('create-recruit-condition-answers');
@@ -349,9 +386,48 @@ router.post('/create-recruit-condition-answers', function (req, res) {
     }
 
 });
+*/
 
 // EXCLUDE BY HEALTH CONDITION
 
+router.post('/create-exclude-health-condition', function (req, res) {
+
+    var conditionsExclude = req.session.data['conditionsExclude'];
+    var addMedications = req.session.data['addMedications'];
+
+    if (!conditionsExclude) {
+        return res.redirect('create-exclude-health-condition');
+    }
+
+    if (!Array.isArray(conditionsExclude)) {
+        conditionsExclude = [conditionsExclude];
+    }
+
+    // Remove the placeholder values added by the JS
+    conditionsExclude = conditionsExclude.filter(c => c !== '_unchecked');
+
+    if (conditionsExclude.length > 5) {
+        return res.redirect('create-exclude-health-condition');
+    }
+
+        if (addMedications) {
+            if (addMedications.includes('Include volunteers taking certain medications')) {
+                
+                return res.redirect('create-recruit-medication');
+
+            }
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
+
+                return res.redirect('create-exclude-medication');
+
+            }
+        }
+
+        return res.redirect('create-check-answers');
+
+});
+
+/*
 router.post('/create-exclude-health-condition', function (req, res) {
 
     var listedConditionExclude = req.session.data['listedConditionExclude'];
@@ -427,9 +503,43 @@ router.post('/create-exclude-condition-answers', function (req, res) {
     }
 
 });
+*/
 
 // RECRUIT BY MEDICATION
 
+router.post('/create-recruit-medication', function (req, res) {
+
+    var medications = req.session.data['medications'];
+    var addMedications = req.session.data['addMedications'];
+
+    if (!medications) {
+        return res.redirect('create-recruit-medication');
+    }
+
+    if (!Array.isArray(medications)) {
+        medications = [medications];
+    }
+
+    // Remove the placeholder values added by the JS
+    medications = medications.filter(c => c !== '_unchecked');
+
+    if (medications.length > 5) {
+        return res.redirect('create-recruit-medication');
+    }
+
+        if (addMedications) {
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
+
+                return res.redirect('create-exclude-medication');
+
+            }
+        }
+        
+        return res.redirect('create-check-answers');
+
+});
+
+/*
 router.post('/create-recruit-medication', function (req, res) {
 
     var listedMedication = req.session.data['listedMedication'];
@@ -520,9 +630,35 @@ router.post('/create-recruit-medication-answers', function (req, res) {
     }
 
 });
+*/
 
 // EXCLUDE BY MEDICATION
 
+router.post('/create-exclude-medication', function (req, res) {
+
+    var medicationsExclude = req.session.data['medicationsExclude'];
+    var addMedications = req.session.data['addMedications'];
+
+    if (!medicationsExclude) {
+        return res.redirect('create-exclude-medication');
+    }
+
+    if (!Array.isArray(medicationsExclude)) {
+        medicationsExclude = [medicationsExclude];
+    }
+
+    // Remove the placeholder values added by the JS
+    medicationsExclude = medicationsExclude.filter(c => c !== '_unchecked');
+
+    if (medicationsExclude.length > 5) {
+        return res.redirect('create-exclude-medication');
+    }
+        
+        return res.redirect('create-check-answers');
+
+});
+
+/*
 router.post('/create-exclude-medication', function (req, res) {
 
     var listedMedicationExclude = req.session.data['listedMedicationExclude'];
@@ -608,6 +744,7 @@ router.post('/create-exclude-medication-answers', function (req, res) {
     }
 
 });
+*/
 
 // Additional Questions
 
