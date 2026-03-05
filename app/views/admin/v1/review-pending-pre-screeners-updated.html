@@ -77,9 +77,9 @@
 
 {% set updatePreScreenerStatus %}
   {% if data['update-pre-screener-status'] == "On hold" %}
-    <strong class="nhsuk-tag nhsuk-tag--yellow">On hold</strong>
+    <strong class="nhsuk-tag nhsuk-tag--orange">On hold</strong>
   {% else %}
-    <strong class="nhsuk-tag nhsuk-tag--blue">Ready for review</strong>
+    <strong class="nhsuk-tag nhsuk-tag--yellow">Ready for review</strong>
   {% endif %}
 {% endset %}
 
@@ -118,7 +118,7 @@
       },
       {
         header: 'Status',
-        html: '<strong class="nhsuk-tag nhsuk-tag--blue">Ready for review</strong>'
+        html: '<strong class="nhsuk-tag nhsuk-tag--yellow">Ready for review</strong>'
       },
       {
         header: 'Actions',
