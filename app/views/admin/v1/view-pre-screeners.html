@@ -78,12 +78,14 @@
 {% set preScreenerStatus %}
   {% if data['pre-screener-status'] == "Rejected" %}
     <strong class="nhsuk-tag nhsuk-tag--red">Rejected</strong>
-  {% elseif data['pre-screener-status'] == "Live" %}
-    <strong class="nhsuk-tag nhsuk-tag--blue">Live</strong>
-  {% elseif data['pre-screener-status'] == "Live" %}
-    <strong class="nhsuk-tag nhsuk-tag--grey">Archived</strong>
-  {% else %}
+  {% elseif data['pre-screener-status'] == "Approved" %}
     <strong class="nhsuk-tag nhsuk-tag--green">Approved</strong>
+  {% elseif data['pre-screener-status'] == "Closed to volunteers" %}
+    <strong class="nhsuk-tag nhsuk-tag--purple">Closed to volunteers</strong>
+  {% elseif data['pre-screener-status'] == "Complete" %}
+    <strong class="nhsuk-tag nhsuk-tag--grey">Complete</strong>
+  {% else %}
+    <strong class="nhsuk-tag nhsuk-tag--blue">Live</strong>
   {% endif %}
 {% endset %}
 
@@ -121,7 +123,7 @@
       },
       {
         header: 'Actions',
-        html: '<p><a href="#">Change status</a></p>'
+        html: '<p><a href="#">Change status</a></p><p><a href="#">Copy link</a></p><p><a href="#">Overview</a></p><p><a href="#">View report</a></p>'
       }
     ],
     [
@@ -136,6 +138,28 @@
       {
         header: 'Last updated',
         text: '28 February 2026'
+      },
+      {
+        header: 'Status',
+        html: '<strong class="nhsuk-tag nhsuk-tag--green">Approved</strong>'
+      },
+      {
+        header: 'Actions',
+        html: '<p><a href="#">Change status</a></p><p><a href="#">Copy link</a></p><p><a href="#">Overview</a></p>'
+      }
+    ],
+    [
+      {
+        header: 'Study name',
+        text: 'The effects of regular exercise on memory and cognitive function'
+      },
+      {
+        header: 'Researcher name',
+        text: 'Jane Doe'
+      },
+      {
+        header: 'Last updated',
+        text: '27 February 2026'
       },
       {
         header: 'Status',
@@ -161,11 +185,11 @@
       },
       {
         header: 'Status',
-        html: '<strong class="nhsuk-tag nhsuk-tag--blue">Live</strong>'
+        html: '<strong class="nhsuk-tag nhsuk-tag--purple">Closed to volunteers</strong>'
       },
       {
         header: 'Actions',
-        html: '<p><a href="#">Change status</a></p><p><a href="#">Copy link</a></p><p><a href="#">Overview</a></p><p><a href="#">View report</a></p>'
+        html: '<p><a href="#">Change status</a></p><p><a href="#">View report</a></p>'
       }
     ],
     [
@@ -183,7 +207,7 @@
       },
       {
         header: 'Status',
-        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Archived</strong>'
+        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Complete</strong>'
       },
       {
         header: 'Actions',
