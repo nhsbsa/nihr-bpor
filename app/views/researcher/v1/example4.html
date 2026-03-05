@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Include volunteers by health conditions" %}
+{% set pageName = "Include volunteers by medication" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -69,31 +69,31 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<form action="/{{folder}}/{{subfolder}}/example" method="post" novalidate>
+<form action="/{{folder}}/{{subfolder}}/create-exclude-medication" method="post" novalidate>
 
 {% call fieldset({
   legend: {
-    text: "Include volunteers by health condition",
+    text: "Exclude volunteers by medication",
     size: "xl",
     isPageHeading: true
   }
 }) %}
 
-<p>You can add one or more health conditions to your inclusion criteria.</p>
+<p>Add any medications that exclude a volunteer from taking part.</p>
 
 {{ searchableCheckboxes({
   label: {
-    text: "Health condition",
+    text: "Medication",
     size: "m"
   },
   classes: "nhsuk-checkboxes--small",
   hint: {
-    text: "Start typing the name of the health condition you’d like to add. The health conditions in our database follow UK naming standards."
+    html: 'Start typing the name of the medication you’d like to add. The medications in our database follow <a href="https://bnf.nice.org.uk/" target="_blank">UK naming standards (opens in a new tab)</a>.'
   },
-  id: "listedConditions",
-  name: "listedConditions",
-  selectedLabel: "Selected health conditions",
-  items: data.health_conditions
+  id: "medicationsExclude",
+  name: "medicationsExclude",
+  selectedLabel: "Selected medication",
+  items: data.drug_names
 }) }}
 
 {{ button({

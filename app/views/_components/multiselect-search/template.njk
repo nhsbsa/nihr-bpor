@@ -11,13 +11,14 @@
   
   {% if params.hint %}
     <div id="{{ params.id }}-hint" class="nhsuk-hint">
-      {{ params.hint.text }}
+      {{- nhsukAttributes(params.attributes) }}
+      {{ params.hint.html | safe | trim | indent(2) if params.hint.html else params.hint.text }}
     </div>
   {% endif %}
 
   <!-- Search (progressive enhancement: JS only) -->
   <div class="js-only">
-    <input class="nhsuk-input" id="{{ params.id }}-search" name="{{ params.name }}" type="text" aria-describedby="{{ params.id }}-hint">
+    <input class="nhsuk-input" id="{{ params.id }}-search" type="text" aria-describedby="{{ params.id }}-hint">
   </div>
 
   <!-- Checkbox list -->

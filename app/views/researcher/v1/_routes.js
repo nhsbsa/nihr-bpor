@@ -273,6 +273,11 @@ router.post('/create-recruit-health-condition', function (req, res) {
 });
 
 router.post('/example', function (req, res) {
+
+    var listedCondition = req.body['listedCondition[]']; 
+
+    console.log(listedCondition);
+
     // Redirect to the next page
     res.redirect('create-recruit-condition-answers');
 });
