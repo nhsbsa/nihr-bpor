@@ -63,6 +63,12 @@
 
     </div>
     <div class="nhsuk-grid-column-three-quarters">
+      
+{% if data['researcherFirstName'] and data['researcherLastName'] %}
+  {% set ownerName = data['researcherFirstName'] + " " + data['researcherLastName'] %}
+{% else %}
+  {% set ownerName = "Jane Doe" %}
+{% endif %}
 
 <h1>Manage pre-screeners</h1>
 
@@ -88,7 +94,7 @@
       },
       {
         header: 'Owner',
-        text: 'Jane Doe'
+        html: ownerName
       },
       {
         header: 'Status',
@@ -110,7 +116,7 @@
       },
       {
         header: 'Owner',
-        text: 'Jane Doe'
+        html: ownerName
       },
       {
         header: 'Status',
@@ -132,7 +138,7 @@
       },
       {
         header: 'Owner',
-        text: 'Jane Doe'
+        html: ownerName
       },
       {
         header: 'Status',
@@ -154,7 +160,7 @@
       },
       {
         header: 'Owner',
-        text: 'Jane Doe'
+        html: ownerName
       },
       {
         header: 'Status',
@@ -176,7 +182,7 @@
       },
       {
         header: 'Owner',
-        text: 'Jane Doe'
+        html: ownerName
       },
       {
         header: 'Status',
@@ -198,7 +204,7 @@
       },
       {
         header: 'Owner',
-        text: 'Jane Doe'
+        html: ownerName
       },
       {
         header: 'Status',

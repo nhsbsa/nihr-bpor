@@ -72,7 +72,15 @@
 
 {% set updateStudyName = data['update-study-name'] | default('Cognitive therapy in Dementia') %}
 {% set updateStudyID = data['update-study-id'] | default('BPOR00123') %}
-{% set updateAdminName = data['select-administrator'] | default('Joe Bloggs') %}
+
+{% if data['select-administrator'] %}
+  {% set updateAdminName = data['select-administrator'] %}
+{% elseif data['adminFirstName'] and data['adminLastName'] %}
+  {% set updateAdminName = data['adminFirstName'] + " " + data['adminLastName'] %}
+{% else %}
+  {% set updateAdminName = "Joe Bloggs" %}
+{% endif %}
+
 {% set updatePreScreenerStatus = data['update-pre-screener-status'] | default('Ready for review') %}
 
 {% set updatePreScreenerStatus %}
@@ -140,7 +148,7 @@
       },
       {
         header: 'Admin name',
-        text: 'Joe Bloggs'
+        text: 'Sophia Bennett'
       },
       {
         header: 'Status',
