@@ -88,33 +88,13 @@
   },
   id: "update-pre-screener-status",
   name: "update-pre-screener-status",
-  value: data['update-pre-screener-status'],
+  value: data['update-pre-screener-status'] or "Live",
   items: [
-    {
-      value: "Rejected",
-      text: "Rejected",
-      selected: data['update-pre-screener-status'] == "Rejected"
-    },
-    {
-      value: "Approved",
-      text: "Approved",
-      selected: data['update-pre-screener-status'] == "Approved"
-    },
-    {
-      value: "Live",
-      text: "Live",
-      selected: data['update-pre-screener-status'] == "Live"
-    },
-    {
-      value: "Closed to volunteers",
-      text: "Closed to volunteers",
-      selected: data['update-pre-screener-status'] == "Closed to volunteers"
-    },
-    {
-      value: "Complete",
-      text: "Complete",
-      selected: data['update-pre-screener-status'] == "Complete"
-    }
+    { value: "Rejected", text: "Rejected" },
+    { value: "Approved", text: "Approved" },
+    { value: "Live", text: "Live" },
+    { value: "Closed to volunteers", text: "Closed to volunteers" },
+    { value: "Complete", text: "Complete" }
   ]
 }) }}
 
