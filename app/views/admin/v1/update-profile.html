@@ -5,7 +5,7 @@
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
 <!-- Extends the layout from /app/views/layout.html -->
-{% extends 'layout-researcher-nihr-logged-in.html' %}
+{% extends 'layout-admin-nihr-logged-in.html' %}
 <!--
   In /app/views/layout.html you can:
     - change the header and footer
@@ -50,10 +50,16 @@
         <ul class="nhsuk-list app-side-nav__list">
             <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="home">Home</a></li>
         </ul>
-        <h2 class="app-side-nav__heading">Study management</h2>
+        <h2 class="app-side-nav__heading">Manage accounts</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Manage accounts</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Create administrator accounts</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Manage studies</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -74,14 +80,14 @@
 
 <form action="/{{folder}}/{{subfolder}}/update-profile" method="post" novalidate>
 
-{% set previousTitle = data.researcherTitle or "Mrs" %}
+{% set previousTitle = data.adminTitle or "Mr" %}
 
 {{ select({
   label: {
     text: "Title"
   },
-  id: "researcherTitle",
-  name: "researcherTitle",
+  id: "adminTitle",
+  name: "adminTitle",
   items: [
     {
       value: "Mr",
@@ -142,33 +148,30 @@
 }) }}
 
 {{ input({
-  id: "researcherFirstName",
-  name: "researcherFirstName",
+  id: "adminFirstName",
+  name: "adminFirstName",
   classes: "nhsuk-input--width-20",
-  value: data.researcherFirstName or "Jane",
+  value: data.adminFirstName or "Joe",
   label: {
     text: "First name"
   }
 }) }}
 
 {{ input({
-  id: "researcherLastName",
-  name: "researcherLastName",
+  id: "adminLastName",
+  name: "adminLastName",
   classes: "nhsuk-input--width-20",
-  value: data.researcherLastName or "Doe",
+  value: data.adminLastName or "Bloggs",
   label: {
     text: "Last name"
   }
 }) }}
 
 <p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Email address</p>
-<p>Jane.Doe@birmingham.ac.uk</p>
-
-<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Organisation</p>
-<p>University of Birmingham</p>
+<p>Joe.Bloggs@nihr.ac.uk</p>
 
 <p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
-<p>Researcher</p>
+<p>Study admin</p>
 
 <div class="nhsuk-button-group">
   {{ button({

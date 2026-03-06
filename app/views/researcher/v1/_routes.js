@@ -163,12 +163,12 @@ router.post('/home', function (req, res) {
 
 router.post('/update-profile', function (req, res) {
 
-    var title = req.session.data['title'];
-    var firstName = req.session.data['firstName'];
-    var lastName = req.session.data['lastName'];
+    var researcherTitle = req.session.data['researcherTitle'];
+    var researcherFirstName = req.session.data['researcherFirstName'];
+    var researcherLastName = req.session.data['researcherLastName'];
 
 
-if (title && firstName && lastName) {
+if (researcherTitle && researcherFirstName && researcherLastName) {
     
     res.redirect('home-profile-updated');
 

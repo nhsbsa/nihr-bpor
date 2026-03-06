@@ -15,6 +15,25 @@ router.post('/index', function (req, res) {
 
 });
 
+router.post('/update-profile', function (req, res) {
+
+    var adminTitle = req.session.data['adminTitle'];
+    var adminFirstName = req.session.data['adminFirstName'];
+    var adminLastName = req.session.data['adminLastName'];
+
+
+if (adminTitle && adminFirstName && adminLastName) {
+    
+    res.redirect('home-profile-updated');
+
+} else {
+
+    res.redirect('update-profile');
+
+}
+
+});
+
 router.post('/update-study-name', function (req, res) {
 
     res.redirect('review-pre-screener');

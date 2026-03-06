@@ -5,7 +5,7 @@
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
 <!-- Extends the layout from /app/views/layout.html -->
-{% extends 'layout-researcher-nihr-logged-in.html' %}
+{% extends 'layout-admin-nihr-logged-in.html' %}
 <!--
   In /app/views/layout.html you can:
     - change the header and footer
@@ -50,10 +50,16 @@
         <ul class="nhsuk-list app-side-nav__list">
             <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="home">Home</a></li>
         </ul>
-        <h2 class="app-side-nav__heading">Study management</h2>
+        <h2 class="app-side-nav__heading">Manage accounts</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Manage accounts</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Create administrator accounts</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Manage studies</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -73,12 +79,12 @@
         text: "Title"
       },
       value: {
-        text: data['researcherTitle'] | default('Mrs')
+        text: data['adminTitle'] | default('Mr')
       },
       actions: {
         items: [
           {
-            href: "/researcher/v1/update-profile#researcherTitle",
+            href: "/admin/v1/update-profile#adminTitle",
             text: "Change",
             visuallyHiddenText: "title"
           }
@@ -90,12 +96,12 @@
         text: "First name"
       },
       value: {
-        text: data['researcherFirstName'] | default('Jane')
+        text: data['adminFirstName'] | default('Joe')
       },
       actions: {
         items: [
           {
-            href: "/researcher/v1/update-profile#researcherFirstName",
+            href: "/admin/v1/update-profile#adminFirstName",
             text: "Change",
             visuallyHiddenText: "first name"
           }
@@ -107,12 +113,12 @@
         text: "Last name"
       },
       value: {
-        text: data['researcherLastName'] | default('Doe')
+        text: data['adminLastName'] | default('Bloggs')
       },
       actions: {
         items: [
           {
-            href: "/researcher/v1/update-profile#researcherLastName",
+            href: "/admin/v1/update-profile#adminLastName",
             text: "Change",
             visuallyHiddenText: "last name"
           }
@@ -124,15 +130,7 @@
         text: "Email address"
       },
       value: {
-        text: "Jane.Doe@birmingham.ac.uk"
-      }
-    },
-    {
-      key: {
-        text: "Organisation"
-      },
-      value: {
-        text: "University of Birmingham"
+        text: "Joe.Bloggs@nihr.ac.uk"
       }
     },
     {
@@ -140,20 +138,12 @@
         text: "Role"
       },
       value: {
-        text: "Researcher"
+        text: "Study admin"
       }
     }
   ]
 }) }}
 
-<form action="/{{folder}}/{{subfolder}}/home" method="post" novalidate>
-
-{{ button({
-  text: "Delete account",
-  classes: "nhsuk-button--warning"
-}) }}
-
-</form>
 
     </div>
   </div>

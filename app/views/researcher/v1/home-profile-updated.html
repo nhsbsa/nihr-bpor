@@ -84,12 +84,12 @@
         text: "Title"
       },
       value: {
-        text: data['title'] | default('Mrs')
+        text: data['researcherTitle'] | default('Mrs')
       },
       actions: {
         items: [
           {
-            href: "/researcher/v1/update-profile#title",
+            href: "/researcher/v1/update-profile#researcherTitle",
             text: "Change",
             visuallyHiddenText: "title"
           }
@@ -101,12 +101,12 @@
         text: "First name"
       },
       value: {
-        text: data['firstName'] | default('Jane')
+        text: data['researcherFirstName'] | default('Jane')
       },
       actions: {
         items: [
           {
-            href: "/researcher/v1/update-profile#firstName",
+            href: "/researcher/v1/update-profile#researcherFirstName",
             text: "Change",
             visuallyHiddenText: "first name"
           }
@@ -118,12 +118,12 @@
         text: "Last name"
       },
       value: {
-        text: data['lastName'] | default('Doe')
+        text: data['researcherLastName'] | default('Doe')
       },
       actions: {
         items: [
           {
-            href: "/researcher/v1/update-profile#lastName",
+            href: "/researcher/v1/update-profile#researcherLastName",
             text: "Change",
             visuallyHiddenText: "last name"
           }
