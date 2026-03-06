@@ -80,7 +80,7 @@
 
 <p>The pre-screener for The impact of physical activity on cognitive decline in older adults is currently <strong>Live</strong>.</p>
 
-<form action="/{{folder}}/{{subfolder}}/update-pre-screener-status" method="post" novalidate>
+<form action="/{{folder}}/{{subfolder}}/change-status" method="post" novalidate>
 
 {{ select({
   label: {
@@ -88,28 +88,32 @@
   },
   id: "update-pre-screener-status",
   name: "update-pre-screener-status",
-  value: updatePreScreenerStatus,
+  value: data['update-pre-screener-status'],
   items: [
     {
       value: "Rejected",
-      text: "Rejected"
+      text: "Rejected",
+      selected: data['update-pre-screener-status'] == "Rejected"
     },
     {
       value: "Approved",
-      text: "Approved"
+      text: "Approved",
+      selected: data['update-pre-screener-status'] == "Approved"
     },
     {
       value: "Live",
       text: "Live",
-      selected: true
+      selected: data['update-pre-screener-status'] == "Live"
     },
     {
       value: "Closed to volunteers",
-      text: "Closed to volunteers"
+      text: "Closed to volunteers",
+      selected: data['update-pre-screener-status'] == "Closed to volunteers"
     },
     {
       value: "Complete",
-      text: "Complete"
+      text: "Complete",
+      selected: data['update-pre-screener-status'] == "Complete"
     }
   ]
 }) }}

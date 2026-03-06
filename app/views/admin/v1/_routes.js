@@ -39,6 +39,12 @@ router.post('/update-pre-screener-status', function (req, res) {
 
 });
 
+router.post('/change-status', function (req, res) {
+
+    res.redirect('view-pre-screeners');
+
+});
+
 router.post('/view-report-update-status', function (req, res) {
 
     var updateContactedStatus = req.session.data['updateContactedStatus'];

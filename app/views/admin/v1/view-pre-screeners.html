@@ -73,19 +73,33 @@
 {% set studyName = data['study-name'] | default('The impact of physical activity on cognitive decline in older adults') %}
 {% set studyID = data['study-id'] | default('BPOR00321') %}
 {% set adminName = data['administrator'] | default('Joe Bloggs') %}
-{% set preScreenerStatus = data['pre-screener-status'] | default('Approved') %}
+{% set preScreenerStatus = data['update-pre-screener-status'] | default('Approved') %}
 
 {% set preScreenerStatus %}
-  {% if data['pre-screener-status'] == "Rejected" %}
+  {% if data['update-pre-screener-status'] == "Rejected" %}
     <strong class="nhsuk-tag nhsuk-tag--red">Rejected</strong>
-  {% elseif data['pre-screener-status'] == "Approved" %}
+  {% elseif data['update-pre-screener-status'] == "Approved" %}
     <strong class="nhsuk-tag nhsuk-tag--green">Approved</strong>
-  {% elseif data['pre-screener-status'] == "Closed to volunteers" %}
+  {% elseif data['update-pre-screener-status'] == "Closed to volunteers" %}
     <strong class="nhsuk-tag nhsuk-tag--purple">Closed to volunteers</strong>
-  {% elseif data['pre-screener-status'] == "Complete" %}
+  {% elseif data['update-pre-screener-status'] == "Complete" %}
     <strong class="nhsuk-tag nhsuk-tag--grey">Complete</strong>
   {% else %}
     <strong class="nhsuk-tag nhsuk-tag--blue">Live</strong>
+  {% endif %}
+{% endset %}
+
+{% set actions %}
+  {% if data['update-pre-screener-status'] == "Rejected" %}
+    <p class="nhsuk-hint">No Actions</p>
+  {% elseif data['update-pre-screener-status'] == "Approved" %}
+    <p><a href="change-status">Change status</a></p><p><a href="copy-link">Copy link</a></p><p><a href="overview">Overview</a></p>
+  {% elseif data['update-pre-screener-status'] == "Closed to volunteers" %}
+    <p><a href="change-status">Change status</a></p><p><a href="view-report">View report</a></p>
+  {% elseif data['update-pre-screener-status'] == "Complete" %}
+    <p class="nhsuk-hint">No Actions</p>
+  {% else %}
+    <p><a href="change-status">Change status</a></p><p><a href="copy-link">Copy link</a></p><p><a href="overview">Overview</a></p><p><a href="view-report">View report</a></p>
   {% endif %}
 {% endset %}
 
@@ -123,7 +137,7 @@
       },
       {
         header: 'Actions',
-        html: '<p><a href="change-status">Change status</a></p><p><a href="copy-link">Copy link</a></p><p><a href="overview">Overview</a></p><p><a href="view-report">View report</a></p>'
+        html: actions
       }
     ],
     [
