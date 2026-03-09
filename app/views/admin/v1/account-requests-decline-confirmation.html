@@ -72,16 +72,16 @@
 
 {% set html %}
   <h3 class="nhsuk-notification-banner__heading">
-    Account declined
+    Account request rejected
   </h3>
-  <p>Serena Whitmore has been sent an email to confirm this.</p>
+  <p>We’ve emailed the researcher to let them know.</p>
 {% endset %}
 
 {{ notificationBanner({
   html: html
 }) }}
 
-<h1>Account requests</h1>
+<h1>Review account requests</h1>
 
 {{ table({
   responsive: true,

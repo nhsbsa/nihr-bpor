@@ -81,10 +81,10 @@
   {% set updateAdminName = "Joe Bloggs" %}
 {% endif %}
 
-{% set updatePreScreenerStatus = data['update-pre-screener-status'] | default('Ready for review') %}
+{% set updatePreScreenerPendingStatus = data['update-pre-screener-pending-status'] | default('Ready for review') %}
 
-{% set updatePreScreenerStatus %}
-  {% if data['update-pre-screener-status'] == "On hold" %}
+{% set updatePreScreenerPendingStatus %}
+  {% if data['update-pre-screener-pending-status'] == "On hold" %}
     <strong class="nhsuk-tag nhsuk-tag--orange">On hold</strong>
   {% else %}
     <strong class="nhsuk-tag nhsuk-tag--yellow">Ready for review</strong>
@@ -126,7 +126,7 @@
       },
       {
         header: 'Status',
-        html: updatePreScreenerStatus
+        html: updatePreScreenerPendingStatus
       },
       {
         header: 'Actions',

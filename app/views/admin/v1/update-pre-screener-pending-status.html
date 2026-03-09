@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "View pre-screeners" %}
+{% set pageName = "Review pending pre-screeners" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -58,8 +58,8 @@
         </ul>
         <h2 class="app-side-nav__heading">Manage studies</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
         <ul class="nhsuk-list app-side-nav__list">
@@ -76,25 +76,31 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
+{% set updateStudyName = data['update-study-name'] | default('Cognitive therapy in Dementia') %}
+{% set updatePreScreenerPendingStatus = data['update-pre-screener-pending-status'] | default('Ready for review') %}
+
 <h1>Update pre-screener status</h1>
 
-<p>The pre-screener for The impact of physical activity on cognitive decline in older adults is currently <strong>Live</strong>.</p>
+<p>The pre-screener for {{ updateStudyName }} is currently <strong>{{ data['update-pre-screener-pending-status'] or "Ready for review"}}</strong>.</p>
 
-<form action="/{{folder}}/{{subfolder}}/change-status" method="post" novalidate>
+<form action="/{{folder}}/{{subfolder}}/update-pre-screener-pending-status" method="post" novalidate>
 
 {{ select({
   label: {
     text: "Update the pre-screener status for this study"
   },
-  id: "update-pre-screener-status",
-  name: "update-pre-screener-status",
-  value: data['update-pre-screener-status'] or "Live",
+  id: "update-pre-screener-pending-status",
+  name: "update-pre-screener-pending-status",
+  value: updatePreScreenerPendingStatus,
   items: [
-    { value: "Rejected", text: "Rejected" },
-    { value: "Approved", text: "Approved" },
-    { value: "Live", text: "Live" },
-    { value: "Closed to volunteers", text: "Closed to volunteers" },
-    { value: "Complete", text: "Complete" }
+    {
+      value: "Ready for review",
+      text: "Ready for review"
+    },
+    {
+      value: "On hold",
+      text: "On hold"
+    }
   ]
 }) }}
 
@@ -102,6 +108,7 @@
   text: "Submit"
 }) }}
 </form>
+
 
     </div>
   </div>

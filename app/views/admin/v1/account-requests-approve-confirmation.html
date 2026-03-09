@@ -72,9 +72,9 @@
 
 {% set html %}
   <h3 class="nhsuk-notification-banner__heading">
-    Account approved
+    Account request approved
   </h3>
-  <p>Serena Whitmore has been sent an email to complete their account setup.</p>
+  <p>We’ve emailed the researcher to let them know.</p>
 {% endset %}
 
 {{ notificationBanner({
@@ -82,7 +82,7 @@
   type: "success"
 }) }}
 
-<h1>Account requests</h1>
+<h1>Review account requests</h1>
 
 {{ table({
   responsive: true,

@@ -79,7 +79,7 @@
 {% set updateStudyName = data['update-study-name'] | default('Cognitive therapy in Dementia') %}
 {% set updateStudyID = data['update-study-id'] | default('BPOR00123') %}
 {% set updateAdminName = data['select-administrator'] | default('Joe Bloggs') %}
-{% set updatePreScreenerStatus = data['update-pre-screener-status'] | default('Ready for review') %}
+{% set updatePreScreenerPendingStatus = data['update-pre-screener-pending-status'] | default('Ready for review') %}
 
 {% set today = "now" | date("D MMMM YYYY") %}
 
@@ -156,12 +156,12 @@
         text: "Status"
       },
       value: {
-        html: updatePreScreenerStatus
+        html: updatePreScreenerPendingStatus
       },
       actions: {
         items: [
           {
-            href: "update-pre-screener-status#update-pre-screener-status",
+            href: "update-pre-screener-pending-status#update-pre-screener-pending-status",
             text: "Change",
             visuallyHiddenText: "status"
           }

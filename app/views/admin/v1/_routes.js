@@ -52,13 +52,13 @@ router.post('/select-administrator', function (req, res) {
 
 });
 
-router.post('/update-pre-screener-status', function (req, res) {
+router.post('/update-pre-screener-pending-status', function (req, res) {
 
     res.redirect('review-pre-screener');
 
 });
 
-router.post('/change-status', function (req, res) {
+router.post('/update-pre-screener-approved-status', function (req, res) {
 
     res.redirect('view-pre-screeners');
 
