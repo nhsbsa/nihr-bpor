@@ -95,34 +95,22 @@
     {
       value: "Not contacted",
       text: "Not contacted",
-      hint: {
-        text: "You have not contacted the volunteer yet"
-      },
       checked: (data.updateContactedStatus == "Not contacted") 
                or (not data.updateContactedStatus)
     },
     {
       value: "Contacted",
       text: "Contacted",
-      hint: {
-        text: "You have contacted the volunteer"
-      },
       checked: data.updateContactedStatus == "Contacted"
     },
     {
       value: "Recruited",
       text: "Recruited",
-      hint: {
-        text: "The volunteer has been recruited to the study"
-      },
       checked: data.updateContactedStatus == "Recruited"
     },
     {
       value: "Withdrawn",
       text: "Withdrawn",
-      hint: {
-        text: "The volunteer has withdrawn from the study"
-      },
       checked: data.updateContactedStatus == "Withdrawn"
     }
   ]
