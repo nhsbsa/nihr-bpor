@@ -93,13 +93,13 @@
   {% if data['update-pre-screener-approved-status'] == "Rejected" %}
     <p class="nhsuk-hint">No Actions</p>
   {% elseif data['update-pre-screener-approved-status'] == "Approved" %}
-    <p><a href="update-pre-screener-approved-status">Change status</a></p><p><a href="copy-link">Copy link</a></p><p><a href="overview">Overview</a></p>
+    <p><a href="update-pre-screener-approved-status">Change status</a></p><p><a href="copy-link">Copy link</a></p><p><a href="overview">Check pre-screener</a></p>
   {% elseif data['update-pre-screener-approved-status'] == "Closed to volunteers" %}
-    <p><a href="update-pre-screener-approved-status">Change status</a></p><p><a href="view-report">View report</a></p>
+    <p><a href="update-pre-screener-approved-status">Change status</a></p><p><a href="view-report">Track volunteer contact</a></p>
   {% elseif data['update-pre-screener-approved-status'] == "Complete" %}
     <p class="nhsuk-hint">No Actions</p>
   {% else %}
-    <p><a href="update-pre-screener-approved-status">Change status</a></p><p><a href="copy-link">Copy link</a></p><p><a href="overview">Overview</a></p><p><a href="view-report">View report</a></p>
+    <p><a href="update-pre-screener-approved-status">Change status</a></p><p><a href="copy-link">Copy link</a></p><p><a href="overview">Check pre-screener</a></p><p><a href="view-report">Track volunteer contact</a></p>
   {% endif %}
 {% endset %}
 
@@ -159,7 +159,7 @@
       },
       {
         header: 'Actions',
-        html: '<p><a href="#">Change status</a></p><p><a href="#">Copy link</a></p><p><a href="#">Overview</a></p>'
+        html: '<p><a href="#">Change status</a></p><p><a href="#">Copy link</a></p><p><a href="#">Check pre-screener</a></p>'
       }
     ],
     [
@@ -203,7 +203,7 @@
       },
       {
         header: 'Actions',
-        html: '<p><a href="#">Change status</a></p><p><a href="#">View report</a></p>'
+        html: '<p><a href="#">Change status</a></p><p><a href="#">Track volunteer contact</a></p>'
       }
     ],
     [
