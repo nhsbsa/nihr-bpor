@@ -125,11 +125,29 @@
   responsive: true,
   panel: false,
   head: [
-    { text: "Volunteer details" },
-    { text: "Participant ID" },
-    { text: "Date pre-screener submitted" },
-    { text: "Status" },
-    { text: "Actions" }
+    {
+      text: "Volunteer details",
+      format: 'string',
+      attributes: { 'aria-sort': 'none' }
+    },
+    {
+      text: "Participant ID",
+      format: 'numeric',
+      attributes: { 'aria-sort': 'none' }
+    },
+    {
+      text: "Date pre-screener submitted",
+      format: 'numeric',
+      attributes: { 'aria-sort': 'none' }
+    },
+    {
+      text: "Status",
+      format: 'string',
+      attributes: { 'aria-sort': 'none' }
+    },
+    {
+      text: "Actions"
+    }
   ],
   rows: [
     [
@@ -139,14 +157,8 @@
       },
       { header: "Participant ID", text: "905173824" },
       { header: "Date pre-screener submitted", text: "04 March 2025" },
-      {
-        header: "Status",
-        html: statusTag
-      },
-      {
-        header: "Actions",
-        html: '<p><a href="view-report-update-status">Update status</a></p>'
-      }
+      { header: "Status", html: statusTag },
+      { header: "Actions", html: '<p><a href="view-report-update-status">Update status</a></p>' }
     ],
     [
       {
@@ -155,14 +167,8 @@
       },
       { header: "Participant ID", text: "905173825" },
       { header: "Date pre-screener submitted", text: "05 March 2025" },
-      {
-        header: "Status",
-        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>'
-      },
-      {
-        header: "Actions",
-        html: '<p><a href="#">Update status</a></p>'
-      }
+      { header: "Status", html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>' },
+      { header: "Actions", html: '<p><a href="#">Update status</a></p>' }
     ],
     [
       {
@@ -171,14 +177,8 @@
       },
       { header: "Participant ID", text: "905173826" },
       { header: "Date pre-screener submitted", text: "06 March 2025" },
-      {
-        header: "Status",
-        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>'
-      },
-      {
-        header: "Actions",
-        html: '<p><a href="#">Update status</a></p>'
-      }
+      { header: "Status", html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>' },
+      { header: "Actions", html: '<p><a href="#">Update status</a></p>' }
     ],
     [
       {
@@ -187,14 +187,8 @@
       },
       { header: "Participant ID", text: "905173827" },
       { header: "Date pre-screener submitted", text: "07 March 2025" },
-      {
-        header: "Status",
-        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>'
-      },
-      {
-        header: "Actions",
-        html: '<p><a href="#">Update status</a></p>'
-      }
+      { header: "Status", html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>' },
+      { header: "Actions", html: '<p><a href="#">Update status</a></p>' }
     ],
     [
       {
@@ -203,14 +197,8 @@
       },
       { header: "Participant ID", text: "905173828" },
       { header: "Date pre-screener submitted", text: "08 March 2025" },
-      {
-        header: "Status",
-        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>'
-      },
-      {
-        header: "Actions",
-        html: '<p><a href="#">Update status</a></p>'
-      }
+      { header: "Status", html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>' },
+      { header: "Actions", html: '<p><a href="#">Update status</a></p>' }
     ],
     [
       {
@@ -219,14 +207,8 @@
       },
       { header: "Participant ID", text: "905173829" },
       { header: "Date pre-screener submitted", text: "09 March 2025" },
-      {
-        header: "Status",
-        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>'
-      },
-      {
-        header: "Actions",
-        html: '<p><a href="#">Update status</a></p>'
-      }
+      { header: "Status", html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>' },
+      { header: "Actions", html: '<p><a href="#">Update status</a></p>' }
     ],
     [
       {
@@ -235,14 +217,8 @@
       },
       { header: "Participant ID", text: "905173830" },
       { header: "Date pre-screener submitted", text: "10 March 2025" },
-      {
-        header: "Status",
-        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>'
-      },
-      {
-        header: "Actions",
-        html: '<p><a href="#">Update status</a></p>'
-      }
+      { header: "Status", html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>' },
+      { header: "Actions", html: '<p><a href="#">Update status</a></p>' }
     ],
     [
       {
@@ -251,14 +227,8 @@
       },
       { header: "Participant ID", text: "905173831" },
       { header: "Date pre-screener submitted", text: "11 March 2025" },
-      {
-        header: "Status",
-        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>'
-      },
-      {
-        header: "Actions",
-        html: '<p><a href="#">Update status</a></p>'
-      }
+      { header: "Status", html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>' },
+      { header: "Actions", html: '<p><a href="#">Update status</a></p>' }
     ],
     [
       {
@@ -267,14 +237,8 @@
       },
       { header: "Participant ID", text: "905173832" },
       { header: "Date pre-screener submitted", text: "12 March 2025" },
-      {
-        header: "Status",
-        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>'
-      },
-      {
-        header: "Actions",
-        html: '<p><a href="#">Update status</a></p>'
-      }
+      { header: "Status", html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>' },
+      { header: "Actions", html: '<p><a href="#">Update status</a></p>' }
     ],
     [
       {
@@ -283,14 +247,8 @@
       },
       { header: "Participant ID", text: "905173833" },
       { header: "Date pre-screener submitted", text: "13 March 2025" },
-      {
-        header: "Status",
-        html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>'
-      },
-      {
-        header: "Actions",
-        html: '<p><a href="#">Update status</a></p>'
-      }
+      { header: "Status", html: '<strong class="nhsuk-tag nhsuk-tag--grey">Not contacted</strong>' },
+      { header: "Actions", html: '<p><a href="#">Update status</a></p>' }
     ]
   ]
 }) }}

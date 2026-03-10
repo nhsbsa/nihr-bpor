@@ -91,12 +91,34 @@
   responsive: true,
   panel: false,
   head: [
-    { text: 'Study name' },
-    { text: 'Researcher name' },
-    { text: 'Last updated' },
-    { text: 'Admin name' },
-    { text: 'Status' },
-    { text: 'Action' }
+    {
+      text: 'Study name',
+      format: 'string',
+      attributes: { 'aria-sort': 'none' }
+    },
+    {
+      text: 'Researcher name',
+      format: 'string',
+      attributes: { 'aria-sort': 'none' }
+    },
+    {
+      text: 'Last updated',
+      format: 'numeric',
+      attributes: { 'aria-sort': 'none' }
+    },
+    {
+      text: 'Admin name',
+      format: 'string',
+      attributes: { 'aria-sort': 'none' }
+    },
+    {
+      text: 'Status',
+      format: 'string',
+      attributes: { 'aria-sort': 'none' }
+    },
+    {
+      text: 'Action'
+    }
   ],
   rows: [
     [
