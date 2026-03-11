@@ -79,10 +79,14 @@
 <span class="nhsuk-caption-xl">The impact of physical activity on cognitive decline in older adults</span>
 <h1 class="nhsuk-heading-xl">Copy pre-screener link</h1>
 
-<div class="nhsuk-form-group">
-  <label class="nhsuk-label" for="pre-screener-link">Pre-screener link</label>
-  <input class="nhsuk-input" id="pre-screener-link" type="text" value="https://bepartofresearch.nihr.ac.uk/pre-screener/AJY1820YAN">
-</div>
+{{ input({
+  id: "pre-screener-link",
+  name: "pre-screener-link",
+  value: "https://bepartofresearch.nihr.ac.uk/pre-screener/AJY1820YAN",
+  label: {
+    text: "Pre-screener link"
+  }
+}) }}
 
 <div class="nhsuk-button-group">
 
