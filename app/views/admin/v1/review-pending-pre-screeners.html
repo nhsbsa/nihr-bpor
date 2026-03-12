@@ -78,7 +78,7 @@
 {% elseif data['adminFirstName'] and data['adminLastName'] %}
   {% set updateAdminName = data['adminFirstName'] + " " + data['adminLastName'] %}
 {% else %}
-  {% set updateAdminName = "Joe Bloggs" %}
+  {% set updateAdminName = '<span class="nhsuk-hint">Not assigned</span>' %}
 {% endif %}
 
 {% set updatePreScreenerPendingStatus = data['update-pre-screener-pending-status'] | default('Ready for review') %}

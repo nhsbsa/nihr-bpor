@@ -150,6 +150,40 @@
         <div class="nhsuk-grid-row">
           <div class="nhsuk-grid-column-two-thirds">
             <span class="nhsuk-details__summary-text">
+              Manage accounts
+            </span>
+          </div>
+          <div class="nhsuk-grid-column-one-third nhsuk-u-text-align-right">
+            <strong class="nhsuk-tag nhsuk-tag--green">DEV</strong>
+          </div>
+        </div>
+      </summary>
+      <div class="nhsuk-details__text">
+        <h3 class="nhsuk-heading-s">User research</h3>
+        <p class="nhsuk-u-font-weight-bold">...</p>
+        <h3 class="nhsuk-heading-s">Changes from previous iteration</h3>
+        <ul>
+          <li>...</li>
+        </ul>
+        <hr>
+        <p><a href="/admin/v1/view-profile">View / edit profile</a></p>
+        <p><a href="/admin/v1/account-requests">Review account requests</a></p>
+        <p><a href="#">Manage accounts</a></p>
+        <p><a href="#">Create administrator accounts</a></p>
+        <hr>
+        {{ actionLink({
+          classes: "nhsuk-u-margin-bottom-3",
+          text: "View user journey",
+          href: "/admin/v1/user-journey"
+        }) }}
+      </div>
+    </details>
+
+    <details class="nhsuk-details nhsuk-expander">
+      <summary class="nhsuk-details__summary">
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-two-thirds">
+            <span class="nhsuk-details__summary-text">
               Pre-Screener
             </span>
           </div>

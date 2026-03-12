@@ -77,7 +77,7 @@
 }) }}
 
 {% set updateStudyName = data['update-study-name'] | default('Cognitive therapy in Dementia') %}
-{% set updateAdminName = data['select-administrator'] | default('Joe Bloggs') %}
+{% set updateAdminName = data['select-administrator'] | default('Not assigned') %}
 
 <h1>Select an administrator</h1>
 
@@ -93,6 +93,10 @@
   name: "select-administrator",
   value: updateAdminName,
   items: [
+    {
+      value: "Not assigned",
+      text: "Not assigned"
+    },
     {
       value: "Joe Bloggs",
       text: "Joe Bloggs"
