@@ -99,7 +99,7 @@
   responsive: true,
   panel: false,
   head: [
-    { text: 'Study name' },
+    { text: 'Study details' },
     { text: 'Researcher name' },
     { text: 'Last updated' },
     { text: 'Admin name' },
@@ -109,8 +109,8 @@
   rows: [
     [
       {
-        header: 'Study name',
-        html: updateStudyName
+        header: 'Study details',
+        html: '<p>' + updateStudyName + '<br><span class="nhsuk-body-s">Study ID: ' + updateStudyID + '</span></p>'
       },
       {
         header: 'Researcher name',
@@ -135,8 +135,8 @@
     ],
     [
       {
-        header: 'Study name',
-        text: 'Exploring the effects of art therapy on memory retention in older adults'
+        header: 'Study details',
+        html: '<p>Exploring the effects of art therapy on memory retention in older adults<br><span class="nhsuk-body-s">Study ID: BPOR08172</span></p>'
       },
       {
         header: 'Researcher name',
