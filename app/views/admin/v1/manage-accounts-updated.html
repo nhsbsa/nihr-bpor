@@ -103,6 +103,14 @@
   ],
   rows: [
     [
+      { header: 'Name', text: ((data['createAdminFirstName'] or 'Michael') ~ ' ' ~ (data['createAdminLastName'] or 'Jones')) },
+      { header: 'Email', text: data['createAdminEmail'] or 'michael.jones@nihr.acuk' },
+      { header: 'Organisation', text: data['createAdminOrganisation'] or 'NIHR' },
+      { header: 'Date submitted', text: '10 February 2026' },
+      { header: 'Role', html: data['createAdminRole'] or 'System administrator' },
+      { header: 'Actions', html: '<p><a href="#">Edit account</a></p>' }
+    ],
+    [
       { header: 'Name', text: ((data['researcherFirstName'] or 'Amelia') ~ ' ' ~ (data['researcherLastName'] or 'Hart')) },
       { header: 'Email', text: 'amelia.hart@nhs.net' },
       { header: 'Organisation', text: data['researcherOrganisation'] or 'NHS Trust' },
