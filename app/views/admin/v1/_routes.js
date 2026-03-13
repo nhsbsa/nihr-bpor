@@ -62,6 +62,27 @@ if (
 
 });
 
+router.post('/edit-researcher-account-update-profile', function (req, res) {
+
+    var researcherTitle = req.session.data['researcherTitle'];
+    var researcherFirstName = req.session.data['researcherFirstName'];
+    var researcherLastName = req.session.data['researcherLastName'];
+    var researcherOrganisation = req.session.data['researcherOrganisation'];
+
+
+
+if (researcherTitle && researcherFirstName && researcherLastName && researcherOrganisation) {
+    
+    res.redirect('edit-researcher-account-updated');
+
+} else {
+
+    res.redirect('edit-researcher-account-update-profile');
+
+}
+
+});
+
 router.post('/update-study-name', function (req, res) {
 
     res.redirect('review-pre-screener');

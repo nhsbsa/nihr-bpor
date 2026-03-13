@@ -69,55 +69,90 @@
 
     </div>
     <div class="nhsuk-grid-column-three-quarters">
+      
+{% set profileUpdated %}
+  <h3 class="nhsuk-notification-banner__heading">
+  {% if data['researcherFirstName'] and data['researcherLastName'] %}{{ data['researcherFirstName'] }} {{ data['researcherLastName'] }}{% else %}Amelia Hart{% endif %}'s details have been updated</h3>
+  <p>We've emailed them to let them know.</p>
+{% endset %}
 
-<h1>Manage accounts</h1>
-
-{{ button({
-  text: "Create administrator account",
-  href: "create-admin-accounts",
-  classes: "nhsuk-button--secondary"
+{{ notificationBanner({
+  html: profileUpdated,
+  type: "success"
 }) }}
 
-{{ table({
-  responsive: true,
-  panel: false,
-  head: [
-    { text: 'Name' },
-    { text: 'Email' },
-    { text: 'Organisation' },
-    { text: 'Date submitted' },
-    { text: 'Role' },
-    { text: 'Action' }
-  ],
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+<h1>Edit account</h1>
+
+{{ summaryList({
   rows: [
-    [
-      { header: 'Name', text: ((data['researcherFirstName'] or 'Amelia') ~ ' ' ~ (data['researcherLastName'] or 'Hart')) },
-      { header: 'Email', text: 'amelia.hart@nhs.net' },
-      { header: 'Organisation', text: data['researcherOrganisation'] or 'NHS Trust' },
-      { header: 'Date submitted', text: '9 February 2026' },
-      { header: 'Role', html: data['researcherRole'] or 'Researcher' },
-      { header: 'Actions', html: '<p><a href="edit-researcher-account">Edit account</a></p>' }
-    ],
-    [
-      { header: 'Name', text: ((data['studyAdminFirstName'] or 'Daniel') ~ ' ' ~ (data['studyAdminLastName'] or 'Mercer')) },
-      { header: 'Email', text: 'daniel.mercer@nihr.ac.uk' },
-      { header: 'Organisation', text: data['studyAdminOrganisation'] or 'NIHR' },
-      { header: 'Date submitted', text: '3 February 2026' },
-      { header: 'Role', html: data['studyAdminRole'] or 'Study administrator' },
-      { header: 'Actions', html: '<p><a href="edit-study-admin-account">Edit account</a></p>' }
-    ],
-    [
-      { header: 'Name', text: ((data['systemAdminFirstName'] or 'Sofia') ~ ' ' ~ (data['systemAdminLastName'] or 'Petrov')) },
-      { header: 'Email', text: 'sofia.petrov@nihr.ac.uk' },
-      { header: 'Organisation', text: data['systemAdminOrganisation'] or 'NIHR' },
-      { header: 'Date submitted', text: '2 February 2026' },
-      { header: 'Role', html: data['systemAdminRole'] or 'System administrator' },
-      { header: 'Actions', html: '<p><a href="edit-system-admin-account">Edit account</a></p>' }
-    ]
+    {
+      key: { text: "Title" },
+      value: { text: data['researcherTitle'] or "Mrs" },
+      actions: {
+        items: [
+          {
+            href: "/admin/v1/edit-researcher-account-update-profile#researcherTitle",
+            text: "Change",
+            visuallyHiddenText: "title"
+          }
+        ]
+      }
+    },
+    {
+      key: { text: "First name" },
+      value: { text: data['researcherFirstName'] or "Amelia" },
+      actions: {
+        items: [
+          {
+            href: "/admin/v1/edit-researcher-account-update-profile#researcherFirstName",
+            text: "Change",
+            visuallyHiddenText: "first name"
+          }
+        ]
+      }
+    },
+    {
+      key: { text: "Last name" },
+      value: { text: data['researcherLastName'] or "Hart" },
+      actions: {
+        items: [
+          {
+            href: "/admin/v1/edit-researcher-account-update-profile#researcherLastName",
+            text: "Change",
+            visuallyHiddenText: "last name"
+          }
+        ]
+      }
+    },
+    {
+      key: { text: "Email address" },
+      value: { text: data['researcherEmail'] or "amelia.hart@nhs.net" }
+    },
+    {
+      key: { text: "Organisation" },
+      value: { text: data['researcherOrganisation'] or "NHS Trust" },
+      actions: {
+        items: [
+          {
+            href: "/admin/v1/edit-researcher-account-update-profile#researcherRole",
+            text: "Change",
+            visuallyHiddenText: "organisation"
+          }
+        ]
+      }
+    },
+    {
+      key: { text: "Role" },
+      value: { text: data['researcherRole'] or "Researcher" }
+    }
   ]
 }) }}
-
-<p>Showing 3 of 3 result(s)</p>
 
     </div>
   </div>

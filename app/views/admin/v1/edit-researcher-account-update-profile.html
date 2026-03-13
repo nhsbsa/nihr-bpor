@@ -70,54 +70,111 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-<h1>Manage accounts</h1>
-
-{{ button({
-  text: "Create administrator account",
-  href: "create-admin-accounts",
-  classes: "nhsuk-button--secondary"
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-{{ table({
-  responsive: true,
-  panel: false,
-  head: [
-    { text: 'Name' },
-    { text: 'Email' },
-    { text: 'Organisation' },
-    { text: 'Date submitted' },
-    { text: 'Role' },
-    { text: 'Action' }
-  ],
-  rows: [
-    [
-      { header: 'Name', text: ((data['researcherFirstName'] or 'Amelia') ~ ' ' ~ (data['researcherLastName'] or 'Hart')) },
-      { header: 'Email', text: 'amelia.hart@nhs.net' },
-      { header: 'Organisation', text: data['researcherOrganisation'] or 'NHS Trust' },
-      { header: 'Date submitted', text: '9 February 2026' },
-      { header: 'Role', html: data['researcherRole'] or 'Researcher' },
-      { header: 'Actions', html: '<p><a href="edit-researcher-account">Edit account</a></p>' }
-    ],
-    [
-      { header: 'Name', text: ((data['studyAdminFirstName'] or 'Daniel') ~ ' ' ~ (data['studyAdminLastName'] or 'Mercer')) },
-      { header: 'Email', text: 'daniel.mercer@nihr.ac.uk' },
-      { header: 'Organisation', text: data['studyAdminOrganisation'] or 'NIHR' },
-      { header: 'Date submitted', text: '3 February 2026' },
-      { header: 'Role', html: data['studyAdminRole'] or 'Study administrator' },
-      { header: 'Actions', html: '<p><a href="edit-study-admin-account">Edit account</a></p>' }
-    ],
-    [
-      { header: 'Name', text: ((data['systemAdminFirstName'] or 'Sofia') ~ ' ' ~ (data['systemAdminLastName'] or 'Petrov')) },
-      { header: 'Email', text: 'sofia.petrov@nihr.ac.uk' },
-      { header: 'Organisation', text: data['systemAdminOrganisation'] or 'NIHR' },
-      { header: 'Date submitted', text: '2 February 2026' },
-      { header: 'Role', html: data['systemAdminRole'] or 'System administrator' },
-      { header: 'Actions', html: '<p><a href="edit-system-admin-account">Edit account</a></p>' }
-    ]
+<h1>Edit account</h1>
+
+<form action="/{{folder}}/{{subfolder}}/edit-researcher-account-update-profile" method="post" novalidate>
+
+{% set previousTitle = data.researcherTitle or "Mrs" %}
+
+{% set organisationHtml %}
+  {{ input({
+    id: "researcherOrganisationName",
+    name: "researcherOrganisationName",
+    classes: "nhsuk-input--width-20",
+    label: {
+      text: "Organisation name"
+    },
+    value: data.researcherOrganisation or "NHS Trust"
+  }) }}
+{% endset -%}
+
+{{ select({
+  label: {
+    text: "Title"
+  },
+  id: "researcherTitle",
+  name: "researcherTitle",
+  items: [
+    { value: "Mr", text: "Mr", selected: previousTitle == "Mr" },
+    { value: "Mrs", text: "Mrs", selected: previousTitle == "Mrs" },
+    { value: "Ms", text: "Ms", selected: previousTitle == "Ms" },
+    { value: "Miss", text: "Miss", selected: previousTitle == "Miss" },
+    { value: "Mx", text: "Mx", selected: previousTitle == "Mx" },
+    { value: "Dr", text: "Dr", selected: previousTitle == "Dr" },
+    { value: "Prof", text: "Prof", selected: previousTitle == "Prof" },
+    { value: "Sir", text: "Sir", selected: previousTitle == "Sir" },
+    { value: "Dame", text: "Dame", selected: previousTitle == "Dame" },
+    { value: "Lady", text: "Lady", selected: previousTitle == "Lady" },
+    { value: "Lord", text: "Lord", selected: previousTitle == "Lord" }
   ]
 }) }}
 
-<p>Showing 3 of 3 result(s)</p>
+{{ input({
+  id: "researcherFirstName",
+  name: "researcherFirstName",
+  classes: "nhsuk-input--width-20",
+  value: data.researcherFirstName or "Amelia",
+  label: { text: "First name" }
+}) }}
+
+{{ input({
+  id: "researcherLastName",
+  name: "researcherLastName",
+  classes: "nhsuk-input--width-20",
+  value: data.researcherLastName or "Hart",
+  label: { text: "Last name" }
+}) }}
+
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Email address</p>
+<p>{{ data.researcherEmail or "amelia.hart@nhs.net" }}</p>
+
+{{ radios({
+  idPrefix: "researcherOrganisation",
+  name: "researcherOrganisation",
+  fieldset: {
+    legend: { text: "Organisation", size: "s" }
+  },
+  classes: "nhsuk-radios--small",
+  items: [
+    {
+      value: "NHS Trust",
+      text: "NHS Trust",
+      checked: (data.researcherOrganisation | default('NHS Trust')) == "NHS Trust"
+    },
+    {
+      value: "University",
+      text: "University",
+      checked: data.researcherOrganisation == "University"
+    },
+    {
+      value: "Research institute",
+      text: "Research institute",
+      checked: data.researcherOrganisation == "Research institute"
+    },
+    {
+      value: "Other",
+      text: "Other",
+      checked: data.researcherOrganisation == "Other",
+      conditional: { html: organisationHtml }
+    }
+  ]
+}) }}
+
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
+<p>{{ data.researcherRole or "Researcher" }}</p>
+
+<div class="nhsuk-button-group">
+  {{ button({ text: "Confirm" }) }}
+  <a href="/{{folder}}/{{subfolder}}/manage-accounts" class="nhsuk-link">Cancel</a>
+</div>
+
+</form>
 
     </div>
   </div>
