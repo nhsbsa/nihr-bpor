@@ -1,0 +1,174 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Manage accounts" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-admin-nihr-logged-in.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Manage accounts" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="#">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Manage accounts</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
+            <!-- <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-admin-accounts">Create administrator accounts</a></li> -->
+        </ul>
+        <h2 class="app-side-nav__heading">Manage studies</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch@nihr.ac.uk">Email us</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+<h1>Edit account</h1>
+
+<form action="/{{folder}}/{{subfolder}}/edit-study-admin-account-update-profile" method="post" novalidate>
+
+{% set previousTitle = data.studyAdminTitle or "Mr" %}
+
+{% set organisationHtml %}
+  {{ input({
+    id: "studyAdminOrganisationName",
+    name: "studyAdminOrganisationName",
+    classes: "nhsuk-input--width-20",
+    label: {
+      text: "Organisation name"
+    },
+    value: data.studyAdminOrganisation or "NIHR"
+  }) }}
+{% endset -%}
+
+{{ select({
+  label: {
+    text: "Title"
+  },
+  id: "studyAdminTitle",
+  name: "studyAdminTitle",
+  items: [
+    { value: "Mr", text: "Mr", selected: previousTitle == "Mr" },
+    { value: "Mrs", text: "Mrs", selected: previousTitle == "Mrs" },
+    { value: "Ms", text: "Ms", selected: previousTitle == "Ms" },
+    { value: "Miss", text: "Miss", selected: previousTitle == "Miss" },
+    { value: "Mx", text: "Mx", selected: previousTitle == "Mx" },
+    { value: "Dr", text: "Dr", selected: previousTitle == "Dr" },
+    { value: "Prof", text: "Prof", selected: previousTitle == "Prof" },
+    { value: "Sir", text: "Sir", selected: previousTitle == "Sir" },
+    { value: "Dame", text: "Dame", selected: previousTitle == "Dame" },
+    { value: "Lady", text: "Lady", selected: previousTitle == "Lady" },
+    { value: "Lord", text: "Lord", selected: previousTitle == "Lord" }
+  ]
+}) }}
+
+{{ input({
+  id: "studyAdminFirstName",
+  name: "studyAdminFirstName",
+  classes: "nhsuk-input--width-20",
+  value: data.studyAdminFirstName or "Daniel",
+  label: { text: "First name" }
+}) }}
+
+{{ input({
+  id: "studyAdminLastName",
+  name: "studyAdminLastName",
+  classes: "nhsuk-input--width-20",
+  value: data.studyAdminLastName or "Mercer",
+  label: { text: "Last name" }
+}) }}
+
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Email address</p>
+<p>{{ data.studyAdminEmail or "daniel.mercer@nihr.ac.uk" }}</p>
+
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Organisation</p>
+<p>{{ data.studyAdminOrganisation or "NIHR" }}</p>
+
+{{ select({
+  label: {
+    text: "Role"
+  },
+  id: "studyAdminRole",
+  name: "studyAdminRole",
+  items: [
+    {
+      value: "Select role",
+      text: "Select role",
+      selected: (data['studyAdminRole'] | default('Study administrator')) == "Select role"
+    },
+    {
+      value: "System administrator",
+      text: "System administrator",
+      selected: (data['studyAdminRole'] | default('Study administrator')) == "System administrator"
+    },
+    {
+      value: "Study administrator",
+      text: "Study administrator",
+      selected: (data['studyAdminRole'] | default('Study administrator')) == "Study administrator"
+    }
+  ]
+}) }}
+
+<div class="nhsuk-button-group">
+  {{ button({ text: "Confirm" }) }}
+  <a href="/{{folder}}/{{subfolder}}/manage-accounts" class="nhsuk-link">Cancel</a>
+</div>
+
+</form>
+
+    </div>
+  </div>
+{% endblock %}
