@@ -34,6 +34,34 @@ if (adminTitle && adminFirstName && adminLastName) {
 
 });
 
+router.post('/create-admin-accounts', function (req, res) {
+
+    var createAdminTitle = req.session.data['createAdminTitle'];
+    var createAdminFirstName = req.session.data['createAdminFirstName'];
+    var createAdminLastName = req.session.data['createAdminLastName'];
+    var createAdminEmail = req.session.data['createAdminEmail'];
+    var createAdminRole = req.session.data['createAdminRole'];
+
+if (
+  createAdminTitle &&
+  createAdminTitle !== 'Select title' &&
+  createAdminFirstName &&
+  createAdminLastName &&
+  createAdminEmail &&
+  createAdminRole &&
+  createAdminRole !== 'Select role'
+) {
+    
+    res.redirect('manage-accounts-updated');
+
+} else {
+
+    res.redirect('create-admin-accounts');
+
+}
+
+});
+
 router.post('/update-study-name', function (req, res) {
 
     res.redirect('review-pre-screener');

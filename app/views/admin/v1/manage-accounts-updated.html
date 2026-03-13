@@ -70,190 +70,74 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-{{ backLink({
-    "href": "javascript:history.go(-1)",
-    "text": "Back",
-    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+{% set newAccountCreated %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Administrator account created
+  </h3>
+  <p>We've emailed the {% if data['createAdminRole'] %}{{ data['createAdminRole'] | lower }}{% else %}study administrator{% endif %} to let them know.</p>
+{% endset %}
+
+{{ notificationBanner({
+  html: newAccountCreated,
+  type: "success"
 }) }}
 
-<h1>Create administrator account</h1>
+<h1>Manage accounts</h1>
 
-<form action="/{{folder}}/{{subfolder}}/create-admin-accounts" method="post" novalidate>
+{{ button({
+  text: "Create administrator account",
+  href: "create-admin-accounts",
+  classes: "nhsuk-button--secondary"
+}) }}
 
-{% set organisationHtml %}
-  {{ input({
-    id: "createAdminOrganisationName",
-    name: "createAdminOrganisationName",
-    classes: "nhsuk-input--width-20",
-    label: {
-      text: "Organisation name"
-    }
-  }) }}
-{% endset -%}
-
-{{ select({
-  label: {
-    text: "Title"
-  },
-  id: "createAdminTitle",
-  name: "createAdminTitle",
-  items: [
-    {
-      value: "Select title",
-      text: "Select title"
-    },
-    {
-      value: "Mr",
-      text: "Mr"
-    },
-    {
-      value: "Mrs",
-      text: "Mrs"
-    },
-    {
-      value: "Ms",
-      text: "Ms"
-    },
-    {
-      value: "Miss",
-      text: "Miss"
-    },
-    {
-      value: "Mx",
-      text: "Mx"
-    },
-    {
-      value: "Dr",
-      text: "Dr"
-    },
-    {
-      value: "Prof",
-      text: "Prof"
-    },
-    {
-      value: "Sir",
-      text: "Sir"
-    },
-    {
-      value: "Dame",
-      text: "Dame"
-    },
-    {
-      value: "Lady",
-      text: "Lady"
-    },
-    {
-      value: "Lord",
-      text: "Lord"
-    }
+{{ table({
+  responsive: true,
+  panel: false,
+  head: [
+    { text: 'Name' },
+    { text: 'Email' },
+    { text: 'Organisation' },
+    { text: 'Date submitted' },
+    { text: 'Role' },
+    { text: 'Action' }
+  ],
+  rows: [
+      [
+        { header: 'Name', html: (data['createAdminFirstName'] + ' ' + data['createAdminLastName']) or 'Michael Jones' },
+        { header: 'Email', html: data['createAdminEmail'] or 'Michael.Jones@nihr.ac.uk' },
+        { header: 'Organisation', html: data['createAdminOrganisation'] or 'NIHR' },
+        { header: 'Date submitted', html: '10 February 2026' },
+        { header: 'Role', html: data['createAdminRole'] or 'Study administrator' },
+        { header: 'Actions', html: '<p><a href="#">Edit account</a></p>' }
+      ],
+      [
+      { header: 'Name', text: 'Amelia Hart' },
+      { header: 'Email', text: 'amelia.hart@nhs.net' },
+      { header: 'Organisation', text: 'NHS Trust' },
+      { header: 'Date submitted', text: '9 February 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">Edit account</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Daniel Mercer' },
+      { header: 'Email', text: 'daniel.mercer@nihr.ac.uk' },
+      { header: 'Organisation', text: 'NIHR' },
+      { header: 'Date submitted', text: '3 February 2026' },
+      { header: 'Role', html: 'Study administrator' },
+      { header: 'Actions', html: '<p><a href="#">Edit account</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Sofia Petrov' },
+      { header: 'Email', text: 'sofia.petrov@nihr.ac.uk' },
+      { header: 'Organisation', text: 'NIHR' },
+      { header: 'Date submitted', text: '2 February 2026' },
+      { header: 'Role', html: 'System administrator' },
+      { header: 'Actions', html: '<p><a href="#">Edit account</a></p>' }
+    ]
   ]
 }) }}
 
-{{ input({
-  id: "createAdminFirstName",
-  name: "createAdminFirstName",
-  classes: "nhsuk-input--width-20",
-  label: {
-    text: "First name"
-  }
-}) }}
-
-{{ input({
-  id: "createAdminLastName",
-  name: "createAdminLastName",
-  classes: "nhsuk-input--width-20",
-  label: {
-    text: "Last name"
-  }
-}) }}
-
-{{ input({
-  id: "createAdminEmail",
-  name: "createAdminEmail",
-  classes: "nhsuk-input--width-20",
-  label: {
-    text: "Email address"
-  }
-}) }}
-
-<!--
-{{ radios({
-  idPrefix: "createAdminOrganisation",
-  name: "createAdminOrganisation",
-  fieldset: {
-    legend: {
-      text: "Organisation",
-      size: "s"
-    }
-  },
-  classes: "nhsuk-radios--small",
-  items: [
-    {
-      value: "NIHR",
-      text: "NIHR"
-    },
-    {
-      value: "NHS Trust",
-      text: "NHS Trust"
-    },
-    {
-      value: "University",
-      text: "University"
-    },
-    {
-      value: "Research institute",
-      text: "Research institute"
-    },
-    {
-      value: "Other",
-      text: "Other",
-      conditional: {
-        html: organisationHtml
-      }
-    }
-  ]
-}) }}
--->
-
-<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Organisation</p>
-<p>NIHR</p>
-
-<!--
-<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
-<p>Study administrator</p>
--->
-
-{{ select({
-  label: {
-    text: "Role"
-  },
-  id: "createAdminRole",
-  name: "createAdminRole",
-  items: [
-    {
-      value: "Select role",
-      text: "Select role"
-    },
-    {
-      value: "System administrator",
-      text: "System administrator"
-    },
-    {
-      value: "Study administrator",
-      text: "Study administrator"
-    }
-  ]
-}) }}
-
-<div class="nhsuk-button-group">
-  {{ button({
-    text: "Confirm"
-  }) }}
-
-  <a href="/{{folder}}/{{subfolder}}/manage-accounts" class="nhsuk-link">Cancel</a>
-</div>
-
-</form>
+<p>Showing 3 of 3 result(s)</p>
 
     </div>
   </div>
