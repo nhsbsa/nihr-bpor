@@ -90,8 +90,6 @@ router.post('/edit-study-admin-account-update-profile', function (req, res) {
     var studyAdminLastName = req.session.data['studyAdminLastName'];
     var studyAdminRole = req.session.data['studyAdminRole'];
 
-
-
 if (studyAdminTitle && studyAdminFirstName && studyAdminLastName && studyAdminRole) {
     
     res.redirect('edit-study-admin-account-updated');
@@ -99,6 +97,25 @@ if (studyAdminTitle && studyAdminFirstName && studyAdminLastName && studyAdminRo
 } else {
 
     res.redirect('edit-study-admin-account-update-profile');
+
+}
+
+});
+
+router.post('/edit-system-admin-account-update-profile', function (req, res) {
+
+    var systemAdminTitle = req.session.data['systemAdminTitle'];
+    var systemAdminFirstName = req.session.data['systemAdminFirstName'];
+    var systemAdminLastName = req.session.data['systemAdminLastName'];
+    var systemAdminRole = req.session.data['systemAdminRole'];
+
+if (systemAdminTitle && systemAdminFirstName && systemAdminLastName && systemAdminRole) {
+    
+    res.redirect('edit-system-admin-account-updated');
+
+} else {
+
+    res.redirect('edit-system-admin-account-update-profile');
 
 }
 
