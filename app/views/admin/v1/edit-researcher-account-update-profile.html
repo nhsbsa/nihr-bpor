@@ -90,7 +90,7 @@
     label: {
       text: "Organisation name"
     },
-    value: data.researcherOrganisation
+    value: data.researcherOrganisation == 'Other' and data.researcherOrganisationName or ''
   }) }}
 {% endset -%}
 
@@ -145,7 +145,7 @@
     {
       value: "NHS Trust",
       text: "NHS Trust",
-      checked: (data.researcherOrganisation | default('NHS Trust')) == "NHS Trust"
+      checked: data.researcherOrganisation == "NHS Trust"
     },
     {
       value: "University",
