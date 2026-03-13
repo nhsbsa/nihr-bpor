@@ -176,6 +176,7 @@
   }
 }) }}
 
+<!--
 {{ radios({
   idPrefix: "createAdminOrganisation",
   name: "createAdminOrganisation",
@@ -212,12 +213,16 @@
     }
   ]
 }) }}
+-->
 
-<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
-<p>Study administrator</p>
-
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Organisation</p>
+<p>NIHR</p>
 
 <!--
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
+<p>Study administrator</p>
+-->
+
 {{ select({
   label: {
     text: "Role"
@@ -239,7 +244,6 @@
     }
   ]
 }) }}
--->
 
 <div class="nhsuk-button-group">
   {{ button({

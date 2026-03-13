@@ -82,6 +82,17 @@
 
 {% set previousTitle = data.adminTitle or "Mr" %}
 
+{% set organisationHtml %}
+  {{ input({
+    id: "adminOrganisationName",
+    name: "adminOrganisationName",
+    classes: "nhsuk-input--width-20",
+    label: {
+      text: "Organisation name"
+    }
+  }) }}
+{% endset -%}
+
 {{ select({
   label: {
     text: "Title"
@@ -170,8 +181,47 @@
 <p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Email address</p>
 <p>Joe.Bloggs@nihr.ac.uk</p>
 
-<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Organisation</p>
-<p>NIHR</p>
+{{ radios({
+  idPrefix: "adminOrganisation",
+  name: "adminOrganisation",
+  fieldset: {
+    legend: {
+      text: "Organisation",
+      size: "s"
+    }
+  },
+  classes: "nhsuk-radios--small",
+  items: [
+    {
+      value: "NIHR",
+      text: "NIHR",
+      checked: (data['adminOrganisation'] | default('NIHR')) == "NIHR"
+    },
+    {
+      value: "NHS Trust",
+      text: "NHS Trust",
+      checked: data['adminOrganisation'] == "NHS Trust"
+    },
+    {
+      value: "University",
+      text: "University",
+      checked: data['adminOrganisation'] == "University"
+    },
+    {
+      value: "Research institute",
+      text: "Research institute",
+      checked: data['adminOrganisation'] == "Research institute"
+    },
+    {
+      value: "Other",
+      text: "Other",
+      checked: data['adminOrganisation'] == "Other",
+      conditional: {
+        html: organisationHtml
+      }
+    }
+  ]
+}) }}
 
 <p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
 <p>Study administrator</p>

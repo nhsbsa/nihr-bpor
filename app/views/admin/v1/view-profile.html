@@ -138,7 +138,16 @@
         text: "Organisation"
       },
       value: {
-        text: "NIHR"
+        text: data['adminOrganisation'] | default('NIHR')
+      },
+      actions: {
+        items: [
+          {
+            href: "/admin/v1/update-profile#adminOrganisation",
+            text: "Change",
+            visuallyHiddenText: "organisation"
+          }
+        ]
       }
     },
     {
