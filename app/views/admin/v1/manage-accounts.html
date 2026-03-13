@@ -1,6 +1,6 @@
 <!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
 
-{% set currentPage = "Review pending pre-screeners" %}
+{% set currentPage = "Manage accounts" %}
 
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Review pending pre-screeners" %}
+{% set pageName = "Manage accounts" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -53,12 +53,12 @@
         <h2 class="app-side-nav__heading">Manage accounts</h2>
         <ul class="nhsuk-list app-side-nav__list">
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
             <!-- <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-admin-accounts">Create administrator accounts</a></li> -->
         </ul>
         <h2 class="app-side-nav__heading">Manage studies</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
@@ -70,87 +70,54 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-{{ backLink({
-    "href": "javascript:history.go(-1)",
-    "text": "Back",
-    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
-}) }}
-
-<span class="nhsuk-caption-xl">Cognitive therapy in Dementia</span>
-<h1 class="nhsuk-heading-xl">Pre-screener overview</h1>
-
-<p>This view shows:</p>
-<ul>
-  <li>the order the questions will appear in</li>
-  <li>which answers volunteers need to give to take part in the study</li>
-</ul>
-
-{{ table({
-  head: [
-    {
-      text: "Health condition questions"
-    },
-    {
-      text: "Required answer"
-    }
-  ],
-  rows: [
-    [
-      {
-        text: "Do you have Dementia (frontotemporal)?"
-      },
-      {
-        text: "Yes"
-      }
-    ],
-    [
-      {
-        text: "Do you have Dementia (vascular)?"
-      },
-      {
-        text: "No"
-      }
-    ]
-  ]
-}) }}
-
-{{ table({
-  head: [
-    {
-      text: "Medication questions"
-    },
-    {
-      text: "Required answer"
-    }
-  ],
-  rows: [
-    [
-      {
-        text: "Do you take Donepezil hydrochloride?"
-      },
-      {
-        text: "Yes"
-      }
-    ],
-    [
-      {
-        text: "Do you take Rivastigmine?"
-      },
-      {
-        text: "No"
-      }
-    ]
-  ]
-}) }}
+<h1>Manage accounts</h1>
 
 {{ button({
-  text: "Back to pre-screener review",
-  classes: "nhsuk-button--secondary",
-  href: "review-pre-screener"
+  text: "Create administrator account",
+  href: "create-admin-accounts",
+  classes: "nhsuk-button--secondary"
 }) }}
 
+{{ table({
+  responsive: true,
+  panel: false,
+  head: [
+    { text: 'Name' },
+    { text: 'Email' },
+    { text: 'Organisation' },
+    { text: 'Date submitted' },
+    { text: 'Role' },
+    { text: 'Action' }
+  ],
+  rows: [
+    [
+      { header: 'Name', text: 'Amelia Hart' },
+      { header: 'Email', text: 'amelia.hart@nhs.net' },
+      { header: 'Organisation', text: 'NHS Trust' },
+      { header: 'Date submitted', text: '9 February 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">Edit account</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Daniel Mercer' },
+      { header: 'Email', text: 'daniel.mercer@nihr.ac.uk' },
+      { header: 'Organisation', text: 'NIHR' },
+      { header: 'Date submitted', text: '3 February 2026' },
+      { header: 'Role', html: 'Study administrator' },
+      { header: 'Actions', html: '<p><a href="#">Edit account</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Sofia Petrov' },
+      { header: 'Email', text: 'sofia.petrov@nihr.ac.uk' },
+      { header: 'Organisation', text: 'NIHR' },
+      { header: 'Date submitted', text: '2 February 2026' },
+      { header: 'Role', html: 'System administrator' },
+      { header: 'Actions', html: '<p><a href="#">Edit account</a></p>' }
+    ]
+  ]
+}) }}
 
-
+<p>Showing 3 of 3 result(s)</p>
 
     </div>
   </div>

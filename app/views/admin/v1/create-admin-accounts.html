@@ -1,6 +1,6 @@
 <!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
 
-{% set currentPage = "Review pending pre-screeners" %}
+{% set currentPage = "Manage accounts" %}
 
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Review pending pre-screeners" %}
+{% set pageName = "Manage accounts" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -53,12 +53,12 @@
         <h2 class="app-side-nav__heading">Manage accounts</h2>
         <ul class="nhsuk-list app-side-nav__list">
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
             <!-- <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-admin-accounts">Create administrator accounts</a></li> -->
         </ul>
         <h2 class="app-side-nav__heading">Manage studies</h2>
         <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
         </ul>
         <h2 class="app-side-nav__heading">Support</h2>
@@ -76,55 +76,180 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-{% set updateStudyName = data['update-study-name'] | default('Cognitive therapy in Dementia') %}
-{% set updateAdminName = data['select-administrator'] | default('Not assigned') %}
+<h1>Create administrator account</h1>
 
-<h1>Select an administrator</h1>
+<form action="/{{folder}}/{{subfolder}}/update-profile" method="post" novalidate>
 
-<p>The study administrator for {{ updateStudyName }} is <strong>{{ updateAdminName }}</strong>.</p>
-
-<form action="/{{folder}}/{{subfolder}}/select-administrator" method="post" novalidate>
+{% set organisationHtml %}
+  {{ input({
+    id: "createAdminOrganisationName",
+    name: "createAdminOrganisationName",
+    classes: "nhsuk-input--width-20",
+    label: {
+      text: "Organisation name"
+    }
+  }) }}
+{% endset -%}
 
 {{ select({
   label: {
-    text: "Select an administrator to manage the study"
+    text: "Title"
   },
-  id: "select-administrator",
-  name: "select-administrator",
-  value: updateAdminName,
+  id: "createAdminTitle",
+  name: "createAdminTitle",
   items: [
     {
-      value: "Not assigned",
-      text: "Not assigned"
+      value: "Select title",
+      text: "Select title"
     },
     {
-      value: "Joe Bloggs",
-      text: "Joe Bloggs"
+      value: "Mr",
+      text: "Mr"
     },
     {
-      value: "Liam Archer",
-      text: "Liam Archer"
+      value: "Mrs",
+      text: "Mrs"
     },
     {
-      value: "Sophia Bennett",
-      text: "Sophia Bennett"
+      value: "Ms",
+      text: "Ms"
     },
     {
-      value: "Ethan Callahan",
-      text: "Ethan Callahan"
+      value: "Miss",
+      text: "Miss"
     },
     {
-      value: "Maya Sterling",
-      text: "Maya Sterling"
+      value: "Mx",
+      text: "Mx"
+    },
+    {
+      value: "Dr",
+      text: "Dr"
+    },
+    {
+      value: "Prof",
+      text: "Prof"
+    },
+    {
+      value: "Sir",
+      text: "Sir"
+    },
+    {
+      value: "Dame",
+      text: "Dame"
+    },
+    {
+      value: "Lady",
+      text: "Lady"
+    },
+    {
+      value: "Lord",
+      text: "Lord"
     }
   ]
 }) }}
 
-{{ button({
-  text: "Submit"
+{{ input({
+  id: "createAdminFirstName",
+  name: "createAdminFirstName",
+  classes: "nhsuk-input--width-20",
+  label: {
+    text: "First name"
+  }
 }) }}
-</form>
 
+{{ input({
+  id: "createAdminLastName",
+  name: "createAdminLastName",
+  classes: "nhsuk-input--width-20",
+  label: {
+    text: "Last name"
+  }
+}) }}
+
+{{ input({
+  id: "createAdminEmail",
+  name: "createAdminEmail",
+  classes: "nhsuk-input--width-20",
+  label: {
+    text: "Email address"
+  }
+}) }}
+
+{{ radios({
+  idPrefix: "createAdminOrganisation",
+  name: "createAdminOrganisation",
+  fieldset: {
+    legend: {
+      text: "Organisation",
+      size: "s"
+    }
+  },
+  classes: "nhsuk-radios--small",
+  items: [
+    {
+      value: "NIHR",
+      text: "NIHR"
+    },
+    {
+      value: "NHS Trust",
+      text: "NHS Trust"
+    },
+    {
+      value: "University",
+      text: "University"
+    },
+    {
+      value: "Research institute",
+      text: "Research institute"
+    },
+    {
+      value: "Other",
+      text: "Other",
+      conditional: {
+        html: organisationHtml
+      }
+    }
+  ]
+}) }}
+
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
+<p>Study administrator</p>
+
+
+<!--
+{{ select({
+  label: {
+    text: "Role"
+  },
+  id: "createAdminRole",
+  name: "createAdminRole",
+  items: [
+    {
+      value: "Select role",
+      text: "Select role"
+    },
+    {
+      value: "System administrator",
+      text: "System administrator"
+    },
+    {
+      value: "Study administrator",
+      text: "Study administrator"
+    }
+  ]
+}) }}
+-->
+
+<div class="nhsuk-button-group">
+  {{ button({
+    text: "Confirm"
+  }) }}
+
+  <a href="/{{folder}}/{{subfolder}}/manage-accounts" class="nhsuk-link">Cancel</a>
+</div>
+
+</form>
 
     </div>
   </div>
