@@ -145,7 +145,7 @@
     {
       value: "NHS Trust",
       text: "NHS Trust",
-      checked: data.researcherOrganisation == "NHS Trust"
+      checked: (not data.researcherOrganisation) or (data.researcherOrganisation == "NHS Trust")
     },
     {
       value: "University",
