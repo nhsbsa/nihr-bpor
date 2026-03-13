@@ -181,6 +181,7 @@
 <p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Email address</p>
 <p>Joe.Bloggs@nihr.ac.uk</p>
 
+<!--
 {{ radios({
   idPrefix: "adminOrganisation",
   name: "adminOrganisation",
@@ -222,9 +223,38 @@
     }
   ]
 }) }}
+-->
 
+<p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Organisation</p>
+<p>NIHR</p>
+
+{{ select({
+  label: {
+    text: "Role"
+  },
+  id: "adminRole",
+  name: "adminRole",
+  value: data['adminRole'] | default('System administrator'),
+  items: [
+    {
+      value: "Select role",
+      text: "Select role"
+    },
+    {
+      value: "System administrator",
+      text: "System administrator"
+    },
+    {
+      value: "Study administrator",
+      text: "Study administrator"
+    }
+  ]
+}) }}
+
+<!--
 <p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
 <p>Study administrator</p>
+-->
 
 <div class="nhsuk-button-group">
   {{ button({

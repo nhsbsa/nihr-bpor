@@ -139,15 +139,6 @@
       },
       value: {
         text: data['adminOrganisation'] | default('NIHR')
-      },
-      actions: {
-        items: [
-          {
-            href: "/admin/v1/update-profile#adminOrganisation",
-            text: "Change",
-            visuallyHiddenText: "organisation"
-          }
-        ]
       }
     },
     {
@@ -155,7 +146,16 @@
         text: "Role"
       },
       value: {
-        text: "Study administrator"
+        text: data['adminRole'] | default('System administrator')
+      },
+      actions: {
+        items: [
+          {
+            href: "/admin/v1/update-profile#adminRole",
+            text: "Change",
+            visuallyHiddenText: "role"
+          }
+        ]
       }
     }
   ]
