@@ -103,17 +103,9 @@
   ],
   rows: [
     [
-      { header: 'Name', text: ((data['createAdminFirstName'] or 'Michael') ~ ' ' ~ (data['createAdminLastName'] or 'Jones')) },
-      { header: 'Email', text: data['createAdminEmail'] or 'michael.jones@nihr.acuk' },
-      { header: 'Organisation', text: data['createAdminOrganisation'] or 'NIHR' },
-      { header: 'Date submitted', text: '10 February 2026' },
-      { header: 'Role', html: data['createAdminRole'] or 'System administrator' },
-      { header: 'Actions', html: '<p><a href="#">Edit account</a></p>' }
-    ],
-    [
       { header: 'Name', text: ((data['researcherFirstName'] or 'Amelia') ~ ' ' ~ (data['researcherLastName'] or 'Hart')) },
       { header: 'Email', text: 'amelia.hart@nhs.net' },
-      { header: 'Organisation', text: data['researcherOrganisation'] or 'NHS Trust' },
+      { header: 'Organisation', text: data['researcherOrganisationName'] if data['researcherOrganisation'] == 'Other' else (data['researcherOrganisation'] or 'NHS Trust')},
       { header: 'Date submitted', text: '9 February 2026' },
       { header: 'Role', html: data['researcherRole'] or 'Researcher' },
       { header: 'Actions', html: '<p><a href="edit-researcher-account">Edit account</a></p>' }
@@ -121,7 +113,7 @@
     [
       { header: 'Name', text: ((data['studyAdminFirstName'] or 'Daniel') ~ ' ' ~ (data['studyAdminLastName'] or 'Mercer')) },
       { header: 'Email', text: 'daniel.mercer@nihr.ac.uk' },
-      { header: 'Organisation', text: data['studyAdminOrganisation'] or 'NIHR' },
+      { header: 'Organisation', text: data['studyAdminOrganisationName'] if data['studyAdminOrganisation'] == 'Other' else (data['studyAdminOrganisation'] or 'NIHR')},
       { header: 'Date submitted', text: '3 February 2026' },
       { header: 'Role', html: data['studyAdminRole'] or 'Study administrator' },
       { header: 'Actions', html: '<p><a href="edit-study-admin-account">Edit account</a></p>' }
@@ -129,7 +121,7 @@
     [
       { header: 'Name', text: ((data['systemAdminFirstName'] or 'Sofia') ~ ' ' ~ (data['systemAdminLastName'] or 'Petrov')) },
       { header: 'Email', text: 'sofia.petrov@nihr.ac.uk' },
-      { header: 'Organisation', text: data['systemAdminOrganisation'] or 'NIHR' },
+      { header: 'Organisation', text: data['systemAdminOrganisationName'] if data['systemAdminOrganisation'] == 'Other' else (data['systemAdminOrganisation'] or 'NIHR')},
       { header: 'Date submitted', text: '2 February 2026' },
       { header: 'Role', html: data['systemAdminRole'] or 'System administrator' },
       { header: 'Actions', html: '<p><a href="edit-system-admin-account">Edit account</a></p>' }

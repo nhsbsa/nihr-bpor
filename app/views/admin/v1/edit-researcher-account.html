@@ -125,7 +125,7 @@
     },
     {
       key: { text: "Organisation" },
-      value: { text: data['researcherOrganisation'] or "NHS Trust" },
+      value: { text: data['researcherOrganisationName'] if data['researcherOrganisation'] == 'Other' else (data['researcherOrganisation'] or "NHS Trust") },
       actions: {
         items: [
           {
