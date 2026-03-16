@@ -108,7 +108,7 @@
       { header: 'Organisation', text: data['researcherOrganisationName'] if data['researcherOrganisation'] == 'Other' else (data['researcherOrganisation'] or 'NHS Trust')},
       { header: 'Date submitted', text: '9 February 2026' },
       { header: 'Role', html: data['researcherRole'] or 'Researcher' },
-      { header: 'Actions', html: '<p><a href="edit-researcher-account">Edit account</a></p>' }
+      { header: 'Actions', html: '<p><a href="edit-researcher-account">Update account</a></p>' }
     ],
     [
       { header: 'Name', text: ((data['studyAdminFirstName'] or 'Daniel') ~ ' ' ~ (data['studyAdminLastName'] or 'Mercer')) },
@@ -116,7 +116,7 @@
       { header: 'Organisation', text: data['studyAdminOrganisationName'] if data['studyAdminOrganisation'] == 'Other' else (data['studyAdminOrganisation'] or 'NIHR')},
       { header: 'Date submitted', text: '3 February 2026' },
       { header: 'Role', html: data['studyAdminRole'] or 'Study administrator' },
-      { header: 'Actions', html: '<p><a href="edit-study-admin-account">Edit account</a></p>' }
+      { header: 'Actions', html: '<p><a href="edit-study-admin-account">Update account</a></p>' }
     ],
     [
       { header: 'Name', text: ((data['systemAdminFirstName'] or 'Sofia') ~ ' ' ~ (data['systemAdminLastName'] or 'Petrov')) },
@@ -124,7 +124,7 @@
       { header: 'Organisation', text: data['systemAdminOrganisationName'] if data['systemAdminOrganisation'] == 'Other' else (data['systemAdminOrganisation'] or 'NIHR')},
       { header: 'Date submitted', text: '2 February 2026' },
       { header: 'Role', html: data['systemAdminRole'] or 'System administrator' },
-      { header: 'Actions', html: '<p><a href="edit-system-admin-account">Edit account</a></p>' }
+      { header: 'Actions', html: '<p><a href="edit-system-admin-account">Update account</a></p>' }
     ]
   ]
 }) }}
