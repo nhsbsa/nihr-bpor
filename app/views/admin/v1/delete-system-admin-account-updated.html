@@ -69,96 +69,59 @@
 
     </div>
     <div class="nhsuk-grid-column-three-quarters">
-      
-{% set profileUpdated %}
+
+{% set deleteSystemAdminAccount %}
   <h3 class="nhsuk-notification-banner__heading">
-  {% if data['systemAdminFirstName'] and data['systemAdminLastName'] %}{{ data['systemAdminFirstName'] }} {{ data['systemAdminLastName'] }}{% else %}Sofia Petrov{% endif %}'s details have been updated</h3>
-  <p>We've emailed them to let them know.</p>
+    Account deleted
+  </h3>
+  <p>We've emailed the system administrator to let them know.</p>
 {% endset %}
 
 {{ notificationBanner({
-  html: profileUpdated,
+  html: deleteSystemAdminAccount,
   type: "success"
 }) }}
 
-{{ backLink({
-    "href": "javascript:history.go(-1)",
-    "text": "Back",
-    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+<h1>Manage accounts</h1>
+
+{{ button({
+  text: "Create administrator account",
+  href: "create-admin-accounts",
+  classes: "nhsuk-button--secondary"
 }) }}
 
-<h1>System administrator account details</h1>
-
-{{ summaryList({
+{{ table({
+  responsive: true,
+  panel: false,
+  head: [
+    { text: 'Name' },
+    { text: 'Email' },
+    { text: 'Organisation' },
+    { text: 'Date submitted' },
+    { text: 'Role' },
+    { text: 'Action' }
+  ],
   rows: [
-    {
-      key: { text: "Title" },
-      value: { text: data['systemAdminTitle'] or "Mrs" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v1/edit-system-admin-account-update-profile#systemAdminTitle",
-            text: "Change",
-            visuallyHiddenText: "title"
-          }
-        ]
-      }
-    },
-    {
-      key: { text: "First name" },
-      value: { text: data['systemAdminFirstName'] or "Sofia" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v1/edit-system-admin-account-update-profile#systemAdminFirstName",
-            text: "Change",
-            visuallyHiddenText: "first name"
-          }
-        ]
-      }
-    },
-    {
-      key: { text: "Last name" },
-      value: { text: data['systemAdminLastName'] or "Petrov" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v1/edit-system-admin-account-update-profile#systemAdminLastName",
-            text: "Change",
-            visuallyHiddenText: "last name"
-          }
-        ]
-      }
-    },
-    {
-      key: { text: "Email address" },
-      value: { text: data['systemAdminEmail'] or "sofia.petrov@nihr.ac.uk" }
-    },
-    {
-      key: { text: "Organisation" },
-      value: { text: data['systemAdminOrganisation'] or "NIHR" }
-    },
-    {
-      key: { text: "Role" },
-      value: { text: data['systemAdminRole'] or "System administrator" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v1/edit-system-admin-account-update-profile#systemAdminRole",
-            text: "Change",
-            visuallyHiddenText: "role"
-          }
-        ]
-      }
-    }
+    [
+      { header: 'Name', text: ((data['researcherFirstName'] or 'Amelia') ~ ' ' ~ (data['researcherLastName'] or 'Hart')) },
+      { header: 'Email', text: 'amelia.hart@nhs.net' },
+      { header: 'Organisation', text: data['researcherOrganisationName'] if data['researcherOrganisation'] == 'Other' else (data['researcherOrganisation'] or 'NHS Trust')},
+      { header: 'Date submitted', text: '9 February 2026' },
+      { header: 'Role', html: data['researcherRole'] or 'Researcher' },
+      { header: 'Actions', html: '<p><a href="edit-researcher-account">Update account</a></p>' }
+    ],
+    [
+      { header: 'Name', text: ((data['studyAdminFirstName'] or 'Daniel') ~ ' ' ~ (data['studyAdminLastName'] or 'Mercer')) },
+      { header: 'Email', text: 'daniel.mercer@nihr.ac.uk' },
+      { header: 'Organisation', text: data['studyAdminOrganisationName'] if data['studyAdminOrganisation'] == 'Other' else (data['studyAdminOrganisation'] or 'NIHR')},
+      { header: 'Date submitted', text: '3 February 2026' },
+      { header: 'Role', html: data['studyAdminRole'] or 'Study administrator' },
+      { header: 'Actions', html: '<p><a href="edit-study-admin-account">Update account</a></p>' }
+    ]
   ]
 }) }}
 
-{{ button({
-  text: "Delete account",
-  classes: "nhsuk-button--warning",
-  href: "delete-system-admin-account"
-}) }}
+<p>Showing 2 of 2 result(s)</p>
 
     </div>
   </div>

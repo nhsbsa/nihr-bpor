@@ -69,17 +69,6 @@
 
     </div>
     <div class="nhsuk-grid-column-three-quarters">
-      
-{% set profileUpdated %}
-  <h3 class="nhsuk-notification-banner__heading">
-  {% if data['systemAdminFirstName'] and data['systemAdminLastName'] %}{{ data['systemAdminFirstName'] }} {{ data['systemAdminLastName'] }}{% else %}Sofia Petrov{% endif %}'s details have been updated</h3>
-  <p>We've emailed them to let them know.</p>
-{% endset %}
-
-{{ notificationBanner({
-  html: profileUpdated,
-  type: "success"
-}) }}
 
 {{ backLink({
     "href": "javascript:history.go(-1)",
@@ -87,78 +76,16 @@
     classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 }) }}
 
-<h1>System administrator account details</h1>
+<h1 class="nhsuk-heading-l">Confirm you want to delete Daniel Mercer's account</h1>
 
-{{ summaryList({
-  rows: [
-    {
-      key: { text: "Title" },
-      value: { text: data['systemAdminTitle'] or "Mrs" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v1/edit-system-admin-account-update-profile#systemAdminTitle",
-            text: "Change",
-            visuallyHiddenText: "title"
-          }
-        ]
-      }
-    },
-    {
-      key: { text: "First name" },
-      value: { text: data['systemAdminFirstName'] or "Sofia" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v1/edit-system-admin-account-update-profile#systemAdminFirstName",
-            text: "Change",
-            visuallyHiddenText: "first name"
-          }
-        ]
-      }
-    },
-    {
-      key: { text: "Last name" },
-      value: { text: data['systemAdminLastName'] or "Petrov" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v1/edit-system-admin-account-update-profile#systemAdminLastName",
-            text: "Change",
-            visuallyHiddenText: "last name"
-          }
-        ]
-      }
-    },
-    {
-      key: { text: "Email address" },
-      value: { text: data['systemAdminEmail'] or "sofia.petrov@nihr.ac.uk" }
-    },
-    {
-      key: { text: "Organisation" },
-      value: { text: data['systemAdminOrganisation'] or "NIHR" }
-    },
-    {
-      key: { text: "Role" },
-      value: { text: data['systemAdminRole'] or "System administrator" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v1/edit-system-admin-account-update-profile#systemAdminRole",
-            text: "Change",
-            visuallyHiddenText: "role"
-          }
-        ]
-      }
-    }
-  ]
-}) }}
+<p>We’ll email them to let them know they cannot access Recruit registry volunteers.</p>
 
-{{ button({
-  text: "Delete account",
-  classes: "nhsuk-button--warning",
-  href: "delete-system-admin-account"
-}) }}
+<div class="nhsuk-button-group">
+  <a href="delete-study-admin-account-updated" class="nhsuk-button">Confirm</a>
+  <a href="manage-accounts" class="nhsuk-link">Cancel</a>
+</div>
+
+
 
     </div>
   </div>
