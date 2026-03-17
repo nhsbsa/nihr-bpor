@@ -37,28 +37,50 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<h1>Recruit Registry Volunteers</h1>
+<h1>
+  <span>Use Recruit registry volunteers services
+    <span class="nhsuk-caption-xl nhsuk-caption--bottom">
+      <span class="nhsuk-u-visually-hidden">-</span>
+        Log in to manage recruitment for your studies.
+    </span>                     
+  </span>
+</h1>
 
-<p>Setting up an account on Recruit Registry Volunteers will enable you to create a pre-screener to send to potential volunteers for your study</p>
-<p>This is an overview of the platform:</p>
+<p>You can:</p>
 
 <ul>
-  <li>While creating the pre-screener, you will be able to save it at any point and continue later.</li>
-  <li>Once submitted, your pre-screener will be sent to our admins for approval.</li>
+  <li>create pre-screeners</li>
+  <li>manage your pre-screeners</li>
+  <li>track which eligible volunteers you’ve contacted</li>
 </ul>
 
-<p>Once approved, a link to pre-screener will be sent to volunteers by email.</p>
-<p>After your volunteers fill out the pre-screener and submit it, you will be able to see the results on this platform.</p>
+<h2 class="nhsuk-heading-m">Before you start</h2>
+
+<p>You’ll need to log in or create an account with either:</p>
+
+<ul>
+  <li>GOV.UK One Login - you can create one if you do not already have one</li>
+  <li>your email address</li>
+</ul>
 
 <form action="/{{folder}}/{{subfolder}}/index" method="post" novalidate>
 
-{{ button({
-  text: "Sign in"
-}) }}
+<div class="nhsuk-button-group">
+  
+  {{ button({
+    text: "Log in"
+  }) }}
+
+  {{ button({
+    text: "Request an account",
+    classes: "nhsuk-button--secondary",
+    href: "/" + folder + "/" + subfolder + "/create-type-of-account"
+  }) }}
+
+</div>
 
 </form>
 
-<p>Don't have an account? <a href="/{{folder}}/{{subfolder}}/create-type-of-account">Register now</a></p>
 
     </div>
   </div>
