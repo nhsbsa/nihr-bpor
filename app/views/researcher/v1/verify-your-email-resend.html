@@ -42,11 +42,13 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
+{% set emailAddress = data['researcherEmailAddress'] or "Jane.Doe@birmingham.ac.uk" %}
+
 {% set html %}
   <h3 class="nhsuk-notification-banner__heading">
     Email sent
   </h3>
-  <p>A new verification email has been sent to john.smith@nihr.ac.uk</p>
+  <p>A new verification email has been sent to {{ data['emailAddress'] }}</p>
 {% endset %}
 
 {{ notificationBanner({
@@ -54,25 +56,28 @@
   type: "success"
 }) }}
 
-<h1>Verify your email</h1>
+<h1>Confirm your email</h1>
 
 <p>You’ll need to verify your email address before continuing.</p>
 
-{{ insetText({
-  html: '<p>We have sent an email to john.smith@nihr.ac.uk</p>'
-}) }}
+<p>We’ve sent an email to <strong>{{ data['emailAddress'] }}</strong></p>
 
-<p>Your email may take a few minutes to arrive. If you have not received your email, check your spam.</p>
+<p>You need to open the link in the email to confirm your email address.</p>
 
-<h2 class="nhsuk-heading-m">Didn’t receive an email?</h2>
-
-{{ insetText({
-  html: '<p>If you haven’t received an email within 30 minutes, you can <a href="#">request another email</a>.</p>'
-}) }}
-
-<p>Once your email is verified, we’ll review your details and notify you when your account has been approved.</p>
-<p>If we need any more information, a member of the team will contact you.</p>
+{% call details({
+  summaryText: "Not received an email?"
+}) %}
+  <p>Emails sometimes take a few minutes to arrive. If you do not receive the email within 30 minutes, you can <a href="verify-your-email-resend">request a new one</a>.</p>
+{% endcall %}
 
     </div>
   </div>
+{% endblock %}
+
+{% block pageScripts %}
+<script type="text/javascript">
+  setTimeout(function () {
+    window.location.href = "researcher-login-verified";
+  }, 10000); // 10,000 milliseconds = 10 seconds
+</script>
 {% endblock %}
