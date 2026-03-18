@@ -48,7 +48,7 @@
   <h3 class="nhsuk-notification-banner__heading">
     Email sent
   </h3>
-  <p>A new verification email has been sent to {{ data['emailAddress'] }}</p>
+  <p>A new verification email has been sent to {{ emailAddress }}</p>
 {% endset %}
 
 {{ notificationBanner({
@@ -60,7 +60,7 @@
 
 <p>You’ll need to verify your email address before continuing.</p>
 
-<p>We’ve sent an email to <strong>{{ data['emailAddress'] }}</strong></p>
+<p>We’ve sent an email to <strong>{{ emailAddress }}</strong></p>
 
 <p>You need to open the link in the email to confirm your email address.</p>
 
