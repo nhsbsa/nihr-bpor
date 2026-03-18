@@ -46,8 +46,10 @@
 
 <p>You’ll need to verify your email address before continuing.</p>
 
+{% set emailAddress = data['researcherEmailAddress'] or "Jane.Doe@birmingham.ac.uk" %}
+
 {{ insetText({
-  html: '<p>We have sent an email to john.smith@nihr.ac.uk</p>'
+  html: "<p>We have sent an email to " + emailAddress + "</p>"
 }) }}
 
 <p>Your email may take a few minutes to arrive. If you have not received your email, check your spam.</p>
@@ -63,4 +65,12 @@
 
     </div>
   </div>
+{% endblock %}
+
+{% block pageScripts %}
+<script type="text/javascript">
+  setTimeout(function () {
+    window.location.href = "researcher-login-verified";
+  }, 10000); // 10,000 milliseconds = 10 seconds
+</script>
 {% endblock %}

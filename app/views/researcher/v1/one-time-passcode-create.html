@@ -42,23 +42,11 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-{% set html %}
-  <h3 class="nhsuk-notification-banner__heading">
-    Email sent
-  </h3>
-  <p>A new access code has been sent to your email address</p>
-{% endset %}
-
-{{ notificationBanner({
-  html: html,
-  type: "success"
-}) }}
-
 <h1>Enter the access code</h1>
 
 <p>We have sent a 6-digit access code to your email address.</p>
 
-<form action="/{{folder}}/{{subfolder}}/update-profile" method="post" novalidate>
+<form action="/{{folder}}/{{subfolder}}/one-time-passcode-create" method="post" novalidate>
 {{ input({
   label: {
   text: "Access code"

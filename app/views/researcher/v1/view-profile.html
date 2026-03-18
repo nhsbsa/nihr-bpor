@@ -66,6 +66,12 @@
 
 <h1>Your details</h1>
 
+{% if data['researcherOrganisation'] == 'Other' %}
+  {% set organisationText = data['researcherOrganisationName'] or 'University of Birmingham' %}
+{% else %}
+  {% set organisationText = data['researcherOrganisation'] or 'University of Birmingham' %}
+{% endif %}
+
 {{ summaryList({
   rows: [
     {
@@ -124,7 +130,7 @@
         text: "Email address"
       },
       value: {
-        text: "Jane.Doe@birmingham.ac.uk"
+        text: data['researcherEmailAddress'] or "Jane.Doe@birmingham.ac.uk"
       }
     },
     {
@@ -132,7 +138,7 @@
         text: "Organisation"
       },
       value: {
-        text: "University of Birmingham"
+        text: organisationText
       }
     },
     {

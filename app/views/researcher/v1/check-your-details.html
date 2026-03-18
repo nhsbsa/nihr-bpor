@@ -44,87 +44,93 @@
 
 <h1>Check your details</h1>
 
-<h2 class="nhsuk-heading-m">Personal details</h2>
+{% if data['researcherOrganisation'] == 'Other' %}
+  {% set organisationText = data['researcherOrganisationName'] or 'NHS Trust' %}
+{% else %}
+  {% set organisationText = data['researcherOrganisation'] or 'NHS Trust' %}
+{% endif %}
 
-{{ summaryList({
-  rows: [
+{% set rows = [
+  {
+    key: { text: "Title" },
+    value: { text: data['researcherTitle'] or 'Mrs' },
+    actions: {
+      items: [
+        {
+          href: "/researcher/v1/enter-your-details#researcherTitle",
+          text: "Change",
+          visuallyHiddenText: "title"
+        }
+      ]
+    }
+  },
+  {
+    key: { text: "First name" },
+    value: { text: data['researcherFirstName'] or 'Jane' },
+    actions: {
+      items: [
+        {
+          href: "/researcher/v1/enter-your-details#researcherFirstName",
+          text: "Change",
+          visuallyHiddenText: "first name"
+        }
+      ]
+    }
+  },
+  {
+    key: { text: "Last name" },
+    value: { text: data['researcherLastName'] or 'Doe' },
+    actions: {
+      items: [
+        {
+          href: "/researcher/v1/enter-your-details#researcherLastName",
+          text: "Change",
+          visuallyHiddenText: "last name"
+        }
+      ]
+    }
+  },
+  {
+    key: { text: "Organisation" },
+    value: { text: organisationText },
+    actions: {
+      items: [
+        {
+          href: "/researcher/v1/enter-your-details#researcherOrganisation",
+          text: "Change",
+          visuallyHiddenText: "organisation"
+        }
+      ]
+    }
+  }
+] %}
+
+{% if data['researcherOrganisation'] == 'Other' %}
+  {% set rows = rows.concat([
     {
-      key: {
-        text: "Title"
-      },
-      value: {
-        text: data['researcherTitle'] | default('Mrs')
-      },
+      key: { text: "Authorisation" },
+      value: { text: data['researcherAuthorisation'] },
       actions: {
         items: [
           {
-            href: "/researcher/v1/enter-your-details#researcherTitle",
+            href: "/researcher/v1/enter-your-details#researcherAuthorisation",
             text: "Change",
-            visuallyHiddenText: "title"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "First name"
-      },
-      value: {
-        text: data['researcherFirstName'] | default('Jane')
-      },
-      actions: {
-        items: [
-          {
-            href: "/researcher/v1/enter-your-details#researcherFirstName",
-            text: "Change",
-            visuallyHiddenText: "first name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Last name"
-      },
-      value: {
-        text: data['researcherLastName'] | default('Doe')
-      },
-      actions: {
-        items: [
-          {
-            href: "/researcher/v1/enter-your-details#researcherLastName",
-            text: "Change",
-            visuallyHiddenText: "last name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Organisation"
-      },
-      value: {
-        text: data['researcherOrganisation'] | default('NHS Trust')
-      },
-      actions: {
-        items: [
-          {
-            href: "/researcher/v1/enter-your-details#researcherOrganisation",
-            text: "Change",
-            visuallyHiddenText: "organisation"
+            visuallyHiddenText: "authorisation"
           }
         ]
       }
     }
-  ]
-}) }}
+  ]) %}
+{% endif %}
+
+{{ summaryList({ rows: rows }) }}
 
 {{ warningCallout({
   heading: "Consent",
   html: '<p class="nhsuk-card__description">By submitting this application, you agree to the <a target="_blank" href="#">terms and conditions</a> (opens in a new tab) and consent to the use of your data as described in the <a target="_blank" href="#">privacy notice</a> (opens in a new tab)</p>'
 }) }}
 
-<form action="/{{folder}}/{{subfolder}}/home" method="post" novalidate>
+<form action="/{{folder}}/{{subfolder}}/check-your-details" method="post" novalidate>
 
 {{ button({
   text: "Accept and send"

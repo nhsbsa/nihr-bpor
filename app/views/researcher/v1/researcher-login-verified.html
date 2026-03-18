@@ -56,11 +56,11 @@
 
 <h1>Log in to Recruit registry volunteers</h1>
 
-<form action="/{{folder}}/{{subfolder}}/researcher-login" method="post" novalidate>
+<form action="/{{folder}}/{{subfolder}}/researcher-login-verified" method="post" novalidate>
   
 {{ input({
-  id: "emailAddress",
-  name: "emailAddress",
+  id: "researcherEmailAddress",
+  name: "researcherEmailAddress",
   type: "email",
   classes: "nhsuk-input--width-20",
   label: {
@@ -72,8 +72,8 @@
   label: {
     text: "Password"
   },
-  id: "password",
-  name: "password",
+  id: "researcherPassword",
+  name: "researcherPassword",
   classes: "nhsuk-input--width-20"
 }) }}
 

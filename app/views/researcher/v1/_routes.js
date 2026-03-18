@@ -56,12 +56,29 @@ router.post('/login-type-of-account', function (req, res) {
 
 });
 
-router.post('/create-an-account', function (req, res) {
+router.post('/researcher-login', function (req, res) {
 
     var emailAddress = req.session.data['emailAddress'];
     var password = req.session.data['password'];
 
     if (emailAddress && password) {
+
+        res.redirect('one-time-passcode-login');
+
+    } else {
+
+        res.redirect('researcher-login');
+
+    }
+
+});
+
+router.post('/create-an-account', function (req, res) {
+
+    var researcherEmailAddress = req.session.data['researcherEmailAddress'];
+    var researcherPassword = req.session.data['researcherPassword'];
+
+    if (researcherEmailAddress && researcherPassword) {
 
         res.redirect('verify-your-email');
 
@@ -73,23 +90,75 @@ router.post('/create-an-account', function (req, res) {
 
 });
 
-router.post('/tell-us-about-yourself', function (req, res) {
+router.post('/researcher-login-verified', function (req, res) {
 
-    var title = req.session.data['title'];
-    var firstName = req.session.data['firstName'];
-    var lastName = req.session.data['lastName'];
-    var emailAddress = req.session.data['emailAddress'];
-    var organisation = req.session.data['organisation'];
-    var termsConditions = req.session.data['termsConditions'];
-    var privacyNotice = req.session.data['privacyNotice'];
+    var researcherEmailAddress = req.session.data['researcherEmailAddress'];
+    var researcherPassword = req.session.data['researcherPassword'];
 
-    if (title && firstName && lastName && emailAddress && organisation) {
+    if (researcherEmailAddress && researcherPassword) {
 
-        res.redirect('sign-up-answers');
+        res.redirect('one-time-passcode-create');
 
     } else {
 
-        res.redirect('tell-us-about-yourself');
+        res.redirect('researcher-login-verified');
+
+    }
+
+});
+
+router.post('/one-time-passcode-login', function (req, res) {
+
+    var oneTimePasscode = req.session.data['oneTimePasscode'];
+
+    if (oneTimePasscode) {
+
+        res.redirect('home');
+
+    } else {
+
+        res.redirect('one-time-passcode-login');
+
+    }
+
+});
+
+router.post('/one-time-passcode-create', function (req, res) {
+
+    var oneTimePasscode = req.session.data['oneTimePasscode'];
+
+    if (oneTimePasscode) {
+
+        res.redirect('enter-your-details');
+
+    } else {
+
+        res.redirect('one-time-passcode-create');
+
+    }
+
+});
+
+router.post('/check-your-details', function (req, res) {
+
+    res.redirect('account-request-submitted');
+
+});
+
+router.post('/enter-your-details', function (req, res) {
+
+    var researcherTitle = req.session.data['researcherTitle'];
+    var researcherFirstName = req.session.data['researcherFirstName'];
+    var researcherLastName = req.session.data['researcherLastName'];
+    var researcherOrganisation = req.session.data['researcherOrganisation'];
+
+    if (researcherTitle && researcherFirstName && researcherLastName && researcherOrganisation) {
+
+        res.redirect('check-your-details');
+
+    } else {
+
+        res.redirect('enter-your-details');
 
     }
 
