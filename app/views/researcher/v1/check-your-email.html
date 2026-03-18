@@ -45,9 +45,17 @@
 <h1>Check your email</h1>
 
 <p>If your email address is registered with an account, we’ll send you instructions to reset your password. </p>
-<p>If you have not received an email, check you have entered it correctly and click <a href="#">resend email</a>.</p>
+<p>If you have not received an email, check you have entered it correctly and click <a href="check-your-email-resend">resend email</a>.</p>
 <p>If you have any problems with the email you registered with, <a href="#">email us</a>.</p>
 
     </div>
   </div>
+{% endblock %}
+
+{% block pageScripts %}
+<script type="text/javascript">
+  setTimeout(function () {
+    window.location.href = "reset-your-password";
+  }, 10000); // 10,000 milliseconds = 10 seconds
+</script>
 {% endblock %}
