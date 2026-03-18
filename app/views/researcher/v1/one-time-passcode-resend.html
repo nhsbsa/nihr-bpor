@@ -42,38 +42,38 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<h1>Create your login details</h1>
+{% set html %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Email sent
+  </h3>
+  <p>A new access code has been sent to your email address</p>
+{% endset %}
 
-<form action="/{{folder}}/{{subfolder}}/create-an-account" method="post" novalidate>
-  
+{{ notificationBanner({
+  html: html,
+  type: "success"
+}) }}
+
+<h1>Enter the access code</h1>
+
+<p>We have sent a 6-digit access code to your email address.</p>
+
+<form action="/{{folder}}/{{subfolder}}/update-profile" method="post" novalidate>
 {{ input({
   label: {
-    size: "m",
-    text: "Enter your email address"
+  text: "Access code"
   },
-    hint: {
-    text: "You should use the email address connected to the organisation you work for."
-  },
-  id: "emailAddress",
-  name: "emailAddress",
-  classes: "nhsuk-input--width-20"
+  id: "oneTimePasscode",
+  name: "oneTimePasscode",
+  classes: "nhsuk-input--width-10"
 }) }}
 
-{{ passwordInput({
-  label: {
-    size: "m",
-    text: "Create your password"
-  },
-    hint: {
-    text: "Your password should be at least 8 characters and include at least one uppercase letter, one lower case letter, one number and one special character."
-  },
-  id: "password",
-  name: "password",
-  classes: "nhsuk-input--width-20"
-}) }}
+<p>It may take a few minutes to arrive.</p>
+
+<p>Problems receiving this code? <a href="#">Request a new code</a></p>
 
 {{ button({
-  text: "Sign up"
+  text: "Continue"
 }) }}
 
 </form>

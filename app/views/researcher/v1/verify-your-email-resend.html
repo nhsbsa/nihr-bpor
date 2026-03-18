@@ -42,41 +42,36 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<h1>Create your login details</h1>
+{% set html %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Email sent
+  </h3>
+  <p>A new verification email has been sent to john.smith@nihr.ac.uk</p>
+{% endset %}
 
-<form action="/{{folder}}/{{subfolder}}/create-an-account" method="post" novalidate>
-  
-{{ input({
-  label: {
-    size: "m",
-    text: "Enter your email address"
-  },
-    hint: {
-    text: "You should use the email address connected to the organisation you work for."
-  },
-  id: "emailAddress",
-  name: "emailAddress",
-  classes: "nhsuk-input--width-20"
+{{ notificationBanner({
+  html: html,
+  type: "success"
 }) }}
 
-{{ passwordInput({
-  label: {
-    size: "m",
-    text: "Create your password"
-  },
-    hint: {
-    text: "Your password should be at least 8 characters and include at least one uppercase letter, one lower case letter, one number and one special character."
-  },
-  id: "password",
-  name: "password",
-  classes: "nhsuk-input--width-20"
+<h1>Verify your email</h1>
+
+<p>You’ll need to verify your email address before continuing.</p>
+
+{{ insetText({
+  html: '<p>We have sent an email to john.smith@nihr.ac.uk</p>'
 }) }}
 
-{{ button({
-  text: "Sign up"
+<p>Your email may take a few minutes to arrive. If you have not received your email, check your spam.</p>
+
+<h2 class="nhsuk-heading-m">Didn’t receive an email?</h2>
+
+{{ insetText({
+  html: '<p>If you haven’t received an email within 30 minutes, you can <a href="#">request another email</a>.</p>'
 }) }}
 
-</form>
+<p>Once your email is verified, we’ll review your details and notify you when your account has been approved.</p>
+<p>If we need any more information, a member of the team will contact you.</p>
 
     </div>
   </div>

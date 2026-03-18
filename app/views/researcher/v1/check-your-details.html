@@ -1,0 +1,137 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-out.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back"
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<h1>Check your details</h1>
+
+<h2 class="nhsuk-heading-m">Personal details</h2>
+
+{{ summaryList({
+  rows: [
+    {
+      key: {
+        text: "Title"
+      },
+      value: {
+        text: data['researcherTitle'] | default('Mrs')
+      },
+      actions: {
+        items: [
+          {
+            href: "/researcher/v1/enter-your-details#researcherTitle",
+            text: "Change",
+            visuallyHiddenText: "title"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "First name"
+      },
+      value: {
+        text: data['researcherFirstName'] | default('Jane')
+      },
+      actions: {
+        items: [
+          {
+            href: "/researcher/v1/enter-your-details#researcherFirstName",
+            text: "Change",
+            visuallyHiddenText: "first name"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Last name"
+      },
+      value: {
+        text: data['researcherLastName'] | default('Doe')
+      },
+      actions: {
+        items: [
+          {
+            href: "/researcher/v1/enter-your-details#researcherLastName",
+            text: "Change",
+            visuallyHiddenText: "last name"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Organisation"
+      },
+      value: {
+        text: data['researcherOrganisation'] | default('NHS Trust')
+      },
+      actions: {
+        items: [
+          {
+            href: "/researcher/v1/enter-your-details#researcherOrganisation",
+            text: "Change",
+            visuallyHiddenText: "organisation"
+          }
+        ]
+      }
+    }
+  ]
+}) }}
+
+{{ warningCallout({
+  heading: "Consent",
+  html: '<p class="nhsuk-card__description">By submitting this application, you agree to the <a target="_blank" href="#">terms and conditions</a> (opens in a new tab) and consent to the use of your data as described in the <a target="_blank" href="#">privacy notice</a> (opens in a new tab)</p>'
+}) }}
+
+<form action="/{{folder}}/{{subfolder}}/home" method="post" novalidate>
+
+{{ button({
+  text: "Accept and send"
+}) }}
+
+</form>
+
+    </div>
+  </div>
+{% endblock %}

@@ -28,11 +28,6 @@
   html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
 }) }}
 
-{{ backLink({
-    "href": "javascript:history.go(-1)",
-    "text": "Back"
-}) }}
-
 {% endblock %}
 
 <!-- For adding page content -->
@@ -42,41 +37,17 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<h1>Create your login details</h1>
+    {{ panel({
+      titleText: "Account request submitted"
+    }) }}
 
-<form action="/{{folder}}/{{subfolder}}/create-an-account" method="post" novalidate>
-  
-{{ input({
-  label: {
-    size: "m",
-    text: "Enter your email address"
-  },
-    hint: {
-    text: "You should use the email address connected to the organisation you work for."
-  },
-  id: "emailAddress",
-  name: "emailAddress",
-  classes: "nhsuk-input--width-20"
-}) }}
+    <h2 class="nhsuk-heading-m">What happens next?</h2>
 
-{{ passwordInput({
-  label: {
-    size: "m",
-    text: "Create your password"
-  },
-    hint: {
-    text: "Your password should be at least 8 characters and include at least one uppercase letter, one lower case letter, one number and one special character."
-  },
-  id: "password",
-  name: "password",
-  classes: "nhsuk-input--width-20"
-}) }}
+    <p>After we’ve reviewed your details, we’ll create your account and email you to let you know. This can take up to 3 working days.</p>
 
-{{ button({
-  text: "Sign up"
-}) }}
+    <p>You can start using your new account as soon as you get this confirmation.</p>
 
-</form>
+    <p>If we need any further information, we’ll contact you by email.</p>
 
     </div>
   </div>
