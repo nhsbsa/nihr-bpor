@@ -40,7 +40,7 @@ router.post('/login-type-of-account', function (req, res) {
 
     var loginTypeAccount = req.session.data['loginTypeAccount'];
 
-    if (loginTypeAccount == "Log in with GOV.UK One Login account") {
+    if (loginTypeAccount == "Log in with GOV.UK One Login") {
 
         res.redirect('https://govuk-one-login-prototype-6d2545e2d700.herokuapp.com/page-index/authentication/create-account');
 
@@ -214,7 +214,7 @@ router.post('/reset-your-password', function (req, res) {
 
 if (password1 && password2 && password1 === password2) {
     
-    res.redirect('password-changed');
+    res.redirect('reset-your-password-confirm');
 
 } else {
 

@@ -42,38 +42,31 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<form action="/{{folder}}/{{subfolder}}/create-type-of-account" method="post" novalidate>
+<h1>Request a new account</h1>
 
-{{ radios({
-  idPrefix: "createTypeAccount",
-  name: "createTypeAccount",
-  fieldset: {
-    legend: {
-      text: "How do you want to create your account?",
-        size: "l",
-      isPageHeading: true
-    }
-  },
-  items: [
-    {
-      value: "Create an account using GOV.UK One Login",
-      text: "Create an account using GOV.UK One Login",
-      hint: {
-        text: "You can use GOV.UK One Login to create an account for this service. You'll be able to create a GOV.UK One Login if you do not already have one."
-      }
-    },
-    {
-      value: "Create an account using an email and password",
-      text: "Create an account using an email and password"
-    }
-  ]
-}) }}
+<p>Before you can start using Recruit registry volunteers, you need to send us an account request.</p>
 
-{{ button({
-  text: "Continue"
-}) }}
+<p>You’ll need to use wither GOV.UK One Login or your email address to prove your identity.</p>
 
-</form>
+{% call details({
+  summaryText: "Logging into your account for the first time"
+}) %}
+  <p>Before you can log in for the first time, we need to review your details and create your account. This can take up to 3 working days.</p>
+  <p>As soon as we’ve created your account, we’ll email you to let you know.</p>
+{% endcall %}
+
+<div class="nhsuk-button-group nhsuk-button-group--small">
+  {{ button({
+    text: "Request an account with GOV.UK One Login",
+    href: "https://govuk-one-login-prototype-6d2545e2d700.herokuapp.com/"
+  }) }}
+
+  {{ button({
+    text: "Request an account with email",
+    classes: "nhsuk-button--secondary",
+    href: "create-an-account"
+  }) }}
+</div>
 
     </div>
   </div>

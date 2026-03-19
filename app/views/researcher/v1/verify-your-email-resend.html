@@ -48,7 +48,7 @@
   <h3 class="nhsuk-notification-banner__heading">
     Email sent
   </h3>
-  <p>A new verification email has been sent to {{ emailAddress }}</p>
+  <p>We've sent a new email confirmation link to {{ emailAddress }}</p>
 {% endset %}
 
 {{ notificationBanner({
@@ -58,7 +58,7 @@
 
 <h1>Confirm your email</h1>
 
-<p>You’ll need to verify your email address before continuing.</p>
+{% set emailAddress = data['researcherEmailAddress'] or "Jane.Doe@birmingham.ac.uk" %}
 
 <p>We’ve sent an email to <strong>{{ emailAddress }}</strong></p>
 
