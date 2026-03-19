@@ -63,7 +63,7 @@ router.post('/researcher-login', function (req, res) {
 
     if (emailAddress && password) {
 
-        res.redirect('one-time-passcode-login');
+        res.redirect('OTP-login-email');
 
     } else {
 
@@ -97,7 +97,7 @@ router.post('/researcher-login-verified', function (req, res) {
 
     if (researcherEmailAddress && researcherPassword) {
 
-        res.redirect('one-time-passcode-create');
+        res.redirect('OTP-create-email');
 
     } else {
 
