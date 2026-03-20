@@ -151,10 +151,24 @@ router.post('/enter-your-details', function (req, res) {
     var researcherFirstName = req.session.data['researcherFirstName'];
     var researcherLastName = req.session.data['researcherLastName'];
     var researcherOrganisation = req.session.data['researcherOrganisation'];
+    var researcherOrganisationName = req.session.data['researcherOrganisationName'];
+    var researcherAuthorisation = req.session.data['researcherAuthorisation'];
 
     if (researcherTitle && researcherFirstName && researcherLastName && researcherOrganisation) {
 
-        res.redirect('check-your-details');
+        if (researcherOrganisation == 'Other') {
+
+            if (researcherOrganisationName && researcherAuthorisation) {
+                res.redirect('check-your-details');
+            } else {
+                res.redirect('enter-your-details');
+            }
+
+        } else {
+
+            res.redirect('check-your-details');
+
+        }
 
     } else {
 
