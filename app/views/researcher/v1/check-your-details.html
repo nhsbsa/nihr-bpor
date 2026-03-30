@@ -44,7 +44,7 @@
 
 <h1>Check your details</h1>
 
-{% if data['researcherOrganisation'] == 'Other' %}
+{% if data['researcherOrganisationName'] %}
   {% set organisationText = data['researcherOrganisationName'] or 'NHS Trust' %}
 {% else %}
   {% set organisationText = data['researcherOrganisation'] or 'NHS Trust' %}
@@ -105,7 +105,7 @@
   }
 ] %}
 
-{% if data['researcherOrganisation'] == 'Other' %}
+{% if data['researcherOrganisationName'] %}
   {% set rows = rows.concat([
     {
       key: { text: "Authorisation" },

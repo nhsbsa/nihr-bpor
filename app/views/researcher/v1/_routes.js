@@ -154,20 +154,15 @@ router.post('/enter-your-details', function (req, res) {
     var researcherOrganisationName = req.session.data['researcherOrganisationName'];
     var researcherAuthorisation = req.session.data['researcherAuthorisation'];
 
-    if (researcherTitle && researcherFirstName && researcherLastName && researcherOrganisation) {
+    if (researcherTitle && researcherFirstName && researcherLastName) {
 
-        if (researcherOrganisation == 'Other') {
-
-            if (researcherOrganisationName && researcherAuthorisation) {
-                res.redirect('check-your-details');
-            } else {
-                res.redirect('enter-your-details');
-            }
-
-        } else {
-
+        if (
+            (researcherOrganisation && !researcherOrganisationName && !researcherAuthorisation) ||
+            (!researcherOrganisation && researcherOrganisationName && researcherAuthorisation)
+        ) {
             res.redirect('check-your-details');
-
+        } else {
+            res.redirect('enter-your-details');
         }
 
     } else {

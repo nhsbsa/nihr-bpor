@@ -165,7 +165,11 @@
 <p>Jane.Doe@birmingham.ac.uk</p>
 
 <p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Organisation</p>
-<p>University of Birmingham</p>
+{% if data['researcherOrganisationName'] %}
+<p>{{ data['researcherOrganisationName'] or 'University of Birmingham' }}</p>
+{% else %}
+<p>{{ data['researcherOrganisation'] or 'University of Birmingham' }}</p>
+{% endif %}
 
 <p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
 <p>Researcher</p>

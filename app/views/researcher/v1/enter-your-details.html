@@ -143,33 +143,39 @@
   }
 }) }}
 
-{{ radios({
-  idPrefix: "researcherOrganisation",
-  name: "researcherOrganisation",
-  fieldset: {
-    legend: { text: "Organisation", size: "s" }
-  },
-  classes: "nhsuk-radios--small",
-  items: [
-    {
-      value: "NHS Trust",
-      text: "NHS Trust"
-    },
-    {
-      value: "University",
-      text: "University"
-    },
-    {
-      value: "Research institute",
-      text: "Research institute"
-    },
-    {
-      value: "Other",
-      text: "Other",
-      conditional: { html: organisationHtml }
-    }
-  ]
-}) }}
+
+<label class="nhsuk-label" for="myAutocomplete">Organisation name</label>
+
+<!--
+<div class="nhsuk-hint">
+  Start typing your organisation name
+</div>
+-->
+
+<div id="my-autocomplete-container" class="nhsuk-input--width-20 nhsuk-u-margin-bottom-5"></div>
+
+{% call details({
+  summaryText: "My organisation is not listed"
+}) %}
+  <p>If your organisation is not listed, enter the name of your organisation and authorisation for using the service.</p>
+
+  <div class="nhsuk-form-group">
+    <label class="nhsuk-label" for="researcherOrganisationName">
+      Organisation name
+    </label>
+    <input class="nhsuk-input" id="researcherOrganisationName" name="researcherOrganisationName" type="text">
+  </div>
+
+  <div class="nhsuk-form-group">
+    <label class="nhsuk-label" for="researcherAuthorisation">
+      Authorisation
+    </label>
+    <div id="researcherAuthorisation-hint" class="nhsuk-hint">
+      Explain who has authorised you to create a Recruit registry volunteers account and why.
+    </div>
+    <textarea class="nhsuk-textarea" id="researcherAuthorisation" name="researcherAuthorisation" rows="3" aria-describedby="researcherAuthorisation-hint"></textarea>
+  </div>
+{% endcall %}
 
 {{ button({
   text: "Continue"
@@ -177,4 +183,44 @@
 
     </div>
   </div>
+{% endblock %}
+
+{% block pageScripts %}
+<script type="module">
+  import accessibleAutocomplete from '/assets/javascript/accessible-autocomplete.min.js'
+  import { organisation_names } from '/assets/javascript/organisation_names.js'
+
+  function customSuggest (query, syncResults) {
+    syncResults(
+      query
+        ? organisation_names.filter(result =>
+            result.name.toLowerCase().includes(query.toLowerCase()) ||
+            result.endonym.toLowerCase().includes(query.toLowerCase())
+          )
+        : []
+    )
+  }
+
+  function inputValueTemplate (result) {
+    return result && result.name
+  }
+
+  function suggestionTemplate (result) {
+    return result && result.name
+  }
+
+  const element = document.querySelector('#my-autocomplete-container')
+
+  accessibleAutocomplete({
+    element: element,
+    id: 'researcherOrganisation',
+    name: 'researcherOrganisation',
+    source: customSuggest,
+    placeholder: 'Search for your organisation',
+    templates: {
+      inputValue: inputValueTemplate,
+      suggestion: suggestionTemplate
+    }
+  })
+</script>
 {% endblock %}
