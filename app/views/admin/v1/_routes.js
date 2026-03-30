@@ -15,16 +15,34 @@ router.post('/index', function (req, res) {
 
 });
 
+router.post('/one-time-passcode', function (req, res) {
+
+    req.session.data = {}
+
+    res.redirect('home');
+
+});
+
 router.post('/update-profile', function (req, res) {
 
     var adminTitle = req.session.data['adminTitle'];
     var adminFirstName = req.session.data['adminFirstName'];
     var adminLastName = req.session.data['adminLastName'];
+    var adminRole = req.session.data['adminRole'];
 
 
-if (adminTitle && adminFirstName && adminLastName) {
+
+if (adminTitle && adminFirstName && adminLastName && (adminRole === "System administrator" || adminRole === "Study administrator")) {
     
-    res.redirect('home-profile-updated');
+    if (adminRole == "Study administrator") {
+        
+        res.redirect('logged-out');
+
+    } else {
+
+        res.redirect('home-profile-updated');
+
+    }
 
 } else {
 
