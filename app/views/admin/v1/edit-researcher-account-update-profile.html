@@ -134,37 +134,29 @@
 <p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Email address</p>
 <p>{{ data.researcherEmail or "amelia.hart@nhs.net" }}</p>
 
-{{ radios({
-  idPrefix: "researcherOrganisation",
-  name: "researcherOrganisation",
-  fieldset: {
-    legend: { text: "Organisation", size: "s" }
-  },
-  classes: "nhsuk-radios--small",
-  items: [
-    {
-      value: "NHS Trust",
-      text: "NHS Trust",
-      checked: (not data.researcherOrganisation) or (data.researcherOrganisation == "NHS Trust")
-    },
-    {
-      value: "University",
-      text: "University",
-      checked: data.researcherOrganisation == "University"
-    },
-    {
-      value: "Research institute",
-      text: "Research institute",
-      checked: data.researcherOrganisation == "Research institute"
-    },
-    {
-      value: "Other",
-      text: "Other",
-      checked: data.researcherOrganisation == "Other",
-      conditional: { html: organisationHtml }
-    }
-  ]
-}) }}
+<label class="nhsuk-label" for="myAutocomplete">Organisation name</label>
+
+<!--
+<div class="nhsuk-hint">
+  Start typing your organisation name
+</div>
+-->
+
+<div id="my-autocomplete-container" class="nhsuk-input--width-20 nhsuk-u-margin-bottom-5"></div>
+
+{% call details({
+  summaryText: "The organisation is not listed"
+}) %}
+  <p>If the organisation is not listed, enter the name of the organisation.</p>
+
+  <div class="nhsuk-form-group">
+    <label class="nhsuk-label" for="researcherOrganisationName">
+      Organisation name
+    </label>
+    <input class="nhsuk-input" id="researcherOrganisationName" name="researcherOrganisationName" type="text">
+  </div>
+
+{% endcall %}
 
 <p class="nhsuk-heading-xs nhsuk-u-margin-bottom-1">Role</p>
 <p>{{ data.researcherRole or "Researcher" }}</p>
@@ -178,4 +170,44 @@
 
     </div>
   </div>
+{% endblock %}
+
+{% block pageScripts %}
+<script type="module">
+  import accessibleAutocomplete from '/assets/javascript/accessible-autocomplete.min.js'
+  import { organisation_names } from '/assets/javascript/organisation_names.js'
+
+  function customSuggest (query, syncResults) {
+    syncResults(
+      query
+        ? organisation_names.filter(result =>
+            result.name.toLowerCase().includes(query.toLowerCase()) ||
+            result.endonym.toLowerCase().includes(query.toLowerCase())
+          )
+        : []
+    )
+  }
+
+  function inputValueTemplate (result) {
+    return result && result.name
+  }
+
+  function suggestionTemplate (result) {
+    return result && result.name
+  }
+
+  const element = document.querySelector('#my-autocomplete-container')
+
+  accessibleAutocomplete({
+    element: element,
+    id: 'researcherOrganisation',
+    name: 'researcherOrganisation',
+    source: customSuggest,
+    placeholder: 'Search for the organisation',
+    templates: {
+      inputValue: inputValueTemplate,
+      suggestion: suggestionTemplate
+    }
+  })
+</script>
 {% endblock %}
