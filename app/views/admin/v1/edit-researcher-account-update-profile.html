@@ -188,15 +188,20 @@
     )
   }
 
-  function inputValueTemplate (result) {
-    return result && result.name
-  }
+function inputValueTemplate (result) {
+  if (!result) return ''
+  return typeof result === 'string' ? result : result.name
+}
 
-  function suggestionTemplate (result) {
-    return result && result.name
-  }
-
+function suggestionTemplate (result) {
+  if (!result) return ''
+  return typeof result === 'string' ? result : result.name
+}
   const element = document.querySelector('#my-autocomplete-container')
+
+  const nunjucksValue = "{{ data['researcherOrganisation'] | default('') | escape }}"
+
+  const defaultOrganisation = nunjucksValue || 'University of Durham'
 
   accessibleAutocomplete({
     element: element,
@@ -204,6 +209,7 @@
     name: 'researcherOrganisation',
     source: customSuggest,
     placeholder: 'Search for the organisation',
+    defaultValue: defaultOrganisation,
     templates: {
       inputValue: inputValueTemplate,
       suggestion: suggestionTemplate
