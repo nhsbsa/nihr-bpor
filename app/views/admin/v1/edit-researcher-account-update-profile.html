@@ -199,7 +199,7 @@ function suggestionTemplate (result) {
 }
   const element = document.querySelector('#my-autocomplete-container')
 
-  const nunjucksValue = "{{ data['researcherOrganisation'] | default('') | escape }}"
+  const nunjucksValue = "{{ (data['researcherOrganisation'] or data['researcherOrganisationName']) | default('') | escape }}"
 
   const defaultOrganisation = nunjucksValue || 'University of Durham'
 

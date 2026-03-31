@@ -78,6 +78,16 @@
 
 <h1>Researcher account details</h1>
 
+{% set org = "" %}
+
+{% if data['researcherOrganisation'] %}
+  {% set org = data['researcherOrganisation'] %}
+{% else %}
+  {% set org = data['researcherOrganisationName'] %}
+{% endif %}
+
+{% set org = org or "University of Durham" %}
+
 {{ summaryList({
   rows: [
     {
@@ -125,7 +135,7 @@
     },
     {
       key: { text: "Organisation" },
-      value: { text: data['researcherOrganisationName'] if data['researcherOrganisation'] == 'Other' else (data['researcherOrganisation'] or "University of Durham") },
+      value: { text: org },
       actions: {
         items: [
           {

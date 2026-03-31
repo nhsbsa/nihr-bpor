@@ -78,6 +78,14 @@
   classes: "nhsuk-button--secondary"
 }) }}
 
+{% set org = "" %}
+
+{% if data['researcherOrganisation'] %}
+  {% set org = data['researcherOrganisation'] %}
+{% else %}
+  {% set org = data['researcherOrganisationName'] %}
+{% endif %}
+
 {{ table({
   responsive: true,
   panel: false,
@@ -93,7 +101,7 @@
     [
       { header: 'Name', text: ((data['researcherFirstName'] or 'Amelia') ~ ' ' ~ (data['researcherLastName'] or 'Hart')) },
       { header: 'Email', text: 'amelia.hart@nhs.net' },
-      { header: 'Organisation', text: data['researcherOrganisationName'] if data['researcherOrganisation'] == 'Other' else (data['researcherOrganisation'] or 'University of Durham')},
+      { header: 'Organisation', text: org },
       { header: 'Date submitted', text: '9 February 2026' },
       { header: 'Role', html: data['researcherRole'] or 'Researcher' },
       { header: 'Actions', html: '<p><a href="edit-researcher-account">Update account</a></p>' }
