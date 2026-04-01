@@ -84,6 +84,11 @@
   name: "title",
   items: [
     {
+      value: "Select title",
+      text: "Select title",
+      selected: previousTitle == "Select title"
+    },
+    {
       value: "Mr",
       text: "Mr",
       selected: previousTitle == "Mr"
@@ -92,11 +97,6 @@
       value: "Mrs",
       text: "Mrs",
       selected: previousTitle == "Mrs"
-    },
-    {
-      value: "Ms",
-      text: "Ms",
-      selected: previousTitle == "Ms"
     },
     {
       value: "Miss",
@@ -119,24 +119,14 @@
       selected: previousTitle == "Prof"
     },
     {
-      value: "Sir",
-      text: "Sir",
-      selected: previousTitle == "Sir"
+      value: "Other",
+      text: "Other",
+      selected: previousTitle == "Other"
     },
     {
-      value: "Dame",
-      text: "Dame",
-      selected: previousTitle == "Dame"
-    },
-    {
-      value: "Lady",
-      text: "Lady",
-      selected: previousTitle == "Lady"
-    },
-    {
-      value: "Lord",
-      text: "Lord",
-      selected: previousTitle == "Lord"
+      value: "Prefer not to say",
+      text: "Prefer not to say",
+      selected: previousTitle == "Prefer not to say"
     }
   ]
 }) }}
