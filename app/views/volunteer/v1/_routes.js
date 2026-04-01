@@ -22,7 +22,7 @@ router.post('/condition-1', function (req, res) {
     if (conditionQuestion1 == "Yes") {
         res.redirect('condition-2');
     } else if (conditionQuestion1 == "No") {
-        res.redirect('no-match');
+        res.redirect('no-check-your-answers');
     } else {
         res.redirect('condition-1');
 
@@ -37,7 +37,7 @@ router.post('/condition-2', function (req, res) {
     if (conditionQuestion2 == "Yes") {
         res.redirect('condition-3');
     } else if (conditionQuestion2 == "No") {
-        res.redirect('no-match');
+        res.redirect('no-check-your-answers');
     } else {
         res.redirect('condition-2');
 
@@ -52,7 +52,7 @@ router.post('/condition-3', function (req, res) {
     if (conditionQuestion3 == "Yes") {
         res.redirect('medication-1');
     } else if (conditionQuestion3 == "No") {
-        res.redirect('no-match');
+        res.redirect('no-check-your-answers');
     } else {
         res.redirect('condition-3');
 
@@ -67,7 +67,7 @@ router.post('/medication-1', function (req, res) {
     if (medicationQuestion1 == "Yes") {
         res.redirect('medication-2');
     } else if (medicationQuestion1 == "No") {
-        res.redirect('no-match');
+        res.redirect('no-check-your-answers');
     } else {
         res.redirect('medication-1');
 
@@ -82,7 +82,7 @@ router.post('/medication-2', function (req, res) {
     if (medicationQuestion2 == "Yes") {
         res.redirect('medication-3');
     } else if (medicationQuestion2 == "No") {
-        res.redirect('no-match');
+        res.redirect('no-check-your-answers');
     } else {
         res.redirect('medication-2');
 
@@ -97,7 +97,7 @@ router.post('/medication-3', function (req, res) {
     if (medicationQuestion3 == "Yes") {
         res.redirect('review-details');
     } else if (medicationQuestion3 == "No") {
-        res.redirect('no-match');
+        res.redirect('no-check-your-answers');
     } else {
         res.redirect('medication-3');
 
@@ -188,6 +188,12 @@ router.post('/review-details', function (req, res) {
     var phoneNumber = req.session.data['phoneNumber'];
 
     res.redirect('check-your-answers');
+
+})
+
+router.post('/no-check-your-answers', function (req, res) {
+
+    res.redirect('no-match');
 
 })
 
