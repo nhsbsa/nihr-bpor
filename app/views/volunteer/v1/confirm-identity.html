@@ -18,7 +18,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "How would you like us to contact you?" %}
+{% set pageName = "Confirm your identity" %}
 
 <!-- For adding a breadcrumb or back link -->
 <!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
@@ -44,56 +44,29 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-      <h1>How would you like us to contact you?</h1>
+<form action="confirm-identity" method="post" novalidate>
 
-      <h2>Your contact details</h2>
+<h1 class="nhsuk-u-margin-bottom-4">Confirm your email address</h1>
 
-      <p>Check the contact details we currently have for you. You should update them if they are not correct.</p>
+{{ hint({
+  html: 'We need you to confirm your email address so we can check your identity and make sure you can take part in this study.'
+}) }}
 
-      <p>{{ data['confirmIdentity'] }}</p>
+{{ input({
+  id: "confirmIdentity",
+  name: "confirmIdentity",
+  classes: "nhsuk-input--width-20",
+  type: "email",
+  autocomplete: "email",
+  spellcheck: false,
+  label: {
+    text: "Email address"
+  }
+}) }}
 
-      {{ summaryList({
-        rows: [
-          {
-            key: {
-              text: "Name"
-            },
-            value: {
-              text: "Joe Bloggs"
-            }
-          },
-          {
-            key: {
-              text: "Email address"
-            },
-            value: {
-              text: data['confirmIdentity'] or "joe.bloggs@gmail.com"
-            }
-          }
-        ]
-      }) }}
-
-      <h2>Would you like to add a phone number?</h2>
-
-      <p>We’ll use your phone number to contact you about this study. If you do not add a phone number, we’ll contact you by email.</p>
-
-<form action="review-details" method="post" novalidate>
-
-      {{ input({
-        label: {
-          text: "Phone number"
-        },
-        id: "phoneNumber",
-        name: "phoneNumber",
-        type: "tel",
-        autocomplete: "tel",
-        classes: "nhsuk-input--width-20",
-        value: data.phoneNumber
-      }) }}
-
-      {{ button({
-        text: "Continue"
-      }) }}
+{{ button({
+  text: "Continue"
+}) }}
 
 </form>
 

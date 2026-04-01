@@ -10,6 +10,12 @@ const router = express.Router();
 
 router.post('/start', function (req, res) {
  
+    res.redirect('confirm-identity');
+
+})
+
+router.post('/confirm-identity', function (req, res) {
+ 
     res.redirect('condition-1');
 
 })
