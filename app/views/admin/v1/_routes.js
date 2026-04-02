@@ -85,26 +85,13 @@ router.post('/edit-researcher-account-update-profile', function (req, res) {
     var researcherTitle = req.session.data['researcherTitle'];
     var researcherFirstName = req.session.data['researcherFirstName'];
     var researcherLastName = req.session.data['researcherLastName'];
-    var researcherOrganisation = req.session.data['researcherOrganisation'];
-    var researcherOrganisationName = req.session.data['researcherOrganisationName'];
 
-    // If BOTH organisation fields exist → stay on update page
-    if (researcherOrganisation && researcherOrganisationName) {
-        return res.redirect('edit-researcher-account-update-profile');
+    if (researcherTitle && researcherFirstName && researcherLastName) {
+        res.redirect('edit-researcher-account-updated');
+    } else {
+        res.redirect('edit-researcher-account-update-profile');
     }
 
-    // If core fields + EITHER organisation field exist → success page
-    if (
-        researcherTitle &&
-        researcherFirstName &&
-        researcherLastName &&
-        (researcherOrganisation || researcherOrganisationName)
-    ) {
-        return res.redirect('edit-researcher-account-updated');
-    }
-
-    // Otherwise → back to form
-    return res.redirect('edit-researcher-account-update-profile');
 });
 
 router.post('/edit-study-admin-account-update-profile', function (req, res) {
