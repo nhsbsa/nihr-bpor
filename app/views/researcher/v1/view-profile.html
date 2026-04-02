@@ -67,9 +67,9 @@
 <h1>Your details</h1>
 
 {% if data['researcherOrganisationName'] %}
-  {% set organisationText = data['researcherOrganisationName'] or 'University of Birmingham' %}
+  {% set organisationText = data['researcherOrganisationName'] or 'University of Durham' %}
 {% else %}
-  {% set organisationText = data['researcherOrganisation'] or 'University of Birmingham' %}
+  {% set organisationText = data['researcherOrganisation'] or 'University of Durham' %}
 {% endif %}
 
 {{ summaryList({
