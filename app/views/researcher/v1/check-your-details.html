@@ -42,7 +42,9 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<h1>Check your details</h1>
+<h1>Check your answers before requesting your account</h1>
+
+<h2 class="nhsuk-heading-m">Personal details</h2>
 
 {% if data['researcherOrganisationName'] %}
   {% set organisationText = data['researcherOrganisationName'] or 'NHS Trust' %}
@@ -91,7 +93,7 @@
     }
   },
   {
-    key: { text: "Organisation" },
+    key: { text: "Organisation name" },
     value: { text: organisationText },
     actions: {
       items: [
@@ -125,10 +127,9 @@
 
 {{ summaryList({ rows: rows }) }}
 
-{{ warningCallout({
-  heading: "Consent",
-  html: '<p class="nhsuk-card__description">By submitting your account request, you:<ul class="nhsuk-u-margin-top-4 nhsuk-u-margin-bottom-0"><li>agree to the <a target="_blank" href="#">terms and conditions (opens in a new tab)</a></li><li>consent to the use of your data as described in the <a target="_blank" href="#">privacy notice (opens in a new tab)</a></li></ul></p>'
-}) }}
+<h2 class="nhsuk-heading-m">Now request your account</h2>
+
+<p>By submitting this account request you're confirming that, to the best of your knowledge, the details you are providing are correct.</p>
 
 <form action="/{{folder}}/{{subfolder}}/check-your-details" method="post" novalidate>
 
