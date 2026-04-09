@@ -93,25 +93,25 @@
   },
   items: [
     {
-      value: "Not contacted",
-      text: "Not contacted",
-      checked: (data.updateContactedStatus == "Not contacted") 
+      value: "Not yet contacted",
+      text: "Not yet contacted",
+      checked: (data.updateContactedStatus == "Not yet contacted") 
                or (not data.updateContactedStatus)
     },
     {
-      value: "Contacted",
-      text: "Contacted",
-      checked: data.updateContactedStatus == "Contacted"
+      value: "Contacted – participant declined",
+      text: "Contacted – participant declined",
+      checked: data.updateContactedStatus == "Contacted – participant declined"
     },
     {
-      value: "Recruited",
-      text: "Recruited",
-      checked: data.updateContactedStatus == "Recruited"
+      value: "Contacted – recruited",
+      text: "Contacted – recruited",
+      checked: data.updateContactedStatus == "Contacted – recruited"
     },
     {
-      value: "Withdrawn",
-      text: "Withdrawn",
-      checked: data.updateContactedStatus == "Withdrawn"
+      value: "Contacted – not eligible",
+      text: "Contacted – not eligible",
+      checked: data.updateContactedStatus == "Contacted – not eligible"
     }
   ]
 }) }}
