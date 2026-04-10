@@ -22,8 +22,8 @@
 {% block header %}
 
 <header class="nhsuk-header nhsuk-header--white" role="banner" data-module="nhsuk-header" data-nhsuk-header-init="">
-   <div class="nhsuk-width-container bpor-container">
-      <div class="bpor-logo-container">
+   <div class="nhsuk-width-container jdr-container">
+      <div class="jdr-logo-container">
         <a class="nhsuk-header__service-logo" href="/" aria-label="Join Dementia Research Logo">
           <img class="nhsuk-header__organisation-logo" src="/assets/images/JDR-logo.svg" width="280" alt="Join Dementia Research Logo">
         </a>
@@ -37,6 +37,38 @@
          </a>
       </div>
    </div>
+  <nav class="nhsuk-header__navigation_jdr" aria-label="Menu">
+    <div class="nhsuk-header__navigation-container nhsuk-width-container">
+      <ul class="nhsuk-header__navigation-list">
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="https://www.joindementiaresearch.nihr.ac.uk/">Home</a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="https://www.joindementiaresearch.nihr.ac.uk/content/about">About us</a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="https://www.joindementiaresearch.nihr.ac.uk/content/whysignup">Why sign up?</a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="https://news.joindementiaresearch.nihr.ac.uk/category/volunteer-stories/">Volunteer stories</a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="https://news.joindementiaresearch.nihr.ac.uk/">News</a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="https://www.joindementiaresearch.nihr.ac.uk/content/researchers">Researchers</a>
+        </li>
+        <li class="nhsuk-header__navigation-item">
+          <a class="nhsuk-header__navigation-link" href="http://nhs.joindementiaresearch.nihr.ac.uk/">Healthcare</a>
+        </li>
+        <li class="nhsuk-header__menu" hidden>
+          <button class="nhsuk-header__menu-toggle nhsuk-header__navigation-link" id="toggle-menu" aria-expanded="false">
+            <span class="nhsuk-u-visually-hidden">Browse </span>More
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </header>
 
 {% endblock %}
@@ -44,42 +76,8 @@
 <!-- Edit the footer -->
 <!-- Footer code examples can be found at https://service-manual.nhs.uk/design-system/components/footer -->
 {% block footer %}
-{% set footerHTML %}
-<div class="footer-inner">
 
-    <div class="footer-left">
-
-      <ul class="social-list">
-        <li><a href="https://www.linkedin.com/company/nihr-research" aria-label="LinkedIn"><img src="/assets/images/linkedin.svg" alt="LinkedIn Logo" /></a></li>
-        <li><a href="https://x.com/NIHRresearch" aria-label="X (formerly Twitter)"><img src="/assets/images/x.svg" alt="X (formerly Twitter) Logo" /></a></li>
-        <li><a href="https://en-gb.facebook.com/OfficialNIHR/" aria-label="Facebook"><img src="/assets/images/facebook.svg" alt="Facebook Logo" /></a></li>
-        <li><a href="https://www.youtube.com/NIHRtv" aria-label="YouTube"><img src="/assets/images/youtube.svg" alt="YouTube Logo" /></a></li>
-        <li><a href="https://www.instagram.com/nihr_research/" aria-label="Instagram"><img src="/assets/images/instagram.svg" alt="Instagram Logo" /></a></li>
-      </ul>
-
-      <nav class="policy-links">
-        <a href="#">Accessibility statement</a>
-        <a href="#">Cookies policy</a>
-        <a href="#">Privacy policy</a>
-        <a href="#">NIHR 2025</a>
-      </nav>
-    </div>
-
-    <div class="funded-by">
-      <p class="funded-by__label">Funded by</p>
-      <a href="https://www.gov.uk/government/organisations/department-of-health-and-social-care" aria-label="Department of Health & Social Care"><img class="funded-by__logo" src="/assets/images/DHSC-logo.svg" alt="Department of Health & Social Care Logo" /></a>
-    </div>
-
-</div>
-{% endset %}
-
-<footer class="bpor-footer-top" role="contentinfo">
-
-  <div class="nhsuk-width-container"><a href="https://www.accessibility-services.co.uk/certificates/nihr-be-part-of-research/"><img src="/assets/images/shaw-trust-logo.svg" alt=""></a></div>
-
-</footer>
-
-<footer class="nhsuk-footer nihr-footer" role="contentinfo">
+<footer class="nhsuk-footer jdr-footer" role="contentinfo">
   <div class="nhsuk-width-container">
 
   
@@ -207,7 +205,7 @@
   </div>
 </footer>
 
-<footer class="bpor-footer-bottom" role="contentinfo">
+<footer class="jdr-footer-bottom" role="contentinfo">
 
   <div class="nhsuk-width-container">
     
