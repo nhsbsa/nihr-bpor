@@ -31,8 +31,8 @@
   align-self:auto;
 }
 
-.nhsuk-header__navigation_jdr {
-    background-color: #990066;
+.jdr-navigation-color {
+    background-color: #990066 !important;
 }
 
 // JDR - Footer
@@ -60,6 +60,22 @@
 }
 
 // JDR - Footer (Custom)
+
+.jdr-footer-top {
+  background-color: #0e2e5a;
+
+  @include nhsuk-print-hide;
+  @include nhsuk-responsive-padding(5, bottom);
+  @include nhsuk-responsive-padding(5, top);
+}
+
+.jdr-footer-bottom {
+  background-color: white;
+
+  @include nhsuk-print-hide;
+  @include nhsuk-responsive-padding(5, bottom);
+  @include nhsuk-responsive-padding(5, top);
+}
 
 .footer-inner {
   display: flex;
@@ -170,4 +186,34 @@
   height: 150px;
   width: auto;
   display: block;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px; /* space between columns */
+}
+
+.footer-col {
+  border-radius: 6px;
+}
+
+/* Make all images same height */
+.footer-col img {
+  width: 100%;
+  height: 125px;      /* set the desired height */
+  border-radius: 4px;
+}
+
+/* Optional: responsive behavior */
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
 }
