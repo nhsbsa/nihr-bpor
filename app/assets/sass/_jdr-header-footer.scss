@@ -37,12 +37,36 @@
 
 // JDR - Footer
 
+@mixin nhsuk-link-style-black {
+  color: #000000; // default link colour
+
+  &:visited {
+    color: #000000; // visited link colour
+  }
+
+  &:hover {
+    color: #BD007A; // hover colour
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 3px solid #ffeb3b;
+    outline-offset: 0;
+    background-color: #ffeb3b;
+    color: #212b32;
+    text-decoration: none;
+  }
+
+  &:active {
+    color: #BD007A;
+  }
+}
+
 .jdr-footer {
-  border-top: none;
-  background-color: $nihr-colour;
+  border-top: solid 4px #BD007A;
+  background-color: #EAEAEA;
 
   @include nhsuk-print-hide;
-  @include nhsuk-responsive-padding(5, bottom);
   @include nhsuk-responsive-padding(5, top);
 
   p {
@@ -50,11 +74,11 @@
   }
 
   a {
-    @include nhsuk-link-style-white;
+    @include nhsuk-link-style-black;
   }
 
   h2 {
-    color: nhsuk-colour("white");
+    color: #BD007A;
   }
 
 }
@@ -70,11 +94,10 @@
 }
 
 .jdr-footer-bottom {
-  background-color: white;
+  background-color: #EAEAEA;
 
   @include nhsuk-print-hide;
   @include nhsuk-responsive-padding(5, bottom);
-  @include nhsuk-responsive-padding(5, top);
 }
 
 .footer-inner {
