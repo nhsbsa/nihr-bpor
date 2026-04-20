@@ -52,6 +52,8 @@ drug_names: [
   { text: "Valproate", value: "Valproate" }, // V
   { text: "Warfarin", value: "Warfarin" }, // W
   { text: "Xylometazoline", value: "Xylometazoline" } // X
-]
+],
+
+// brand: 'JDR'
 
 }
