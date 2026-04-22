@@ -54,13 +54,13 @@
 
         {% if data['conditionQuestion1'] %}
           {% set rows = rows.concat([{
-            key: { text: "Do you have Diabetes (type 2)?" },
+            key: { text: "Have you been diagnosed with diabetes (type 2)?" },
             value: { text: data['conditionQuestion1'] },
             actions: {
               items: [{
                 href: "condition-1#conditionQuestion1",
                 text: "Change",
-                visuallyHiddenText: "if you have Diabetes (type 2)"
+                visuallyHiddenText: "if you have diabetes (type 2)"
               }]
             }
           }]) %}
@@ -68,13 +68,13 @@
 
         {% if data['conditionQuestion2'] %}
           {% set rows = rows.concat([{
-            key: { text: "Do you have Congenital heart disease?" },
+            key: { text: "Have you been diagnosed with congenital heart disease?" },
             value: { text: data['conditionQuestion2'] },
             actions: {
               items: [{
                 href: "condition-2#conditionQuestion2",
                 text: "Change",
-                visuallyHiddenText: "if you have Congenital heart disease"
+                visuallyHiddenText: "if you have congenital heart disease"
               }]
             }
           }]) %}
@@ -82,13 +82,13 @@
 
         {% if data['conditionQuestion3'] %}
           {% set rows = rows.concat([{
-            key: { text: "Do you have Stroke?" },
+            key: { text: "Have you been diagnosed with stroke?" },
             value: { text: data['conditionQuestion3'] },
             actions: {
               items: [{
                 href: "condition-3#conditionQuestion3",
                 text: "Change",
-                visuallyHiddenText: "if you have Stroke"
+                visuallyHiddenText: "if you have stroke"
               }]
             }
           }]) %}
@@ -96,13 +96,13 @@
 
         {% if data['medicationQuestion1'] %}
           {% set rows = rows.concat([{
-            key: { text: "Are you taking Metformin hydrochloride?" },
+            key: { text: "Are you taking Metformin Hydrochloride?" },
             value: { text: data['medicationQuestion1'] },
             actions: {
               items: [{
                 href: "medication-1#medicationQuestion1",
                 text: "Change",
-                visuallyHiddenText: "if you currently take Metformin hydrochloride"
+                visuallyHiddenText: "if you currently take Metformin Hydrochloride"
               }]
             }
           }]) %}

@@ -46,9 +46,11 @@
 
       <h1>How would you like us to contact you?</h1>
 
-      <h2>Your contact details</h2>
+      <p>We’ll share your name and email address with the research team on the study so they can let you know what happens next.</p>
 
-      <p>Check the contact details we currently have for you. You should update them if they are not correct.</p>
+      <h2 class="nhsuk-heading-m">Confirm your name and email address</h2>
+
+      <p>Check we have your correct name and email address. If you need to update them you can <a href="#">log in your Be Part of Research account</a>.</p>
 
       {{ summaryList({
         rows: [
@@ -71,9 +73,9 @@
         ]
       }) }}
 
-      <h2>Would you like to add a phone number?</h2>
+      <h2 class="nhsuk-heading-m">Would you like to add a phone number?</h2>
 
-      <p>We’ll use your phone number to contact you about this study. If you do not add a phone number, we’ll contact you by email.</p>
+      <p>You can also choose to add your phone number.</p>
 
 <form action="review-details" method="post" novalidate>
 
@@ -89,11 +91,19 @@
         value: data.phoneNumber
       }) }}
 
+      {% call details({
+  summaryText: "How will I be contacted?"
+}) %}
+  <p>Different research teams will prefer to use different methods of contact. By adding your phone number, you’re giving researchers another way to get in touch. However, they may still choose to contact you by email.</p>
+{% endcall %}
+
+
       {{ button({
         text: "Continue"
       }) }}
 
 </form>
+
 
     </div>
   </div>
