@@ -49,7 +49,7 @@
 <h1 class="nhsuk-u-margin-bottom-4">Confirm your email address</h1>
 
 {{ hint({
-  html: 'We need you to confirm your email address so we can check your identity and make sure you can take part in this study.'
+  html: 'Enter the email address you use to log in to Be Part of Research.'
 }) }}
 
 {{ input({
@@ -63,6 +63,12 @@
     text: "Email address"
   }
 }) }}
+
+{% call details({
+  summaryText: "Why we ask you to confirm your email address"
+}) %}
+  <p>This is a security check to confirm your identity and make sure you can take part in this study.</p>
+{% endcall %}
 
 {{ button({
   text: "Continue"
