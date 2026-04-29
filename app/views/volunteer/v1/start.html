@@ -55,15 +55,16 @@
           <li>medication you take</li>
         </ul>
 
-        <p>
-          After you’ve answered the questions, we’ll let you know straight away if you can continue to take part. 
-        </p>
-
         {% call details({
           summaryText: "How we handle your data"
         }) %}
-          <p>We'll only use your data to check if you can take part in this specific study. If you cannot take part, we'll delete your data immediately.</p>
-          <p>We'll only keep your data as long as it's needed for this study. After that, we’ll permanently delete it.</p>
+          <p>If you can take part in this study, we:</p>
+          <ul>
+            <li>only store that you’re eligible to take part - we’ll delete this information once it’s no longer needed for this study</li>
+            <li>do not store any of the data linked to the health conditions or medications that make you eligible</li>
+          </ul>
+          <p>If you cannot take part, we do not keep any of your data relating to this study.</p>
+          <p>This information only applies to the data you give us to check if you can take part in this particular study. General data linked to your Be Part of Research account is not affected.</p>
         {% endcall %}
 
         <form action="start" method="post" novalidate>
