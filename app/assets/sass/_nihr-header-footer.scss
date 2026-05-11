@@ -96,37 +96,43 @@
   gap: 1.5rem;
   padding-bottom: 0.5rem;
   @include nhsuk-font(16);
-  a {
+
+  a,
+  span {
+    color: white;
     white-space: nowrap;
     position: relative;
-
-    + a {
-      &::before {
-        content: "";
-        position: absolute;
-        left: -0.75rem;
-        top: 50%;
-        width: 1px;
-        height: 1rem;
-        background: rgba(255, 255, 255, 1);
-        transform: translateY(-50%);
-      }
-    }
   }
 
-  // ✅ Mobile/Tablet behaviour
-  @include nhsuk-media-query($until: tablet) {
-    flex-direction: column;      // Stack vertically
-    gap: 0.75rem;                // Tighter spacing
-    align-items: flex-start;     // Left align
+  // Add separator before every item except the first
+  a + a::before,
+  a + span::before,
+  span + a::before,
+  span + span::before {
+    content: "";
+    position: absolute;
+    left: -0.75rem;
+    top: 50%;
+    width: 1px;
+    height: 1rem;
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-50%);
+  }
 
-    a {
-      white-space: normal;       // Allow wrapping if needed
-      padding-left: 0;           // Remove separator spacing
+  @include nhsuk-media-query($until: tablet) {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+
+    a,
+    span {
+      white-space: normal;
+      padding-left: 0;
     }
 
-    a + a::before {
-      display: none;             // Remove vertical separators on mobile
+    a::before,
+    span::before {
+      display: none;
     }
   }
 }
