@@ -33,113 +33,90 @@
 <!-- Edit the footer -->
 <!-- Footer code examples can be found at https://service-manual.nhs.uk/design-system/components/footer -->
 {% block footer %}
-{% set footerHTML %}
-<div class="footer-inner">
-
-    <div class="footer-left">
-
-      <ul class="social-list">
-        <li><a href="https://www.linkedin.com/company/nihr-research" aria-label="LinkedIn"><img src="/assets/images/linkedin.svg" alt="LinkedIn Logo" /></a></li>
-        <li><a href="https://x.com/NIHRresearch" aria-label="X (formerly Twitter)"><img src="/assets/images/x.svg" alt="X (formerly Twitter) Logo" /></a></li>
-        <li><a href="https://en-gb.facebook.com/OfficialNIHR/" aria-label="Facebook"><img src="/assets/images/facebook.svg" alt="Facebook Logo" /></a></li>
-        <li><a href="https://www.youtube.com/NIHRtv" aria-label="YouTube"><img src="/assets/images/youtube.svg" alt="YouTube Logo" /></a></li>
-        <li><a href="https://www.instagram.com/nihr_research/" aria-label="Instagram"><img src="/assets/images/instagram.svg" alt="Instagram Logo" /></a></li>
-      </ul>
-
-      <nav class="policy-links">
-        <a href="#">Accessibility statement</a>
-        <a href="#">Cookies policy</a>
-        <a href="#">Privacy policy</a>
-        <a href="#">NIHR 2025</a>
-      </nav>
-    </div>
-
-    <div class="funded-by">
-      <p class="funded-by__label">Funded by</p>
-      <a href="https://www.gov.uk/government/organisations/department-of-health-and-social-care" aria-label="Department of Health & Social Care"><img class="funded-by__logo" src="/assets/images/DHSC-logo.svg" alt="Department of Health & Social Care Logo" /></a>
-    </div>
-
-</div>
-{% endset %}
-
-{{ footer({
-  classes: "nihr-footer",
-  navigation: [
-    {
-      title: "Useful links",
-      items: [
-        {
-          href: "https://www.nihr.ac.uk/contact-us",
-          text: "Contact us"
-        },
-        {
-          href: "https://www.nihr.ac.uk/glossary",
-          text: "Glossary"
-        },
-        {
-          href: "https://www.nihr.ac.uk/login-nihr-systems",
-          text: "Login to NIHR systems"
-        },
-        {
-          href: "https://www.nihr.ac.uk/newsletters",
-          text: "Newsletters"
-        }
-      ]
-    },
-    {
-      title: "About",
-      items: [
-        {
-          href: "https://www.nihr.ac.uk/news-views-stories",
-          text: "News, views and stories"
-        },
-        {
-          href: "https://www.nihr.ac.uk/about-us/who-we-are/policies-and-guidelines",
-          text: "Policies and guidelines"
-        },
-        {
-          href: "https://www.nihr.ac.uk/people",
-          text: "Our people"
-        },
-        {
-          href: "https://www.nihr.ac.uk/events",
-          text: "Events"
-        }
-      ]
-    },
-    {
-      title: "Get involved",
-      items: [
-        {
-          href: "https://www.nihr.ac.uk/jobs",
-          text: "Jobs"
-        },
-        {
-          href: "https://www.nihr.ac.uk/get-involved/committees",
-          text: "Join our committees"
-        },
-        {
-          href: "https://www.nihr.ac.uk/get-involved/read-and-review-documentation",
-          text: "Become a reviewer"
-        },
-        {
-          href: "https://www.nihr.ac.uk/get-involved/take-part-in-a-study",
-          text: "Take part in a study"
-        },
-        {
-          href: "/prototype-admin/reset?returnPage=" + (currentPage | urlencode),
-          text: "Reset data"
-        }
-      ]
-    }
-  ],
-  meta: {
-    html: footerHTML
-  },
-  copyright: {
-    text: ""
-  }
-}) }}
+<footer class="nhsuk-footer nihr-footer" role="contentinfo">
+   <div class="nhsuk-width-container">
+      <div class="nhsuk-footer__navigation nhsuk-grid-row">
+         <div class="nhsuk-grid-column-one-quarter">
+            <h2 class="nhsuk-footer__heading nhsuk-heading-s">Useful links</h2>
+            <ul class="nhsuk-footer__list">
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/contact-us">Contact us</a>
+               </li>
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/glossary">Glossary</a>
+               </li>
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/login-nihr-systems">Login to NIHR systems</a>
+               </li>
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/newsletters">Newsletters</a>
+               </li>
+            </ul>
+         </div>
+         <div class="nhsuk-grid-column-one-quarter">
+            <h2 class="nhsuk-footer__heading nhsuk-heading-s">About</h2>
+            <ul class="nhsuk-footer__list">
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/news-views-stories">News, views and stories</a>
+               </li>
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/about-us/who-we-are/policies-and-guidelines">Policies and guidelines</a>
+               </li>
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/people">Our people</a>
+               </li>
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/events">Events</a>
+               </li>
+            </ul>
+         </div>
+         <div class="nhsuk-grid-column-one-quarter">
+            <h2 class="nhsuk-footer__heading nhsuk-heading-s">Get involved</h2>
+            <ul class="nhsuk-footer__list">
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/jobs">Jobs</a>
+               </li>
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/get-involved/committees">Join our committees</a>
+               </li>
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/get-involved/read-and-review-documentation">Become a reviewer</a>
+               </li>
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="https://www.nihr.ac.uk/get-involved/take-part-in-a-study">Take part in a study</a>
+               </li>
+               <li class="nhsuk-footer__list-item">
+                  <a class="nhsuk-footer__list-item-link" href="/prototype-admin/reset?returnPage=%2Fresearcher">Reset data</a>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <div class="nhsuk-footer__meta">
+         <div class="footer-inner">
+            <div class="footer-left">
+               <ul class="social-list">
+                  <li><a href="https://www.linkedin.com/company/nihr-research" aria-label="LinkedIn"><img src="/assets/images/linkedin.svg" alt="LinkedIn Logo"></a></li>
+                  <li><a href="https://x.com/NIHRresearch" aria-label="X (formerly Twitter)"><img src="/assets/images/x.svg" alt="X (formerly Twitter) Logo"></a></li>
+                  <li><a href="https://en-gb.facebook.com/OfficialNIHR/" aria-label="Facebook"><img src="/assets/images/facebook.svg" alt="Facebook Logo"></a></li>
+                  <li><a href="https://www.youtube.com/NIHRtv" aria-label="YouTube"><img src="/assets/images/youtube.svg" alt="YouTube Logo"></a></li>
+                  <li><a href="https://www.instagram.com/nihr_research/" aria-label="Instagram"><img src="/assets/images/instagram.svg" alt="Instagram Logo"></a></li>
+               </ul>
+               <nav class="policy-links">
+                  <a href="#">Accessibility statement</a>
+                  <a href="#">Cookies policy</a>
+                  <a href="#">Privacy policy</a>
+                  <span><strong>&copy; NIHR 2026</strong></span>
+               </nav>
+            </div>
+            <div class="funded-by">
+               <p class="funded-by__label">Funded by</p>
+               <a href="https://www.gov.uk/government/organisations/department-of-health-and-social-care" aria-label="Department of Health &amp; Social Care"><img class="funded-by__logo" src="/assets/images/DHSC-logo.svg" alt="Department of Health &amp; Social Care Logo"></a>
+            </div>
+         </div>
+         <p class="nhsuk-body-s"></p>
+      </div>
+   </div>
+</footer>
 {% endblock %}
 
 {% block bodyEnd %}
