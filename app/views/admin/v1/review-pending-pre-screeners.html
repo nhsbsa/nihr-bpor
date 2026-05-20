@@ -76,7 +76,7 @@
 {% if data['select-administrator'] %}
   {% set updateAdminName = data['select-administrator'] %}
 {% elseif data['adminFirstName'] and data['adminLastName'] %}
-  {% set updateAdminName = data['adminFirstName'] + " " + data['adminLastName'] %}
+  {% set updateAdminName = data['adminLastName'] + ", " + data['adminFirstName'] %}
 {% else %}
   {% set updateAdminName = '<span class="nhsuk-hint">Not assigned</span>' %}
 {% endif %}
@@ -114,7 +114,7 @@
       },
       {
         header: 'Researcher name',
-        text: 'Jane Doe'
+        text: 'Doe, Jane'
       },
       {
         header: 'Last updated',
@@ -140,7 +140,7 @@
       },
       {
         header: 'Researcher name',
-        text: 'Jane Doe'
+        text: 'Doe, Jane'
       },
       {
         header: 'Last updated',
@@ -148,7 +148,7 @@
       },
       {
         header: 'Admin name',
-        text: 'Sophia Bennett'
+        text: 'Bennett, Sophia'
       },
       {
         header: 'Status',

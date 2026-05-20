@@ -65,9 +65,9 @@
     <div class="nhsuk-grid-column-three-quarters">
       
 {% if data['researcherFirstName'] and data['researcherLastName'] %}
-  {% set ownerName = data['researcherFirstName'] + " " + data['researcherLastName'] %}
+  {% set ownerName = data['researcherLastName'] + ", " + data['researcherFirstName'] %}
 {% else %}
-  {% set ownerName = "Jane Doe" %}
+  {% set ownerName = "Doe, Jane" %}
 {% endif %}
 
 <h1>Manage pre-screeners</h1>

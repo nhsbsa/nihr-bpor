@@ -103,7 +103,7 @@
   ],
   rows: [
     [
-      { header: 'Name', text: ((data['researcherFirstName'] or 'Amelia') ~ ' ' ~ (data['researcherLastName'] or 'Hart')) },
+      { header: 'Name', text: ((data['researcherLastName'] or 'Hart') ~ ', ' ~ (data['researcherFirstName'] or 'Amelia')) },
       { header: 'Email', text: 'amelia.hart@durham.ac.uk' },
       { header: 'Organisation', text: data['researcherOrganisationName'] if data['researcherOrganisation'] == 'Other' else (data['researcherOrganisation'] or 'NHS Trust')},
       { header: 'Date submitted', text: '9 February 2026' },
@@ -111,7 +111,7 @@
       { header: 'Actions', html: '<p><a href="edit-researcher-account">Update account</a></p>' }
     ],
     [
-      { header: 'Name', text: ((data['studyAdminFirstName'] or 'Daniel') ~ ' ' ~ (data['studyAdminLastName'] or 'Mercer')) },
+      { header: 'Name', text: ((data['studyAdminLastName'] or 'Mercer') ~ ', ' ~ (data['studyAdminFirstName'] or 'Daniel')) },
       { header: 'Email', text: 'daniel.mercer@nihr.ac.uk' },
       { header: 'Organisation', text: data['studyAdminOrganisationName'] if data['studyAdminOrganisation'] == 'Other' else (data['studyAdminOrganisation'] or 'NIHR')},
       { header: 'Date submitted', text: '3 February 2026' },

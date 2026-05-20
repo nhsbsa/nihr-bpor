@@ -103,7 +103,7 @@
   ],
   rows: [
     [
-      { header: 'Name', text: ((data['studyAdminFirstName'] or 'Daniel') ~ ' ' ~ (data['studyAdminLastName'] or 'Mercer')) },
+      { header: 'Name', text: ((data['studyAdminLastName'] or 'Mercer') ~ ', ' ~ (data['studyAdminFirstName'] or 'Daniel')) },
       { header: 'Email', text: 'daniel.mercer@nihr.ac.uk' },
       { header: 'Organisation', text: data['studyAdminOrganisationName'] if data['studyAdminOrganisation'] == 'Other' else (data['studyAdminOrganisation'] or 'NIHR')},
       { header: 'Date submitted', text: '3 February 2026' },
@@ -111,7 +111,7 @@
       { header: 'Actions', html: '<p><a href="edit-study-admin-account">Update account</a></p>' }
     ],
     [
-      { header: 'Name', text: ((data['systemAdminFirstName'] or 'Sofia') ~ ' ' ~ (data['systemAdminLastName'] or 'Petrov')) },
+      { header: 'Name', text: ((data['systemAdminLastName'] or 'Petrov') ~ ', ' ~ (data['systemAdminFirstName'] or 'Sofia')) },
       { header: 'Email', text: 'sofia.petrov@nihr.ac.uk' },
       { header: 'Organisation', text: data['systemAdminOrganisationName'] if data['systemAdminOrganisation'] == 'Other' else (data['systemAdminOrganisation'] or 'NIHR')},
       { header: 'Date submitted', text: '2 February 2026' },
