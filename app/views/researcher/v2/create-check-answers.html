@@ -1,0 +1,313 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+{% set currentPage = "Create pre-screener" %}
+{% extends 'layout-researcher-nihr-logged-in.html' %}
+{% set pageName = "Check your answers before submitting your pre-screener" %}
+{% set containerClasses = "nihr-dashboard" %}
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+{% block content %}
+<div class="nhsuk-grid-row">
+   <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+      <nav class="app-side-nav">
+         <h2 class="app-side-nav__heading">Dashboard</h2>
+         <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+         </ul>
+         <h2 class="app-side-nav__heading">Manage studies</h2>
+         <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+         </ul>
+         <h2 class="app-side-nav__heading">Support</h2>
+         <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch-volunteerservice@nihr.ac.uk">Email us</a></li>
+         </ul>
+      </nav>
+   </div>
+   <div class="nhsuk-grid-column-three-quarters">
+      {{ backLink({
+      "href": "javascript:history.go(-1)",
+      "text": "Back",
+      classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+      }) }}
+      <h1>Check your answers before submitting your pre-screener</h1>
+      <h2 class="nhsuk-heading-m">
+         Study information details
+      </h2>
+      <dl class="nhsuk-summary-list">
+         <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">
+               Full study name
+            </dt>
+            <dd class="nhsuk-summary-list__value">
+               {% if data['studyName'] %}{{ data['studyName'] }}{% else %}Cognitive therapy in Dementia{% endif %}
+            </dd>
+            <dd class="nhsuk-summary-list__actions">
+               <a class="nhsuk-link" href="create-study-details#studyName">Change<span class="nhsuk-u-visually-hidden"> full study name</span></a>
+            </dd>
+         </div>
+         <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">
+               Be Part of Research study ID
+            </dt>
+            <dd class="nhsuk-summary-list__value">
+               {% if data['studyID'] %}{{ data['studyID'] }}{% else %}BPOR001234{% endif %}
+            </dd>
+            <dd class="nhsuk-summary-list__actions">
+               <a class="nhsuk-link" href="create-study-details#studyID">Change<span class="nhsuk-u-visually-hidden"> study ID</span></a>
+            </dd>
+         </div>
+      </dl>
+      <h2 class="nhsuk-heading-m">
+         Inclusion and exclusion criteria details
+      </h2>
+      <dl class="nhsuk-summary-list">
+         <div class="nhsuk-summary-list__row">
+            <dt class="nhsuk-summary-list__key">
+               Criteria selected
+            </dt>
+            <dd class="nhsuk-summary-list__value">
+              {% if data.addhealthConditions and data.addhealthConditions|length > 0 %}
+                {{ data.addhealthConditions | join('<br>') | safe }}<br>
+              {% endif %}
+
+              {% if data.addMedications and data.addMedications|length > 0 %}
+                {{ data.addMedications | join('<br>') | safe }}<br>
+              {% endif %}
+
+              {% if data.addAdditionalQuestion and data.addAdditionalQuestion|length > 0 %}
+                {{ data.addAdditionalQuestion | join('<br>') | safe }}
+              {% endif %}
+            </dd>
+            <dd class="nhsuk-summary-list__actions">
+               <a class="nhsuk-link" href="create-inclusion-exclusion-criteria#addhealthConditions">Change<span class="nhsuk-u-visually-hidden"> inclusion and exclusion criteria</span></a>
+            </dd>
+         </div>
+      </dl>
+{# ------------------------------------------------------------
+   HEALTH CONDITIONS
+------------------------------------------------------------ #}
+
+{% if data.addhealthConditions
+  and data.addhealthConditions | length
+  and (
+    'Include volunteers with certain health conditions' in data.addhealthConditions or
+    'Exclude volunteers with certain health conditions' in data.addhealthConditions
+  )
+%}
+<h2 class="nhsuk-heading-m">Health condition details</h2>
+{% endif %}
+
+{% if data.addhealthConditions
+  and data.addhealthConditions | length
+  and 'Include volunteers with certain health conditions' in data.addhealthConditions
+%}
+<h3 class="nhsuk-heading-s">Include volunteers with certain health conditions</h3>
+
+{{ summaryList({
+  classes: "nhsuk-summary-list--no-border",
+  rows: [
+    {
+      key: {
+        text: "Health condition"
+      },
+      value: {
+        html: data.conditions | join("<br>")
+      },
+      actions: {
+        items: [
+          {
+            href: "create-recruit-health-condition",
+            text: "Change",
+            visuallyHiddenText: "health condition"
+          }
+        ]
+      }
+    }
+  ]
+}) }}
+
+{% endif %}
+
+{% if data.addhealthConditions
+  and data.addhealthConditions | length
+  and 'Exclude volunteers with certain health conditions' in data.addhealthConditions
+%}
+<h3 class="nhsuk-heading-s">Exclude volunteers with certain health conditions</h3>
+
+{{ summaryList({
+  classes: "nhsuk-summary-list--no-border",
+  rows: [
+    {
+      key: {
+        text: "Health condition"
+      },
+      value: {
+        html: data.conditionsExclude | join("<br>")
+      },
+      actions: {
+        items: [
+          {
+            href: "create-exclude-health-condition",
+            text: "Change",
+            visuallyHiddenText: "health condition"
+          }
+        ]
+      }
+    }
+  ]
+}) }}
+
+{% endif %}
+
+
+{# ------------------------------------------------------------
+   MEDICATIONS
+------------------------------------------------------------ #}
+
+{% if data.addMedications
+  and data.addMedications | length
+  and (
+    'Include volunteers taking certain medications' in data.addMedications or
+    'Exclude volunteers taking certain medications' in data.addMedications
+  )
+%}
+<h2 class="nhsuk-heading-m">Medication details</h2>
+{% endif %}
+
+{% if data.addMedications
+  and data.addMedications | length
+  and 'Include volunteers taking certain medications' in data.addMedications
+%}
+<h3 class="nhsuk-heading-s">Include volunteers taking certain medications</h3>
+
+{{ summaryList({
+  classes: "nhsuk-summary-list--no-border",
+  rows: [
+    {
+      key: {
+        text: "Medication"
+      },
+      value: {
+        html: data.medications | join("<br>")
+      },
+      actions: {
+        items: [
+          {
+            href: "create-recruit-medication",
+            text: "Change",
+            visuallyHiddenText: "medication"
+          }
+        ]
+      }
+    }
+  ]
+}) }}
+
+{% endif %}
+
+{% if data.addMedications
+  and data.addMedications | length
+  and 'Exclude volunteers taking certain medications' in data.addMedications
+%}
+<h3 class="nhsuk-heading-s">Exclude volunteers taking certain medications</h3>
+
+{{ summaryList({
+  classes: "nhsuk-summary-list--no-border",
+  rows: [
+    {
+      key: {
+        text: "Medication"
+      },
+      value: {
+        html: data.medicationsExclude | join("<br>")
+      },
+      actions: {
+        items: [
+          {
+            href: "create-exclude-medication",
+            text: "Change",
+            visuallyHiddenText: "medication"
+          }
+        ]
+      }
+    }
+  ]
+}) }}
+
+{% endif %}
+
+
+{# ------------------------------------------------------------
+   ADDITIONAL QUESTIONS
+------------------------------------------------------------ #}
+
+{% if data.addAdditionalQuestion %}
+<h2 class="nhsuk-heading-m">Additional questions</h2>
+{% endif %}
+
+{% for i in [1,2,3,4,5] %}
+  {% if data["question" ~ i ~ "Text"] %}
+    {{ summaryList({
+      card: {
+        heading: "Question " ~ i,
+        headingSize: "s",
+        actions: {
+          items: [
+            {
+              text: "Remove",
+              href: "/remove-additional-question-" ~ i,
+              visuallyHiddenText: "question " ~ i
+            }
+          ]
+        }
+      },
+      rows: [
+        {
+          key: { text: "Question" },
+          value: { text: data["question" ~ i ~ "Text"] },
+          actions: {
+            items: [
+              {
+                text: "Change",
+                href: "/create-additional-question-" ~ i ~ "#question" ~ i ~ "Text",
+                visuallyHiddenText: "question " ~ i
+              }
+            ]
+          }
+        },
+        {
+          classes: "nhsuk-summary-list__row--no-border",
+          key: { text: "Matching answer" },
+          value: { text: data["question" ~ i ~ "Answer"] },
+          actions: {
+            items: [
+              {
+                text: "Change",
+                href: "/create-additional-question-" ~ i ~ "#question" ~ i ~ "Answer",
+                visuallyHiddenText: "question " ~ i
+              }
+            ]
+          }
+        }
+      ]
+    }) }}
+  {% endif %}
+{% endfor %}
+      <p>After you submit your pre-screener, it’ll be sent to our team for review.</p>
+
+      {{ button({
+      text: "Submit",
+      href: "create-submitted"
+      }) }}
+   </div>
+</div>
+{% endblock %}

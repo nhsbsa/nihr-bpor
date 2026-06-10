@@ -1,0 +1,88 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-out.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<h1>
+  <span>Use Recruit registry volunteers services
+    <span class="nhsuk-caption-xl nhsuk-caption--bottom">
+      <span class="nhsuk-u-visually-hidden">-</span>
+        Log in to manage recruitment for your studies
+    </span>                     
+  </span>
+</h1>
+
+<p>You can:</p>
+
+<ul>
+  <li>create and manage pre-screeners</li>
+  <li>track which eligible volunteers you’ve contacted</li>
+</ul>
+
+<h2 class="nhsuk-heading-m">Before you start</h2>
+
+<p>You'll need to log in or send us a request for a new account.</p>
+
+<p>To do this, you'll need to prove your identity using either:</p>
+
+<ul>
+  <li>GOV.UK One Login - you can create one if you do not already have one</li>
+  <li>your email address</li>
+</ul>
+
+<form action="/{{folder}}/{{subfolder}}/index" method="post" novalidate>
+
+<div class="nhsuk-button-group">
+  
+  {{ button({
+    text: "Log in"
+  }) }}
+
+  {{ button({
+    text: "Request an account",
+    classes: "nhsuk-button--secondary",
+    href: "/" + folder + "/" + subfolder + "/create-type-of-account"
+  }) }}
+
+</div>
+
+</form>
+
+
+    </div>
+  </div>
+{% endblock %}
