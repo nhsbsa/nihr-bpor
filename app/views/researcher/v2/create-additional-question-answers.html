@@ -1,0 +1,347 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Create pre-screener" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-in.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Set your inclusion and exclusion criteria" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Manage studies</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch-volunteerservice@nihr.ac.uk">Email us</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+<h1>List of additional questions</h1>
+
+{% if data.question1Text %}
+  {{ summaryList({
+    card: {
+      heading: "Question 1",
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "remove-additional-question-one",
+            visuallyHiddenText: "question one"
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Question" },
+        value: { text: data.question1Text },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-one#question1Text",
+              visuallyHiddenText: "question one"
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Matching answer" },
+        value: { text: data.question1Answer },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-one#question1Answer",
+              visuallyHiddenText: "question one"
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endif %}
+
+{% if data.question2Text %}
+  {{ summaryList({
+    card: {
+      heading: "Question 2",
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "remove-additional-question-two",
+            visuallyHiddenText: "question two"
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Question" },
+        value: { text: data.question2Text },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-two#question2Text",
+              visuallyHiddenText: "question two"
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Matching answer" },
+        value: { text: data.question2Answer },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-two#question2Answer",
+              visuallyHiddenText: "question two"
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endif %}
+
+{% if data.question3Text %}
+  {{ summaryList({
+    card: {
+      heading: "Question 3",
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "remove-additional-question-three",
+            visuallyHiddenText: "question three"
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Question" },
+        value: { text: data.question3Text },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-three#question3Text",
+              visuallyHiddenText: "question three"
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Matching answer" },
+        value: { text: data.question3Answer },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-three#question3Answer",
+              visuallyHiddenText: "question three"
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endif %}
+
+{% if data.question4Text %}
+  {{ summaryList({
+    card: {
+      heading: "Question 4",
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "remove-additional-question-four",
+            visuallyHiddenText: "question four"
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Question" },
+        value: { text: data.question4Text },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-four#question4Text",
+              visuallyHiddenText: "question four"
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Matching answer" },
+        value: { text: data.question4Answer },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-four#question4Answer",
+              visuallyHiddenText: "question four"
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endif %}
+
+{% if data.question5Text %}
+  {{ summaryList({
+    card: {
+      heading: "Question 5",
+      headingSize: "s",
+      actions: {
+        items: [
+          {
+            text: "Remove",
+            href: "remove-additional-question-five",
+            visuallyHiddenText: "question five"
+          }
+        ]
+      }
+    },
+    rows: [
+      {
+        key: { text: "Question" },
+        value: { text: data.question5Text },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-five#question5Text",
+              visuallyHiddenText: "question five"
+            }
+          ]
+        }
+      },
+      {
+        classes: "nhsuk-summary-list__row--no-border",
+        key: { text: "Matching answer" },
+        value: { text: data.question5Answer },
+        actions: {
+          items: [
+            {
+              text: "Change",
+              href: "create-additional-question-five#question5Answer",
+              visuallyHiddenText: "question five"
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+{% endif %}
+
+{% if not (data.question5Text) %}
+
+<form action="/{{folder}}/{{subfolder}}/create-additional-question-answers" method="post" novalidate>
+
+{{ radios({
+  idPrefix: "anotherQuestion",
+  name: "anotherQuestion",
+  classes: "nhsuk-radios--inline",
+  fieldset: {
+    legend: {
+      text: "Do you want to add another question?",
+      size: "m",
+      isPageHeading: true
+    }
+  },
+  items: [
+    {
+      value: "Yes",
+      text: "Yes"
+    },
+    {
+      value: "No",
+      text: "No"
+    }
+  ]
+}) }}
+
+{{ button({
+  text: "Continue"
+}) }}
+
+</form>
+
+{% endif %}
+
+
+    </div>
+  </div>
+{% endblock %}

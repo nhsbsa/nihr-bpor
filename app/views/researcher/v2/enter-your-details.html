@@ -1,0 +1,214 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-out.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back"
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+{% set organisationHtml %}
+  {{ input({
+    id: "researcherOrganisationName",
+    name: "researcherOrganisationName",
+    label: {
+      text: "Organisation name"
+    }
+  }) }}
+  {{ textarea({
+    id: "researcherAuthorisation",
+    name: "researcherAuthorisation",
+    rows: "3",
+    label: {
+      text: "Authorisation"
+    },
+    hint: {
+      text: "Explain who has authorised you to create a Recruit registry volunteers account and why."
+    }
+  }) }}
+{% endset -%}
+
+<h1>Enter your details</h1>
+
+<form action="/{{folder}}/{{subfolder}}/enter-your-details" method="post" novalidate>
+
+{{ select({
+  label: {
+    text: "Title"
+  },
+  id: "researcherTitle",
+  name: "researcherTitle",
+  items: [
+    {
+      value: "Select title",
+      text: "Select title"
+    },
+    {
+      value: "Mr",
+      text: "Mr"
+    },
+    {
+      value: "Mrs",
+      text: "Mrs"
+    },
+    {
+      value: "Miss",
+      text: "Miss"
+    },
+    {
+      value: "Mx",
+      text: "Mx"
+    },
+    {
+      value: "Dr",
+      text: "Dr"
+    },
+    {
+      value: "Prof",
+      text: "Prof"
+    },
+    {
+      value: "Other",
+      text: "Other"
+    },
+    {
+      value: "Prefer not to say",
+      text: "Prefer not to say"
+    }
+  ]
+}) }}
+
+{{ input({
+  id: "researcherFirstName",
+  name: "researcherFirstName",
+  classes: "nhsuk-input--width-20",
+  label: {
+    text: "First name"
+  }
+}) }}
+
+{{ input({
+  id: "researcherLastName",
+  name: "researcherLastName",
+  classes: "nhsuk-input--width-20",
+  label: {
+    text: "Last name"
+  }
+}) }}
+
+
+<label class="nhsuk-label" for="myAutocomplete">Organisation name</label>
+
+<!--
+<div class="nhsuk-hint">
+  Start typing your organisation name
+</div>
+-->
+
+<div id="my-autocomplete-container" class="nhsuk-input--width-20 nhsuk-u-margin-bottom-5"></div>
+
+{% call details({
+  summaryText: "If your organisation is not listed"
+}) %}
+  <p>Enter the your organisation name and authorisation for using the service.</p>
+
+  <div class="nhsuk-form-group">
+    <label class="nhsuk-label" for="researcherOrganisationName">
+      Enter your organisation name
+    </label>
+    <input class="nhsuk-input" id="researcherOrganisationName" name="researcherOrganisationName" type="text">
+  </div>
+
+  <div class="nhsuk-form-group">
+    <label class="nhsuk-label" for="researcherAuthorisation">
+      Authorisation
+    </label>
+    <div id="researcherAuthorisation-hint" class="nhsuk-hint">
+      Explain who has authorised you to create a Recruit registry volunteers account and why.
+    </div>
+    <textarea class="nhsuk-textarea" id="researcherAuthorisation" name="researcherAuthorisation" rows="3" aria-describedby="researcherAuthorisation-hint"></textarea>
+  </div>
+{% endcall %}
+
+{{ button({
+  text: "Continue"
+}) }}
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block pageScripts %}
+<script type="module">
+  import accessibleAutocomplete from '/assets/javascript/accessible-autocomplete.min.js'
+  import { organisation_names } from '/assets/javascript/organisation_names.js'
+
+  function customSuggest (query, syncResults) {
+    syncResults(
+      query
+        ? organisation_names.filter(result =>
+            result.name.toLowerCase().includes(query.toLowerCase()) ||
+            result.endonym.toLowerCase().includes(query.toLowerCase())
+          )
+        : []
+    )
+  }
+
+  function inputValueTemplate (result) {
+    return result && result.name
+  }
+
+  function suggestionTemplate (result) {
+    return result && result.name
+  }
+
+  const element = document.querySelector('#my-autocomplete-container')
+
+  accessibleAutocomplete({
+    element: element,
+    id: 'researcherOrganisation',
+    name: 'researcherOrganisation',
+    source: customSuggest,
+    placeholder: 'Search for your organisation',
+    templates: {
+      inputValue: inputValueTemplate,
+      suggestion: suggestionTemplate
+    }
+  })
+</script>
+{% endblock %}

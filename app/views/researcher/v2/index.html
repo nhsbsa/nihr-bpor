@@ -1,10 +1,7 @@
-<!-- Use this page as the index for your project -->
-
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
 <!-- Extends the layout from /app/views/layout.html -->
-{% extends 'layout.html' %}
-
+{% extends 'layout-researcher-nihr-logged-out.html' %}
 <!--
   In /app/views/layout.html you can:
     - change the header and footer
@@ -18,7 +15,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Researcher MVP - User Flows" %}
+{% set pageName = "" %}
 
 <!-- For adding a breadcrumb or back link -->
 <!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
@@ -31,25 +28,61 @@
   html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
 }) }}
 
-{{ backLink({
-    "href": "javascript:history.go(-1)",
-    "text": "Back"
-}) }}
-
 {% endblock %}
 
 <!-- For adding page content -->
 <!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
 {% block content %}
+
   <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-full">
-      <h2>Recruit Registry Volunteers (RRV) - Researcher<span class="nhsuk-caption-l nhsuk-caption--bottom">User Journey (MVP)</span></h2>
-      <p class="nhsuk-u-margin-top-6"><strong>Miro Password:</strong> NIHR-NHSBSA</p>
-        <div class="u-ratio u-ratio--16x9">
-            <iframe width="960" height="540" src="https://miro.com/app/embed/uXjVGK4Koxg=/?autoplay=yep" frameborder="0" scrolling="no" allowfullscreen></iframe>
-        </div>
-        <p class="nhsuk-u-margin-top-6">Use the plus and minus to zoom.</p>
-        <p>You can make the map full screen by using the arrows, use <kbd>Esc</kbd> (the escape key) to exit the full screen view.</p>
+    <div class="nhsuk-grid-column-two-thirds">
+
+<h1>
+  <span>Use Recruit registry volunteers services
+    <span class="nhsuk-caption-xl nhsuk-caption--bottom">
+      <span class="nhsuk-u-visually-hidden">-</span>
+        Log in to manage recruitment for your studies
+    </span>                     
+  </span>
+</h1>
+
+<p>You can:</p>
+
+<ul>
+  <li>create and manage pre-screeners</li>
+  <li>track which eligible volunteers you’ve contacted</li>
+</ul>
+
+<h2 class="nhsuk-heading-m">Before you start</h2>
+
+<p>You'll need to log in or send us a request for a new account.</p>
+
+<p>To do this, you'll need to prove your identity using either:</p>
+
+<ul>
+  <li>GOV.UK One Login - you can create one if you do not already have one</li>
+  <li>your email address</li>
+</ul>
+
+<form action="/{{folder}}/{{subfolder}}/index" method="post" novalidate>
+
+<div class="nhsuk-button-group">
+  
+  {{ button({
+    text: "Log in"
+  }) }}
+
+  {{ button({
+    text: "Request an account",
+    classes: "nhsuk-button--secondary",
+    href: "/" + folder + "/" + subfolder + "/create-type-of-account"
+  }) }}
+
+</div>
+
+</form>
+
+
     </div>
   </div>
-  {% endblock %}
+{% endblock %}
