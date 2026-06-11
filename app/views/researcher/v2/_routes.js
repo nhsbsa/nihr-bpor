@@ -1,3 +1,9 @@
+// ****************************************
+// Route File Versions
+// ****************************************
+
+router.use('/researcher/v2', require('./views/researcher/v2/_routes'));
+
 // ********************************
 // RESEARCHER
 // ********************************
@@ -9,6 +15,7 @@ const router = express.Router();
 // ********************
 // Account Registration
 // ********************
+
 
 router.post('/index', function (req, res) {
 
@@ -222,7 +229,7 @@ router.post('/reset-your-password', function (req, res) {
     var password2 = req.session.data['password2'];
 
 if (password1 && password2 && password1 === password2) {
-    
+
     res.redirect('reset-your-password-confirm');
 
 } else {
@@ -247,7 +254,7 @@ router.post('/update-profile', function (req, res) {
 
 
 if (researcherTitle && researcherFirstName && researcherLastName) {
-    
+
     res.redirect('home-profile-updated');
 
 } else {
@@ -357,7 +364,7 @@ router.post('/create-recruit-health-condition', function (req, res) {
 
         if (addhealthConditions) {
             if (addhealthConditions.includes('Exclude volunteers with certain health conditions')) {
- 
+
                 return res.redirect('create-exclude-health-condition');
 
             }
@@ -365,7 +372,7 @@ router.post('/create-recruit-health-condition', function (req, res) {
 
         if (addMedications) {
             if (addMedications.includes('Include volunteers taking certain medications')) {
-                
+
                 return res.redirect('create-recruit-medication');
 
             }
@@ -428,7 +435,7 @@ router.post('/create-recruit-condition-answers', function (req, res) {
 
         if (addhealthConditions) {
             if (addhealthConditions.includes('Exclude volunteers with certain health conditions')) {
- 
+
                 return res.redirect('create-exclude-health-condition');
 
             }
@@ -436,7 +443,7 @@ router.post('/create-recruit-condition-answers', function (req, res) {
 
         if (addMedications) {
             if (addMedications.includes('Include volunteers taking certain medications')) {
-                
+
                 return res.redirect('create-recruit-medication');
 
             }
@@ -490,7 +497,7 @@ router.post('/create-exclude-health-condition', function (req, res) {
 
         if (addMedications) {
             if (addMedications.includes('Include volunteers taking certain medications')) {
-                
+
                 return res.redirect('create-recruit-medication');
 
             }
@@ -553,7 +560,7 @@ router.post('/create-exclude-condition-answers', function (req, res) {
 
         if (addMedications) {
             if (addMedications.includes('Include volunteers taking certain medications')) {
-                
+
                 return res.redirect('create-recruit-medication');
 
             }
@@ -612,7 +619,7 @@ router.post('/create-recruit-medication', function (req, res) {
 
             }
         }
-        
+
         return res.redirect('create-check-answers');
 
 });
@@ -731,7 +738,7 @@ router.post('/create-exclude-medication', function (req, res) {
     if (medicationsExclude.length > 5) {
         return res.redirect('create-exclude-medication');
     }
-        
+
         return res.redirect('create-check-answers');
 
 });
@@ -927,7 +934,7 @@ router.post('/create-additional-question-answers', function (req, res) {
     // Go to the next unanswered question
     if (!question1Text) {
         return res.redirect('create-additional-question-one');
-    } 
+    }
 
     if (!question2Text) {
         return res.redirect('create-additional-question-two');
