@@ -44,27 +44,38 @@
 
 <form action="/{{folder}}/{{subfolder}}/login-type-of-account" method="post" novalidate>
 
-{{ radios({
-  idPrefix: "loginTypeAccount",
-  name: "loginTypeAccount",
-  fieldset: {
-    legend: {
-      text: "How do you want to log in to your account?",
-        size: "l",
-      isPageHeading: true
-    }
-  },
-  items: [
-    {
-      value: "Log in with GOV.UK One Login",
-      text: "Log in with GOV.UK One Login"
-    },
-    {
-      value: "Log in with email and password",
-      text: "Log in with email and password"
-    }
-  ]
-}) }}
+  <div class="nhsuk-form-group">
+  <fieldset class="nhsuk-fieldset" aria-describedby="example-hints-hint">
+    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+      <h1 class="nhsuk-fieldset__heading">
+        How do you want to log in?
+      </h1>
+    </legend>
+
+    {% call details({
+  summaryText: "Logging into your account for the first time"
+}) %}
+  <p>Before you can log in for the first time, we need to review your details and create your account. This can take up to 3 working days.</p>
+  <p>As soon as we’ve created your account, we’ll email you to let you know.</p>
+{% endcall %}
+
+    <div class="nhsuk-radios" data-module="nhsuk-radios">
+      <div class="nhsuk-radios__item">
+        <input class="nhsuk-radios__input" id="example-hints" name="exampleHints" type="radio" value="email">
+        <label class="nhsuk-label nhsuk-radios__label" for="example-hints">
+          GOV.UK One Login
+        </label>
+      </div>
+      <div class="nhsuk-radios__item">
+        <input class="nhsuk-radios__input" id="example-hints-2" name="exampleHints" type="radio" value="phone">
+        <label class="nhsuk-label nhsuk-radios__label" for="example-hints-2">
+          Email and password
+        </label>
+      </div>
+
+    </div>
+  </fieldset>
+</div>
 
 {{ button({
   text: "Continue"
