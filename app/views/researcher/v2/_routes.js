@@ -41,11 +41,11 @@ router.post('/login-type-of-account', function (req, res) {
 
     var loginTypeAccount = req.session.data['loginTypeAccount'];
 
-    if (loginTypeAccount == "Log in with GOV.UK One Login") {
+    if (loginTypeAccount == "GOV.UK One Login") {
 
         res.redirect('https://govuk-one-login-prototype-6d2545e2d700.herokuapp.com/page-index/authentication/create-account');
 
-    } else if (loginTypeAccount == "Log in with email and password") {
+    } else if (loginTypeAccount == "Email and password") {
 
         res.redirect('researcher-login');
 

@@ -42,7 +42,7 @@
     <span class="nhsuk-caption-xl nhsuk-caption--bottom">
       <span class="nhsuk-u-visually-hidden">-</span>
         Log in to manage recruitment for your studies
-    </span>                     
+    </span>
   </span>
 </h1>
 
@@ -55,20 +55,28 @@
 
 <h2 class="nhsuk-heading-m">Before you start</h2>
 
-<p>You'll need to log in or send us a request for a new account.</p>
+<p>You'll need to log in or request an account.</li>
 
-<p>To do this, you'll need to prove your identity using either:</p>
+<p>To request an account, you’ll need to prove your identity using either:</p>
 
 <ul>
   <li>GOV.UK One Login - you can create one if you do not already have one</li>
   <li>your email address</li>
 </ul>
 
+{% call details({
+  summaryText: "About GOV.UK One Login"
+}) %}
+  <p>GOV.UK One Login allows you to sign in to some government services using the same email address and password.</p>
+
+<p>In the future you’ll be able to use your GOV.UK One Login to access all services on GOV.UK.</p>
+{% endcall %}
+
 <form action="/{{folder}}/{{subfolder}}/index" method="post" novalidate>
 
 <div class="nhsuk-button-group">
-  
-  {{ button({
+
+{{ button({
     text: "Log in"
   }) }}
 
