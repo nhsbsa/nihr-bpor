@@ -75,10 +75,21 @@
 
 <p class="nhsuk-body-l">Track who you’ve contacted about taking part in <strong>Exploring the effects of art therapy on memory retention in older adults</strong> and their responses.</p>
 
+{% from "inset-text/macro.njk" import insetText %}
+
+{% set insetTextHtml %}
+  <p class="nhsuk-body-m">You must only use volunteer details in accordance with our <a href="https://bepartofresearch.nihr.ac.uk/site-policies/terms-and-conditions">Terms and Conditions</a> and <a href="https://bepartofresearch.nihr.ac.uk/site-policies/privacy-policy/">Privacy Policy</a>.</p>
+{% endset %}
+
+{{ insetText({
+  html: insetTextHtml
+}) }}
+
+
 <!--
 <div class="nhsuk-grid-row">
   <div class="nhsuk-grid-column-one-half">
-    
+
     {{ button({
       text: "Show filters",
       classes: "nhsuk-button--secondary",
@@ -96,8 +107,8 @@
         classes: "nhsuk-button--secondary",
         href: "add-collaborator"
       }) }}
-      
-    </div>    
+
+    </div>
 
   </div>
 </div>
