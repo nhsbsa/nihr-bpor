@@ -1,0 +1,86 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% set layout = "layout.html" %}
+
+{% if data['brand'] == "JDR" %}
+  {% set layout = "layout-volunteer-jdr.html" %}
+{% elseif data['brand'] == "BPOR" %}
+  {% set layout = "layout-volunteer-bpor.html" %}
+{% endif %}
+
+{% extends layout %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<h1>Recruit participants to your study</h1>
+
+<p>Use the National Institute for Health and Care Research (NIHR) volunteer registry to find people interested in taking part in your health or care research study.</p>
+
+<p>The service gives researchers access to a UK-wide pool of volunteers who have agreed to hear about research opportunities.</p>
+
+<h2 class="nhsuk-heading-m">What you'll get</h2>
+
+
+<p>If your study is eligible, the NIHR team will:</p>
+
+<ul>
+  <li>identify volunteers who match your study requirements</li>
+  <li>contact suitable volunteers on your behalf</li>
+  <li>support you through the recruitment process</li>
+</ul>
+
+{{ insetText({
+  text: "Once you've registered, the NIHR team will contact you within 3 working days."
+}) }}
+
+<p>If volunteers express an interest in taking part in your study, you will be responsible for following up any interested volunteers and managing their recruitment.</p>
+
+<form action="/{{folder}}/{{subfolder}}/so-add-a-study" method="post" novalidate>
+
+<div class="nhsuk-button-group">
+  
+  {{ button({
+    text: "Start now"
+  }) }}
+
+</div>
+
+</form>
+
+
+    </div>
+  </div>
+{% endblock %}

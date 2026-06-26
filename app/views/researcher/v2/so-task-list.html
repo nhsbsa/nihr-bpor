@@ -1,0 +1,215 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% set layout = "layout.html" %}
+
+{% if data['brand'] == "JDR" %}
+  {% set layout = "layout-volunteer-jdr.html" %}
+{% elseif data['brand'] == "BPOR" %}
+  {% set layout = "layout-volunteer-bpor.html" %}
+{% endif %}
+
+{% extends layout %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back"
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<span class="nhsuk-caption-xl">{% if data['brand'] == 'BPOR' %}Be Part of Research{% elif data['brand'] == 'JDR' %}Join Dementia Research{% elif data['studyType'] == 'BPOR' %}Be Part of Research{% elif data['studyType'] == 'JDR' %}Join Dementia Research{% else %}NIHR{% endif %}</span>
+<h1 class="nhsuk-heading-xl">Recruit participants to your study</h1>
+
+<p>You will only be able to submit your study once you have completed each section.</p>
+
+{# ============================================
+   Primary contact
+   ============================================ #}
+
+{% if data['so-primary-contact-complete'] %}
+
+  {% set soPrimaryContactSTATUS = {
+    tag: {
+      text: "Completed",
+      classes: "nhsuk-tag--green"
+    }
+  } %}
+
+{% else %}
+
+  {% set soPrimaryContactSTATUS = {
+    tag: {
+      text: "Incomplete",
+      classes: "nhsuk-tag--blue"
+    }
+  } %}
+
+{% endif %}
+
+{% if data['brand'] == "BPOR" or data['brand'] == "JDR" %}
+
+{% set soPrimaryContactURL = "/researcher/v2/so-primary-contact" %}
+
+{% else %}
+
+{% set soPrimaryContactURL = "/researcher/v2/so-primary-contact-confirm" %}
+
+{% endif %}
+
+
+{# ============================================
+   Portfolio and funding
+   ============================================ #}
+
+{% if data['so-portfolio-funding-complete'] %}
+
+  {% set soPortfolioFundingSTATUS = {
+    tag: {
+      text: "Completed",
+      classes: "nhsuk-tag--green"
+    }
+  } %}
+
+{% else %}
+
+  {% set soPortfolioFundingSTATUS = {
+    tag: {
+      text: "Incomplete",
+      classes: "nhsuk-tag--blue"
+    }
+  } %}
+
+{% endif %}
+
+{% set soPortfolioFundingURL = "/researcher/v2/so-rdn-portfolio" %}
+
+
+{# ============================================
+   Study details
+   ============================================ #}
+
+{% if data['so-portfolio-funding-complete'] %}
+
+  {% if data['so-study-details-complete'] %}
+
+    {% set soStudyDetailsSTATUS = {
+      tag: {
+        text: "Completed",
+        classes: "nhsuk-tag--green"
+      }
+    } %}
+
+  {% else %}
+
+    {% set soStudyDetailsSTATUS = {
+      tag: {
+        text: "Incomplete",
+        classes: "nhsuk-tag--blue"
+      }
+    } %}
+
+  {% endif %}
+
+  {% if data['soCPMSID'] %}
+
+    {% set soStudyDetailsURL = "/researcher/v2/so-health-conditions" %}
+
+  {% else %}
+
+    {% set soStudyDetailsURL = "/researcher/v2/so-study-title" %}
+
+  {% endif %}
+
+{% else %}
+
+  {% set soStudyDetailsSTATUS = {
+    text: "Cannot start yet",
+    classes: "nhsuk-task-list__status--cannot-start-yet"
+  } %}
+
+{% endif %}
+
+
+{{ taskList({
+  items: [
+    {
+      title: {
+        text: "Primary contact"
+      },
+      href: soPrimaryContactURL,
+      status: soPrimaryContactSTATUS
+    },
+    {
+      title: {
+        text: "Portfolio and funding"
+      },
+      href: soPortfolioFundingURL,
+      status: soPortfolioFundingSTATUS
+    },
+    {
+      title: {
+        text: "Study details"
+      },
+      href: soStudyDetailsURL,
+      status: soStudyDetailsSTATUS
+    }
+  ]
+}) }}
+
+{% if data['so-primary-contact-complete'] and data['so-portfolio-funding-complete'] and data['so-study-details-complete'] %}
+
+{{ button({
+  text: "Submit now",
+  href: "so-check-answers"
+}) }}
+
+{% else %}
+
+{{ button({
+  text: "Submit now",
+  disabled: true
+}) }}
+
+{% endif %}
+
+
+
+
+
+
+    </div>
+  </div>
+{% endblock %}

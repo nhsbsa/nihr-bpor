@@ -54,6 +54,24 @@ drug_names: [
   { text: "Xylometazoline", value: "Xylometazoline" } // X
 ],
 
+study_sponsors: [
+  { text: "Sponsor 1", value: "Sponsor 1" },
+  { text: "Sponsor 2", value: "Sponsor 2" },
+  { text: "Sponsor 3", value: "Sponsor 3" },
+  { text: "Sponsor 4", value: "Sponsor 4" },
+  { text: "Sponsor 5", value: "Sponsor 5" },
+  { text: "Sponsor 6", value: "Sponsor 6" },
+  { text: "Sponsor 7", value: "Sponsor 7" },
+  { text: "Sponsor 8", value: "Sponsor 8" },
+  { text: "Sponsor 9", value: "Sponsor 9" },
+  { text: "Sponsor 10", value: "Sponsor 10" },
+  { text: "Sponsor 11", value: "Sponsor 11" },
+  { text: "Sponsor 12", value: "Sponsor 12" },
+  { text: "Sponsor 13", value: "Sponsor 13" },
+  { text: "Sponsor 14", value: "Sponsor 14" },
+  { text: "Sponsor 15", value: "Sponsor 15" }
+],
+
 // brand: 'JDR'
 
 }
