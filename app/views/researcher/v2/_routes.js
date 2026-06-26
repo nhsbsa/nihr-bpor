@@ -969,6 +969,401 @@ router.post('/view-report-update-status', function (req, res) {
 
 });
 
+// ********************
+// Add a study
+// ********************
+
+
+router.post('/so-add-a-study', function (req, res) {
+
+    res.redirect('so-add-a-study-before');
+
+});
+
+router.post('/so-add-a-study-before', function (req, res) {
+
+    var brand = req.session.data['brand'];
+
+    if (brand == "JDR") {
+
+        res.redirect('so-task-list');
+
+    } else if (brand == "BPOR") {
+
+        res.redirect('so-task-list');
+
+    } else {
+
+        res.redirect('so-add-a-study-type');
+
+    }
+
+});
+
+router.post('/so-add-a-study-type', function (req, res) {
+
+    var studyType = req.session.data['studyType'];
+
+    if (studyType) {
+
+        res.redirect('so-task-list');
+
+    } else {
+
+        res.redirect('so-add-a-study-type');
+
+    }
+
+});
+
+router.post('/so-primary-contact-confirm', function (req, res) {
+
+    var primaryContactConfirm = req.session.data['primaryContactConfirm'];
+
+    if (primaryContactConfirm == "Yes") {
+
+        res.redirect('so-primary-contact-chief-investigator');
+
+    } else if (primaryContactConfirm == "No") {
+
+        res.redirect('so-primary-contact');
+
+    } else {
+
+        res.redirect('so-primary-contact-confirm');
+
+    }
+
+});
+
+router.post('/so-primary-contact', function (req, res) {
+
+    var soPrimaryContactTitle = req.session.data['soPrimaryContactTitle'];
+    var soPrimaryContactFirstName = req.session.data['soPrimaryContactFirstName'];
+    var soPrimaryContactLastName = req.session.data['soPrimaryContactLastName'];
+    var soPrimaryContactEmailAddress = req.session.data['soPrimaryContactEmailAddress'];
+    var soPrimaryContactOrganisation = req.session.data['soPrimaryContactOrganisation'];
+    var soPrimaryContactOrganisationName = req.session.data['soPrimaryContactOrganisationName'];
+
+    if (soPrimaryContactTitle && soPrimaryContactFirstName && soPrimaryContactLastName && soPrimaryContactEmailAddress) {
+
+        if (
+            (soPrimaryContactOrganisation && !soPrimaryContactOrganisationName) ||
+            (!soPrimaryContactOrganisation && soPrimaryContactOrganisationName)
+        ) {
+
+            res.redirect('so-primary-contact-chief-investigator');
+
+        } else {
+
+            res.redirect('so-primary-contact');
+        }
+
+    } else {
+
+        res.redirect('so-primary-contact');
+
+    }
+
+});
+
+router.post('/so-chief-investigator', function (req, res) {
+
+    var soChiefInvestigatorTitle = req.session.data['soChiefInvestigatorTitle'];
+    var soChiefInvestigatorFirstName = req.session.data['soChiefInvestigatorFirstName'];
+    var soChiefInvestigatorLastName = req.session.data['soChiefInvestigatorLastName'];
+    var soChiefInvestigatorEmailAddress = req.session.data['soChiefInvestigatorEmailAddress'];
+    var soChiefInvestigatorOrganisation = req.session.data['soChiefInvestigatorOrganisation'];
+    var soChiefInvestigatorOrganisationName = req.session.data['soChiefInvestigatorOrganisationName'];
+
+    if (soChiefInvestigatorTitle && soChiefInvestigatorFirstName && soChiefInvestigatorLastName && soChiefInvestigatorEmailAddress) {
+
+        if (
+            (soChiefInvestigatorOrganisation && !soChiefInvestigatorOrganisationName) ||
+            (!soChiefInvestigatorOrganisation && soChiefInvestigatorOrganisationName)
+        ) {
+
+            req.session.data['so-primary-contact-complete'] = true;
+
+            res.redirect('so-task-list');
+
+        } else {
+
+            res.redirect('so-chief-investigator');
+        }
+
+    } else {
+
+        res.redirect('so-chief-investigator');
+
+    }
+
+});
+
+router.post('/so-primary-contact-chief-investigator', function (req, res) {
+
+    var soPrimaryContactChiefInvestigator = req.session.data['soPrimaryContactChiefInvestigator'];
+
+    if (soPrimaryContactChiefInvestigator == "Yes") {
+
+        req.session.data['so-primary-contact-complete'] = true;
+
+        res.redirect('so-task-list');
+
+    } else if (soPrimaryContactChiefInvestigator == "No") {
+
+        res.redirect('so-chief-investigator');
+
+    } else {
+
+        res.redirect('primary-contact-chief-investigator');
+
+    }
+
+});
+
+router.post('/so-rdn-portfolio', function (req, res) {
+
+    var soRDNPortfolio = req.session.data['soRDNPortfolio'];
+    var soCPMSID = req.session.data['soCPMSID'];
+
+    if (soRDNPortfolio) {
+
+        if (soRDNPortfolio == "Yes" && soCPMSID) {
+
+            res.redirect('so-ethics-approval');
+        
+        } else if (soRDNPortfolio == "No" || soRDNPortfolio == "Not yet, but will be") {
+
+            res.redirect('so-nihr-funding');
+
+        } else {
+
+            res.redirect('so-rdn-portfolio');
+
+        }
+
+    } else {
+
+        res.redirect('so-rdn-portfolio');
+
+    }
+
+});
+
+router.post('/so-nihr-funding', function (req, res) {
+
+    var nihrFunding = req.session.data['nihrFunding'];
+
+    if (nihrFunding) {
+
+        res.redirect('so-ethics-approval');
+
+    } else {
+
+        res.redirect('so-nihr-funding');
+
+    }
+
+});
+
+router.post('/so-ethics-approval', function (req, res) {
+
+    var soEthicsApproval = req.session.data['soEthicsApproval'];
+    var soCPMSID = req.session.data['soCPMSID'];
+
+
+    if (soEthicsApproval) {
+
+
+        if (soCPMSID) {
+
+            req.session.data['so-portfolio-funding-complete'] = true;
+
+            res.redirect('so-task-list');
+
+        } else {
+
+            res.redirect('so-study-sponsors');
+
+        }
+
+
+    } else {
+
+        res.redirect('so-ethics-approval');
+
+    }
+
+});
+
+router.post('/so-study-sponsors', function (req, res) {
+
+    var soStudySponsors = req.session.data['soStudySponsors'];
+
+    if (!soStudySponsors) {
+        return res.redirect('so-study-sponsors');
+    }
+
+    if (!Array.isArray(soStudySponsors)) {
+        soStudySponsors = [soStudySponsors];
+    }
+
+    // Remove placeholder values
+    soStudySponsors = soStudySponsors.filter(c => c !== '_unchecked');
+
+    // Nothing selected
+    if (soStudySponsors.length === 0) {
+        return res.redirect('so-study-sponsors');
+    }
+
+    // Save cleaned values back to the session if needed
+    req.session.data['soStudySponsors'] = soStudySponsors;
+
+    req.session.data['so-portfolio-funding-complete'] = true;
+
+    return res.redirect('so-task-list');
+});
+
+router.post('/so-study-title', function (req, res) {
+
+    var studyTitle = req.session.data['studyTitle'];
+
+    if (studyTitle) {
+
+        res.redirect('so-study-description');
+
+    } else {
+
+        res.redirect('so-study-title');
+
+    }
+
+});
+
+router.post('/so-study-description', function (req, res) {
+
+    var studyDescription = req.session.data['studyDescription'];
+
+    if (studyDescription) {
+
+        res.redirect('so-study-demographic');
+
+    } else {
+
+        res.redirect('so-study-description');
+
+    }
+
+});
+
+router.post('/so-study-demographic', function (req, res) {
+
+    var studyDemographic = req.session.data['studyDemographic'];
+
+    if (studyDemographic) {
+
+        res.redirect('so-health-conditions');
+
+    } else {
+
+        res.redirect('so-study-demographic');
+
+    }
+
+});
+
+router.post('/so-health-conditions', function (req, res) {
+
+    var soHealthConditions = req.session.data['soHealthConditions'];
+    var soCPMSID = req.session.data['soCPMSID'];
+
+
+    if (!soHealthConditions) {
+        return res.redirect('so-health-conditions');
+    }
+
+    if (!Array.isArray(soHealthConditions)) {
+        soHealthConditions = [soHealthConditions];
+    }
+
+    // Remove placeholder values
+    soHealthConditions = soHealthConditions.filter(c => c !== '_unchecked');
+
+    // Nothing selected
+    if (soHealthConditions.length === 0) {
+        return res.redirect('so-health-conditions');
+    }
+
+    // Save cleaned values back to the session if needed
+    req.session.data['soHealthConditions'] = soHealthConditions;
+
+    
+    if (soCPMSID) {
+        req.session.data['so-study-details-complete'] = true;
+
+        return res.redirect('so-task-list');
+
+    }
+
+    return res.redirect('so-study-location');
+    
+});
+
+router.post('/so-study-location', function (req, res) {
+
+    var soStudyLocation = req.session.data['soStudyLocation'];
+
+    if (soStudyLocation) {
+
+        res.redirect('so-recruitment-end-date');
+
+    } else {
+
+        res.redirect('so-study-location');
+
+    }
+
+});
+
+router.post('/so-study-location', function (req, res) {
+
+    var soStudyLocation = req.session.data['soStudyLocation'];
+
+    if (soStudyLocation) {
+
+        res.redirect('so-recruitment-end-date');
+
+    } else {
+
+        res.redirect('so-study-location');
+
+    }
+
+});
+
+router.post('/so-recruitment-end-date', function (req, res) {
+
+    var soRecruitmentEndDateDay = req.session.data['soRecruitmentEndDate']?.day;
+    var soRecruitmentEndDateMonth = req.session.data['soRecruitmentEndDate']?.month;
+    var soRecruitmentEndDateYear = req.session.data['soRecruitmentEndDate']?.year;
+
+    if (soRecruitmentEndDateDay && soRecruitmentEndDateMonth && soRecruitmentEndDateYear) {
+
+        req.session.data['so-study-details-complete'] = true;
+
+        res.redirect('so-task-list');
+
+    } else {
+
+        res.redirect('so-recruitment-end-date');
+
+    }
+
+});
+
+
+
 // End Routes
 
 module.exports = router;
