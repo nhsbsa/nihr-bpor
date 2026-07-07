@@ -49,20 +49,34 @@
       titleText: "Request submitted"
     }) }}
 
+    {% if data['brand'] == "BPOR" or data['brand'] == "JDR" %}
+
     <h2 class="nhsuk-heading-m">What happens next?</h2>
 
-    <p>We will review your study{% if data['brand'] == "BPOR" or data['brand'] == "JDR" %} and create your account{% endif %}. This can take up to 3 working days.</p>
+    <p>We will review your study to check if it meets our requirements.</p>
 
-    <p>We will email you {% if data['brand'] == "BPOR" or data['brand'] == "JDR" %}when we have set up your account or {% endif %}if we need more information.</p>
+    <p>If we approve your study, we will create an account for <strong>{% if soPrimaryContactFirstName and soPrimaryContactLastName %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %}</strong>.</p>
 
-    {% if not data['brand'] %}
-    
-      {{ button({
-        text: "Return to Recruit registry volunteers service",
-        classes: "nhsuk-button--secondary",
-        href: "/researcher/v2/home"
-      }) }}
-    
+    <p>We will contact <strong>{% if soPrimaryContactFirstName and soPrimaryContactLastName %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %}</strong> if we need more information.</p>
+
+    <p>This can take up to 3 working days.</p>
+
+    {% else %}
+
+    <h2 class="nhsuk-heading-m">What happens next?</h2>
+
+    <p>We will review your study to check if it meets our requirements.</p>
+
+    <p>We’ll contact <strong>{% if data['primaryContactConfirm'] == "Yes" %}{{ data['researcherFirstName'] }} {{ data['researcherLastName'] }}{% elif data['primaryContactConfirm'] == "No" %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %}</strong> if we need any more information.</p>
+
+    <p>This can take up to 3 working days.</p>
+
+    {{ button({
+      text: "Return to Recruit registry volunteers service",
+      classes: "nhsuk-button--secondary",
+      href: "/researcher/v2/home"
+    }) }}
+
     {% endif %}
 
     </div>
