@@ -1,0 +1,170 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Review pending studies" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-admin-nihr-logged-in-v2.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Review pending studies" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Manage accounts</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
+            <!-- <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-admin-accounts">Create administrator accounts</a></li> -->
+        </ul>
+        <h2 class="app-side-nav__heading">Manage studies</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="review-pending-studies">Review pending studies</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch-volunteerservice@nihr.ac.uk">Email us</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{% set updateStudyName = data['update-study-name'] | default('Cognitive therapy in Dementia') %}
+{% set updateStudyID = data['update-study-id'] | default('BPOR00123') %}
+
+{% if data['select-administrator'] %}
+  {% set updateAdminName = data['select-administrator'] %}
+{% elseif data['adminFirstName'] and data['adminLastName'] %}
+  {% set updateAdminName = data['adminLastName'] + ", " + data['adminFirstName'] %}
+{% else %}
+  {% set updateAdminName = '<span class="nhsuk-hint">Not assigned</span>' %}
+{% endif %}
+
+{% set updatePreScreenerPendingStatus = data['update-pre-screener-pending-status'] | default('Ready for review') %}
+
+{% set updatePreScreenerPendingStatus %}
+  {% if data['update-pre-screener-pending-status'] == "On hold" %}
+    <strong class="nhsuk-tag nhsuk-tag--orange">On hold</strong>
+  {% else %}
+    <strong class="nhsuk-tag nhsuk-tag--yellow">Ready for review</strong>
+  {% endif %}
+{% endset %}
+
+{% set today = "now" | date("D MMMM YYYY") %}
+
+<h1>Review pending studies</h1>
+
+{{ table({
+  responsive: true,
+  panel: false,
+  head: [
+    { text: 'Study details' },
+    { text: 'Researcher name' },
+    { text: 'Last updated' },
+    { text: 'Admin name' },
+    { text: 'Status' },
+    { text: 'Action' }
+  ],
+  rows: [
+    [
+      {
+        header: 'Study details',
+        html: '<p>' + updateStudyName + '<br><span class="nhsuk-body-s">Be Part of Research</span></p>'
+      },
+      {
+        header: 'Researcher name',
+        text: 'Doe, Jane'
+      },
+      {
+        header: 'Last updated',
+        html: today
+      },
+      {
+        header: 'Admin name',
+        html: updateAdminName
+      },
+      {
+        header: 'Status',
+        html: updatePreScreenerPendingStatus
+      },
+      {
+        header: 'Actions',
+        html: '<p><a href="review-study">Review study</a></p>'
+      }
+    ],
+    [
+      {
+        header: 'Study details',
+        html: '<p>Exploring the effects of art therapy on memory retention in older adults<br><span class="nhsuk-body-s">Join Dementia Research</span></p>'
+      },
+      {
+        header: 'Researcher name',
+        text: 'Doe, Jane'
+      },
+      {
+        header: 'Last updated',
+        text: '28 February 2026'
+      },
+      {
+        header: 'Admin name',
+        text: 'Bennett, Sophia'
+      },
+      {
+        header: 'Status',
+        html: '<strong class="nhsuk-tag nhsuk-tag--orange">On hold</strong>'
+      },
+      {
+        header: 'Actions',
+        html: '<p><a href="#">Review study</a></p>'
+      }
+    ]
+  ]
+}) }}
+
+<p>Showing 2 of 2 result(s)</p>
+
+    </div>
+  </div>
+{% endblock %}

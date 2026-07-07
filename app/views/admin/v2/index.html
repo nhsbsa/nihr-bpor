@@ -1,0 +1,70 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-admin-nihr-logged-out.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Log in to Recruit registry volunteers" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<h1>
+  <span>Log in to Recruit registry volunteers
+    <span class="nhsuk-caption-xl nhsuk-caption--bottom">
+      <span class="nhsuk-u-visually-hidden">-</span>
+        (Administrators)
+    </span>                     
+  </span>
+</h1>
+
+<p>Log in to manage accounts and requests for Recruit registry volunteers.</p>
+
+<p>You need to use your NIHR Google ID to log in to this service.</p>
+
+<form action="/{{folder}}/{{subfolder}}/index" method="post" novalidate>
+
+{{ button({
+  text: "Log in"
+}) }}
+
+</form>
+
+{% call details({
+  summaryText: "Can’t log in to the service?"
+}) %}
+  <p>Only approved NIHR staff can use this service.</p>
+  <p>You should <a href="mailto:bepartofresearch-volunteerservice@nihr.ac.uk">email us</a> if you need access.</p>
+{% endcall %}
+
+    </div>
+  </div>
+{% endblock %}
