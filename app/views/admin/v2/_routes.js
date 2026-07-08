@@ -180,6 +180,27 @@ router.post('/view-report-update-status', function (req, res) {
 
 });
 
+// Study Onboarding
+
+router.post('/select-so-administrator', function (req, res) {
+
+    res.redirect('review-study-step-one');
+
+});
+
+router.post('/update-study-pending-status', function (req, res) {
+
+    res.redirect('review-study-step-one');
+
+});
+
+router.post('/review-study-rejection-reason', function (req, res) {
+
+    res.redirect('study-rejected');
+
+});
+
+
 // End Routes
 
 module.exports = router;

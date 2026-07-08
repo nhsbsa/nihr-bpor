@@ -71,99 +71,45 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
 {% set updateSOStudyName = data['update-so-study-name'] | default('Glucose Perception in Type 2 diabetes (Phase 1)') %}
-{% set updateSOStudyID = data['update-so-study-id'] | default('BPOR00987') %}
-
-{% if data['select-so-administrator'] %}
-  {% set updateSOAdminName = data['select-so-administrator'] %}
-{% elseif data['adminSOFirstName'] and data['adminSOLastName'] %}
-  {% set updateSOAdminName = data['adminSOLastName'] + ", " + data['adminSOFirstName'] %}
-{% else %}
-  {% set updateSOAdminName = '<span class="nhsuk-hint">Not assigned</span>' %}
-{% endif %}
-
 {% set updateStudyPendingStatus = data['update-so-pending-status'] | default('Ready for review') %}
 
-{% set updateStudyPendingStatus %}
-  {% if data['update-so-pending-status'] == "On hold" %}
-    <strong class="nhsuk-tag nhsuk-tag--orange">On hold</strong>
-  {% else %}
-    <strong class="nhsuk-tag nhsuk-tag--yellow">Ready for review</strong>
-  {% endif %}
-{% endset %}
+<h1>Update study status</h1>
 
-{% set today = "now" | date("D MMMM YYYY") %}
+<p>The study for {{ updateSOStudyName }} is currently <strong>{{ data['update-so-pending-status'] or "Ready for review"}}</strong>.</p>
 
-<h1>Review pending studies</h1>
+<form action="/{{folder}}/{{subfolder}}/update-study-pending-status" method="post" novalidate>
 
-{{ table({
-  responsive: true,
-  panel: false,
-  head: [
-    { text: 'Study details' },
-    { text: 'Researcher name' },
-    { text: 'Last updated' },
-    { text: 'Admin name' },
-    { text: 'Status' },
-    { text: 'Action' }
-  ],
-  rows: [
-    [
-      {
-        header: 'Study details',
-        html: '<p>' + updateSOStudyName + '<br><span class="nhsuk-body-s">Be Part of Research</span></p>'
-      },
-      {
-        header: 'Researcher name',
-        text: 'Doe, Jane'
-      },
-      {
-        header: 'Last updated',
-        html: today
-      },
-      {
-        header: 'Admin name',
-        html: updateSOAdminName
-      },
-      {
-        header: 'Status',
-        html: updateStudyPendingStatus
-      },
-      {
-        header: 'Actions',
-        html: '<p><a href="review-study-step-one">Review study</a></p>'
-      }
-    ],
-    [
-      {
-        header: 'Study details',
-        html: '<p>Exploring the effects of art therapy on memory retention in older adults<br><span class="nhsuk-body-s">Join Dementia Research</span></p>'
-      },
-      {
-        header: 'Researcher name',
-        text: 'Doe, Jane'
-      },
-      {
-        header: 'Last updated',
-        text: '28 February 2026'
-      },
-      {
-        header: 'Admin name',
-        text: 'Bennett, Sophia'
-      },
-      {
-        header: 'Status',
-        html: '<strong class="nhsuk-tag nhsuk-tag--orange">On hold</strong>'
-      },
-      {
-        header: 'Actions',
-        html: '<p><a href="#">Review study</a></p>'
-      }
-    ]
+{{ select({
+  label: {
+    text: "Update the status for this study"
+  },
+  id: "update-so-pending-status",
+  name: "update-so-pending-status",
+  value: updateStudyPendingStatus,
+  items: [
+    {
+      value: "Ready for review",
+      text: "Ready for review"
+    },
+    {
+      value: "On hold",
+      text: "On hold"
+    }
   ]
 }) }}
 
-<p>Showing 2 of 2 result(s)</p>
+{{ button({
+  text: "Submit"
+}) }}
+</form>
+
 
     </div>
   </div>

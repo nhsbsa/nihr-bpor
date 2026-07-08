@@ -71,99 +71,78 @@
     </div>
     <div class="nhsuk-grid-column-three-quarters">
 
-{% set updateSOStudyName = data['update-so-study-name'] | default('Glucose Perception in Type 2 diabetes (Phase 1)') %}
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+{% set updateSOStudyName = data['update-study-name'] | default('Glucose Perception in Type 2 diabetes (Phase 1)') %}
 {% set updateSOStudyID = data['update-so-study-id'] | default('BPOR00987') %}
-
-{% if data['select-so-administrator'] %}
-  {% set updateSOAdminName = data['select-so-administrator'] %}
-{% elseif data['adminSOFirstName'] and data['adminSOLastName'] %}
-  {% set updateSOAdminName = data['adminSOLastName'] + ", " + data['adminSOFirstName'] %}
-{% else %}
-  {% set updateSOAdminName = '<span class="nhsuk-hint">Not assigned</span>' %}
-{% endif %}
-
+{% set updateSOAdminName = data['select-so-administrator'] | default('Not assigned') %}
 {% set updateStudyPendingStatus = data['update-so-pending-status'] | default('Ready for review') %}
-
-{% set updateStudyPendingStatus %}
-  {% if data['update-so-pending-status'] == "On hold" %}
-    <strong class="nhsuk-tag nhsuk-tag--orange">On hold</strong>
-  {% else %}
-    <strong class="nhsuk-tag nhsuk-tag--yellow">Ready for review</strong>
-  {% endif %}
-{% endset %}
 
 {% set today = "now" | date("D MMMM YYYY") %}
 
-<h1>Review pending studies</h1>
+<span class="nhsuk-caption-xl">{{ updateSOStudyName }}</span>
+<h1 class="nhsuk-heading-xl">Review study</h1>
 
-{{ table({
-  responsive: true,
-  panel: false,
-  head: [
-    { text: 'Study details' },
-    { text: 'Researcher name' },
-    { text: 'Last updated' },
-    { text: 'Admin name' },
-    { text: 'Status' },
-    { text: 'Action' }
-  ],
+{{ summaryList({
+  card: {
+    heading: "Admin information",
+    headingSize: "m"
+  },
   rows: [
-    [
-      {
-        header: 'Study details',
-        html: '<p>' + updateSOStudyName + '<br><span class="nhsuk-body-s">Be Part of Research</span></p>'
+    {
+      key: {
+        text: "Admin name"
       },
-      {
-        header: 'Researcher name',
-        text: 'Doe, Jane'
-      },
-      {
-        header: 'Last updated',
-        html: today
-      },
-      {
-        header: 'Admin name',
+      value: {
         html: updateSOAdminName
       },
-      {
-        header: 'Status',
+      actions: {
+        items: [
+          {
+            href: "so-select-administrator#select-administrator",
+            text: "Change",
+            visuallyHiddenText: "admin name"
+          }
+        ]
+      }
+    },
+    {
+      key: {
+        text: "Status"
+      },
+      value: {
         html: updateStudyPendingStatus
       },
-      {
-        header: 'Actions',
-        html: '<p><a href="review-study-step-one">Review study</a></p>'
+      actions: {
+        items: [
+          {
+            href: "update-study-pending-status#update-study-pending-status",
+            text: "Change",
+            visuallyHiddenText: "status"
+          }
+        ]
       }
-    ],
-    [
-      {
-        header: 'Study details',
-        html: '<p>Exploring the effects of art therapy on memory retention in older adults<br><span class="nhsuk-body-s">Join Dementia Research</span></p>'
+    },
+    {
+      classes: "nhsuk-summary-list__row--no-border",
+      key: {
+        text: "Date submitted"
       },
-      {
-        header: 'Researcher name',
-        text: 'Doe, Jane'
-      },
-      {
-        header: 'Last updated',
-        text: '28 February 2026'
-      },
-      {
-        header: 'Admin name',
-        text: 'Bennett, Sophia'
-      },
-      {
-        header: 'Status',
-        html: '<strong class="nhsuk-tag nhsuk-tag--orange">On hold</strong>'
-      },
-      {
-        header: 'Actions',
-        html: '<p><a href="#">Review study</a></p>'
+      value: {
+        html: today
       }
-    ]
+    }
   ]
 }) }}
 
-<p>Showing 2 of 2 result(s)</p>
+  {{ button({
+    text: "Continue",
+    href: "review-study-step-two"
+  }) }}
 
     </div>
   </div>
