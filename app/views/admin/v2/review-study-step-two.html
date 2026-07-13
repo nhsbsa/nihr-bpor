@@ -1,0 +1,464 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Review pending studies" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-admin-nihr-logged-in-v2.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Review pending studies" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Manage accounts</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
+            <!-- <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-admin-accounts">Create administrator accounts</a></li> -->
+        </ul>
+        <h2 class="app-side-nav__heading">Manage studies</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="review-pending-studies">Review pending studies</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch-volunteerservice@nihr.ac.uk">Email us</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back",
+    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+}) }}
+
+{% set updateSOStudyName = data['update-study-name'] | default('Glucose Perception in Type 2 diabetes (Phase 1)') %}
+{% set updateSOStudyID = data['update-so-study-id'] | default('BPOR00987') %}
+{% set updateSOAdminName = data['select-so-administrator'] | default('Not assigned') %}
+{% set updateStudyPendingStatus = data['update-so-pending-status'] | default('Ready for review') %}
+
+{% set today = "now" | date("D MMMM YYYY") %}
+
+{% if not data['brand'] %}
+
+{% set soServiceName = data['studyType'] %}
+
+{% if data['studyType'] == "BPOR" %}
+  {% set soServiceName = "Be Part of Research" %}
+{% elif data['studyType'] == "JDR" %}
+  {% set soServiceName = "Join Dementia Research" %}
+{% endif %}
+
+<span class="nhsuk-caption-xl">{{ updateSOStudyName }}</span>
+<h1 class="nhsuk-heading-xl">Review study</h1>
+
+<h2 class="nhsuk-heading-m">Service</h2>
+
+{{ summaryList({
+  card: {},
+  rows: [
+    {
+      classes: "nhsuk-summary-list__row--no-border",
+      key: { text: "Service name" },
+      value: { text: soServiceName or "Be Part of Research" }
+    }
+  ]
+}) }}
+
+{% endif %}
+
+{# =========================
+   PRIMARY CONTACT ROWS
+   ========================= #}
+
+{% set primaryRows = [] %}
+
+{% if data['primaryContactConfirm'] %}
+  {% set primaryRows = primaryRows.concat([
+    {
+      key: { text: "Is Researcher the primary contact?" },
+      value: { text: data['primaryContactConfirm'] }
+    }
+  ]) %}
+{% endif %}
+
+{% if data['primaryContactConfirm'] == "Yes" %}
+
+  {% set primaryRows = primaryRows.concat([
+    { key: { text: "Title" }, value: { text: data['researcherTitle'] or "Mrs" } },
+    { key: { text: "First name" }, value: { text: data['researcherFirstName'] or "Jane" } },
+    { key: { text: "Last name" }, value: { text: data['researcherLastName'] or "Doe" } },
+    { key: { text: "Email address" }, value: { text: data['researcherEmailAddress'] or "jane.doe@durham.ac.uk" } },
+    {
+      classes: "nhsuk-summary-list__row--no-border",
+      key: { text: "Organisation" },
+      value: { text: data['researcherOrganisationName'] or data['researcherOrganisation'] or "University of Durham" }
+    }
+  ]) %}
+
+{% else %}
+
+  {% set primaryOrgHref = "/researcher/v2/so-primary-contact#soPrimaryContactOrganisation" %}
+
+  {% if data['soPrimaryContactOrganisationName'] %}
+    {% set primaryOrgHref = "/researcher/v2/so-primary-contact#soPrimaryContactOrganisationName" %}
+  {% endif %}
+
+  {% set primaryRows = primaryRows.concat([
+    {
+      key: { text: "Title" },
+      value: { text: data['soPrimaryContactTitle'] or "Mrs" }
+    },
+    {
+      key: { text: "First name" },
+      value: { text: data['soPrimaryContactFirstName'] or "Jane" }
+    },
+    {
+      key: { text: "Last name" },
+      value: { text: data['soPrimaryContactLastName'] or "Doe" }
+    },
+    {
+      key: { text: "Email address" },
+      value: { text: data['soPrimaryContactEmailAddress'] or "jane.doe@durham.ac.uk" }
+    },
+    {
+      classes: "nhsuk-summary-list__row--no-border",
+      key: { text: "Organisation" },
+      value: {
+        text: data['soPrimaryContactOrganisationName'] or data['soPrimaryContactOrganisation'] or "University of Durham"
+      }
+    }
+  ]) %}
+
+{% endif %}
+
+{# =========================
+   CHIEF INVESTIGATOR ROWS
+   ========================= #}
+
+{% if not data['brand'] or data['primaryContactConfirm'] == "Yes" %}
+  {% set soPrimaryContactChiefInvestigatorQuestion = "Is Researcher the chief investigator?" %}
+{% else %}
+  {% set soPrimaryContactChiefInvestigatorQuestion = "Is primary contact the same as chief investigator?" %}
+{% endif %}
+
+{% set ciRows = [] %}
+
+{% if data['soPrimaryContactChiefInvestigator'] %}
+  {% set ciRows = ciRows.concat([
+    {
+      key: { text: soPrimaryContactChiefInvestigatorQuestion },
+      value: { text: data['soPrimaryContactChiefInvestigator'] }
+    }
+  ]) %}
+{% endif %}
+
+{% if not data['brand'] and data['soPrimaryContactChiefInvestigator'] == "Yes" %}
+
+  {% set ciRows = ciRows.concat([
+    { key: { text: "Title" }, value: { text: data['researcherTitle'] or "Mrs" } },
+    { key: { text: "First name" }, value: { text: data['researcherFirstName'] or "Jane" } },
+    { key: { text: "Last name" }, value: { text: data['researcherLastName'] or "Doe" } },
+    { key: { text: "Email address" }, value: { text: data['researcherEmailAddress'] or "jane.doe@durham.ac.uk" } },
+    {
+      classes: "nhsuk-summary-list__row--no-border",
+      key: { text: "Organisation" },
+      value: {
+        text: data['researcherOrganisationName'] or data['researcherOrganisation'] or "University of Durham"
+      }
+    }
+  ]) %}
+
+{% elif data['brand'] and data['soPrimaryContactChiefInvestigator'] == "Yes" %}
+
+  {% set ciRows = ciRows.concat([
+    { key: { text: "Title" }, value: { text: data['soPrimaryContactTitle'] or data['researcherTitle'] or "Mrs" } },
+    { key: { text: "First name" }, value: { text: data['soPrimaryContactFirstName'] or data['researcherFirstName'] or "Jane" } },
+    { key: { text: "Last name" }, value: { text: data['soPrimaryContactLastName'] or data['researcherLastName'] or "Doe" } },
+    { key: { text: "Email address" }, value: { text: data['soPrimaryContactEmailAddress'] or data['researcherEmailAddress'] or "jane.doe@durham.ac.uk" } },
+    {
+      classes: "nhsuk-summary-list__row--no-border",
+      key: { text: "Organisation" },
+      value: {
+        text: data['soPrimaryContactOrganisationName'] or data['soPrimaryContactOrganisation'] or data['researcherOrganisationName'] or data['researcherOrganisation'] or "University of Durham"
+      }
+    }
+  ]) %}
+
+{% else %}
+
+  {% set ciOrgHref = "/researcher/v2/so-chief-investigator#soChiefInvestigatorOrganisation" %}
+
+  {% if data['soChiefInvestigatorOrganisationName'] %}
+    {% set ciOrgHref = "/researcher/v2/so-chief-investigator#soChiefInvestigatorOrganisationName" %}
+  {% endif %}
+
+  {% set ciRows = ciRows.concat([
+    {
+      key: { text: "Title" },
+      value: { text: data['soChiefInvestigatorTitle'] or "Mrs" }
+    },
+    {
+      key: { text: "First name" },
+      value: { text: data['soChiefInvestigatorFirstName'] or "Jane" }
+    },
+    {
+      key: { text: "Last name" },
+      value: { text: data['soChiefInvestigatorLastName'] or "Doe" }
+    },
+    {
+      key: { text: "Email address" },
+      value: { text: data['soChiefInvestigatorEmailAddress'] or "jane.doe@durham.ac.uk" }
+    },
+    {
+      classes: "nhsuk-summary-list__row--no-border",
+      key: { text: "Organisation" },
+      value: {
+        text: data['soChiefInvestigatorOrganisationName'] or data['soChiefInvestigatorOrganisation'] or "University of Durham"
+      }
+    }
+  ]) %}
+
+{% endif %}
+
+<h2 class="nhsuk-heading-m">Primary contact and chief investigator</h2>
+
+{{ summaryList({
+  card: { heading: "Primary contact details", headingSize: "s" },
+  rows: primaryRows
+}) }}
+
+{{ summaryList({
+  card: { heading: "Chief investigator details", headingSize: "s" },
+  rows: ciRows
+}) }}
+
+{# =========================
+   PORTFOLIO AND FUNDING
+   ========================= #}
+  
+<h2 class="nhsuk-heading-m">Portfolio and funding</h2>
+
+{% set rows2 = [] %}
+
+{% set _ = rows2.push({
+  key: { text: "Included in the Research Delivery Network (RDN) portfolio?" },
+  value: { text: data['soRDNPortfolio'] or "Yes" }
+}) %}
+
+{% if data['soCPMSID'] %}
+  {% set _ = rows2.push({
+    key: { text: "CPMS ID" },
+    value: { text: data['soCPMSID'] }
+  }) %}
+{% endif %}
+
+{% if data['soRDNPortfolio'] == "No" or data['soRDNPortfolio'] == "Not yet, but will be" %}
+  {% set _ = rows2.push({
+    key: { text: "NIHR funding?" },
+    value: { text: data['nihrFunding'] or "Not yet, but will be" }
+  }) %}
+{% endif %}
+
+{% if data['soCPMSID'] %}
+
+  {% set _ = rows2.push({
+    classes: "nhsuk-summary-list__row--no-border",
+    key: { text: "Ethics approval?" },
+    value: { text: data['soEthicsApproval'] or "Yes" }
+  }) %}
+
+{% else %}
+
+  {% set _ = rows2.push({
+    key: { text: "Ethics approval?" },
+    value: { text: data['soEthicsApproval'] or "No" }
+  }) %}
+
+  {% set _ = rows2.push({
+    classes: "nhsuk-summary-list__row--no-border",
+    key: { text: "Study sponsor(s)" },
+    value: { text: data['soStudySponsors'] or "Manchester University NHS Foundation Trust" }
+  }) %}
+
+{% endif %}
+
+{{ summaryList({
+  card: {},
+  rows: rows2
+}) }}
+
+{# =========================
+   STUDY DETAILS
+   ========================= #}
+
+<h2 class="nhsuk-heading-m">Study details</h2>
+
+{% if data['soCPMSID'] %}
+{{ insetText({
+  classes: "nhsuk-u-margin-top-3 nhsuk-u-margin-bottom-5",
+  html: "<p>These study details are based on the Central Portfolio Management System (CPMS) ID.</p>"
+}) }}
+{% endif %}
+
+{% set rows3 = [] %}
+
+{% if not data['soCPMSID'] %}
+  {% set rows3 = rows3.concat([{
+    key: { text: "Study name" },
+    value: { text: data['studyTitle'] or "Glucose Perception in Type 2 diabetes (Phase 1)" }
+  }]) %}
+{% else %}
+  {% set rows3 = rows3.concat([{
+    key: { text: "Study name" },
+    value: { text: data['studyTitle'] or "Glucose Perception in Type 2 diabetes (Phase 1)" }
+  }]) %}
+{% endif %}
+
+{% if not data['soCPMSID'] %}
+  {% set rows3 = rows3.concat([{
+    key: { text: "Study description" },
+    value: { text: data['studyDescription'] or "The 'Glucose Perception in Type 2 diabetes (Phase 1)' study aims to compare the taste sensitivity and liking between people living with diabetes and those without diabetes." }
+  }]) %}
+{% else %}
+  {% set rows3 = rows3.concat([{
+    key: { text: "Study description" },
+    value: { text: data['studyDescription'] or "The 'Glucose Perception in Type 2 diabetes (Phase 1)' study aims to compare the taste sensitivity and liking between people living with diabetes and those without diabetes." }
+  }]) %}
+{% endif %}
+
+{% if not data['soCPMSID'] %}
+  {% set rows3 = rows3.concat([{
+    key: { text: "Study demographic" },
+    value: { text: data['studyDemographic'] or "Adults aged between 18 and 65 years old" }
+  }]) %}
+{% else %}
+  {% set rows3 = rows3.concat([{
+    key: { text: "Study demographic" },
+    value: { text: data['studyDemographic'] or "Adults aged between 18 and 65 years old" }
+  }]) %}
+{% endif %}
+
+{% set rows3 = rows3.concat([{
+  key: { text: "Study health conditions" },
+  value: { text: data['soHealthConditions'] or "Diabetes (Type 2)" }
+}]) %}
+
+{% if not data['soCPMSID'] %}
+  {% set rows3 = rows3.concat([{
+    key: { text: "Study location" },
+    value: { text: data['soStudyLocation'] or "Online (from your own home, or anywhere with internet access)" }
+  }]) %}
+{% else %}
+  {% set rows3 = rows3.concat([{
+    key: { text: "Study location" },
+    value: { text: data['soStudyLocation'] or "Online (from your own home, or anywhere with internet access)" }
+  }]) %}
+{% endif %}
+
+{% if not data['soCPMSID'] and data['soRecruitmentEndDate'] %}
+
+  {% set months = [
+    "January","February","March","April","May","June",
+    "July","August","September","October","November","December"
+  ] %}
+
+  {% set rows3 = rows3.concat([{
+    key: { text: "Study recruitment end date" },
+    classes: "nhsuk-summary-list__row--no-border",
+    value: {
+      text:
+        data['soRecruitmentEndDate']['day'] + " " +
+        months[(data['soRecruitmentEndDate']['month'] | int) - 1] + " " +
+        data['soRecruitmentEndDate']['year']
+    }
+  }]) %}
+{% endif %}
+
+{% if data['soCPMSID'] %}
+  {% set rows3 = rows3.concat([{
+    classes: "nhsuk-summary-list__row--no-border",
+    key: { text: "Study end date" },
+    value: { text: "12 December 2026" }
+  }]) %}
+{% endif %}
+
+{{ summaryList({
+  card: {},
+  rows: rows3
+}) }}
+
+<h2 class="nhsuk-heading-m">Approve this study</h2>
+
+<p>Make sure the following information is correct before you approve this study:</p>
+
+<ul>
+  <li>primary contact is eligible to use the service</li>
+  <li>NIHR affiliation</li>
+  <li>study is not a duplicate</li>
+  <li>recruitment end date allows sufficient recruitment time</li>
+  <li>target population is broad enough</li>
+  <li>health conditions are compatible with the chosen registry</li>
+</ul>
+
+<div class="nhsuk-button-group nhsuk-button-group--small">
+  {{ button({
+    text: "Approve",
+    href: "study-approved"
+  }) }}
+
+  {{ button({
+    text: "Reject",
+    href: "review-study-rejection-reason",
+    classes: "nhsuk-button--warning"
+  }) }}
+</div>
+
+    </div>
+  </div>
+{% endblock %}

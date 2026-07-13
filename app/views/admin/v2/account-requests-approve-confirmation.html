@@ -1,0 +1,208 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Review account requests" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-admin-nihr-logged-in-v2.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Manage accounts</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
+            <!-- <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-admin-accounts">Create administrator accounts</a></li> -->
+        </ul>
+        <h2 class="app-side-nav__heading">Manage studies</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-studies">Review pending studies</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:bepartofresearch-volunteerservice@nihr.ac.uk">Email us</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+
+{% set html %}
+  <h3 class="nhsuk-notification-banner__heading">
+    Account request approved
+  </h3>
+  <p>We’ve emailed the researcher to let them know.</p>
+{% endset %}
+
+{{ notificationBanner({
+  html: html,
+  type: "success"
+}) }}
+
+<h1>Review account requests</h1>
+
+{{ table({
+  responsive: true,
+  panel: false,
+  head: [
+    { text: 'Name' },
+    { text: 'Email' },
+    { text: 'Organisation' },
+    { text: 'Date submitted' },
+    { text: 'Role' },
+    { text: 'Action' }
+  ],
+  rows: [
+    [
+      { header: 'Name', text: 'Reyes, Jasper' },
+      { header: 'Email', text: 'jasper.reyes@nhs.net' },
+      { header: 'Organisation', text: 'NHS Trust' },
+      { header: 'Date submitted', text: '3 February 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">View request</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Novak, Lina' },
+      { header: 'Email', text: 'l.novak@leeds.ac.uk' },
+      { header: 'Organisation', text: 'University' },
+      { header: 'Date submitted', text: '2 February 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">View request</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Holloway, Theo' },
+      { header: 'Email', text: 'theo.holloway@consulting-group.co.uk' },
+      { header: 'Organisation', text: 'Consulting Group' },
+      { header: 'Date submitted', text: '1 February 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">View request</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Smith, Michael' },
+      { header: 'Email', text: 'michael.smith@nhs.net' },
+      { header: 'Organisation', text: 'NHS Trust' },
+      { header: 'Date submitted', text: '31 January 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">View request</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Khan, Aisha' },
+      { header: 'Email', text: 'aisha.khan@homegroup.com' },
+      { header: 'Organisation', text: 'Home Group' },
+      { header: 'Date submitted', text: '30 January 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">View request</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Grant, Oliver' },
+      { header: 'Email', text: 'o.grant@manchester.ac.uk' },
+      { header: 'Organisation', text: 'University' },
+      { header: 'Date submitted', text: '29 January 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">View request</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Desai, Priya' },
+      { header: 'Email', text: 'priya.desai@healthinsights.org' },
+      { header: 'Organisation', text: 'Health Insights' },
+      { header: 'Date submitted', text: '28 January 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">View request</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Brooks, Ethan' },
+      { header: 'Email', text: 'ethan.brooks@nhs.net' },
+      { header: 'Organisation', text: 'NHS Trust' },
+      { header: 'Date submitted', text: '27 January 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">View request</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Martinez, Sofia' },
+      { header: 'Email', text: 'sofia.martinez@oxford.ac.uk' },
+      { header: 'Organisation', text: 'University' },
+      { header: 'Date submitted', text: '26 January 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">View request</a></p>' }
+    ],
+    [
+      { header: 'Name', text: 'Patel, Hannah' },
+      { header: 'Email', text: 'hannah.patel@nhs.net' },
+      { header: 'Organisation', text: 'NHS Trust' },
+      { header: 'Date submitted', text: '24 January 2026' },
+      { header: 'Role', html: 'Researcher' },
+      { header: 'Actions', html: '<p><a href="#">View request</a></p>' }
+    ]
+  ]
+}) }}
+
+<p>Showing 10 of 27 result(s)</p>
+
+{{ pagination({
+  next: {
+    href: "#"
+  },
+  items: [
+    {
+      number: 1,
+      href: '#',
+      current: true
+    },
+    {
+      number: 2,
+      href: '#'
+    },
+    {
+      number: 3,
+      href: '#'
+    }
+  ]
+}) }}
+
+    </div>
+  </div>
+{% endblock %}
