@@ -90,25 +90,30 @@
   name: "updateRejectionStatus",
   items: [
     {
-      value: "ABC - Rejection Reason 1",
-      text: "ABC - Rejection Reason 1",
-      checked: (data.updateRejectionStatus == "ABC - Rejection Reason 1") 
+      value: "Not NIHR affiliated",
+      text: "Not NIHR affiliated",
+      checked: (data.updateRejectionStatus == "Not NIHR affiliated") 
                or (not data.updateRejectionStatus)
     },
     {
-      value: "ABC - Rejection Reason 2",
-      text: "ABC - Rejection Reason 2",
-      checked: data.updateRejectionStatus == "ABC - Rejection Reason 2"
+      value: "Recruitment window too short",
+      text: "Recruitment window too short",
+      checked: data.updateRejectionStatus == "Recruitment window too short"
     },
     {
-      value: "ABC - Rejection Reason 3",
-      text: "ABC - Rejection Reason 3",
-      checked: data.updateRejectionStatus == "ABC - Rejection Reason 3"
+      value: "Not possible to recruit target population",
+      text: "Not possible to recruit target population",
+      checked: data.updateRejectionStatus == "Not possible to recruit target population"
     },
     {
-      value: "ABC - Rejection Reason 4",
-      text: "ABC - Rejection Reason 4",
-      checked: data.updateRejectionStatus == "ABC - Rejection Reason 4"
+      value: "Study already listed here (duplication check)",
+      text: "Study already listed here (duplication check)",
+      checked: data.updateRejectionStatus == "Study already listed here (duplication check)"
+    },
+    {
+      value: "PPIE opportunity ",
+      text: "PPIE opportunity ",
+      checked: data.updateRejectionStatus == "PPIE opportunity "
     }
   ]
 }) }}
