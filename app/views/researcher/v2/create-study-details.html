@@ -82,7 +82,12 @@
 
   {{ textarea({
     label: {
-      text: "Full study name"
+      text: "Full study name",
+      size: "m"
+    },
+  hint: {
+    text: "This must be unique and explain what the study is about in plain language"
+
     },
     id: "studyName",
     name: "studyName",
@@ -92,7 +97,8 @@
 
   {{ input({
     label: {
-      text: "Be Part of Research study ID"
+      text: "Be Part of Research study ID",
+      size: "m"
     },
     hint: {
       text: "It’s on the email we sent you inviting you to create a pre-screener - for example, BPOR00123"
