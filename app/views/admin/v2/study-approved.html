@@ -74,18 +74,17 @@
     {% set updateSOStudyName = data['update-so-study-name'] | default('Glucose Perception in Type 2 diabetes (Phase 1)') %}
 
     {{ panel({
-      titleText: "Study approved",
+      titleText: "Study eligible for inclusion on registry",
       html: updateSOStudyName
     }) }}
 
-    <p>You should now:</p>
+    <p>This study has been approved for inclusion on the registry.</p>
 
-    <ul>
-      <li>XXX</li>
-      <li>XXX</li>
-    </ul>
+    <h2 class="nhsuk-heading-m">What happens next</h2>
 
-    <p>We’ve emailed the researcher to let them know they can....</p>
+    <p>We’ve emailed {% if data['soPrimaryContactFirstName'] and data['soPrimaryContactLastName'] %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %}.</p>
+
+    <p>If they do not have an account, we'll send them instructions to create one.</p>
 
     {{ button({
       text: "Back to dashboard",

@@ -184,13 +184,13 @@ router.post('/view-report-update-status', function (req, res) {
 
 router.post('/select-so-administrator', function (req, res) {
 
-    res.redirect('review-study-step-one');
+    res.redirect('review-study-step-two');
 
 });
 
 router.post('/update-study-pending-status', function (req, res) {
 
-    res.redirect('review-study-step-one');
+    res.redirect('review-study-step-two');
 
 });
 

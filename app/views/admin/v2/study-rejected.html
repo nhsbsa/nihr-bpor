@@ -74,18 +74,15 @@
     {% set updateSOStudyName = data['update-so-study-name'] | default('Glucose Perception in Type 2 diabetes (Phase 1)') %}
 
     {{ panel({
-      titleText: "Study rejected",
+      titleText: "Study not eligible for inclusion on registry",
       html: updateSOStudyName
     }) }}
 
-    <p>You should now:</p>
+    <p>This study has not been approved for inclusion on the registry.</p>
 
-    <ul>
-      <li>XXX</li>
-      <li>XXX</li>
-    </ul>
+    <h2 class="nhsuk-heading-m">What happens next</h2>
 
-    <p>We’ve emailed the researcher to let them know they can....</p>
+    <p>We’ve emailed {% if data['soPrimaryContactFirstName'] and data['soPrimaryContactLastName'] %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %} with the reasons the study was not eligible for inclusion..</p>
 
     {{ button({
       text: "Back to dashboard",

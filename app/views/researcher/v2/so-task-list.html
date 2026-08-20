@@ -53,7 +53,7 @@
 <span class="nhsuk-caption-xl">{% if data['brand'] == 'BPOR' %}Be Part of Research{% elif data['brand'] == 'JDR' %}Join Dementia Research{% elif data['studyType'] == 'BPOR' %}Be Part of Research{% elif data['studyType'] == 'JDR' %}Join Dementia Research{% else %}NIHR{% endif %}</span>
 <h1 class="nhsuk-heading-xl">Recruit participants to your study</h1>
 
-<p>You will only be able to submit your study once you have completed each section.</p>
+<p>You’ll only be able to submit your study once you have completed each section.</p>
 
 {# ============================================
    Primary contact
@@ -192,14 +192,14 @@
 {% if data['so-primary-contact-complete'] and data['so-portfolio-funding-complete'] and data['so-study-details-complete'] %}
 
 {{ button({
-  text: "Submit now",
+  text: "Continue",
   href: "so-check-answers"
 }) }}
 
 {% else %}
 
 {{ button({
-  text: "Submit now",
+  text: "Continue",
   disabled: true
 }) }}
 
