@@ -90,7 +90,7 @@
 
     <p>If you would like to view the details submitted for this study, you'll need to <a href="#">create a Recruit Registry Volunteers account</a>.</p>
 
-    <p>If you need more support or have any questions, you can email us at <a href="mailto:bepartofresearch-volunteerservice@nihr.ac.uk">bepartofresearch-volunteerservice@nihr.ac.uk</a></p>
+    <p>If you need more support or have any questions, you can email us at <a href="mailto:recruitregistryvolunteers@nihr.ac.uk">recruitregistryvolunteers@nihr.ac.uk</a></p>
 
     {% else %}
 
@@ -102,7 +102,7 @@
 
     <p>We’ll email <strong>{% if data['primaryContactConfirm'] == "Yes" %}{% if data['researcherFirstName'] %}{{ data['researcherFirstName'] }}{% else %}Jane{% endif %} {% if data['researcherLastName'] %}{{ data['researcherLastName'] }}{% else %}Doe{% endif %}{% elif data['primaryContactConfirm'] == "No" %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %}</strong> if we need any more information.</p>
 
-    <p>If you need more support or have any questions, you can email us at <a href="mailto:bepartofresearch-volunteerservice@nihr.ac.uk">bepartofresearch-volunteerservice@nihr.ac.uk</a></p>
+    <p>If you need more support or have any questions, you can email us at <a href="mailto:recruitregistryvolunteers@nihr.ac.uk">recruitregistryvolunteers@nihr.ac.uk</a></p>
 
     {{ button({
       text: "Return to Recruit registry volunteers service",
