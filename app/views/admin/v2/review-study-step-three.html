@@ -87,73 +87,26 @@
 <span class="nhsuk-caption-xl">{{ updateSOStudyName }}</span>
 <h1 class="nhsuk-heading-xl">Review study</h1>
 
-{{ summaryList({
-  card: {
-    heading: "Admin information",
-    headingSize: "m"
-  },
-  rows: [
-    {
-      key: {
-        text: "Admin name"
-      },
-      value: {
-        html: updateSOAdminName
-      },
-      actions: {
-        items: [
-          {
-            href: "so-select-administrator#select-administrator",
-            text: "Change",
-            visuallyHiddenText: "admin name"
-          }
-        ]
-      }
-    },
-    {
-      key: {
-        text: "Status"
-      },
-      value: {
-        html: updateStudyPendingStatus
-      },
-      actions: {
-        items: [
-          {
-            href: "update-study-pending-status#update-study-pending-status",
-            text: "Change",
-            visuallyHiddenText: "status"
-          }
-        ]
-      }
-    },
-    {
-      classes: "nhsuk-summary-list__row--no-border",
-      key: {
-        text: "Date submitted"
-      },
-      value: {
-        html: today
-      }
-    }
-  ]
+{{ warningCallout({
+  heading: "Important",
+  classes: "nhsuk-u-margin-top-8",
+  html: '<p>Make sure the following information is correct before you approve this study:</p><ul class="nhsuk-u-margin-bottom-0"><li>primary contact is eligible to use the service</li><li>NIHR affiliation</li><li>study is not a duplicate</li><li>recruitment end date allows sufficient recruitment time</li><li>target population is broad enough</li><li>health conditions are compatible with the chosen registry</li><li>study is assigned to the correct admin based on speciality</li></ul>'
 }) }}
 
-{% if not updateSOAdminName or updateSOAdminName == "Not assigned" %}
+<div class="nhsuk-button-group">
 
-    {{ button({
-      text: "Continue",
-      href: "review-study-step-two-error"
-    }) }}
+  {{ button({
+    text: "Approve",
+    href: "study-approved"
+  }) }}
 
-{% else %}
+  {{ button({
+    text: "Reject",
+    href: "review-study-rejection-reason",
+    classes: "nhsuk-button--warning"
+  }) }}
 
-    {{ button({
-      text: "Continue",
-      href: "review-study-step-three"
-    }) }}
-
-{% endif %}
+</div>
 
     </div>
   </div>

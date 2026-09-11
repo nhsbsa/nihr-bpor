@@ -87,6 +87,16 @@
 <span class="nhsuk-caption-xl">{{ updateSOStudyName }}</span>
 <h1 class="nhsuk-heading-xl">Review study</h1>
 
+{{ errorSummary({
+  heading: "There is a problem",
+  errorList: [
+    {
+      text: "Assign the study to the admin with the correct specialism",
+      href: "#admin-error"
+    }
+  ]
+}) }}
+
 {{ summaryList({
   card: {
     heading: "Admin information",
@@ -98,7 +108,8 @@
         text: "Admin name"
       },
       value: {
-        html: updateSOAdminName
+        html: '<p class="nhsuk-error-message nhsuk-u-margin-bottom-1" id="admin-error"><span class="nhsuk-u-visually-hidden">Error:</span> Assign the study to the admin with the correct specialism</p>' + updateSOAdminName,
+        classes: "nhsuk-u-display-block nhsuk-form-group--error nhsuk-u-padding-left-3 nhsuk-u-margin-bottom-3"
       },
       actions: {
         items: [
@@ -139,7 +150,7 @@
   ]
 }) }}
 
-{% if not updateSOAdminName or updateSOAdminName == "Not assigned" %}
+{% if not data['updateSOAdminName'] or data['updateSOAdminName'] == "Not assigned" %}
 
     {{ button({
       text: "Continue",
@@ -154,6 +165,7 @@
     }) }}
 
 {% endif %}
+
 
     </div>
   </div>
