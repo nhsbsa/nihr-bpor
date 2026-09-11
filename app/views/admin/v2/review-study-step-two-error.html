@@ -84,9 +84,6 @@
 
 {% set today = "now" | date("D MMMM YYYY") %}
 
-<span class="nhsuk-caption-xl">{{ updateSOStudyName }}</span>
-<h1 class="nhsuk-heading-xl">Review study</h1>
-
 {{ errorSummary({
   heading: "There is a problem",
   errorList: [
@@ -96,6 +93,9 @@
     }
   ]
 }) }}
+
+<span class="nhsuk-caption-xl">{{ updateSOStudyName }}</span>
+<h1 class="nhsuk-heading-xl">Review study</h1>
 
 {{ summaryList({
   card: {
