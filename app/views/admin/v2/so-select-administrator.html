@@ -80,15 +80,15 @@
 {% set updateSOStudyName = data['update-so-study-name'] | default('Glucose Perception in Type 2 diabetes (Phase 1)') %}
 {% set updateSOAdminName = data['select-so-administrator'] | default('Not assigned') %}
 
-<h1>Select an administrator</h1>
+<h1>Select an admin</h1>
 
-<p>The study administrator for {{ updateSOStudyName }} is <strong>{{ updateSOAdminName }}</strong>.</p>
+<p>The study admin for {{ updateSOStudyName }} is currently <strong>{{ updateSOAdminName }}</strong>.</p>
 
 <form action="/{{folder}}/{{subfolder}}/select-so-administrator" method="post" novalidate>
 
 {{ select({
   label: {
-    text: "Select an administrator to manage the study"
+    text: "Select the admin with the relevant specialism to manage this study"
   },
   id: "select-so-administrator",
   name: "select-so-administrator",

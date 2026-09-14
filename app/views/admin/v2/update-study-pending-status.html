@@ -82,13 +82,13 @@
 
 <h1>Update study status</h1>
 
-<p>The study for {{ updateSOStudyName }} is currently <strong>{{ data['update-so-pending-status'] or "Ready for review"}}</strong>.</p>
+<p>The status of {{ updateSOStudyName }} is currently <strong>{{ data['update-so-pending-status'] or "Ready for review"}}</strong>.</p>
 
 <form action="/{{folder}}/{{subfolder}}/update-study-pending-status" method="post" novalidate>
 
 {{ select({
   label: {
-    text: "Update the status for this study"
+    text: "Update the status of this study"
   },
   id: "update-so-pending-status",
   name: "update-so-pending-status",
