@@ -115,3 +115,25 @@
     </div>
   </div>
 {% endblock %}
+
+{% block pageScripts %}
+
+  {% if data['brand'] == "JDR" or data['brand'] == "BPOR" %}
+
+  <script type="text/javascript">
+    setTimeout(function () {
+      window.location.href = "so-application-submitted-email-non-account";
+    }, 10000); // 10,000 milliseconds = 10 seconds
+  </script>
+
+  {% else %}
+
+  <script type="text/javascript">
+    setTimeout(function () {
+      window.location.href = "so-application-submitted-email-account";
+    }, 10000); // 10,000 milliseconds = 10 seconds
+  </script>
+
+  {% endif %}
+
+{% endblock %}
