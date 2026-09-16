@@ -43,7 +43,7 @@
     </tr>
     <tr class="nhsuk-table__row" role="row">
       <td class="nhsuk-table__cell" role="cell"><strong>To:</strong></td>
-      <td class="nhsuk-table__cell" role="cell">joe.bloggs@gmail.com</td>
+      <td class="nhsuk-table__cell" role="cell">{% if data['soPrimaryContactEmailAddress'] %}{{ data['soPrimaryContactEmailAddress'] }}{% elif data['researcherEmailAddress'] %}{{ data['researcherEmailAddress'] }}{% else %}email.address@gmail.com{% endif %}</td>
     </tr>
     <tr class="nhsuk-table__row" role="row">
       <td class="nhsuk-table__cell" role="cell"><strong>Subject:</strong></td>
@@ -54,7 +54,7 @@
 
 <p><img src="/assets/images/NIHR-logo.svg" width="280" alt="Be Part of Research Logo"></p>
 
-<h1 class="nhsuk-heading-m">Dear Joe Bloggs,</h1>
+<h1 class="nhsuk-heading-m">Dear {% if data['soPrimaryContactFirstName'] and data['soPrimaryContactLastName'] %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% elif data['researcherFirstName'] and data['researcherLastName'] %}{{ data['researcherFirstName'] }} {{ data['researcherLastName'] }}{% else %}Jane Doe{% endif %},</h1>
 
 <p>We’ve received your study and are checking whether it can be included on the Recruit registry volunteers service.</p>
 

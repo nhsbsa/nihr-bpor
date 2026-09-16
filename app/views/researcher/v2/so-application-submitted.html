@@ -108,7 +108,7 @@
 
     <p>We’ll review your study to check that it meets our requirements. This can take up to 3 working days.</p>
 
-    <p>We’ll email <strong>{% if soPrimaryContactFirstName and soPrimaryContactLastName %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %}</strong> if we need any more information.</p>
+    <p>We’ll email <strong>{% if data['soPrimaryContactFirstName'] and data['soPrimaryContactLastName'] %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %}</strong> if we need any more information.</p>
 
     <p>If you would like to view the details submitted for this study, you'll need to <a href="#">create a Recruit Registry Volunteers account</a>.</p>
 
