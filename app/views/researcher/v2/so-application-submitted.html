@@ -69,12 +69,34 @@
 
     {% if data['brand'] != "BPOR" and data['brand'] != "JDR" %}
 
-    {{ panel({
-      heading: {
-        text: "Request submitted"
-      },
-      html: "Your reference number <strong>NIHR00123</strong>"
-    }) }}
+        {% if data['studyType'] == "BPOR" %}
+
+        {{ panel({
+          heading: {
+            text: "Request submitted"
+          },
+          html: "Your reference number <strong>BPOR00123</strong>"
+        }) }}
+
+        {% elif data['studyType'] == "JDR" %}
+
+        {{ panel({
+          heading: {
+            text: "Request submitted"
+          },
+          html: "Your reference number <strong>JDR00123</strong>"
+        }) }}
+
+        {% else %}
+
+        {{ panel({
+          heading: {
+            text: "Request submitted"
+          },
+          html: "Your reference number <strong>NIHR00123</strong>"
+        }) }}
+
+        {% endif %}
 
     {% endif %}
 
