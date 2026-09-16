@@ -39,7 +39,7 @@
   <tbody class="nhsuk-table__body">
     <tr class="nhsuk-table__row" role="row">
       <td class="nhsuk-table__cell" role="cell"><strong>From:</strong></td>
-      <td class="nhsuk-table__cell" role="cell">National Institute for Health and Care Research (NIHR)</td>
+      <td class="nhsuk-table__cell" role="cell">{% if data['brand'] == "BPOR" %}Be Part of Research team{% elif data['brand'] == "JDR" %}Join Dementia Research{% else %}National Institute for Health and Care Research (NIHR){% endif %}</td>
     </tr>
     <tr class="nhsuk-table__row" role="row">
       <td class="nhsuk-table__cell" role="cell"><strong>To:</strong></td>
@@ -52,7 +52,19 @@
   </tbody>
 </table>
 
-<p><img src="/assets/images/NIHR-logo.svg" width="280" alt="Be Part of Research Logo"></p>
+{% if data['brand'] == "BPOR" %}
+
+<p><img src="/assets/images/BPOR-logo.svg" width="280" alt="Be Part of Research Logo"></p>
+
+{% elif data['brand'] == "JDR" %}
+
+<p><img src="/assets/images/JDR-logo.svg" width="280" alt="Join Dementia Research Logo"></p>
+
+{% else %}
+
+<p><img src="/assets/images/NIHR-logo.svg" width="280" alt="National Institute for Health and Care Research Logo"></p>
+
+{% endif %}
 
 <h1 class="nhsuk-heading-m">Dear {% if data['soPrimaryContactFirstName'] and data['soPrimaryContactLastName'] %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %},</h1>
 
@@ -62,7 +74,19 @@
 
 <p>If we need more information, we'll email you within 3 working days.</p>
 
+{% if data['brand'] == "BPOR" %}
+
 <h2 class="nhsuk-heading-m nhsuk-u-margin-bottom-4">The Be Part of Research team</h2>
+
+{% elif data['brand'] == "JDR" %}
+
+<h2 class="nhsuk-heading-m nhsuk-u-margin-bottom-4">The Join Dementia Research team</h2>
+
+{% else %}
+
+<h2 class="nhsuk-heading-m nhsuk-u-margin-bottom-4">The National Institute for Health and Care Research team</h2>
+
+{% endif %}
 
   </div>
 </div>
