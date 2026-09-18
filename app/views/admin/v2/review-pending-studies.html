@@ -100,8 +100,8 @@
   responsive: true,
   panel: false,
   head: [
-    { text: 'Study details', sort: true },
-    { text: 'Primary contact', sort: true },
+    { text: 'Study name', sort: true },
+    { text: 'Service', sort: true },
     { text: 'Last updated', sort: 'ascending' },
     { text: 'Admin name', sort: true },
     { text: 'Status', sort: true },
@@ -110,12 +110,12 @@
   rows: [
     [
       {
-        header: 'Study details',
-        html: '<p>' + updateSOStudyName + '<br><span class="nhsuk-body-s">Be Part of Research</span></p>'
+        header: 'Study name',
+        html: updateSOStudyName
       },
       {
-        header: 'Primary contact',
-        text: 'Doe, Jane'
+        header: 'Service',
+        text: 'Be Part of Research'
       },
       {
         header: 'Last updated',
@@ -136,12 +136,12 @@
     ],
     [
       {
-        header: 'Study details',
-        html: '<p>Exploring the effects of art therapy on memory retention in older adults<br><span class="nhsuk-body-s">Join Dementia Research</span></p>'
+        header: 'Study name',
+        html: '<p>Exploring the effects of art therapy on memory retention in older adults</p>'
       },
       {
-        header: 'Primary contact',
-        text: 'Doe, Jane'
+        header: 'Service',
+        text: 'Join Dementia Research'
       },
       {
         header: 'Last updated',

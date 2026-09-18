@@ -33,7 +33,7 @@
 
   <!-- Checkbox list -->
   <div
-    class="nhsuk-checkboxes scrollable-list {{ params.classes | default('') }}"
+    class="nhsuk-checkboxes scrollable-list{% if params.showAllOptions %} scrollable-list--show-all{% endif %} {{ params.classes | default('') }}"
     id="{{ params.id }}-list"
     data-js-hidden="true">
 
@@ -58,6 +58,7 @@
 
       </div>
     {% endfor %}
+
   </div>
 
   <!-- Selected tags (JS only) -->
