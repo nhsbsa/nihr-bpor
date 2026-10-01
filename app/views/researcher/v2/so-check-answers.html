@@ -625,12 +625,16 @@
       html: '<p>By submitting your study for approval, you:<ul><li>agree to the <a href="#" target="_blank" rel="noreferrer noopener">terms and conditions (opens in a new tab)</a></li><li>consent to the use of your data as described in the <a href="#" target="_blank" rel="noreferrer noopener">privacy notice (opens in a new tab)</a></a></li></ul>'
     }) }}
 
+
+    <form action="/{{folder}}/{{subfolder}}/so-check-answers" method="post" novalidate>
+
     <div class="nhsuk-button-group">
       {{ button({
-        text: "Accept and send",
-        href: "so-application-submitted"
+        text: "Accept and send"
       }) }}
     </div>
+
+    </form>
 
   </div>
 </div>

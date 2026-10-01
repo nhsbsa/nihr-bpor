@@ -1,0 +1,156 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "My studies" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-researcher-nihr-logged-in-v2.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "My studies" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+
+      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+      <nav class="app-side-nav">
+        <h2 class="app-side-nav__heading">Dashboard</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Manage studies</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="so-add-a-study?brand=">Add a study</a></li>
+            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="my-studies">My studies</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Tools</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Check study feasibility</a></li>
+        </ul>
+        <h2 class="app-side-nav__heading">Support</h2>
+        <ul class="nhsuk-list app-side-nav__list">
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:recruitregistryvolunteers@nihr.ac.uk">Email us</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="nhsuk-grid-column-three-quarters">
+      
+{% if data['soCPMSID'] %}
+  {% set soStudyName = "Glucose Perception in Type 2 diabetes (Phase 1)" %}
+{% elif data['studyTitle'] %}
+  {% set soStudyName = data['studyTitle'] %}
+{% else %}
+  {% set soStudyName = "Assessing the effectiveness of cognitive behavioural therapy for dementia" %}
+{% endif %}
+
+{% if data['studyType'] == "BPOR" %}
+  {% set soStudyID = "BPOR-2419" %}
+{% elif data['studyType'] == "JDR" %}
+  {% set soStudyID = "JDR-2419" %}
+{% else %}
+
+  {% if data['brand'] == "BPOR" %}
+    {% set soStudyID = "BPOR-2419" %}
+  {% elif data['brand'] == "JDR" %}
+    {% set soStudyID = "JDR-2419" %}
+  {% else %}
+    {% set soStudyID = "BPOR-2419" %}
+  {% endif %}
+
+{% endif %}
+
+{% if data['researcherFirstName'] and data['researcherLastName'] %}
+  {% set ownerName = data['researcherLastName'] + ", " + data['researcherFirstName'] %}
+{% else %}
+  {% set ownerName = "Doe, Jane" %}
+{% endif %}
+
+<h1>My studies</h1>
+
+{% if data['so-study-submit'] == true %}
+  
+{{ table({
+  responsive: true,
+  panel: false,
+  head: [
+    { text: 'Study name', sort: true },
+    { text: 'Study ID', sort: true },
+    { text: 'Owner', sort: true },
+    { text: 'Status', sort: true },
+    { text: 'Action' }
+  ],
+  rows: [
+    [
+      {
+        header: 'Study name',
+        html: soStudyName
+      },
+      {
+        header: 'Study ID',
+        html: soStudyID
+      },
+      {
+        header: 'Owner',
+        html: ownerName
+      },
+      {
+        header: 'Status',
+        html: '<strong class="nhsuk-tag nhsuk-tag--yellow">Submitted</strong>'
+      },
+      {
+        header: 'Actions',
+        html: '<p class="nhsuk-hint">No Actions</p>'
+      }
+    ]
+  ]
+}) }}
+
+<p>Showing 1 of 1 result(s)</p>
+
+{% else %}
+
+<h2 class="nhsuk-heading-m">No studies found</h2>
+
+<p>You have not created any studies yet. <a href="so-add-a-study?brand=">Add a study</a> to get started.</p>
+
+{% endif %}
+
+
+    </div>
+  </div>
+{% endblock %}

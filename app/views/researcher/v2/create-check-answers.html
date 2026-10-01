@@ -24,6 +24,7 @@
          <h2 class="app-side-nav__heading">Manage studies</h2>
          <ul class="nhsuk-list app-side-nav__list">
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="so-add-a-study?brand=">Add a study</a></li>
+            <li class="app-side-nav__item"><a class="app-side-nav__link" href="my-studies">My studies</a></li>
             <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="create-start">Create pre-screener</a></li>
             <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-start">Manage pre-screeners</a></li>
          </ul>
@@ -60,7 +61,7 @@
                Be Part of Research study ID
             </dt>
             <dd class="nhsuk-summary-list__value">
-               {% if data['studyID'] %}{{ data['studyID'] }}{% else %}BPOR001234{% endif %}
+               {% if data['studyID'] %}{{ data['studyID'] }}{% else %}BPOR-24194{% endif %}
             </dd>
             <dd class="nhsuk-summary-list__actions">
                <a class="nhsuk-link" href="create-study-details#studyID">Change<span class="nhsuk-u-visually-hidden"> study ID</span></a>

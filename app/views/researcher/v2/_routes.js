@@ -1368,6 +1368,16 @@ router.post('/so-recruitment-end-date', function (req, res) {
 
 });
 
+router.post('/so-check-answers', function (req, res) {
+
+    req.session.data['so-study-submit'] = true;
+
+    res.redirect('so-application-submitted');
+
+});
+
+
+
 
 
 // End Routes
