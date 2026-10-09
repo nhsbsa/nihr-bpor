@@ -1,0 +1,59 @@
+<!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+
+<nav class="app-side-nav">
+    <h2 class="app-side-nav__heading">Dashboard</h2>
+
+    <ul class="nhsuk-list app-side-nav__list">
+        <li class="app-side-nav__item{% if activePage == 'home' %} app-side-nav__item--current{% endif %}">
+            <a class="app-side-nav__link" href="home"
+               {% if activePage == 'home' %}aria-current="page"{% endif %}>Home</a>
+        </li>
+    </ul>
+
+    <h2 class="app-side-nav__heading">Manage accounts</h2>
+
+    <ul class="nhsuk-list app-side-nav__list">
+        <li class="app-side-nav__item{% if activePage == 'account-requests' %} app-side-nav__item--current{% endif %}">
+            <a class="app-side-nav__link" href="account-requests"
+               {% if activePage == 'account-requests' %}aria-current="page"{% endif %}>Review account requests</a>
+        </li>
+
+        <li class="app-side-nav__item{% if activePage == 'manage-accounts' %} app-side-nav__item--current{% endif %}">
+            <a class="app-side-nav__link" href="manage-accounts"
+               {% if activePage == 'manage-accounts' %}aria-current="page"{% endif %}>Manage accounts</a>
+        </li>
+    </ul>
+
+    <h2 class="app-side-nav__heading">Manage studies</h2>
+
+    <ul class="nhsuk-list app-side-nav__list">
+        <li class="app-side-nav__item{% if activePage == 'review-pending-studies' %} app-side-nav__item--current{% endif %}">
+            <a class="app-side-nav__link" href="review-pending-studies" {% if activePage == 'review-pending-studies' %}aria-current="page"{% endif %}>Review pending studies</a>
+        </li>
+        <li class="app-side-nav__item{% if activePage == 'view-studies' %} app-side-nav__item--current{% endif %}">
+            <a class="app-side-nav__link" href="view-studies" {% if activePage == 'view-studies' %}aria-current="page"{% endif %}>View studies</a>
+        </li>
+        <li class="app-side-nav__item{% if activePage == 'review-pending-pre-screeners' %} app-side-nav__item--current{% endif %}">
+            <a class="app-side-nav__link" href="review-pending-pre-screeners" {% if activePage == 'review-pending-pre-screeners' %}aria-current="page"{% endif %}>Review pending pre-screeners</a>
+        </li>
+        <li class="app-side-nav__item{% if activePage == 'view-pre-screeners' %} app-side-nav__item--current{% endif %}">
+            <a class="app-side-nav__link" href="view-pre-screeners" {% if activePage == 'view-pre-screeners' %}aria-current="page"{% endif %}>View pre-screeners</a>
+        </li>
+    </ul>
+
+    <h2 class="app-side-nav__heading">Tools</h2>
+
+    <ul class="nhsuk-list app-side-nav__list">
+        <li class="app-side-nav__item{% if activePage == 'check-study-feasibility' %} app-side-nav__item--current{% endif %}">
+            <a class="app-side-nav__link" href="#" {% if activePage == 'check-study-feasibility' %}aria-current="page"{% endif %}>Check study feasibility</a>
+        </li>
+    </ul>
+
+    <h2 class="app-side-nav__heading">Support</h2>
+
+    <ul class="nhsuk-list app-side-nav__list">
+        <li class="app-side-nav__item">
+            <a class="app-side-nav__link" href="mailto:recruitregistryvolunteers@nihr.ac.uk">Email us</a>
+        </li>
+    </ul>
+</nav>

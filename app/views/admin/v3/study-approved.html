@@ -40,63 +40,35 @@
 <!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
 {% block content %}
 
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+<div class="nhsuk-grid-row">
+	<div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+		{% set activePage = 'review-pending-studies' %}
+		{% include "admin/v3/partials/side-nav.njk" %}
+	</div>
 
-      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+	<div class="nhsuk-grid-column-three-quarters">
 
-      <nav class="app-side-nav">
-        <h2 class="app-side-nav__heading">Dashboard</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Manage accounts</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
-            <!-- <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-admin-accounts">Create administrator accounts</a></li> -->
-        </ul>
-        <h2 class="app-side-nav__heading">Manage studies</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="review-pending-studies">Review pending studies</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-studies">View studies</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Tools</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Check study feasibility</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Support</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:recruitregistryvolunteers@nihr.ac.uk">Email us</a></li>
-        </ul>
-      </nav>
+	{% set updateSOStudyName = data['update-so-study-name'] | default('Glucose Perception in Type 2 diabetes (Phase 1)') %}
 
-    </div>
-    <div class="nhsuk-grid-column-three-quarters">
+	{{ panel({
+		titleText: "Study eligible for inclusion on registry",
+		html: updateSOStudyName
+	}) }}
 
-    {% set updateSOStudyName = data['update-so-study-name'] | default('Glucose Perception in Type 2 diabetes (Phase 1)') %}
+	<p>This study has been approved for inclusion on the registry.</p>
 
-    {{ panel({
-      titleText: "Study eligible for inclusion on registry",
-      html: updateSOStudyName
-    }) }}
+	<h2 class="nhsuk-heading-m">What happens next</h2>
 
-    <p>This study has been approved for inclusion on the registry.</p>
+	<p>We've emailed {% if data['soPrimaryContactFirstName'] and data['soPrimaryContactLastName'] %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %}.</p>
 
-    <h2 class="nhsuk-heading-m">What happens next</h2>
+	<p>If they do not have an account, we'll send them instructions to create one.</p>
 
-    <p>We’ve emailed {% if data['soPrimaryContactFirstName'] and data['soPrimaryContactLastName'] %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %}.</p>
+	{{ button({
+		text: "Back to dashboard",
+		href: "review-pending-studies-updated",
+		classes: "nhsuk-button--secondary"
+	}) }}
 
-    <p>If they do not have an account, we'll send them instructions to create one.</p>
-
-    {{ button({
-      text: "Back to dashboard",
-      href: "review-pending-studies-updated",
-      classes: "nhsuk-button--secondary"
-    }) }}
-
-    </div>
-  </div>
+	</div>
+</div>
 {% endblock %}

@@ -40,92 +40,64 @@
 <!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
 {% block content %}
 
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+<div class="nhsuk-grid-row">
+	<div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+		{% set activePage = 'review-pending-studies' %}
+		{% include "admin/v3/partials/side-nav.njk" %}
+	</div>
 
-      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+	<div class="nhsuk-grid-column-three-quarters">
 
-      <nav class="app-side-nav">
-        <h2 class="app-side-nav__heading">Dashboard</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Manage accounts</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
-            <!-- <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-admin-accounts">Create administrator accounts</a></li> -->
-        </ul>
-        <h2 class="app-side-nav__heading">Manage studies</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="review-pending-studies">Review pending studies</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-studies">View studies</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Tools</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Check study feasibility</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Support</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:recruitregistryvolunteers@nihr.ac.uk">Email us</a></li>
-        </ul>
-      </nav>
+	{{ backLink({
+	"href": "javascript:history.go(-1)",
+	"text": "Back",
+	classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+	}) }}
 
-    </div>
-    <div class="nhsuk-grid-column-three-quarters">
-
-{{ backLink({
-    "href": "javascript:history.go(-1)",
-    "text": "Back",
-    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
-}) }}
-
-{% set updateSOStudyName = data['update-study-name'] | default('Glucose Perception in Type 2 diabetes (Phase 1)') %}
+	{% set updateSOStudyName = data['update-study-name'] | default('Glucose Perception in Type 2 diabetes (Phase 1)') %}
 
 
-<span class="nhsuk-caption-xl">{{ updateSOStudyName }}</span>
-<h1 class="nhsuk-heading-xl">Rejection reason</h1>
+	<span class="nhsuk-caption-xl">{{ updateSOStudyName }}</span>
+	<h1 class="nhsuk-heading-xl">Rejection reason</h1>
 
-<form action="/{{folder}}/{{subfolder}}/review-study-rejection-reason" method="post" novalidate>
+	<form action="/{{folder}}/{{subfolder}}/review-study-rejection-reason" method="post" novalidate>
 
-{{ radios({
-  idPrefix: "updateRejectionStatus",
-  name: "updateRejectionStatus",
-  items: [
-    {
-      value: "Not NIHR affiliated",
-      text: "Not NIHR affiliated",
-      checked: (data.updateRejectionStatus == "Not NIHR affiliated") 
-               or (not data.updateRejectionStatus)
-    },
-    {
-      value: "Recruitment window too short",
-      text: "Recruitment window too short",
-      checked: data.updateRejectionStatus == "Recruitment window too short"
-    },
-    {
-      value: "Not possible to recruit target population",
-      text: "Not possible to recruit target population",
-      checked: data.updateRejectionStatus == "Not possible to recruit target population"
-    },
-    {
-      value: "Study already listed here (duplication check)",
-      text: "Study already listed here (duplication check)",
-      checked: data.updateRejectionStatus == "Study already listed here (duplication check)"
-    }
-  ]
-}) }}
+	{{ radios({
+	idPrefix: "updateRejectionStatus",
+	name: "updateRejectionStatus",
+	items: [
+	{
+		value: "Not NIHR affiliated",
+		text: "Not NIHR affiliated",
+		checked: (data.updateRejectionStatus == "Not NIHR affiliated") 
+				or (not data.updateRejectionStatus)
+	},
+	{
+		value: "Recruitment window too short",
+		text: "Recruitment window too short",
+		checked: data.updateRejectionStatus == "Recruitment window too short"
+	},
+	{
+		value: "Not possible to recruit target population",
+		text: "Not possible to recruit target population",
+		checked: data.updateRejectionStatus == "Not possible to recruit target population"
+	},
+	{
+		value: "Study already listed here (duplication check)",
+		text: "Study already listed here (duplication check)",
+		checked: data.updateRejectionStatus == "Study already listed here (duplication check)"
+	}
+	]
+	}) }}
 
-  {{ button({
-    text: "Reject",
-    classes: "nhsuk-button--warning"
-  }) }}
+	{{ button({
+	text: "Reject",
+	classes: "nhsuk-button--warning"
+	}) }}
 
-</form>
+	</form>
 
 
-    </div>
-  </div>
+	</div>
+</div>
 {% endblock %}
