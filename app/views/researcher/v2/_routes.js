@@ -1298,38 +1298,46 @@ router.post('/so-study-demographic', function (req, res) {
 router.post('/so-health-conditions', function (req, res) {
 
     var soHealthConditions = req.session.data['soHealthConditions'];
+    var soHealthConditionsTopic = req.session.data['soHealthConditionsTopic'];
     var soCPMSID = req.session.data['soCPMSID'];
 
-
-    if (!soHealthConditions) {
-        return res.redirect('so-health-conditions');
-    }
-
-    if (!Array.isArray(soHealthConditions)) {
+    // Convert values to arrays if necessary
+    if (soHealthConditions && !Array.isArray(soHealthConditions)) {
         soHealthConditions = [soHealthConditions];
     }
 
-    // Remove placeholder values
-    soHealthConditions = soHealthConditions.filter(c => c !== '_unchecked');
+    if (soHealthConditionsTopic && !Array.isArray(soHealthConditionsTopic)) {
+        soHealthConditionsTopic = [soHealthConditionsTopic];
+    }
 
-    // Nothing selected
-    if (soHealthConditions.length === 0) {
+    // Remove placeholder values
+    soHealthConditions = (soHealthConditions || [])
+        .filter(c => c !== '_unchecked');
+
+    soHealthConditionsTopic = (soHealthConditionsTopic || [])
+        .filter(t => t !== '_unchecked');
+
+    // Check that at least one field has a valid selection
+    if (
+        soHealthConditions.length === 0 &&
+        soHealthConditionsTopic.length === 0
+    ) {
         return res.redirect('so-health-conditions');
     }
 
-    // Save cleaned values back to the session if needed
+    // Save cleaned values back to the session
     req.session.data['soHealthConditions'] = soHealthConditions;
+    req.session.data['soHealthConditionsTopic'] = soHealthConditionsTopic;
 
-    
+    // Preserve existing CPMS redirect logic
     if (soCPMSID) {
         req.session.data['so-study-details-complete'] = true;
 
         return res.redirect('so-task-list');
-
     }
-    
+
     return res.redirect('so-recruitment-end-date');
-    
+
 });
 
 router.post('/so-study-location', function (req, res) {
