@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "Recruit Registry Volunteers" %}
+{% set pageName = "Check study feasibility" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -47,7 +47,151 @@
 	</div>
 
     <div class="nhsuk-grid-column-three-quarters">
-		<h1>Test</h1>
-    </div>
+		<h1>Volunteer Criteria Feasibility Tool</h1>
+		<p>Study Feasibility assesses how many volunteers match a study's recruitment criteria, providing a numerical signal of availability which will determine whether the registry can support a study.</p>
+    
+		<hr>
+
+		<h2>Date of volunteer registration</h2>
+		<p class="nhsuk-hint">Enter a <strong>From</strong> and <strong>To</strong> date to filter volunteers by the date their account was created.</p>
+
+		{{ dateInput({
+			id: "registration-from",
+			namePrefix: "registrationFrom",
+			fieldset: { 
+				legend: { 
+					text: "From", 
+					classes: "nhsuk-fieldset__legend--s" 
+				} 
+			},
+			items: [
+				{ name: "day", classes: "nhsuk-input--width-2" },
+				{ name: "month", classes: "nhsuk-input--width-2" },
+				{ name: "year", classes: "nhsuk-input--width-4" }
+			]
+		}) }}
+
+		{{ dateInput({
+			id: "registration-to",
+			namePrefix: "registrationTo",
+			fieldset: { legend: { text: "To", classes: "nhsuk-fieldset__legend--s" } },
+			items: [
+				{ name: "day", classes: "nhsuk-input--width-2" },
+				{ name: "month", classes: "nhsuk-input--width-2" },
+				{ name: "year", classes: "nhsuk-input--width-4" }
+			]
+		}) }}
+
+		<hr>
+
+		<h2>Location</h2>
+
+		{{ input({
+			id: "postcode-districts",
+			name: "postcodeDistricts",
+			classes: "nhsuk-u-width-three-quarters",
+			label: { 
+				text: "Postcode districts",
+				size: "s"
+			},
+			hint: { 
+					text: "Enter one or more postcode districts separated by commas. For example: SW1A, WC2B, EC1V." 
+			}
+		}) }}
+
+		<p class="nhsuk-body"><strong>OR</strong></p>
+
+		{{ input({
+			id: "full-postcode",
+			name: "fullPostcode",
+			classes: "nhsuk-input--width-10",
+			label: { 
+				text: "Full postcode",
+				size: "s" 
+			},
+			hint: { text: "For example: EC1A 1BB." }
+		}) }}
+
+		{{ input({
+			id: "radius",
+			name: "radius",
+			classes: "nhsuk-input--width-4",
+			inputmode: "numeric",
+			label: { 
+				text: "Radius",
+				size: "s" 
+			},
+			hint: { text: "Indicate the radius, in miles, for searching volunteers based on the provided full postcode." },
+			suffix: "Miles"
+		}) }}
+
+		<hr>
+
+		<h2>Demographics</h2>
+
+		{{ dateInput({
+			id: "rage-range",
+			namePrefix: "age",
+			fieldset: { 
+				legend: { 
+					text: "Age range", 
+					classes: "nhsuk-fieldset__legend--s" 
+				} 
+			},
+			hint: {
+				text: "Please specify the age range you wish to filter. The minimum starting age is 18"
+			},
+			items: [
+				{ 
+					name: "from", 
+					classes: "nhsuk-input--width-2"
+				},
+				{ 
+					name: "to", 
+					classes: "nhsuk-input--width-2" 
+				}
+			]
+		}) }}
+
+		{{ checkboxes({
+			idPrefix: "sex-at-birth",
+			name: "sexAtBirth",
+			fieldset: { legend: { text: "Sex registered at birth", classes: "nhsuk-fieldset__legend--s" } },
+			items: [
+				{ value: "male", text: "Male" },
+				{ value: "female", text: "Female" },
+				{ value: "intersex", text: "Intersex" },
+				{ value: "prefer-not-to-say", text: "Prefer not to say" }
+			]
+		}) }}
+
+		{{ checkboxes({
+			idPrefix: "gender-same",
+			name: "genderSameAsSex",
+			fieldset: { legend: { text: "Is gender same as sex registered at birth?", classes: "nhsuk-fieldset__legend--s" } },
+			items: [
+				{ value: "yes", text: "Yes" },
+				{ value: "no", text: "No" },
+				{ value: "prefer-not-to-say", text: "Prefer not to say" }
+			]
+		}) }}
+
+		{{ checkboxes({
+			idPrefix: "ethnic-group",
+			name: "ethnicGroup",
+			fieldset: { legend: { text: "Ethnic group", classes: "nhsuk-fieldset__legend--s" } },
+			items: [
+				{ value: "asian", text: "Asian" },
+				{ value: "black", text: "Black" },
+				{ value: "mixed", text: "Mixed or multiple ethnic groups" },
+				{ value: "white", text: "White" },
+				{ value: "other", text: "Other ethnic group" }
+			]
+		}) }}
+
+		<hr>
+
+		<h2>BPoR health criteria search options</h2>
+	</div>
 </div>
 {% endblock %}
