@@ -70,8 +70,8 @@
     {% endif %}
 
     {# =========================
-       PRIMARY CONTACT ROWS
-       ========================= #}
+      PRIMARY CONTACT ROWS
+      ========================= #}
 
     {% set primaryRows = [] %}
 
@@ -191,8 +191,8 @@
     {% endif %}
 
     {# =========================
-       CHIEF INVESTIGATOR ROWS
-       ========================= #}
+      CHIEF INVESTIGATOR ROWS
+      ========================= #}
 
     {% if not data['brand'] or data['primaryContactConfirm'] == "Yes" %}
       {% set soPrimaryContactChiefInvestigatorQuestion = "Is the researcher the chief investigator?" %}
@@ -364,8 +364,8 @@
     }) }}
 
     {# =========================
-       PORTFOLIO AND FUNDING
-       ========================= #}
+      PORTFOLIO AND FUNDING
+      ========================= #}
 
     <h2 class="nhsuk-heading-m">Portfolio and funding</h2>
 
@@ -454,8 +454,8 @@
     }) }}
 
     {# =========================
-       STUDY DETAILS
-       ========================= #}
+      STUDY DETAILS
+      ========================= #}
 
     <h2 class="nhsuk-heading-m">Study details</h2>
 
@@ -545,10 +545,12 @@
 
     {% endif %}
 
-    {# 
+    {#
       soHealthConditions is an array, so convert it to a string
       before passing it to summaryList.
     #}
+
+    {% if data['soHealthConditions'] and data['soHealthConditions'] | length > 0 %}
 
     {% set rows3 = rows3.concat([{
       key: { text: "Study health conditions" },
@@ -563,6 +565,32 @@
         }]
       }
     }]) %}
+
+    {% endif %}
+
+    {# OTHER HEALTH AND CARE TOPICS #}
+
+    {% if data['soHealthConditionsTopic'] %}
+
+      {% set healthConditionsTopic = data['soHealthConditionsTopic'] %}
+
+      {% if healthConditionsTopic is not string %}
+        {% set healthConditionsTopic = healthConditionsTopic | join(", ") %}
+      {% endif %}
+
+      {% set rows3 = rows3.concat([{
+        key: { text: "Other health and care topics" },
+        value: { text: healthConditionsTopic },
+        actions: {
+          items: [{
+            href: "/researcher/v2/so-health-conditions#soHealthConditionsTopic",
+            text: "Change",
+            visuallyHiddenText: "other health and care topics"
+          }]
+        }
+      }]) %}
+
+    {% endif %}
 
     {% if not data['soCPMSID'] and data['soRecruitmentEndDate'] %}
 
@@ -617,22 +645,21 @@
     }) }}
 
     {# =========================
-       CONSENT
-       ========================= #}
+      CONSENT
+      ========================= #}
 
     {{ warningCallout({
       heading: "Consent",
       html: '<p>By submitting your study for approval, you:<ul><li>agree to the <a href="#" target="_blank" rel="noreferrer noopener">terms and conditions (opens in a new tab)</a></li><li>consent to the use of your data as described in the <a href="#" target="_blank" rel="noreferrer noopener">privacy notice (opens in a new tab)</a></a></li></ul>'
     }) }}
 
-
     <form action="/{{folder}}/{{subfolder}}/so-check-answers" method="post" novalidate>
 
-    <div class="nhsuk-button-group">
-      {{ button({
-        text: "Accept and send"
-      }) }}
-    </div>
+      <div class="nhsuk-button-group">
+        {{ button({
+          text: "Accept and send"
+        }) }}
+      </div>
 
     </form>
 

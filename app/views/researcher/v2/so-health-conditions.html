@@ -59,13 +59,37 @@
   },
   classes: "nhsuk-checkboxes--small",
   hint: {
-    html: '<p>Choose the health conditions relevant to your study.</p><p>We’ll use this information to identify volunteers whose profile interests match these conditions and may be suitable for recruitment.</p>'
+    html: '<p>Select the health conditions relevant to your study. Include any inclusions and exclusions.</p><p>We’ll use this information to identify volunteers whose profile interests match these conditions and may be suitable for recruitment.</p>'
   },
   id: "soHealthConditions",
   name: "soHealthConditions",
   selectedLabel: "Selected health conditions",
   items: data.health_conditions
 }) }}
+
+{% call details({
+  summary: "What if I cannot find relevant conditions or topics in the list?",
+  classes: "nhsuk-u-margin-bottom-6"
+}) %}
+  <p>If the condition is not listed, or your study covers other health and care topics, enter them in the text box.</p>
+  <p>This could include:</p>
+  <ul>
+    <li>treatments, interventions, and care pathways</li>
+    <li>lifestyle factors</li>
+    <li>social care</li>
+    <li>public health</li>
+    <li>health and care research</li>
+  </ul>
+  <div class="nhsuk-form-group nhsuk-character-count" data-module="nhsuk-character-count" data-maxlength="150" data-count-type="words">
+    <label class="nhsuk-label nhsuk-label--s" for="soHealthConditionsTopic">
+      Enter a health condition or topic (optional)
+    </label>
+    <textarea class="nhsuk-textarea nhsuk-js-character-count" id="soHealthConditionsTopic" name="soHealthConditionsTopic" rows="5" aria-describedby="soHealthConditionsTopic-info"></textarea>
+    <div class="nhsuk-hint nhsuk-character-count__message" id="soHealthConditionsTopic-info">
+      You can enter up to 150 words
+    </div>
+  </div>
+{% endcall %}
 
 {{ button({
   text: "Continue"
