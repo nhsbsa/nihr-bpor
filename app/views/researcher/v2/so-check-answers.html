@@ -58,7 +58,7 @@
             value: { text: serviceName },
             actions: {
               items: [{
-                href: "/researcher/v2/so-add-a-study-type#studyType",
+                href: "so-add-a-study-type#studyType",
                 text: "Change",
                 visuallyHiddenText: "which service do you want to use"
               }]
@@ -82,7 +82,7 @@
           value: { text: data['primaryContactConfirm'] },
           actions: {
             items: [{
-              href: "/researcher/v2/so-primary-contact-confirm",
+              href: "so-primary-contact-confirm",
               text: "Change",
               visuallyHiddenText: "primary contact selection"
             }]
@@ -121,10 +121,10 @@
 
     {% else %}
 
-      {% set primaryOrgHref = "/researcher/v2/so-primary-contact#soPrimaryContactOrganisation" %}
+      {% set primaryOrgHref = "so-primary-contact#soPrimaryContactOrganisation" %}
 
       {% if data['soPrimaryContactOrganisationName'] %}
-        {% set primaryOrgHref = "/researcher/v2/so-primary-contact#soPrimaryContactOrganisationName" %}
+        {% set primaryOrgHref = "so-primary-contact#soPrimaryContactOrganisationName" %}
       {% endif %}
 
       {% set primaryRows = primaryRows.concat([
@@ -133,7 +133,7 @@
           value: { text: data['soPrimaryContactTitle'] or "" },
           actions: {
             items: [{
-              href: "/researcher/v2/so-primary-contact#soPrimaryContactTitle",
+              href: "so-primary-contact#soPrimaryContactTitle",
               text: "Change",
               visuallyHiddenText: "primary contact title"
             }]
@@ -144,7 +144,7 @@
           value: { text: data['soPrimaryContactFirstName'] or "" },
           actions: {
             items: [{
-              href: "/researcher/v2/so-primary-contact#soPrimaryContactFirstName",
+              href: "so-primary-contact#soPrimaryContactFirstName",
               text: "Change",
               visuallyHiddenText: "primary contact first name"
             }]
@@ -155,7 +155,7 @@
           value: { text: data['soPrimaryContactLastName'] or "" },
           actions: {
             items: [{
-              href: "/researcher/v2/so-primary-contact#soPrimaryContactLastName",
+              href: "so-primary-contact#soPrimaryContactLastName",
               text: "Change",
               visuallyHiddenText: "primary contact last name"
             }]
@@ -166,7 +166,7 @@
           value: { text: data['soPrimaryContactEmailAddress'] or "" },
           actions: {
             items: [{
-              href: "/researcher/v2/so-primary-contact#soPrimaryContactEmailAddress",
+              href: "so-primary-contact#soPrimaryContactEmailAddress",
               text: "Change",
               visuallyHiddenText: "primary contact email address"
             }]
@@ -209,7 +209,7 @@
           value: { text: data['soPrimaryContactChiefInvestigator'] },
           actions: {
             items: [{
-              href: "/researcher/v2/so-primary-contact-chief-investigator#",
+              href: "so-primary-contact-chief-investigator#",
               text: "Change",
               visuallyHiddenText: "chief investigator selection"
             }]
@@ -280,10 +280,10 @@
 
     {% else %}
 
-      {% set ciOrgHref = "/researcher/v2/so-chief-investigator#soChiefInvestigatorOrganisation" %}
+      {% set ciOrgHref = "so-chief-investigator#soChiefInvestigatorOrganisation" %}
 
       {% if data['soChiefInvestigatorOrganisationName'] %}
-        {% set ciOrgHref = "/researcher/v2/so-chief-investigator#soChiefInvestigatorOrganisationName" %}
+        {% set ciOrgHref = "so-chief-investigator#soChiefInvestigatorOrganisationName" %}
       {% endif %}
 
       {% set ciRows = ciRows.concat([
@@ -292,7 +292,7 @@
           value: { text: data['soChiefInvestigatorTitle'] or "" },
           actions: {
             items: [{
-              href: "/researcher/v2/so-chief-investigator#soChiefInvestigatorTitle",
+              href: "so-chief-investigator#soChiefInvestigatorTitle",
               text: "Change",
               visuallyHiddenText: "chief investigator title"
             }]
@@ -303,7 +303,7 @@
           value: { text: data['soChiefInvestigatorFirstName'] or "" },
           actions: {
             items: [{
-              href: "/researcher/v2/so-chief-investigator#soChiefInvestigatorFirstName",
+              href: "so-chief-investigator#soChiefInvestigatorFirstName",
               text: "Change",
               visuallyHiddenText: "chief investigator first name"
             }]
@@ -314,7 +314,7 @@
           value: { text: data['soChiefInvestigatorLastName'] or "" },
           actions: {
             items: [{
-              href: "/researcher/v2/so-chief-investigator#soChiefInvestigatorLastName",
+              href: "so-chief-investigator#soChiefInvestigatorLastName",
               text: "Change",
               visuallyHiddenText: "chief investigator last name"
             }]
@@ -325,7 +325,7 @@
           value: { text: data['soChiefInvestigatorEmailAddress'] or "" },
           actions: {
             items: [{
-              href: "/researcher/v2/so-chief-investigator#soChiefInvestigatorEmailAddress",
+              href: "so-chief-investigator#soChiefInvestigatorEmailAddress",
               text: "Change",
               visuallyHiddenText: "chief investigator email address"
             }]
@@ -376,7 +376,7 @@
       value: { text: data['soRDNPortfolio'] or "" },
       actions: {
         items: [{
-          href: "/researcher/v2/so-rdn-portfolio#soRDNPortfolio",
+          href: "so-rdn-portfolio#soRDNPortfolio",
           text: "Change",
           visuallyHiddenText: "RDN portfolio status"
         }]
@@ -389,7 +389,7 @@
         value: { text: data['soCPMSID'] },
         actions: {
           items: [{
-            href: "/researcher/v2/so-rdn-portfolio#soCPMSID",
+            href: "so-rdn-portfolio#soCPMSID",
             text: "Change",
             visuallyHiddenText: "CPMS ID"
           }]
@@ -403,7 +403,7 @@
         value: { text: data['nihrFunding'] or "" },
         actions: {
           items: [{
-            href: "/researcher/v2/so-nihr-funding#nihrFunding",
+            href: "so-nihr-funding#nihrFunding",
             text: "Change",
             visuallyHiddenText: "NIHR funding"
           }]
@@ -419,7 +419,7 @@
         value: { text: data['soEthicsApproval'] or "" },
         actions: {
           items: [{
-            href: "/researcher/v2/so-ethics-approval#soEthicsApproval",
+            href: "so-ethics-approval#soEthicsApproval",
             text: "Change",
             visuallyHiddenText: "ethics approval"
           }]
@@ -433,7 +433,7 @@
         value: { text: data['soEthicsApproval'] or "" },
         actions: {
           items: [{
-            href: "/researcher/v2/so-ethics-approval#soEthicsApproval",
+            href: "so-ethics-approval#soEthicsApproval",
             text: "Change",
             visuallyHiddenText: "ethics approval"
           }]
@@ -475,7 +475,7 @@
         value: { text: data['studyTitle'] or "" },
         actions: {
           items: [{
-            href: "/researcher/v2/so-study-title#studyTitle",
+            href: "so-study-title#studyTitle",
             text: "Change",
             visuallyHiddenText: "study name"
           }]
@@ -500,7 +500,7 @@
         value: { text: data['studyDescription'] or "" },
         actions: {
           items: [{
-            href: "/researcher/v2/so-study-description#studyDescription",
+            href: "so-study-description#studyDescription",
             text: "Change",
             visuallyHiddenText: "study description"
           }]
@@ -526,7 +526,7 @@
         value: { text: data['studyDemographic'] or "" },
         actions: {
           items: [{
-            href: "/researcher/v2/so-study-demographic#studyDemographic",
+            href: "so-study-demographic#studyDemographic",
             text: "Change",
             visuallyHiddenText: "study demographic"
           }]
@@ -559,7 +559,7 @@
       },
       actions: {
         items: [{
-          href: "/researcher/v2/so-health-conditions#soHealthConditions",
+          href: "so-health-conditions#soHealthConditions",
           text: "Change",
           visuallyHiddenText: "study health conditions"
         }]
@@ -583,7 +583,7 @@
         value: { text: healthConditionsTopic },
         actions: {
           items: [{
-            href: "/researcher/v2/so-health-conditions#soHealthConditionsTopic",
+            href: "so-health-conditions#soHealthConditionsTopic",
             text: "Change",
             visuallyHiddenText: "other health and care topics"
           }]
@@ -620,7 +620,7 @@
         },
         actions: {
           items: [{
-            href: "/researcher/v2/so-recruitment-end-date#soRecruitmentEndDate-day",
+            href: "so-recruitment-end-date#soRecruitmentEndDate-day",
             text: "Change",
             visuallyHiddenText: "study recruitment end date"
           }]
