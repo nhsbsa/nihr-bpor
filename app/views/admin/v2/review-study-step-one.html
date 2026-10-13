@@ -531,23 +531,12 @@
       }
     }]) %}
 
-    {% if not data['soCPMSID'] %}
+    {% if data['soHealthConditionsTopic'] %}
 
       {% set rows3 = rows3.concat([{
-        key: { text: "Study location" },
+        key: { text: "Other health and care topics" },
         value: {
-          text: data['soStudyLocation']
-            or "Online (from your own home, or anywhere with internet access)"
-        }
-      }]) %}
-
-    {% else %}
-
-      {% set rows3 = rows3.concat([{
-        key: { text: "Study location" },
-        value: {
-          text: data['soStudyLocation']
-            or "Online (from your own home, or anywhere with internet access)"
+          text: (data['soHealthConditionsTopic'] or ["My study is also includes treatments, interventions, and care pathways around social depravation"]) | join(", ")
         }
       }]) %}
 
