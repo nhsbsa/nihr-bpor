@@ -169,10 +169,10 @@
 
     {% else %}
 
-      {% set primaryOrgHref = "/researcher/v3/so-primary-contact#soPrimaryContactOrganisation" %}
+      {% set primaryOrgHref = "/researcher/v2/so-primary-contact#soPrimaryContactOrganisation" %}
 
       {% if data['soPrimaryContactOrganisationName'] %}
-        {% set primaryOrgHref = "/researcher/v3/so-primary-contact#soPrimaryContactOrganisationName" %}
+        {% set primaryOrgHref = "/researcher/v2/so-primary-contact#soPrimaryContactOrganisationName" %}
       {% endif %}
 
       {% set primaryRows = primaryRows.concat([
@@ -306,10 +306,10 @@
 
     {% else %}
 
-      {% set ciOrgHref = "/researcher/v3/so-chief-investigator#soChiefInvestigatorOrganisation" %}
+      {% set ciOrgHref = "/researcher/v2/so-chief-investigator#soChiefInvestigatorOrganisation" %}
 
       {% if data['soChiefInvestigatorOrganisationName'] %}
-        {% set ciOrgHref = "/researcher/v3/so-chief-investigator#soChiefInvestigatorOrganisationName" %}
+        {% set ciOrgHref = "/researcher/v2/so-chief-investigator#soChiefInvestigatorOrganisationName" %}
       {% endif %}
 
       {% set ciRows = ciRows.concat([
@@ -531,23 +531,12 @@
       }
     }]) %}
 
-    {% if not data['soCPMSID'] %}
+    {% if data['soHealthConditionsTopic'] %}
 
       {% set rows3 = rows3.concat([{
-        key: { text: "Study location" },
+        key: { text: "Other health and care topics" },
         value: {
-          text: data['soStudyLocation']
-            or "Online (from your own home, or anywhere with internet access)"
-        }
-      }]) %}
-
-    {% else %}
-
-      {% set rows3 = rows3.concat([{
-        key: { text: "Study location" },
-        value: {
-          text: data['soStudyLocation']
-            or "Online (from your own home, or anywhere with internet access)"
+          text: (data['soHealthConditionsTopic'] or ["My study is also includes treatments, interventions, and care pathways around social depravation"]) | join(", ")
         }
       }]) %}
 
