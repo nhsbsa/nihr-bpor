@@ -91,7 +91,7 @@
 
 <!-- End of reusable data -->
 
-<div class="nhsuk-grid-row">
+<div class="nhsuk-grid-row" id="top">
 	<div class="nhsuk-grid-column-one-quarter hide-on-mobile">
 		{% set activePage = 'check-study-feasibility' %}
 		{% include "admin/v3/partials/side-nav.njk" %}
@@ -569,6 +569,40 @@
 			classes: "nhsuk-checkboxes--small",
 			items: notAnsweredItem
 		}) }}
+
+
+
+{% set cardDescriptionHtml %}
+  	<p>
+		<strong>BPoR:</strong> 1234<br />
+		<strong>JDR:</strong> 567
+	</p>
+	<button class="nhsuk-button nhsuk-u-margin-right-4" data-module="nhsuk-button" type="submit">
+		Run feasibility check
+	</button>
+
+	<button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+		Clear filters
+	</button>
+
+  	<p><a href="#top" class="nhsuk-link--no-visited-state">Back to top</a></p>
+{% endset %}
+
+<ul class="nhsuk-grid-row nhsuk-card-group">
+  <li class="nhsuk-grid-column-two-thirds nhsuk-card-group__item">
+    {{ card({
+      heading: {
+        text: "Volunteers matching criteria:",
+        size: "m"
+      },
+      description: {
+        html: cardDescriptionHtml
+      },
+      clickable: false
+    }) }}
+  </li>
+</ul>
+
 	</div>
 </div>
 {% endblock %}
