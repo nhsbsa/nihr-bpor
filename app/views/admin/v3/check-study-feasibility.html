@@ -40,6 +40,57 @@
 <!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
 {% block content %}
 
+
+<!-- Reusable data -->
+
+{% set notAnsweredItem = [{ value: "include", text: "Include not answered responses" }] %}
+
+{% set yesNoItems = [
+	{ value: "yes", text: "Yes" },
+	{ value: "no", text: "No" },
+	{ value: "not-known", text: "Not known" }
+] %}
+
+<!--Select + "Include not answered responses" fields at the bottom of the form -->
+{% set selectFields = [
+	{ id: "apoe4-tested", name: "apoe4Tested", label: "Tested for Alzheimer's risk gene APOE4?" },
+	{ id: "apoe4-positive", name: "apoe4Positive", label: "Positive for Alzheimer's risk gene APOE4?" },
+	{ id: "family-history", name: "familyHistory", label: "Family history of dementia?" },
+	{ id: "amyloid-plaque", name: "amyloidPlaque", label: "Positive for amyloid plaque?" },
+	{ id: "has-carer", name: "hasCarer", label: "Has a carer?" },
+	{ id: "family-in-care", name: "familyInCare", label: "Family member in care who they visit regularly?" },
+	{ id: "volunteer-carer", name: "volunteerCarer", label: "Volunteer cares or supports a person with dementia?" }
+] %}
+
+{% set disabilityItems = [
+	{ value: "hearing", text: "Hearing impairment" },
+	{ value: "visual", text: "Visual impairment" },
+	{ value: "mobility", text: "Mobility problems" },
+	{ value: "learning", text: "Learning difficulties" },
+	{ value: "communication", text: "Communication problems" },
+	{ divider: "or" },
+	{ value: "none", text: "None", behaviour: "exclusive" }
+] %}
+
+{% set medicalConditionItems = [
+	{ value: "down-syndrome", text: "Down syndrome" },
+	{ value: "sleep-disorders", text: "Diagnosed sleep disorders" },
+	{ value: "cancer", text: "Cancer (in the last 5 years)" },
+	{ value: "cardiac", text: "Significant cardiac problems" },
+	{ value: "pacemaker", text: "Pacemaker fitted" },
+	{ value: "stroke", text: "Stroke" },
+	{ value: "high-blood-pressure", text: "High blood pressure" },
+	{ value: "diabetes", text: "Diabetes" },
+	{ value: "depression-anxiety", text: "Depression / Anxiety" },
+	{ value: "other-mental-health", text: "Other mental health issues" },
+	{ value: "tbi", text: "Traumatic brain injury" },
+	{ value: "epilepsy", text: "Epilepsy" },
+	{ divider: "or" },
+	{ value: "none", text: "None", behaviour: "exclusive" }
+] %}
+
+<!-- End of reusable data -->
+
 <div class="nhsuk-grid-row">
 	<div class="nhsuk-grid-column-one-quarter hide-on-mobile">
 		{% set activePage = 'check-study-feasibility' %}
@@ -192,6 +243,332 @@
 		<hr>
 
 		<h2>BPoR health criteria search options</h2>
+
+		{{ input({
+              id: "research-search",
+              name: "researchSearch",
+              type: "search",
+			  classes: "nhsuk-u-width-three-quarters",
+              label: { 
+				text: "Areas of research volunteers are interested in", 
+				size: "s" 
+			},
+			hint: {
+				text: "Leave blank to include all volunteers and those who have not specified any areas of research. Enter one or more areas of research to refine by interests."
+			},
+              attributes: { placeholder: "Search..." }
+		}) }}
+
+		<div style="max-height: 12rem; overflow-y: auto; border: 1px solid #aeb7bd; padding: 8px; margin-bottom: 24px;">
+			{{ checkboxes({
+				idPrefix: "research-areas",
+				name: "researchAreas",
+				formGroup: {
+					classes: "nhsuk-u-margin-bottom-0"
+				},
+                fieldset: { 
+					legend: { 
+						text: "Select research areas", 
+						classes: "nhsuk-fieldset__legend--s" 
+					} 
+				},
+                items: [
+					{ value: "none-specified", text: "None specified" },
+					{ value: "aaa", text: "AAA" },
+					{ value: "aaa-screening", text: "AAA screening" },
+					{ value: "abdominal-aortic-aneurysm", text: "Abdominal aortic aneurysm" }
+                ]
+			}) }}
+		</div>
+
+		{{ checkboxes({
+			idPrefix: "long-term-conditions",
+			name: "longTermConditions",
+			fieldset: { 
+				legend: { 
+					text: "Long term conditions or illnesses", 
+					classes: "nhsuk-fieldset__legend--s" 
+				} 
+			},
+			hint: { 
+				text: "Do volunteers have long term conditions" 
+			},
+			items: [
+				{ value: "yes", text: "Yes" },
+				{ value: "no", text: "No" },
+				{ value: "prefer-not-to-say", text: "Prefer not to say" }
+			]
+		}) }}
+
+		<hr>
+
+		<h2>JDR health criteria search options</h2>
+
+		{% call fieldset({
+			legend: {
+				text: "Diagnosis date (optional)",
+				classes: "nhsuk-fieldset__legend--s"
+			}
+		}) %}
+  
+		<div class="nhsbsa-flex-input">
+			<p class="nhsuk-u-visually-hidden" id="diagnosis-from-label">From</p>
+
+			{{ dateInput({
+				id: "diagnosis-from",
+				namePrefix: "diagnosisFrom",
+				attributes: {
+					"role": "group",
+					"aria-labelledby": "diagnosis-from-label"
+				},
+				items: [
+					{ 
+						name: "month", 
+						classes: "nhsuk-input--width-2", 
+						label: "Month" 
+					},
+					{ 
+						name: "year", 
+						classes: "nhsuk-input--width-4", 
+						label: "Year" 
+					}
+				]
+			}) }}
+
+			<span class="nhsbsa-flex-input__separator" aria-hidden="true">
+				To
+			</span>
+
+			<p class="nhsuk-u-visually-hidden" id="diagnosis-to-label">To</p>
+			{{ dateInput({
+				id: "diagnosis-to",
+				namePrefix: "diagnosisTo",
+				attributes: {
+					"role": "group",
+					"aria-labelledby": "diagnosis-to-label"
+				},
+				items: [
+					{ name: "month", classes: "nhsuk-input--width-2", label: "Month" },
+					{ name: "year", classes: "nhsuk-input--width-4", label: "Year" }
+				]
+			}) }}
+		</div>
+		{% endcall %}	
+
+		{{ checkboxes({
+			idPrefix: "diagnosis-date-not-answered",
+			name: "diagnosisDateNotAnswered",
+			classes: "nhsuk-checkboxes--small",
+			items: notAnsweredItem
+		}) }}
+
+		{{ checkboxes({
+			idPrefix: "diagnoses",
+			name: "diagnoses",
+			fieldset: { legend: { text: "Diagnoses", classes: "nhsuk-fieldset__legend--s" } },
+			hint: { text: "Select all options that are relevant." },
+			items: [
+				{ value: "alzheimers", text: "Alzheimer's disease" },
+				{ value: "vascular", text: "Vascular dementia" },
+				{ value: "mci", text: "Mild cognitive impairment (MCI)" },
+				{ value: "mixed", text: "Mixed dementia" },
+				{ value: "lewy-bodies", text: "Dementia with Lewy bodies" },
+				{ value: "ftd", text: "Frontotemporal dementia (FTD)" },
+				{ value: "alcohol-related", text: "Alcohol-related dementia (including Wernicke-Korsakoff syndrome)" },
+				{ value: "parkinsons", text: "Dementia in Parkinson's disease" },
+				{ value: "huntingtons", text: "Dementia in Huntington's disease" },
+				{ value: "other-dementias", text: "Other dementias" },
+				{ value: "not-specified", text: "I am not aware of a specific diagnosis" },
+				{ value: "no-diagnosis", text: "Show volunteers with no diagnosis of a dementia" }
+			]
+		}) }}
+
+		{{ checkboxes({
+			idPrefix: "symptoms",
+			name: "symptoms",
+			fieldset: {
+			legend: { text: "Symptoms", classes: "nhsuk-fieldset__legend--s" }
+			},
+			items: [
+				{ value: "mild", text: "Mild" },
+				{ value: "moderate", text: "Moderate" },
+				{ value: "severe", text: "Severe" },
+				{ value: "not-known", text: "Not known" }
+			]
+		}) }}
+
+		{{ checkboxes({
+			idPrefix: "symptoms-not-answered",
+			name: "symptomsNotAnswered",
+			classes: "nhsuk-checkboxes--small",
+			items: notAnsweredItem
+		}) }}
+
+		{% call fieldset({
+			legend: {
+				text: "MMSE score (optional)",
+				classes: "nhsuk-fieldset__legend--s"
+			}
+		}) %}
+		{% endcall %}	
+
+		<div class="nhsbsa-flex-input">
+			{% set mmseOptions = [{ value: "", text: "" }] %}
+            
+			{% for score in range(0, 31) %}
+				{% set mmseOptions = (mmseOptions.push({ value: score, text: score }), mmseOptions) %}
+            {% endfor %}
+
+			{{ select({ 
+				id: "mmse-from", 
+				name: "mmseFrom",
+				formGroup: {
+					classes: "nhsuk-u-margin-right-4"
+				},
+				label: { 
+					text: "From", 
+					classes: "" }, 
+					items: mmseOptions 
+				}) 
+			}}
+			{{ select({ id: "mmse-to", name: "mmseTo", label: { text: "To", classes: "" }, items: mmseOptions }) }}
+		</div>
+
+		{{ checkboxes({
+			idPrefix: "mmse-not-answered",
+			name: "mmseNotAnswered",
+			classes: "nhsuk-checkboxes--small",
+			items: notAnsweredItem
+		}) }}
+
+		<p class="nhsuk-fieldset__legend--s">Disabilities (optional)</p>
+
+		<div class="nhsuk-grid-row">
+			<div class="nhsuk-grid-column-one-half">
+				{{ checkboxes({
+					idPrefix: "disabilities-include",
+					name: "disabilitiesInclude",
+					fieldset: { legend: { text: "Inclusions", classes: "nhsuk-fieldset__legend--s" } },
+					items: disabilityItems
+				}) }}
+			</div>
+			<div class="nhsuk-grid-column-one-half">
+				{{ checkboxes({
+					idPrefix: "disabilities-exclude",
+					name: "disabilitiesExclude",
+					fieldset: { legend: { text: "Exclusions", classes: "nhsuk-fieldset__legend--s" } },
+					items: disabilityItems
+				}) }}
+			</div>
+		</div>
+
+		<p class="nhsuk-fieldset__legend--s">Medical conditions (optional)</p>
+
+		<div class="nhsuk-grid-row">
+			<div class="nhsuk-grid-column-one-half">
+				{{ checkboxes({
+					idPrefix: "conditions-include",
+					name: "conditionsInclude",
+					fieldset: { legend: { text: "Inclusions", classes: "nhsuk-fieldset__legend--s" } },
+					items: medicalConditionItems
+				}) }}
+			</div>
+
+			<div class="nhsuk-grid-column-one-half">
+				{{ checkboxes({
+					idPrefix: "conditions-exclude",
+					name: "conditionsExclude",
+					fieldset: { legend: { text: "Exclusions", classes: "nhsuk-fieldset__legend--s" } },
+					items: medicalConditionItems
+				}) }}
+			</div>
+		</div>
+
+		{{ checkboxes({
+			idPrefix: "memory-medications",
+			name: "memoryMedications",
+			fieldset: { legend: { text: "Memory medications", classes: "nhsuk-fieldset__legend--s" } },
+			items: [
+				{ value: "donepezil", text: "Donepezil Hydrochloride (Aricept)" },
+				{ value: "rivastigmine", text: "Rivastigmine (Exelon)" },
+				{ value: "memantine", text: "Memantine Hydrochloride (Ebixa)" },
+				{ value: "galantamine", text: "Galantamine (Reminyl)" },
+				{ divider: "or" },
+				{ value: "none", text: "None", behaviour: "exclusive" }
+			]
+		}) }}
+
+		{% for field in selectFields %}
+			{{ radios({
+				idPrefix: field.id,
+				name: field.name,
+				
+				fieldset: {
+				legend: { text: field.label + " (optional)", classes: "nhsuk-fieldset__legend--s" }
+				},
+				items: yesNoItems
+			}) }}
+			{{ checkboxes({
+				idPrefix: field.id + "-not-answered",
+				name: field.name + "NotAnswered",
+				classes: "nhsuk-checkboxes--small",
+				items: notAnsweredItem
+			}) }}
+		{% endfor %}
+
+		{{ checkboxes({
+			idPrefix: "carer-experience",
+			name: "carerExperience",
+			fieldset: { legend: { text: "Carer experience (optional)", classes: "nhsuk-fieldset__legend--s" } },
+			hint: { text: "Select carer experience" },
+			items: [
+				{ value: "current", text: "Current carer/supporter for someone with dementia" },
+				{ value: "former", text: "Former carer/supporter for someone with dementia" },
+				{ value: "professional", text: "Professional carer" }
+			]
+		}) }}
+
+		{{ radios({
+			idPrefix: "care-home",
+			name: "careHome",
+			
+			fieldset: {
+				legend: { text: "Do you live in a care / nursing home? (optional)", classes: "nhsuk-fieldset__legend--s" }
+			},
+			items: yesNoItems
+		}) }}
+
+		{{ checkboxes({
+			idPrefix: "care-home-not-answered",
+			name: "careHomeNotAnswered",
+			classes: "nhsuk-checkboxes--small",
+			items: notAnsweredItem
+		}) }}
+
+		{{ radios({
+			idPrefix: "carer-relationship",
+			name: "carerRelationship",
+			fieldset: {
+			legend: { 
+				text: "Relationship with carer (optional)", 
+				classes: "nhsuk-fieldset__legend--s" }
+			},
+			items: [
+				{ value: "partner", text: "Partner" },
+				{ value: "parent", text: "Parent" },
+				{ value: "child", text: "Child" },
+				{ value: "friend", text: "Friend" },
+				{ value: "carer", text: "Carer, inlcuding professional carer" },
+				{ value: "other", text: "Other" }
+			]
+		}) }}
+
+		{{ checkboxes({
+			idPrefix: "carer-relationship-not-answered",
+			name: "carerRelationshipNotAnswered",
+			classes: "nhsuk-checkboxes--small",
+			items: notAnsweredItem
+		}) }}
 	</div>
 </div>
 {% endblock %}

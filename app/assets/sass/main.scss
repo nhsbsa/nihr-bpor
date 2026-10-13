@@ -26,8 +26,7 @@ $nihr-colour: #193E72;
 @import "cookies";
 @import "timeout";
 @import "count";
-
-
+@import "check-study-feasibility";
 
 html {
   background: $nihr-colour;
