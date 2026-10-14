@@ -106,32 +106,34 @@
 		<h2>Date of volunteer registration</h2>
 		<p class="nhsuk-hint">Enter a From and To date to filter volunteers by the date their account was created.</p>
 
-		{{ dateInput({
-			id: "registration-from",
-			namePrefix: "registrationFrom",
-			fieldset: { 
-				legend: { 
-					text: "From", 
-					classes: "nhsuk-fieldset__legend--s" 
-				} 
-			},
-			items: [
-				{ name: "day", classes: "nhsuk-input--width-2" },
-				{ name: "month", classes: "nhsuk-input--width-2" },
-				{ name: "year", classes: "nhsuk-input--width-4" }
-			]
-		}) }}
-
-		{{ dateInput({
-			id: "registration-to",
-			namePrefix: "registrationTo",
-			fieldset: { legend: { text: "To", classes: "nhsuk-fieldset__legend--s" } },
-			items: [
-				{ name: "day", classes: "nhsuk-input--width-2" },
-				{ name: "month", classes: "nhsuk-input--width-2" },
-				{ name: "year", classes: "nhsuk-input--width-4" }
-			]
-		}) }}
+		<div class="nhsbsa-flex-input">
+			{{ dateInput({
+				id: "registration-from",
+				namePrefix: "registrationFrom",
+				fieldset: { 
+					legend: { 
+						text: "From", 
+						classes: "nhsuk-fieldset__legend--s" 
+					} 
+				},
+				items: [
+					{ name: "day", classes: "nhsuk-input--width-2" },
+					{ name: "month", classes: "nhsuk-input--width-2" },
+					{ name: "year", classes: "nhsuk-input--width-4" }
+				]
+			}) }}
+	
+			{{ dateInput({
+				id: "registration-to",
+				namePrefix: "registrationTo",
+				fieldset: { legend: { text: "To", classes: "nhsuk-fieldset__legend--s" } },
+				items: [
+					{ name: "day", classes: "nhsuk-input--width-2" },
+					{ name: "month", classes: "nhsuk-input--width-2" },
+					{ name: "year", classes: "nhsuk-input--width-4" }
+				]
+			}) }}
+		</div>
 
 		<hr>
 
@@ -140,7 +142,6 @@
 		{{ input({
 			id: "postcode-districts",
 			name: "postcodeDistricts",
-			classes: "nhsuk-u-width-three-quarters",
 			label: { 
 				text: "Postcode districts",
 				size: "s"
