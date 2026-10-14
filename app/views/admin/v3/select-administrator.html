@@ -40,98 +40,70 @@
 <!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
 {% block content %}
 
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+<div class="nhsuk-grid-row">
+	<div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+		{% set activePage = 'review-pending-pre-screeners' %}
+		{% include "admin/v3/partials/side-nav.njk" %}
+	</div>
 
-      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+	<div class="nhsuk-grid-column-three-quarters">
 
-      <nav class="app-side-nav">
-        <h2 class="app-side-nav__heading">Dashboard</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Manage accounts</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
-            <!-- <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-admin-accounts">Create administrator accounts</a></li> -->
-        </ul>
-        <h2 class="app-side-nav__heading">Manage studies</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-studies">Review pending studies</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-studies">View studies</a></li>
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Tools</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Check study feasibility</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Support</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:recruitregistryvolunteers@nihr.ac.uk">Email us</a></li>
-        </ul>
-      </nav>
+	{{ backLink({
+	"href": "javascript:history.go(-1)",
+	"text": "Back",
+	classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+	}) }}
 
-    </div>
-    <div class="nhsuk-grid-column-three-quarters">
+	{% set updateStudyName = data['update-study-name'] | default('Cognitive therapy in Dementia') %}
+	{% set updateAdminName = data['select-administrator'] | default('Not assigned') %}
 
-{{ backLink({
-    "href": "javascript:history.go(-1)",
-    "text": "Back",
-    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
-}) }}
+	<h1>Select an administrator</h1>
 
-{% set updateStudyName = data['update-study-name'] | default('Cognitive therapy in Dementia') %}
-{% set updateAdminName = data['select-administrator'] | default('Not assigned') %}
+	<p>The study administrator for {{ updateStudyName }} is <strong>{{ updateAdminName }}</strong>.</p>
 
-<h1>Select an administrator</h1>
+	<form action="/{{folder}}/{{subfolder}}/select-administrator" method="post" novalidate>
 
-<p>The study administrator for {{ updateStudyName }} is <strong>{{ updateAdminName }}</strong>.</p>
+	{{ select({
+	label: {
+	text: "Select an administrator to manage the study"
+	},
+	id: "select-administrator",
+	name: "select-administrator",
+	value: updateAdminName,
+	items: [
+	{
+		value: "Not assigned",
+		text: "Not assigned"
+	},
+	{
+		value: "Joe Bloggs",
+		text: "Joe Bloggs"
+	},
+	{
+		value: "Liam Archer",
+		text: "Liam Archer"
+	},
+	{
+		value: "Sophia Bennett",
+		text: "Sophia Bennett"
+	},
+	{
+		value: "Ethan Callahan",
+		text: "Ethan Callahan"
+	},
+	{
+		value: "Maya Sterling",
+		text: "Maya Sterling"
+	}
+	]
+	}) }}
 
-<form action="/{{folder}}/{{subfolder}}/select-administrator" method="post" novalidate>
-
-{{ select({
-  label: {
-    text: "Select an administrator to manage the study"
-  },
-  id: "select-administrator",
-  name: "select-administrator",
-  value: updateAdminName,
-  items: [
-    {
-      value: "Not assigned",
-      text: "Not assigned"
-    },
-    {
-      value: "Joe Bloggs",
-      text: "Joe Bloggs"
-    },
-    {
-      value: "Liam Archer",
-      text: "Liam Archer"
-    },
-    {
-      value: "Sophia Bennett",
-      text: "Sophia Bennett"
-    },
-    {
-      value: "Ethan Callahan",
-      text: "Ethan Callahan"
-    },
-    {
-      value: "Maya Sterling",
-      text: "Maya Sterling"
-    }
-  ]
-}) }}
-
-{{ button({
-  text: "Submit"
-}) }}
-</form>
+	{{ button({
+	text: "Submit"
+	}) }}
+	</form>
 
 
-    </div>
-  </div>
+	</div>
+</div>
 {% endblock %}

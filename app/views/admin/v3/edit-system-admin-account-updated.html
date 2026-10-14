@@ -40,132 +40,107 @@
 <!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
 {% block content %}
 
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+<div class="nhsuk-grid-row">
+	<div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+		{% set activePage = 'manage-accounts' %}
+		{% include "admin/v3/partials/side-nav.njk" %}
+	</div>
+    
+	<div class="nhsuk-grid-column-three-quarters">		
+		{% set profileUpdated %}
+			<h3 class="nhsuk-notification-banner__heading">
+			{% if data['systemAdminFirstName'] and data['systemAdminLastName'] %}{{ data['systemAdminFirstName'] }} {{ data['systemAdminLastName'] }}{% else %}Sofia Petrov{% endif %}'s details have been updated</h3>
+			<p>We've emailed them to let them know.</p>
+		{% endset %}
 
-      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
+		{{ notificationBanner({
+			html: profileUpdated,
+			type: "success"
+		}) }}
 
-      <nav class="app-side-nav">
-        <h2 class="app-side-nav__heading">Dashboard</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Manage accounts</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
-            <!-- <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-admin-accounts">Create administrator accounts</a></li> -->
-        </ul>
-        <h2 class="app-side-nav__heading">Manage studies</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-studies">Review pending studies</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-studies">View studies</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Tools</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Check study feasibility</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Support</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:recruitregistryvolunteers@nihr.ac.uk">Email us</a></li>
-        </ul>
-      </nav>
+		{{ backLink({
+			"href": "javascript:history.go(-1)",
+			"text": "Back",
+			classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+		}) }}
 
-    </div>
-    <div class="nhsuk-grid-column-three-quarters">
-      
-{% set profileUpdated %}
-  <h3 class="nhsuk-notification-banner__heading">
-  {% if data['systemAdminFirstName'] and data['systemAdminLastName'] %}{{ data['systemAdminFirstName'] }} {{ data['systemAdminLastName'] }}{% else %}Sofia Petrov{% endif %}'s details have been updated</h3>
-  <p>We've emailed them to let them know.</p>
-{% endset %}
+		<h1>System administrator account details</h1>
 
-{{ notificationBanner({
-  html: profileUpdated,
-  type: "success"
-}) }}
+		{{ summaryList({
+		rows: [
+			{
+			key: { text: "Title" },
+			value: { text: data['systemAdminTitle'] or "Mrs" },
+			actions: {
+				items: [
+				{
+					href: "edit-system-admin-account-update-profile#systemAdminTitle",
+					text: "Change",
+classes: "nhsuk-link--no-visited-state",
+					visuallyHiddenText: "title"
+				}
+				]
+			}
+			},
+			{
+			key: { text: "First name" },
+			value: { text: data['systemAdminFirstName'] or "Sofia" },
+			actions: {
+				items: [
+				{
+					href: "edit-system-admin-account-update-profile#systemAdminFirstName",
+					text: "Change",
+classes: "nhsuk-link--no-visited-state",
+					visuallyHiddenText: "first name"
+				}
+				]
+			}
+			},
+			{
+			key: { text: "Last name" },
+			value: { text: data['systemAdminLastName'] or "Petrov" },
+			actions: {
+				items: [
+				{
+					href: "edit-system-admin-account-update-profile#systemAdminLastName",
+					text: "Change",
+classes: "nhsuk-link--no-visited-state",
+					visuallyHiddenText: "last name"
+				}
+				]
+			}
+			},
+			{
+			key: { text: "Email address" },
+			value: { text: data['systemAdminEmail'] or "sofia.petrov@nihr.ac.uk" }
+			},
+			{
+			key: { text: "Organisation" },
+			value: { text: data['systemAdminOrganisation'] or "NIHR" }
+			},
+			{
+			key: { text: "Role" },
+			value: { text: data['systemAdminRole'] or "System administrator" },
+			actions: {
+				items: [
+				{
+					href: "edit-system-admin-account-update-profile#systemAdminRole",
+					text: "Change",
+classes: "nhsuk-link--no-visited-state",
+					visuallyHiddenText: "role"
+				}
+				]
+			}
+			}
+		]
+		}) }}
 
-{{ backLink({
-    "href": "javascript:history.go(-1)",
-    "text": "Back",
-    classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
-}) }}
+		{{ button({
+		text: "Delete account",
+		classes: "nhsuk-button--warning",
+		href: "delete-system-admin-account"
+		}) }}
 
-<h1>System administrator account details</h1>
-
-{{ summaryList({
-  rows: [
-    {
-      key: { text: "Title" },
-      value: { text: data['systemAdminTitle'] or "Mrs" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v3/edit-system-admin-account-update-profile#systemAdminTitle",
-            text: "Change",
-            visuallyHiddenText: "title"
-          }
-        ]
-      }
-    },
-    {
-      key: { text: "First name" },
-      value: { text: data['systemAdminFirstName'] or "Sofia" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v3/edit-system-admin-account-update-profile#systemAdminFirstName",
-            text: "Change",
-            visuallyHiddenText: "first name"
-          }
-        ]
-      }
-    },
-    {
-      key: { text: "Last name" },
-      value: { text: data['systemAdminLastName'] or "Petrov" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v3/edit-system-admin-account-update-profile#systemAdminLastName",
-            text: "Change",
-            visuallyHiddenText: "last name"
-          }
-        ]
-      }
-    },
-    {
-      key: { text: "Email address" },
-      value: { text: data['systemAdminEmail'] or "sofia.petrov@nihr.ac.uk" }
-    },
-    {
-      key: { text: "Organisation" },
-      value: { text: data['systemAdminOrganisation'] or "NIHR" }
-    },
-    {
-      key: { text: "Role" },
-      value: { text: data['systemAdminRole'] or "System administrator" },
-      actions: {
-        items: [
-          {
-            href: "/admin/v3/edit-system-admin-account-update-profile#systemAdminRole",
-            text: "Change",
-            visuallyHiddenText: "role"
-          }
-        ]
-      }
-    }
-  ]
-}) }}
-
-{{ button({
-  text: "Delete account",
-  classes: "nhsuk-button--warning",
-  href: "delete-system-admin-account"
-}) }}
-
-    </div>
-  </div>
+	</div>
+</div>
 {% endblock %}

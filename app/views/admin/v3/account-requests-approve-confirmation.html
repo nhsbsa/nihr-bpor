@@ -40,47 +40,19 @@
 <!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
 {% block content %}
 
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+<div class="nhsuk-grid-row">
+	<div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+		{% set activePage = 'account-requests' %}
+		{% include "admin/v3/partials/side-nav.njk" %}
+	</div>
 
-      <!-- Use "app-side-nav__item--current" class on <li> for selected state -->
-
-      <nav class="app-side-nav">
-        <h2 class="app-side-nav__heading">Dashboard</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="home">Home</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Manage accounts</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="account-requests">Review account requests</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="manage-accounts">Manage accounts</a></li>
-            <!-- <li class="app-side-nav__item"><a class="app-side-nav__link" href="create-admin-accounts">Create administrator accounts</a></li> -->
-        </ul>
-        <h2 class="app-side-nav__heading">Manage studies</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-studies">Review pending studies</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-studies">View studies</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="review-pending-pre-screeners">Review pending pre-screeners</a></li>
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="view-pre-screeners">View pre-screeners</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Tools</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="#">Check study feasibility</a></li>
-        </ul>
-        <h2 class="app-side-nav__heading">Support</h2>
-        <ul class="nhsuk-list app-side-nav__list">
-            <li class="app-side-nav__item"><a class="app-side-nav__link" href="mailto:recruitregistryvolunteers@nihr.ac.uk">Email us</a></li>
-        </ul>
-      </nav>
-
-    </div>
     <div class="nhsuk-grid-column-three-quarters">
 
 {% set html %}
   <h3 class="nhsuk-notification-banner__heading">
     Account request approved
   </h3>
-  <p>We’ve emailed the researcher to let them know.</p>
+  <p>We've emailed the researcher to let them know.</p>
 {% endset %}
 
 {{ notificationBanner({

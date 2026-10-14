@@ -1,0 +1,18 @@
+.nhsbsa-flex-input {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0 16px;
+    margin-bottom: 24px;
+}
+
+.nhsbsa-flex-input .nhsuk-form-group {
+    margin-bottom: 0;
+}
+
+.nhsbsa-flex-input__separator {
+    padding-bottom: 8px;
+    font-weight: 600;
+    margin-right: 24px;
+    font-size: 1.1875rem;
+}
