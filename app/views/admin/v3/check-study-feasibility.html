@@ -51,8 +51,8 @@
 	{ value: "not-known", text: "Not known" }
 ] %}
 
-<!--Select + "Include not answered responses" fields at the bottom of the form -->
-{% set selectFields = [
+<!-- Radios + "Include not answered responses" fields at the bottom of the form -->
+{% set radioFields = [
 	{ id: "apoe4-tested", name: "apoe4Tested", label: "Tested for Alzheimer's risk gene APOE4?" },
 	{ id: "apoe4-positive", name: "apoe4Positive", label: "Positive for Alzheimer's risk gene APOE4?" },
 	{ id: "family-history", name: "familyHistory", label: "Family history of dementia?" },
@@ -104,7 +104,7 @@
 		<hr>
 
 		<h2>Date of volunteer registration</h2>
-		<p class="nhsuk-hint">Enter a <strong>From</strong> and <strong>To</strong> date to filter volunteers by the date their account was created.</p>
+		<p class="nhsuk-hint">Enter a From and To date to filter volunteers by the date their account was created.</p>
 
 		{{ dateInput({
 			id: "registration-from",
@@ -150,7 +150,7 @@
 			}
 		}) }}
 
-		<p class="nhsuk-body"><strong>OR</strong></p>
+		<p><strong>OR</strong></p>
 
 		{{ input({
 			id: "full-postcode",
@@ -244,42 +244,22 @@
 
 		<h2>BPoR health criteria search options</h2>
 
-		{{ input({
-              id: "research-search",
-              name: "researchSearch",
-              type: "search",
-			  classes: "nhsuk-u-width-three-quarters",
-              label: { 
-				text: "Areas of research volunteers are interested in", 
-				size: "s" 
+		{%- from '_components/multiselect-search/macro.njk' import searchableCheckboxes %}
+
+		{{ searchableCheckboxes({
+			label: {
+				text: "Areas of research volunteers are interested in",
+				size: "s"
 			},
+			classes: "nhsuk-checkboxes--small",
 			hint: {
 				text: "Leave blank to include all volunteers and those who have not specified any areas of research. Enter one or more areas of research to refine by interests."
 			},
-              attributes: { placeholder: "Search..." }
+			id: "research-search",
+			name: "researchSearch",
+			selectedLabel: "Selected research areas",
+			items: data.health_conditions
 		}) }}
-
-		<div style="max-height: 12rem; overflow-y: auto; border: 1px solid #aeb7bd; padding: 8px; margin-bottom: 24px;">
-			{{ checkboxes({
-				idPrefix: "research-areas",
-				name: "researchAreas",
-				formGroup: {
-					classes: "nhsuk-u-margin-bottom-0"
-				},
-                fieldset: { 
-					legend: { 
-						text: "Select research areas", 
-						classes: "nhsuk-fieldset__legend--s" 
-					} 
-				},
-                items: [
-					{ value: "none-specified", text: "None specified" },
-					{ value: "aaa", text: "AAA" },
-					{ value: "aaa-screening", text: "AAA screening" },
-					{ value: "abdominal-aortic-aneurysm", text: "Abdominal aortic aneurysm" }
-                ]
-			}) }}
-		</div>
 
 		{{ checkboxes({
 			idPrefix: "long-term-conditions",
@@ -498,7 +478,7 @@
 			]
 		}) }}
 
-		{% for field in selectFields %}
+		{% for field in radioFields %}
 			{{ radios({
 				idPrefix: field.id,
 				name: field.name,
@@ -570,39 +550,40 @@
 			items: notAnsweredItem
 		}) }}
 
+		{% set cardDescriptionHtml %}
+			<p>
+				<strong>BPoR:</strong> 1234<br />
+				<strong>JDR:</strong> 567
+			</p>
+			<button class="nhsuk-button nhsuk-u-margin-right-4" data-module="nhsuk-button" type="submit">
+				Run feasibility check
+			</button>
 
+			<button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
+				Clear filters
+			</button>
 
-{% set cardDescriptionHtml %}
-  	<p>
-		<strong>BPoR:</strong> 1234<br />
-		<strong>JDR:</strong> 567
-	</p>
-	<button class="nhsuk-button nhsuk-u-margin-right-4" data-module="nhsuk-button" type="submit">
-		Run feasibility check
-	</button>
+			<p><a href="#top" class="nhsuk-link--no-visited-state">Back to top</a></p>
+		{% endset %}
 
-	<button class="nhsuk-button nhsuk-button--secondary" data-module="nhsuk-button" type="submit">
-		Clear filters
-	</button>
-
-  	<p><a href="#top" class="nhsuk-link--no-visited-state">Back to top</a></p>
-{% endset %}
-
-<ul class="nhsuk-grid-row nhsuk-card-group">
-  <li class="nhsuk-grid-column-two-thirds nhsuk-card-group__item">
-    {{ card({
-      heading: {
-        text: "Volunteers matching criteria:",
-        size: "m"
-      },
-      description: {
-        html: cardDescriptionHtml
-      },
-      clickable: false
-    }) }}
-  </li>
-</ul>
+		<ul class="nhsuk-grid-row nhsuk-card-group">
+			<li class="nhsuk-grid-column-two-thirds nhsuk-card-group__item">
+				{{ card({
+				heading: {
+					text: "Volunteers matching criteria:",
+					size: "m"
+				},
+				description: {
+					html: cardDescriptionHtml
+				},
+				clickable: false
+				}) }}
+			</li>
+		</ul>
 
 	</div>
 </div>
+{% endblock %}
+{% block pageScripts %}
+<script type="module" src="/assets/javascript/multi-select-search.js"></script>
 {% endblock %}
