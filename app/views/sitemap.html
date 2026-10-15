@@ -14,8 +14,7 @@
 
 {# Render pages and deeper folders inside an expander #}
 {% macro renderSubItems(items, depth=0) %}
-  <ul class="nhsuk-list"
-      style="margin-left: {{ depth * 20 }}px;">
+  <ul class="nhsuk-list">
     {% for item in items %}
       <li>
         {% if item.type == "folder" %}
