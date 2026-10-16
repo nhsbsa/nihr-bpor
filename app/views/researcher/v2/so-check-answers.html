@@ -522,7 +522,7 @@
     {% if not data['soCPMSID'] %}
 
       {% set rows3 = rows3.concat([{
-        key: { text: "Study demographic" },
+        key: { text: "Target population" },
         value: { text: data['studyDemographic'] or "" },
         actions: {
           items: [{
@@ -536,7 +536,7 @@
     {% else %}
 
       {% set rows3 = rows3.concat([{
-        key: { text: "Study demographic" },
+        key: { text: "Target population" },
         value: {
           text: data['studyDemographic']
             or "Adults aged between 18 and 65 years old"
@@ -553,7 +553,7 @@
     {% if data['soHealthConditions'] and data['soHealthConditions'] | length > 0 %}
 
     {% set rows3 = rows3.concat([{
-      key: { text: "Study health conditions" },
+      key: { text: "Study focus areas" },
       value: {
         text: (data['soHealthConditions'] or []) | join(", ")
       },

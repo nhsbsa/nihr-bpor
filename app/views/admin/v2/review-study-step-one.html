@@ -169,10 +169,10 @@
 
     {% else %}
 
-      {% set primaryOrgHref = "/researcher/v2/so-primary-contact#soPrimaryContactOrganisation" %}
+      {% set primaryOrgHref = "so-primary-contact#soPrimaryContactOrganisation" %}
 
       {% if data['soPrimaryContactOrganisationName'] %}
-        {% set primaryOrgHref = "/researcher/v2/so-primary-contact#soPrimaryContactOrganisationName" %}
+        {% set primaryOrgHref = "so-primary-contact#soPrimaryContactOrganisationName" %}
       {% endif %}
 
       {% set primaryRows = primaryRows.concat([
@@ -306,10 +306,10 @@
 
     {% else %}
 
-      {% set ciOrgHref = "/researcher/v2/so-chief-investigator#soChiefInvestigatorOrganisation" %}
+      {% set ciOrgHref = "so-chief-investigator#soChiefInvestigatorOrganisation" %}
 
       {% if data['soChiefInvestigatorOrganisationName'] %}
-        {% set ciOrgHref = "/researcher/v2/so-chief-investigator#soChiefInvestigatorOrganisationName" %}
+        {% set ciOrgHref = "so-chief-investigator#soChiefInvestigatorOrganisationName" %}
       {% endif %}
 
       {% set ciRows = ciRows.concat([
@@ -493,7 +493,7 @@
     {% if not data['soCPMSID'] %}
 
       {% set rows3 = rows3.concat([{
-        key: { text: "Study demographic" },
+        key: { text: "Target population" },
         value: {
           text: data['studyDemographic']
             or "Adults aged between 18 and 65 years old"
@@ -503,7 +503,7 @@
     {% else %}
 
       {% set rows3 = rows3.concat([{
-        key: { text: "Study demographic" },
+        key: { text: "Target population" },
         value: {
           text: data['studyDemographic']
             or "Adults aged between 18 and 65 years old"
@@ -525,7 +525,7 @@
     #}
 
     {% set rows3 = rows3.concat([{
-      key: { text: "Study health conditions" },
+      key: { text: "Study focus areas" },
       value: {
         text: (data['soHealthConditions'] or ["Diabetes (Type 2)"]) | join(", ")
       }
