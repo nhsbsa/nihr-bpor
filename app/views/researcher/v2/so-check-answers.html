@@ -3,12 +3,6 @@
 <!-- Extends the layout from /app/views/layout.html -->
 {% set layout = "layout.html" %}
 
-{% if data['brand'] == "JDR" %}
-  {% set layout = "layout-volunteer-jdr.html" %}
-{% elseif data['brand'] == "BPOR" %}
-  {% set layout = "layout-volunteer-bpor.html" %}
-{% endif %}
-
 {% extends layout %}
 
 <!--
@@ -570,13 +564,19 @@
 
     {# OTHER HEALTH AND CARE TOPICS #}
 
-    {% if data['soHealthConditionsTopic'] %}
+    {% set healthConditionsTopic = data['soHealthConditionsTopic'] or [] %}
 
-      {% set healthConditionsTopic = data['soHealthConditionsTopic'] %}
+    {% if healthConditionsTopic is string %}
 
-      {% if healthConditionsTopic is not string %}
-        {% set healthConditionsTopic = healthConditionsTopic | join(", ") %}
-      {% endif %}
+      {% set healthConditionsTopic = healthConditionsTopic | trim %}
+
+    {% else %}
+
+      {% set healthConditionsTopic = healthConditionsTopic | reject("equalto", "") | list | join(", ") | trim %}
+
+    {% endif %}
+
+    {% if healthConditionsTopic %}
 
       {% set rows3 = rows3.concat([{
         key: { text: "Other health and care topics" },

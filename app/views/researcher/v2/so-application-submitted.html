@@ -3,13 +3,8 @@
 <!-- Extends the layout from /app/views/layout.html -->
 {% set layout = "layout.html" %}
 
-{% if data['brand'] == "JDR" %}
-  {% set layout = "layout-volunteer-jdr.html" %}
-{% elseif data['brand'] == "BPOR" %}
-  {% set layout = "layout-volunteer-bpor.html" %}
-{% endif %}
-
 {% extends layout %}
+
 <!--
   In /app/views/layout.html you can:
     - change the header and footer
