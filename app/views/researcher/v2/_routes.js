@@ -1020,8 +1020,8 @@ router.post('/so-18s-outside-uk', function (req, res) {
 
     var u18sOutsideUk = req.session.data['18sOutsideUk'];
 
-    if (u18sOutsideUk.includes("Participants under 18 years of age") ||
-        u18sOutsideUk.includes("Participants who live outside of the UK")) {
+    if (u18sOutsideUk.includes("Only participants under 18 years of age") ||
+        u18sOutsideUk.includes("Only participants who live outside of the UK")) {
 
         res.redirect('so-18s-outside-uk-kickout');
 
