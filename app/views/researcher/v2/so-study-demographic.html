@@ -45,32 +45,28 @@
   <div class="nhsuk-grid-row">
     <div class="nhsuk-grid-column-two-thirds">
 
-<form action="/{{folder}}/{{subfolder}}/so-study-demographic" method="post" novalidate>
+      <form action="/{{folder}}/{{subfolder}}/so-study-demographic" method="post" novalidate>
+        {{ characterCount({
+        name: "studyDemographic",
+        id: "studyDemographic",
+        label: {
+          text: "What is the target population for your study?",
+          size: "l",
+          isPageHeading: true
+        },
+        hint: {
+          html: '<p>Provide a summary. For Example, women aged 50+ with asthma or healthy volunteers aged 18-35.</p>'
+        },
+        maxlength: 60,
+        countType: "words"
+      }) }}
 
-{{ textarea({
-  name: "studyDemographic",
-  id: "studyDemographic",
-  label: {
-    text: "What is the target population for your study?",
-    size: "l",
-    isPageHeading: true
-  },
-  hint: {
-    html: '<p>Provide a summary. For Example, women aged 50+ with asthma or healthy volunteers aged 18-35.</p>'
-  }
-}) }}
-
-<div class="nhsuk-button-group">
-  
-  {{ button({
-    text: "Continue"
-  }) }}
-
-</div>
-
-</form>
-
-
-    </div>
+      <div class="nhsuk-button-group">
+        {{ button({
+          text: "Continue"
+        }) }}
+      </div>
+    </form>
   </div>
+</div>
 {% endblock %}
