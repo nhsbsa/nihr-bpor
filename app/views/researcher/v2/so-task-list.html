@@ -89,27 +89,38 @@
    Portfolio and funding
    ============================================ #}
 
-{% if data['so-portfolio-funding-complete'] %}
+{% if data['so-primary-contact-complete'] %}
 
-  {% set soPortfolioFundingSTATUS = {
-    tag: {
-      text: "Completed",
-      classes: "nhsuk-tag--green"
-    }
-  } %}
+  {% if data['so-portfolio-funding-complete'] %}
+
+    {% set soPortfolioFundingSTATUS = {
+      tag: {
+        text: "Completed",
+        classes: "nhsuk-tag--green"
+      }
+    } %}
+
+  {% else %}
+
+    {% set soPortfolioFundingSTATUS = {
+      tag: {
+        text: "Incomplete",
+        classes: "nhsuk-tag--blue"
+      }
+    } %}
+
+  {% endif %}
+
+{% set soPortfolioFundingURL = "/researcher/v2/so-rdn-portfolio" %}
 
 {% else %}
 
   {% set soPortfolioFundingSTATUS = {
-    tag: {
-      text: "Incomplete",
-      classes: "nhsuk-tag--blue"
-    }
+    text: "Cannot start yet",
+    classes: "nhsuk-task-list__status--cannot-start-yet"
   } %}
 
 {% endif %}
-
-{% set soPortfolioFundingURL = "/researcher/v2/so-rdn-portfolio" %}
 
 
 {# ============================================
