@@ -1,0 +1,101 @@
+
+{% set currentPage = "Check that the study is ready to recruit" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-admin-nihr-logged-in-v3.html' %}
+
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+{% set pageName = "Check that the study is ready to recruit" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="nhsuk-grid-row">
+	<div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+		{% include "admin/v3/partials/side-nav.njk" %}
+	</div>
+
+    <div class="nhsuk-grid-column-three-quarters">
+
+        {{ backLink({
+            "href": "view-studies",
+            "text": "Back",
+            classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+        }) }}
+
+        <h1 class="nhsuk-heading-xl">Check that the study is ready to recruit</h1>
+
+        {% if data['studyListed'] == "yes" %}
+
+            {% set studyListingStatus %}
+                {{ tag({
+                    text: "Completed",
+                    classes: "nhsuk-tag--green"
+                }) }}
+            {% endset %}
+
+        {% else %}
+
+            {% set studyListingStatus %}
+                {{ tag({
+                    text: "Incomplete",
+                    classes: "nhsuk-tag--blue"
+                }) }}
+            {% endset %}
+
+        {% endif %}
+
+        {{ taskList({
+            items: [
+                {
+                    heading: {
+                        text: "Study is listed on the study search",
+                        classes: " nhsuk-link--no-visited-state"
+                    },
+                    href: "study-search-listing-check",
+                    status: {
+                        html: studyListingStatus
+                    }
+                }
+            ]
+        }) }}
+
+        {% if data['studyListed'] == "yes" %}
+
+            {{ button({
+                text: "Continue",
+                href: "#"
+            }) }}
+
+            {% else %}
+
+            {{ button({
+                text: "Continue",
+                disabled: true
+            }) }}
+
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

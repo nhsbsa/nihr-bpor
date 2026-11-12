@@ -1,0 +1,80 @@
+
+{% set currentPage = "Check that the study is ready to recruit" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-admin-nihr-logged-in-v3.html' %}
+
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+{% set pageName = "Is this study listed on the study search?" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="nhsuk-grid-row">
+	<div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+		{% include "admin/v3/partials/side-nav.njk" %}
+	</div>
+
+    <div class="nhsuk-grid-column-three-quarters">
+
+        {{ backLink({
+            "href": "check-study-ready-to-recruit",
+            "text": "Back",
+            classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+        }) }}
+
+        <form action="/{{folder}}/{{subfolder}}/study-search-listing-check" method="post" novalidate>         
+            {{ radios({
+                fieldset: {
+                    legend: {
+                        heading: "Is this study listed on the study search?",
+                        size: "l"
+                    }
+                },
+                idPrefix: "study-listed",
+                name: "studyListed",
+                items: [
+                    {
+                        value: "yes",
+                        text: "Yes",
+                        checked: data['studyListed'] == "yes"
+                    },
+                    {
+                        value: "no",
+                        text: "No",
+                        checked: data['studyListed'] == "no"
+                    },
+                    {
+                        value: "under discussion",
+                        text: "Under discussion",
+                        checked: data['studyListed'] == "under discussion"
+                    }
+                ]
+            }) }}
+
+            {{ button({
+                text: "Continue"
+            }) }}
+        </form> 
+    </div>
+</div>
+{% endblock %}

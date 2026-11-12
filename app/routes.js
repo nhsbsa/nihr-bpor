@@ -149,7 +149,8 @@ router.use('/researcher/archive', require('./views/researcher/archive/_routes'))
 
 router.use('/admin/v1', require('./views/admin/v1/_routes'));
 router.use('/admin/v2', require('./views/admin/v2/_routes'));
-router.use('/admin/v3', require('./views/admin/v2/_routes'));
+router.use('/admin/v3', require('./views/admin/v3/_routes'));
+router.use('/admin/v4', require('./views/admin/v4/_routes'));
 
 router.use('/volunteer/v1', require('./views/volunteer/v1/_routes'));
 

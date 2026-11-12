@@ -1,0 +1,69 @@
+<!-- Use this page as the index for your project -->
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-blank.html' %}
+
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Admin MVP - User Flows" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+
+{% set bodyClasses = "nihr-login" %}
+{% set mainClasses = "nihr-login-main" %}
+
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+<div class="viewport">
+  <div class="page">
+    <header class="header">
+      <img src="/assets/images/NIHR-logo.svg" alt="NIHR Logo" class="logo" />
+    </header>
+
+    <main class="card">
+      <h1>Email Verification</h1>
+
+      <label for="email">Enter the code sent to your email address (joe*********@nihr.ac.uk)</label>
+      <div class="input-wrapper">
+        <input
+          type="one-time-passcode"
+          id="one-time-passcode"
+        />
+      </div>
+
+      <form action="/{{folder}}/{{subfolder}}/one-time-passcode" method="post" novalidate>
+      <p><button class="primary-btn" type="submit">Continue</button></p>
+      </form>
+
+      <p><a href="#"><button class="secondary-btn">Resend code</button></a></p>
+
+    </main>
+
+    <footer class="footer">
+      <p>© NIHR 2026</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms and Conditions</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Accessibility Statement</a>
+      </div>
+    </footer>
+  </div>
+  </div>
+  {% endblock %}

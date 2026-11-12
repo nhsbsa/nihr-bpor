@@ -1,0 +1,146 @@
+<!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
+
+{% set currentPage = "Manage accounts" %}
+
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% extends 'layout-admin-nihr-logged-in-v3.html' %}
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Manage accounts" %}
+
+{% set containerClasses = "nihr-dashboard" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+<div class="nhsuk-grid-row">
+	<div class="nhsuk-grid-column-one-quarter hide-on-mobile">
+		{% set activePage = 'manage-accounts' %}
+		{% include "admin/v3/partials/side-nav.njk" %}
+	</div>
+    
+	<div class="nhsuk-grid-column-three-quarters">		
+		{% set profileUpdated %}
+			<h3 class="nhsuk-notification-banner__heading">
+			{% if data['systemAdminFirstName'] and data['systemAdminLastName'] %}{{ data['systemAdminFirstName'] }} {{ data['systemAdminLastName'] }}{% else %}Sofia Petrov{% endif %}'s details have been updated</h3>
+			<p>We've emailed them to let them know.</p>
+		{% endset %}
+
+		{{ notificationBanner({
+			html: profileUpdated,
+			type: "success"
+		}) }}
+
+		{{ backLink({
+			"href": "javascript:history.go(-1)",
+			"text": "Back",
+			classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
+		}) }}
+
+		<h1>System administrator account details</h1>
+
+		{{ summaryList({
+		rows: [
+			{
+			key: { text: "Title" },
+			value: { text: data['systemAdminTitle'] or "Mrs" },
+			actions: {
+				items: [
+				{
+					href: "edit-system-admin-account-update-profile#systemAdminTitle",
+					text: "Change",
+classes: "nhsuk-link--no-visited-state",
+					visuallyHiddenText: "title"
+				}
+				]
+			}
+			},
+			{
+			key: { text: "First name" },
+			value: { text: data['systemAdminFirstName'] or "Sofia" },
+			actions: {
+				items: [
+				{
+					href: "edit-system-admin-account-update-profile#systemAdminFirstName",
+					text: "Change",
+classes: "nhsuk-link--no-visited-state",
+					visuallyHiddenText: "first name"
+				}
+				]
+			}
+			},
+			{
+			key: { text: "Last name" },
+			value: { text: data['systemAdminLastName'] or "Petrov" },
+			actions: {
+				items: [
+				{
+					href: "edit-system-admin-account-update-profile#systemAdminLastName",
+					text: "Change",
+classes: "nhsuk-link--no-visited-state",
+					visuallyHiddenText: "last name"
+				}
+				]
+			}
+			},
+			{
+			key: { text: "Email address" },
+			value: { text: data['systemAdminEmail'] or "sofia.petrov@nihr.ac.uk" }
+			},
+			{
+			key: { text: "Organisation" },
+			value: { text: data['systemAdminOrganisation'] or "NIHR" }
+			},
+			{
+			key: { text: "Role" },
+			value: { text: data['systemAdminRole'] or "System administrator" },
+			actions: {
+				items: [
+				{
+					href: "edit-system-admin-account-update-profile#systemAdminRole",
+					text: "Change",
+classes: "nhsuk-link--no-visited-state",
+					visuallyHiddenText: "role"
+				}
+				]
+			}
+			}
+		]
+		}) }}
+
+		{{ button({
+		text: "Delete account",
+		classes: "nhsuk-button--warning",
+		href: "delete-system-admin-account"
+		}) }}
+
+	</div>
+</div>
+{% endblock %}
