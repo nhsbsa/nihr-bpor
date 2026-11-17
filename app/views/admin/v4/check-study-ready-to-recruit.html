@@ -12,7 +12,7 @@
     - add custom CSS and JavaScript
 -->
 
-{% set pageName = "Check that the study is ready to recruit" %}
+{% set pageName = "Check the study is ready to recruit" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -42,27 +42,47 @@
             classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
         }) }}
 
-        <h1 class="nhsuk-heading-xl">Check that the study is ready to recruit</h1>
+        <h1 class="nhsuk-heading-xl">Check the study is ready to recruit</h1>
 
-        {% if data['studyListed'] == "yes" %}
 
-            {% set studyListingStatus %}
-                {{ tag({
-                    text: "Completed",
-                    classes: "nhsuk-tag--green"
-                }) }}
-            {% endset %}
+{% if data['studyListed'] == "yes" %}
 
-        {% else %}
+    {% set studyListingStatus %}
+        {{ tag({
+            text: "Completed",
+            classes: "nhsuk-tag--green"
+        }) }}
+    {% endset %}
 
-            {% set studyListingStatus %}
-                {{ tag({
-                    text: "Incomplete",
-                    classes: "nhsuk-tag--blue"
-                }) }}
-            {% endset %}
+{% elif data['studyListed'] == "no" %}
 
-        {% endif %}
+    {% set studyListingStatus %}
+        {{ tag({
+            text: "Pending",
+            classes: "nhsuk-tag--yellow"
+        }) }}
+    {% endset %}
+
+{% elif data['studyListed'] == "under discussion" %}
+
+    {% set studyListingStatus %}
+        {{ tag({
+            text: "Under discussion",
+            classes: "nhsuk-tag--yellow"
+        }) }}
+    {% endset %}
+
+{% else %}
+
+    {% set studyListingStatus %}
+        {{ tag({
+            text: "Not started",
+            classes: "nhsuk-tag--grey"
+        }) }}
+    {% endset %}
+
+{% endif %}
+
 
         {{ taskList({
             items: [

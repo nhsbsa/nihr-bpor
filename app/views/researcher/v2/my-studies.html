@@ -99,6 +99,18 @@
 <h1>My studies</h1>
 
 {% if data['so-study-submit'] == true %}
+
+<!-- Logic for actions column of the table -->
+{% if data['studyListed'] == "no" or data['studyListed'] == "under discussion" %}
+  {% set studyActions %}
+    <a href="have-you-listed-your-study" class="nhsuk-link nhsuk-link--no-visited-state">List your study</a>
+  {% endset %}
+{% else %}
+  {% set studyActions %}
+    <p class="nhsuk-hint">No actions</p>
+  {% endset %}
+{% endif %}
+<!-- end -->
   
 {{ table({
   responsive: true,
@@ -130,7 +142,7 @@
       },
       {
         header: 'Actions',
-        html: '<p class="nhsuk-hint">No Actions</p>'
+        html: studyActions
       }
     ]
   ]
@@ -142,7 +154,7 @@
 
 <h2 class="nhsuk-heading-m">No studies found</h2>
 
-<p>You have not created any studies yet. <a href="so-add-a-study?brand=">Add a study</a> to get started.</p>
+<p>You have not created any studies yet. <a href="so-add-a-study?brand=" class="nhsuk-link--no-visited-state">Add a study</a> to get started.</p>
 
 {% endif %}
 

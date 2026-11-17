@@ -204,11 +204,15 @@ router.post('/review-study-rejection-reason', function (req, res) {
 router.post('/study-search-listing-check', function (req, res) {
     var studyListed = req.session.data['studyListed'];
 
-    if (studyListed === "yes" || studyListed === "no" || studyListed === "under discussion") {
+    if (studyListed === "yes") {
         res.redirect('check-study-ready-to-recruit');
-    } else {
-        // Do nothing / show error message as nothing is selected.
+    } 
+    else if (studyListed === "no" || studyListed === "under discussion") {
+        res.redirect('study-search-listing-email-sent');
     }       
+    else {
+        // Do nothing / show error message as nothing is selected.
+    }
 });
 
 
