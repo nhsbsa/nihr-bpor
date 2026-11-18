@@ -1025,7 +1025,7 @@ router.post('/so-18s-outside-uk', function (req, res) {
 
         res.redirect('so-18s-outside-uk-kickout');
 
-    } else if (u18sOutsideUk.includes("None of the above")) {
+    } else if (u18sOutsideUk.includes("All other participants")) {
 
         res.redirect('so-task-list');
 
