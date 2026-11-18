@@ -48,6 +48,14 @@
 <span class="nhsuk-caption-xl">{% if data['brand'] == 'BPOR' %}Be Part of Research{% elif data['brand'] == 'JDR' %}Join Dementia Research{% elif data['studyType'] == 'BPOR' %}Be Part of Research{% elif data['studyType'] == 'JDR' %}Join Dementia Research{% else %}NIHR{% endif %}</span>
 <h1 class="nhsuk-heading-xl">Recruit participants to your study</h1>
 
+{% set insetTextHtml %}
+  <p>Your answers will not be saved until you submit your study.</p>
+{% endset %}
+
+{{ insetText({
+  html: insetTextHtml
+}) }}
+
 <p>You will only be able to submit your study once you have completed each section.</p>
 
 {# ============================================
