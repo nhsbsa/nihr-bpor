@@ -18,7 +18,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "" %}
+{% set pageName = "Check the study details" %}
 
 <!-- For adding a breadcrumb or back link -->
 <!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
@@ -48,7 +48,7 @@
         <form action="/{{folder}}/{{subfolder}}/so-rdn-portfolio-confirm" method="post" novalidate>
             {% call fieldset({
                 legend: {
-                    text: "Please confirm the details of your study",
+                    text: "Check the study details",
                     size: "l",
                     isPageHeading: true
                 }
@@ -96,7 +96,7 @@
                 items: [
                     {
                     value: "confirmed",
-                    text: "I confirm that the details of the study are correct"
+                    text: "I confirm that this is the correct study and that the CPMS ID and study name are correct."
                     }
                 ]
             }) }}
@@ -109,9 +109,10 @@
         </form>
 
         {% call details({
-            summary: "What do I do if this is not my study?"
+            summary: "What if this is not my study?"
             }) %}
-            <p>Please check you have entered the correct CPMS ID, you can find this within the study details page on the Central Portfolio Management System.</p>
+            <p>The CPMS ID you entered may be incorrect. Check it against your study records or ask your study team to confirm the correct ID.</p>
+            <p>You can also check the study details page on the <a href="https://www.nihr.ac.uk/support-and-services/support-for-delivering-research/rdn-portfolio">Research Delivery Network (RDN) portfolio</a></p>
         {% endcall %}
 
     </div>
