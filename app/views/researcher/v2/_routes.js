@@ -1174,14 +1174,17 @@ router.post('/so-rdn-portfolio', function (req, res) {
 });
 
 router.post('/so-rdn-portfolio-confirm', function (req, res) {
-    // Check whether the checkbox has been selected
-    if (req.body.confirmation === 'yes') {
-        // Redirect to the success page
+
+    console.log('Checkbox value:', req.session.data['rdnConfirmation']);
+
+    let rdnConfirm = req.session.data['rdnConfirmation'];
+
+    if (rdnConfirm == "confirmed") {
         res.redirect('so-ethics-approval');
     } else {
-        // Do nothing as unchecked
         res.redirect('so-rdn-portfolio-confirm');
     }
+
 });
 
 router.post('/so-nihr-funding', function (req, res) {
