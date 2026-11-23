@@ -103,11 +103,17 @@
 <!-- Logic for actions column of the table -->
 {% if data['studyListed'] == "no" or data['studyListed'] == "under discussion" %}
   {% set studyActions %}
-    <a href="have-you-listed-your-study" class="nhsuk-link nhsuk-link--no-visited-state">List your study</a>
+    <a href="manage-my-study" class="nhsuk-link nhsuk-link--no-visited-state">Manage study</a>
+  {% endset %}
+  {% set studyStatus %}
+    <strong class="nhsuk-tag nhsuk-tag--yellow">Prepare to recruit</strong>
   {% endset %}
 {% else %}
   {% set studyActions %}
     <p class="nhsuk-hint">No actions</p>
+  {% endset %}
+  {% set studyStatus %}
+    <strong class="nhsuk-tag nhsuk-tag--yellow">Submitted</strong>
   {% endset %}
 {% endif %}
 <!-- end -->
@@ -138,7 +144,7 @@
       },
       {
         header: 'Status',
-        html: '<strong class="nhsuk-tag nhsuk-tag--yellow">Submitted</strong>'
+        html: studyStatus
       },
       {
         header: 'Actions',

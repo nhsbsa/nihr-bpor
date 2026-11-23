@@ -44,44 +44,43 @@
 
         <h1 class="nhsuk-heading-xl">Check the study is ready to recruit</h1>
 
+        {% if data['studyListed'] == "yes" %}
 
-{% if data['studyListed'] == "yes" %}
+            {% set studyListingStatus %}
+                {{ tag({
+                    text: "Completed",
+                    classes: "nhsuk-tag--green"
+                }) }}
+            {% endset %}
 
-    {% set studyListingStatus %}
-        {{ tag({
-            text: "Completed",
-            classes: "nhsuk-tag--green"
-        }) }}
-    {% endset %}
+        {% elif data['studyListed'] == "no" %}
 
-{% elif data['studyListed'] == "no" %}
+            {% set studyListingStatus %}
+                {{ tag({
+                    text: "Pending",
+                    classes: "nhsuk-tag--yellow"
+                }) }}
+            {% endset %}
 
-    {% set studyListingStatus %}
-        {{ tag({
-            text: "Pending",
-            classes: "nhsuk-tag--yellow"
-        }) }}
-    {% endset %}
+        {% elif data['studyListed'] == "under discussion" %}
 
-{% elif data['studyListed'] == "under discussion" %}
+            {% set studyListingStatus %}
+                {{ tag({
+                    text: "Under discussion",
+                    classes: "nhsuk-tag--yellow"
+                }) }}
+            {% endset %}
 
-    {% set studyListingStatus %}
-        {{ tag({
-            text: "Under discussion",
-            classes: "nhsuk-tag--yellow"
-        }) }}
-    {% endset %}
+        {% else %}
 
-{% else %}
+            {% set studyListingStatus %}
+                {{ tag({
+                    text: "Not started",
+                    classes: "nhsuk-tag--grey"
+                }) }}
+            {% endset %}
 
-    {% set studyListingStatus %}
-        {{ tag({
-            text: "Not started",
-            classes: "nhsuk-tag--grey"
-        }) }}
-    {% endset %}
-
-{% endif %}
+        {% endif %}
 
 
         {{ taskList({

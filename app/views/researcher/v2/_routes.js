@@ -1384,7 +1384,26 @@ router.post('/so-check-answers', function (req, res) {
 
 });
 
+// Have you arranged for your study to be listed?
+router.post('/have-you-listed-your-study', function (req, res) {
 
+    let studyListingArranged = req.session.data['studyListingArranged'];
+
+    if (studyListingArranged == "yes") {
+        // Redirect to a confirmation page that the study has been listed and admin has been notified
+        res.redirect('study-listed-confirmation');
+
+    } else if (studyListingArranged == "no") {
+        // Redirect to a page to tell the user to arrange for their study to be listed
+        res.redirect('arrange-study-listing');
+
+    } else {
+        // Nothing selected, stay on page
+        res.redirect('have-you-listed-your-study');
+
+    }
+
+});
 
 
 
