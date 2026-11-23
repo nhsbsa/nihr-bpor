@@ -1146,14 +1146,14 @@ router.post('/so-primary-contact-chief-investigator', function (req, res) {
 
 router.post('/so-rdn-portfolio', function (req, res) {
 
-    var soRDNPortfolio = req.session.data['soRDNPortfolio'];
-    var soCPMSID = req.session.data['soCPMSID'];
+    let soRDNPortfolio = req.session.data['soRDNPortfolio'];
+    let soCPMSID = req.session.data['soCPMSID'];
 
     if (soRDNPortfolio) {
 
         if (soRDNPortfolio == "Yes" && soCPMSID) {
-
-            res.redirect('so-ethics-approval');
+            res.redirect('so-rdn-portfolio-confirm');
+            //res.redirect('so-ethics-approval');
         
         } else if (soRDNPortfolio == "No" || soRDNPortfolio == "Not yet, but will be") {
 
@@ -1171,6 +1171,17 @@ router.post('/so-rdn-portfolio', function (req, res) {
 
     }
 
+});
+
+router.post('/so-rdn-portfolio-confirm', function (req, res) {
+    // Check whether the checkbox has been selected
+    if (req.body.confirmation === 'yes') {
+        // Redirect to the success page
+        res.redirect('so-ethics-approval');
+    } else {
+        // Do nothing as unchecked
+        res.redirect('so-rdn-portfolio-confirm');
+    }
 });
 
 router.post('/so-nihr-funding', function (req, res) {
@@ -1383,9 +1394,6 @@ router.post('/so-check-answers', function (req, res) {
     res.redirect('so-application-submitted');
 
 });
-
-
-
 
 
 // End Routes

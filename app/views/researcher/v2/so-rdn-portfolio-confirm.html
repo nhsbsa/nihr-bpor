@@ -1,0 +1,133 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% set layout = "layout.html" %}
+
+{% extends layout %}
+
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{{ backLink({
+    "href": "so-rdn-portfolio",
+    "text": "Back"
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+<div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+        <form action="/{{folder}}/{{subfolder}}/so-rdn-portfolio-confirm" method="post" novalidate>
+            {% call fieldset({
+                legend: {
+                    text: "Please confirm the details of your study",
+                    size: "l",
+                    isPageHeading: true
+                }
+                }) %}
+
+                {% set insetTextHtml %}
+                    <dl class="nhsuk-summary-list">
+                        <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">
+                                CPMS ID
+                            </dt>
+                            <dd class="nhsuk-summary-list__value">
+                                {% if data['soCPMSID'] %}
+                                    {{ data['soCPMSID'] }}
+                                {% else %}
+                                    12345
+                                {% endif %}
+                            </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">
+                                Study name
+                            </dt>
+                            <dd class="nhsuk-summary-list__value">
+                                {% if data['soStudyName'] %}
+                                    {{ data['soStudyName'] }}
+                                {% else %}
+                                    Example study name
+                                {% endif %}
+                            </dd>
+                        </div>
+                    </dl>
+                {% endset %}
+
+                {{ insetText({
+                    html: insetTextHtml,
+                    classes: "nhsuk-u-margin-top-3 nhsuk-u-margin-bottom-5"
+                }) }}
+            {% endcall %}
+
+            {{ checkboxes({
+                idPrefix: "confirmation",
+                name: "confirmation",
+                items: [
+                    {
+                    value: "confirmed",
+                    text: "I confirm that the details of the study are correct"
+                    }
+                ]
+            }) }}
+
+            {{ button({
+                text: "Continue",
+                id: "continue-button",
+                disabled: true
+            }) }}
+        </form>
+
+        {% call details({
+            summary: "What do I do if this is not my study?"
+            }) %}
+            <p>Please check you have entered the correct CPMS ID, you can find this within the study details page on the Central Portfolio Management System.</p>
+        {% endcall %}
+
+    </div>
+</div>    
+
+<!-- JS to control the disabled state of the continue button -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+    const checkbox = document.getElementById('confirmation');
+    const button = document.getElementById('continue-button');
+
+    checkbox.addEventListener('change', function () {
+        button.disabled = !checkbox.checked;
+    });
+
+    });
+</script>
+{% endblock %}
