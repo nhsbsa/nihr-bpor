@@ -1174,6 +1174,8 @@ router.post('/so-rdn-portfolio', function (req, res) {
 
 router.post('/so-rdn-portfolio-confirm', function (req, res) {
 
+    console.log('Checkbox value:', req.session.data['rdnConfirmation']);
+
     let rdnConfirm = req.session.data['rdnConfirmation'];
 
     if (rdnConfirm == "confirmed") {
@@ -1394,28 +1396,6 @@ router.post('/so-check-answers', function (req, res) {
     res.redirect('so-application-submitted');
 
 });
-
-// Have you arranged for your study to be listed?
-router.post('/have-you-listed-your-study', function (req, res) {
-
-    let studyListingArranged = req.session.data['studyListingArranged'];
-
-    if (studyListingArranged == "yes") {
-        // Redirect to a page that an admin has been notified
-        res.redirect('study-listed-notified');
-
-    } else if (studyListingArranged == "no") {
-        // Redirect to a page to tell the user to arrange for their study to be listed
-        res.redirect('you-need-to-list-your-study');
-
-    } else {
-        // Nothing selected, stay on page
-        res.redirect('have-you-listed-your-study');
-
-    }
-
-});
-
 
 
 // End Routes
