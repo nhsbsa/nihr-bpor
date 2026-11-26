@@ -1,0 +1,82 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% set layout = "layout.html" %}
+
+{% extends layout %}
+
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<h1>Recruit participants to your study</h1>
+
+<p>Use this service to find out whether your study is eligible to use the National Institute for Health and Care Research (NIHR) volunteer registry.</p>
+
+<p>This eligibility check helps you understand whether your study can receive support through Be Part of Research and Join Dementia Research before giving us detailed study information.</p>
+
+<p>If eligible, the NIHR team can help you recruit participants through Be Part of Research and Join Dementia Research, using a UK-wide pool of volunteers interested in research opportunities.</p>
+
+<h2 class="nhsuk-heading-m">If your study is eligible</h2>
+
+<p>The NIHR team will:</p>
+
+<ul>
+  <li>identify volunteers who match your study requirements</li>
+  <li>signpost volunteers to your study</li>
+  <li>keep you informed throughout the recruitment process</li>
+</ul>
+
+{{ insetText({
+  text: "Once you have registered, the NIHR team will contact you within 3 working days to discuss your study and the next steps."
+}) }}
+
+<p>If your study is eligible and volunteers express an interest in taking part, you'll be responsible for contacting interested volunteers and managing their recruitment.</p>
+
+<form action="/{{folder}}/{{subfolder}}/so-add-a-study" method="post" novalidate>
+
+<div class="nhsuk-button-group">
+  
+  {{ button({
+    text: "Start now"
+  }) }}
+
+</div>
+
+</form>
+
+
+    </div>
+  </div>
+{% endblock %}

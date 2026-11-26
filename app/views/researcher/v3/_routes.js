@@ -1,0 +1,1423 @@
+// ********************************
+// RESEARCHER
+// ********************************
+
+// External dependencies
+const express = require('express');
+const router = express.Router();
+
+// ********************
+// Account Registration
+// ********************
+
+
+router.post('/index', function (req, res) {
+
+    res.redirect('login-type-of-account');
+
+});
+
+router.post('/create-type-of-account', function (req, res) {
+
+    var createTypeAccount = req.session.data['createTypeAccount'];
+
+    if (createTypeAccount == "Create an account using GOV.UK One Login") {
+
+        res.redirect('https://govuk-one-login-prototype-6d2545e2d700.herokuapp.com/page-index/authentication/create-account');
+
+    } else if (createTypeAccount == "Create an account using an email and password") {
+
+        res.redirect('create-an-account');
+
+    } else {
+
+        res.redirect('create-type-of-account');
+
+    }
+
+});
+
+router.post('/login-type-of-account', function (req, res) {
+
+    var loginTypeAccount = req.session.data['loginTypeAccount'];
+
+    if (loginTypeAccount == "GOV.UK One Login") {
+
+        res.redirect('https://govuk-one-login-prototype-6d2545e2d700.herokuapp.com/page-index/authentication/create-account');
+
+    } else if (loginTypeAccount == "Email and password") {
+
+        res.redirect('researcher-login');
+
+    } else {
+
+        res.redirect('login-type-of-account');
+
+    }
+
+});
+
+router.post('/researcher-login', function (req, res) {
+
+    var emailAddress = req.session.data['emailAddress'];
+    var password = req.session.data['password'];
+
+    if (emailAddress && password) {
+
+        res.redirect('OTP-login-email');
+
+    } else {
+
+        res.redirect('researcher-login');
+
+    }
+
+});
+
+router.post('/create-an-account', function (req, res) {
+
+    var researcherEmailAddress = req.session.data['researcherEmailAddress'];
+    var researcherPassword = req.session.data['researcherPassword'];
+
+    if (researcherEmailAddress && researcherPassword) {
+
+        res.redirect('verify-your-email');
+
+    } else {
+
+        res.redirect('create-an-account');
+
+    }
+
+});
+
+router.post('/researcher-login-verified', function (req, res) {
+
+    var researcherEmailAddress = req.session.data['researcherEmailAddress'];
+    var researcherPassword = req.session.data['researcherPassword'];
+
+    if (researcherEmailAddress && researcherPassword) {
+
+        res.redirect('OTP-create-email');
+
+    } else {
+
+        res.redirect('researcher-login-verified');
+
+    }
+
+});
+
+router.post('/one-time-passcode-login', function (req, res) {
+
+    var oneTimePasscode = req.session.data['oneTimePasscode'];
+
+    if (oneTimePasscode) {
+
+        res.redirect('home');
+
+    } else {
+
+        res.redirect('one-time-passcode-login');
+
+    }
+
+});
+
+router.post('/one-time-passcode-create', function (req, res) {
+
+    var oneTimePasscode = req.session.data['oneTimePasscode'];
+
+    if (oneTimePasscode) {
+
+        res.redirect('enter-your-details');
+
+    } else {
+
+        res.redirect('one-time-passcode-create');
+
+    }
+
+});
+
+router.post('/check-your-details', function (req, res) {
+
+    res.redirect('account-request-submitted');
+
+});
+
+router.post('/enter-your-details', function (req, res) {
+
+    var researcherTitle = req.session.data['researcherTitle'];
+    var researcherFirstName = req.session.data['researcherFirstName'];
+    var researcherLastName = req.session.data['researcherLastName'];
+    var researcherOrganisation = req.session.data['researcherOrganisation'];
+    var researcherOrganisationName = req.session.data['researcherOrganisationName'];
+    var researcherAuthorisation = req.session.data['researcherAuthorisation'];
+
+    if (researcherTitle && researcherFirstName && researcherLastName) {
+
+        if (
+            (researcherOrganisation && !researcherOrganisationName && !researcherAuthorisation) ||
+            (!researcherOrganisation && researcherOrganisationName && researcherAuthorisation)
+        ) {
+            res.redirect('check-your-details');
+        } else {
+            res.redirect('enter-your-details');
+        }
+
+    } else {
+
+        res.redirect('enter-your-details');
+
+    }
+
+});
+
+router.post('/sign-up-answers', function (req, res) {
+
+    res.redirect('registration-submitted');
+
+});
+
+// ********************
+// Account Login
+// ********************
+
+router.post('/researcher-login', function (req, res) {
+
+    var emailAddress = req.session.data['emailAddress'];
+    var password = req.session.data['password'];
+
+    if (emailAddress && password) {
+
+        res.redirect('home');
+
+    } else {
+
+        res.redirect('researcher-login');
+
+    }
+
+});
+
+router.post('/forgot-password', function (req, res) {
+
+    var emailAddress = req.session.data['emailAddress'];
+
+    if (emailAddress) {
+
+        res.redirect('check-your-email');
+
+    } else {
+
+        res.redirect('forgot-password');
+
+    }
+
+});
+
+router.post('/reset-your-password', function (req, res) {
+
+    var password1 = req.session.data['password1'];
+    var password2 = req.session.data['password2'];
+
+if (password1 && password2 && password1 === password2) {
+
+    res.redirect('reset-your-password-confirm');
+
+} else {
+
+    res.redirect('reset-your-password');
+
+}
+
+});
+
+router.post('/home', function (req, res) {
+
+    res.redirect('delete-account-active-studies');
+
+});
+
+router.post('/update-profile', function (req, res) {
+
+    var researcherTitle = req.session.data['researcherTitle'];
+    var researcherFirstName = req.session.data['researcherFirstName'];
+    var researcherLastName = req.session.data['researcherLastName'];
+
+
+if (researcherTitle && researcherFirstName && researcherLastName) {
+
+    res.redirect('home-profile-updated');
+
+} else {
+
+    res.redirect('update-profile');
+
+}
+
+});
+
+router.post('/delete-account-active-studies', function (req, res) {
+
+    res.redirect('delete-account');
+
+});
+
+router.post('/delete-account', function (req, res) {
+
+    res.redirect('account-deleted');
+
+});
+
+// ********************
+// Create Pre-Screener
+// ********************
+
+router.post('/create-start', function (req, res) {
+
+    req.session.destroy()
+
+    res.redirect('create-study-details');
+
+});
+
+router.post('/create-study-details', function (req, res) {
+
+    var studyName = req.session.data['studyName'];
+    var studyID = req.session.data['studyID'];
+
+    if (studyName && studyID) {
+
+        res.redirect('create-inclusion-exclusion-criteria');
+
+    } else {
+
+        res.redirect('create-study-details');
+
+    }
+})
+
+router.post('/create-inclusion-exclusion-criteria', function (req, res) {
+
+    var addhealthConditions = req.session.data['addhealthConditions'];
+    var addMedications = req.session.data['addMedications'];
+    var addAdditionalQuestion = req.session.data['addAdditionalQuestion'];
+
+    if (addhealthConditions && addhealthConditions.includes("Include volunteers with certain health conditions")) {
+
+        res.redirect('create-recruit-health-condition');
+
+    } else if (addhealthConditions && addhealthConditions.includes("Exclude volunteers with certain health conditions")) {
+
+        res.redirect('create-exclude-health-condition');
+
+    } else if (addMedications && addMedications.includes("Include volunteers taking certain medications")) {
+
+        res.redirect('create-recruit-medication');
+
+    } else if (addMedications && addMedications.includes("Exclude volunteers taking certain medications")) {
+
+        res.redirect('create-exclude-medication');
+
+    } else if (addAdditionalQuestion && addAdditionalQuestion.includes("I’d like to add additional questions")) {
+
+        res.redirect('create-additional-question-one');
+
+    } else {
+
+        res.redirect('create-inclusion-exclusion-criteria');
+
+    }
+
+})
+
+// RECRUIT BY HEALTH CONDITION
+
+router.post('/create-recruit-health-condition', function (req, res) {
+
+    var conditions = req.session.data['conditions'];
+    var addhealthConditions = req.session.data['addhealthConditions'];
+    var addMedications = req.session.data['addMedications'];
+
+    if (!conditions) {
+        return res.redirect('create-recruit-health-condition');
+    }
+
+    if (!Array.isArray(conditions)) {
+        conditions = [conditions];
+    }
+
+    // Remove the placeholder values added by the JS
+    conditions = conditions.filter(c => c !== '_unchecked');
+
+    if (conditions.length > 5) {
+        return res.redirect('create-recruit-health-condition');
+    }
+
+        if (addhealthConditions) {
+            if (addhealthConditions.includes('Exclude volunteers with certain health conditions')) {
+
+                return res.redirect('create-exclude-health-condition');
+
+            }
+        }
+
+        if (addMedications) {
+            if (addMedications.includes('Include volunteers taking certain medications')) {
+
+                return res.redirect('create-recruit-medication');
+
+            }
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
+
+                return res.redirect('create-exclude-medication');
+
+            }
+        }
+
+        return res.redirect('create-check-answers');
+
+});
+
+/*
+router.post('/create-recruit-health-condition', function (req, res) {
+
+    var listedCondition = req.session.data['listedCondition'];
+
+    // Make sure the 'conditions' array exists
+    if (!req.session.data['conditions']) {
+        req.session.data['conditions'] = [];
+    }
+
+    // Add the new condition to the array
+    req.session.data['conditions'].push(listedCondition);
+
+    // Redirect to the next page
+    res.redirect('create-recruit-condition-answers');
+});
+
+router.post('/create-recruit-non-listed-health-condition', function (req, res) {
+
+    var nonListedCondition = req.session.data['nonListedCondition'];
+
+    // Make sure the 'conditions' array exists
+    if (!req.session.data['conditions']) {
+        req.session.data['conditions'] = [];
+    }
+
+    // Add the new condition to the array
+    req.session.data['conditions'].push(nonListedCondition);
+
+    // Redirect to the next page
+    res.redirect('create-recruit-condition-answers');
+});
+
+router.post('/create-recruit-condition-answers', function (req, res) {
+
+    var recruitAnotherCondition = req.session.data['recruitAnotherCondition'];
+    var addhealthConditions = req.session.data['addhealthConditions'];
+    var addMedications = req.session.data['addMedications'];
+    var addAdditionalQuestion = req.session.data['addAdditionalQuestion'];
+
+    if (recruitAnotherCondition == "Yes") {
+
+        return res.redirect('create-recruit-health-condition');
+
+    } else if (recruitAnotherCondition == "No") {
+
+        if (addhealthConditions) {
+            if (addhealthConditions.includes('Exclude volunteers with certain health conditions')) {
+
+                return res.redirect('create-exclude-health-condition');
+
+            }
+        }
+
+        if (addMedications) {
+            if (addMedications.includes('Include volunteers taking certain medications')) {
+
+                return res.redirect('create-recruit-medication');
+
+            }
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
+
+                return res.redirect('create-exclude-medication');
+
+            }
+        }
+
+        if (addAdditionalQuestion) {
+            if (addAdditionalQuestion.includes('I’d like to add additional questions')) {
+
+                return res.redirect('create-additional-question-one');
+
+            }
+        }
+
+        return res.redirect('create-check-answers');
+
+    } else {
+
+        return res.redirect('create-recruit-condition-answers');
+
+    }
+
+});
+*/
+
+// EXCLUDE BY HEALTH CONDITION
+
+router.post('/create-exclude-health-condition', function (req, res) {
+
+    var conditionsExclude = req.session.data['conditionsExclude'];
+    var addMedications = req.session.data['addMedications'];
+
+    if (!conditionsExclude) {
+        return res.redirect('create-exclude-health-condition');
+    }
+
+    if (!Array.isArray(conditionsExclude)) {
+        conditionsExclude = [conditionsExclude];
+    }
+
+    // Remove the placeholder values added by the JS
+    conditionsExclude = conditionsExclude.filter(c => c !== '_unchecked');
+
+    if (conditionsExclude.length > 5) {
+        return res.redirect('create-exclude-health-condition');
+    }
+
+        if (addMedications) {
+            if (addMedications.includes('Include volunteers taking certain medications')) {
+
+                return res.redirect('create-recruit-medication');
+
+            }
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
+
+                return res.redirect('create-exclude-medication');
+
+            }
+        }
+
+        return res.redirect('create-check-answers');
+
+});
+
+/*
+router.post('/create-exclude-health-condition', function (req, res) {
+
+    var listedConditionExclude = req.session.data['listedConditionExclude'];
+
+    // Make sure the 'conditionsExclude' array exists
+    if (!req.session.data['conditionsExclude']) {
+        req.session.data['conditionsExclude'] = [];
+    }
+
+    // Add the new condition to the array
+    req.session.data['conditionsExclude'].push(listedConditionExclude);
+
+    // Redirect to the next page
+    res.redirect('create-exclude-condition-answers');
+});
+
+router.post('/create-exclude-non-listed-health-condition', function (req, res) {
+
+    var nonListedConditionExclude = req.session.data['nonListedConditionExclude'];
+
+    // Make sure the 'conditionsExclude' array exists
+    if (!req.session.data['conditionsExclude']) {
+        req.session.data['conditionsExclude'] = [];
+    }
+
+    // Add the new condition to the array
+    req.session.data['conditionsExclude'].push(nonListedConditionExclude);
+
+    // Redirect to the next page
+    res.redirect('create-exclude-condition-answers');
+});
+
+router.post('/create-exclude-condition-answers', function (req, res) {
+
+    var excludeAnotherCondition = req.session.data['excludeAnotherCondition'];
+    var addhealthConditions = req.session.data['addhealthConditions'];
+    var addMedications = req.session.data['addMedications'];
+    var addAdditionalQuestion = req.session.data['addAdditionalQuestion'];
+
+    if (excludeAnotherCondition == "Yes") {
+
+        return res.redirect('create-exclude-health-condition');
+
+    } else if (excludeAnotherCondition == "No") {
+
+        if (addMedications) {
+            if (addMedications.includes('Include volunteers taking certain medications')) {
+
+                return res.redirect('create-recruit-medication');
+
+            }
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
+
+                return res.redirect('create-exclude-medication');
+
+            }
+        }
+
+        if (addAdditionalQuestion) {
+            if (addAdditionalQuestion.includes('I’d like to add additional questions')) {
+
+                return res.redirect('create-additional-question-one');
+
+            }
+        }
+
+        return res.redirect('create-check-answers');
+
+    } else {
+
+        return res.redirect('create-exclude-condition-answers');
+
+    }
+
+});
+*/
+
+// RECRUIT BY MEDICATION
+
+router.post('/create-recruit-medication', function (req, res) {
+
+    var medications = req.session.data['medications'];
+    var addMedications = req.session.data['addMedications'];
+
+    if (!medications) {
+        return res.redirect('create-recruit-medication');
+    }
+
+    if (!Array.isArray(medications)) {
+        medications = [medications];
+    }
+
+    // Remove the placeholder values added by the JS
+    medications = medications.filter(c => c !== '_unchecked');
+
+    if (medications.length > 5) {
+        return res.redirect('create-recruit-medication');
+    }
+
+        if (addMedications) {
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
+
+                return res.redirect('create-exclude-medication');
+
+            }
+        }
+
+        return res.redirect('create-check-answers');
+
+});
+
+/*
+router.post('/create-recruit-medication', function (req, res) {
+
+    var listedMedication = req.session.data['listedMedication'];
+
+    // Make sure the 'medications' array exists
+    if (!req.session.data['medications']) {
+        req.session.data['medications'] = [];
+    }
+
+    // Push the new medication
+    req.session.data['medications'].push(listedMedication);
+
+    // Redirect to the next page
+    res.redirect('create-recruit-medication-answers');
+});
+
+router.post('/create-recruit-non-listed-medication', function (req, res) {
+
+    var nonListedMedication = req.session.data['nonListedMedication'];
+
+    // Make sure the 'medications' array exists
+    if (!req.session.data['medications']) {
+        req.session.data['medications'] = [];
+    }
+
+    // The index will be the current length (before push)
+    const newIndex = req.session.data['medications'].length;
+
+    // Push the new medication OBJECT
+    req.session.data['medications'].push({
+        drugName: nonListedMedication,
+        friendlyName: null,
+        listedMedication: false
+    });
+
+    // Store the index for later routes to use
+    req.session.data['currentMedicationIndex'] = newIndex;
+
+    // Redirect to the next page
+    res.redirect('create-recruit-medication-other-name');
+});
+
+router.post('/create-recruit-medication-other-name', function (req, res) {
+
+    const friendlyName = req.session.data['friendlyName'];
+    const recruitIndex = req.session.data['currentMedicationIndex'];
+
+    // Update the object within the array
+    req.session.data['medications'][recruitIndex].friendlyName = friendlyName;
+
+    res.redirect('create-recruit-medication-answers');
+});
+
+router.post('/create-recruit-medication-answers', function (req, res) {
+
+    var recruitAnotherMedication = req.session.data['recruitAnotherMedication'];
+    var addMedications = req.session.data['addMedications'];
+    var addAdditionalQuestion = req.session.data['addAdditionalQuestion'];
+
+    if (recruitAnotherMedication == "Yes") {
+
+        return res.redirect('create-recruit-medication');
+
+    } else if (recruitAnotherMedication == "No") {
+
+        if (addMedications) {
+            if (addMedications.includes('Exclude volunteers taking certain medications')) {
+
+                return res.redirect('create-exclude-medication');
+
+            }
+        }
+
+        if (addAdditionalQuestion) {
+            if (addAdditionalQuestion.includes('I’d like to add additional questions')) {
+
+                return res.redirect('create-additional-question-one');
+
+            }
+        }
+
+        return res.redirect('create-check-answers');
+
+    } else {
+
+        return res.redirect('create-recruit-medication-answers');
+
+    }
+
+});
+*/
+
+// EXCLUDE BY MEDICATION
+
+router.post('/create-exclude-medication', function (req, res) {
+
+    var medicationsExclude = req.session.data['medicationsExclude'];
+    var addMedications = req.session.data['addMedications'];
+
+    if (!medicationsExclude) {
+        return res.redirect('create-exclude-medication');
+    }
+
+    if (!Array.isArray(medicationsExclude)) {
+        medicationsExclude = [medicationsExclude];
+    }
+
+    // Remove the placeholder values added by the JS
+    medicationsExclude = medicationsExclude.filter(c => c !== '_unchecked');
+
+    if (medicationsExclude.length > 5) {
+        return res.redirect('create-exclude-medication');
+    }
+
+        return res.redirect('create-check-answers');
+
+});
+
+/*
+router.post('/create-exclude-medication', function (req, res) {
+
+    var listedMedicationExclude = req.session.data['listedMedicationExclude'];
+
+    // Make sure the 'medicationsExclude' array exists
+    if (!req.session.data['medicationsExclude']) {
+        req.session.data['medicationsExclude'] = [];
+    }
+
+    // Push the new medication
+    req.session.data['medicationsExclude'].push(listedMedicationExclude);
+
+    // Redirect to the next page
+    res.redirect('create-exclude-medication-answers');
+});
+
+
+router.post('/create-exclude-non-listed-medication', function (req, res) {
+
+    var nonListedMedicationExclude = req.session.data['nonListedMedicationExclude'];
+
+    // Make sure the 'medicationsExclude' array exists
+    if (!req.session.data['medicationsExclude']) {
+        req.session.data['medicationsExclude'] = [];
+    }
+
+    // The index will be the current length (before push)
+    const newIndex = req.session.data['medicationsExclude'].length;
+
+    // Push the new medication OBJECT
+    req.session.data['medicationsExclude'].push({
+        drugName: nonListedMedicationExclude,
+        friendlyName: null,
+        listedMedication: false
+    });
+
+    // Store the index for later routes to use
+    req.session.data['currentExcludeMedicationIndex'] = newIndex;
+
+    // Redirect to the next page
+    res.redirect('create-exclude-medication-other-name');
+});
+
+
+router.post('/create-exclude-medication-other-name', function (req, res) {
+
+    const friendlyNameExclude = req.session.data['friendlyNameExclude'];
+    const excludeIndex = req.session.data['currentExcludeMedicationIndex'];
+
+    // Update the object within the array
+    req.session.data['medicationsExclude'][excludeIndex].friendlyName = friendlyNameExclude;
+
+    res.redirect('create-exclude-medication-answers');
+});
+
+
+router.post('/create-exclude-medication-answers', function (req, res) {
+
+    var recruitAnotherMedication = req.session.data['recruitAnotherMedication'];
+    var addMedications = req.session.data['addMedications'];
+    var addAdditionalQuestion = req.session.data['addAdditionalQuestion'];
+
+    if (recruitAnotherMedication == "Yes") {
+
+        return res.redirect('create-exclude-medication');
+
+    } else if (recruitAnotherMedication == "No") {
+
+        if (addAdditionalQuestion) {
+            if (addAdditionalQuestion.includes('I’d like to add additional questions')) {
+
+                return res.redirect('create-additional-question-one');
+
+            }
+        }
+
+        return res.redirect('create-check-answers');
+
+    } else {
+
+        return res.redirect('create-exclude-medication-answers');
+
+    }
+
+});
+*/
+
+// Additional Questions
+
+router.post('/create-additional-question-one', function (req, res) {
+
+    var question1Text = req.session.data['question1Text'];
+    var question1Answer = req.session.data['question1Answer'];
+    var question1SoftFail = req.session.data['question1SoftFail'];
+
+    if (question1Text && question1Answer) {
+
+        res.redirect('create-additional-question-answers');
+
+    } else {
+
+        res.redirect('create-additional-question-one');
+
+    }
+})
+
+router.post('/create-additional-question-two', function (req, res) {
+
+    var question2Text = req.session.data['question2Text'];
+    var question2Answer = req.session.data['question2Answer'];
+    var question2SoftFail = req.session.data['question2SoftFail'];
+
+    if (question2Text && question2Answer) {
+
+        res.redirect('create-additional-question-answers');
+
+    } else {
+
+        res.redirect('create-additional-question-two');
+
+    }
+})
+
+router.post('/create-additional-question-three', function (req, res) {
+
+    var question3Text = req.session.data['question3Text'];
+    var question3Answer = req.session.data['question3Answer'];
+    var question3SoftFail = req.session.data['question3SoftFail'];
+
+    if (question3Text && question3Answer) {
+
+        res.redirect('create-additional-question-answers');
+
+    } else {
+
+        res.redirect('create-additional-question-three');
+
+    }
+})
+
+router.post('/create-additional-question-four', function (req, res) {
+
+    var question4Text = req.session.data['question4Text'];
+    var question4Answer = req.session.data['question4Answer'];
+    var question4SoftFail = req.session.data['question4SoftFail'];
+
+    if (question4Text && question4Answer) {
+
+        res.redirect('create-additional-question-answers');
+
+    } else {
+
+        res.redirect('create-additional-question-four');
+
+    }
+})
+
+router.post('/create-additional-question-five', function (req, res) {
+
+    var question5Text = req.session.data['question5Text'];
+    var question5Answer = req.session.data['question5Answer'];
+    var question5SoftFail = req.session.data['question5SoftFail'];
+
+    if (question5Text && question5Answer) {
+
+        res.redirect('create-additional-question-answers');
+
+    } else {
+
+        res.redirect('create-additional-question-five');
+
+    }
+})
+
+router.post('/create-additional-question-answers', function (req, res) {
+
+    var anotherQuestion = req.session.data['anotherQuestion'];
+    var question1Text = req.session.data['question1Text'];
+    var question2Text = req.session.data['question2Text'];
+    var question3Text = req.session.data['question3Text'];
+    var question4Text = req.session.data['question4Text'];
+    var question5Text = req.session.data['question5Text'];
+
+    if (anotherQuestion !== "Yes") {
+        return res.redirect('create-check-answers');
+    }
+
+    // Go to the next unanswered question
+    if (!question1Text) {
+        return res.redirect('create-additional-question-one');
+    }
+
+    if (!question2Text) {
+        return res.redirect('create-additional-question-two');
+    }
+
+    if (!question3Text) {
+        return res.redirect('create-additional-question-three');
+    }
+
+    if (!question4Text) {
+        return res.redirect('create-additional-question-four');
+    }
+
+    if (!question5Text) {
+        return res.redirect('create-additional-question-five');
+    }
+
+    // All questions answered
+    return res.redirect('create-additional-question-answers');
+
+});
+
+router.post('/view-report-update-status', function (req, res) {
+
+    var updateContactedStatus = req.session.data['updateContactedStatus'];
+
+    console.log(updateContactedStatus);
+
+    if (updateContactedStatus) {
+
+        res.redirect('view-report-updated');
+
+    } else {
+
+        res.redirect('view-report-update-status');
+
+    }
+
+});
+
+// ********************
+// Add a study
+// ********************
+
+
+router.post('/so-add-a-study', function (req, res) {
+
+    res.redirect('so-add-a-study-before');
+
+});
+
+router.post('/so-add-a-study-before', function (req, res) {
+
+    var brand = req.session.data['brand'];
+
+    if (brand == "JDR") {
+
+        res.redirect('so-18s-outside-uk');
+
+    } else if (brand == "BPOR") {
+
+        res.redirect('so-18s-outside-uk');
+
+    } else {
+
+        res.redirect('so-add-a-study-type');
+
+    }
+
+});
+
+router.post('/so-add-a-study-type', function (req, res) {
+
+    var studyType = req.session.data['studyType'];
+
+    if (studyType) {
+
+        res.redirect('so-18s-outside-uk');
+
+    } else {
+
+        res.redirect('so-add-a-study-type');
+
+    }
+
+});
+
+router.post('/so-18s-outside-uk', function (req, res) {
+
+    var u18sOutsideUk = req.session.data['18sOutsideUk'];
+
+    if (u18sOutsideUk.includes("Only participants under 18 years of age") ||
+        u18sOutsideUk.includes("Only participants who live outside of the UK")) {
+
+        res.redirect('so-18s-outside-uk-kickout');
+
+    } else if (u18sOutsideUk.includes("All other participants")) {
+
+        res.redirect('so-task-list');
+
+    } else {
+
+        res.redirect('so-18s-outside-uk');
+
+    }
+
+});
+
+
+router.post('/so-primary-contact-confirm', function (req, res) {
+
+    var primaryContactConfirm = req.session.data['primaryContactConfirm'];
+
+    if (primaryContactConfirm == "Yes") {
+
+        res.redirect('so-primary-contact-chief-investigator');
+
+    } else if (primaryContactConfirm == "No") {
+
+        res.redirect('so-primary-contact');
+
+    } else {
+
+        res.redirect('so-primary-contact-confirm');
+
+    }
+
+});
+
+router.post('/so-primary-contact', function (req, res) {
+
+    var soPrimaryContactTitle = req.session.data['soPrimaryContactTitle'];
+    var soPrimaryContactFirstName = req.session.data['soPrimaryContactFirstName'];
+    var soPrimaryContactLastName = req.session.data['soPrimaryContactLastName'];
+    var soPrimaryContactEmailAddress = req.session.data['soPrimaryContactEmailAddress'];
+    var soPrimaryContactOrganisation = req.session.data['soPrimaryContactOrganisation'];
+    var soPrimaryContactOrganisationName = req.session.data['soPrimaryContactOrganisationName'];
+
+    if (soPrimaryContactTitle && soPrimaryContactFirstName && soPrimaryContactLastName && soPrimaryContactEmailAddress) {
+
+        if (
+            (soPrimaryContactOrganisation && !soPrimaryContactOrganisationName) ||
+            (!soPrimaryContactOrganisation && soPrimaryContactOrganisationName)
+        ) {
+
+            res.redirect('so-primary-contact-chief-investigator');
+
+        } else {
+
+            res.redirect('so-primary-contact');
+        }
+
+    } else {
+
+        res.redirect('so-primary-contact');
+
+    }
+
+});
+
+router.post('/so-chief-investigator', function (req, res) {
+
+    var soChiefInvestigatorTitle = req.session.data['soChiefInvestigatorTitle'];
+    var soChiefInvestigatorFirstName = req.session.data['soChiefInvestigatorFirstName'];
+    var soChiefInvestigatorLastName = req.session.data['soChiefInvestigatorLastName'];
+    var soChiefInvestigatorEmailAddress = req.session.data['soChiefInvestigatorEmailAddress'];
+    var soChiefInvestigatorOrganisation = req.session.data['soChiefInvestigatorOrganisation'];
+    var soChiefInvestigatorOrganisationName = req.session.data['soChiefInvestigatorOrganisationName'];
+
+    if (soChiefInvestigatorTitle && soChiefInvestigatorFirstName && soChiefInvestigatorLastName && soChiefInvestigatorEmailAddress) {
+
+        if (
+            (soChiefInvestigatorOrganisation && !soChiefInvestigatorOrganisationName) ||
+            (!soChiefInvestigatorOrganisation && soChiefInvestigatorOrganisationName)
+        ) {
+
+            req.session.data['so-primary-contact-complete'] = true;
+
+            res.redirect('so-task-list');
+
+        } else {
+
+            res.redirect('so-chief-investigator');
+        }
+
+    } else {
+
+        res.redirect('so-chief-investigator');
+
+    }
+
+});
+
+router.post('/so-primary-contact-chief-investigator', function (req, res) {
+
+    var soPrimaryContactChiefInvestigator = req.session.data['soPrimaryContactChiefInvestigator'];
+
+    if (soPrimaryContactChiefInvestigator == "Yes") {
+
+        req.session.data['so-primary-contact-complete'] = true;
+
+        res.redirect('so-task-list');
+
+    } else if (soPrimaryContactChiefInvestigator == "No") {
+
+        res.redirect('so-chief-investigator');
+
+    } else {
+
+        res.redirect('primary-contact-chief-investigator');
+
+    }
+
+});
+
+router.post('/so-rdn-portfolio', function (req, res) {
+
+    let soRDNPortfolio = req.session.data['soRDNPortfolio'];
+    let soCPMSID = req.session.data['soCPMSID'];
+
+    if (soRDNPortfolio) {
+
+        if (soRDNPortfolio == "Yes" && soCPMSID) {
+            res.redirect('so-rdn-portfolio-confirm');
+        
+        } else if (soRDNPortfolio == "No" || soRDNPortfolio == "Not yet, but will be") {
+
+            res.redirect('so-nihr-funding');
+
+        } else {
+
+            res.redirect('so-rdn-portfolio');
+
+        }
+
+    } else {
+
+        res.redirect('so-rdn-portfolio');
+
+    }
+
+});
+
+router.post('/so-rdn-portfolio-confirm', function (req, res) {
+
+    let rdnConfirm = req.session.data['rdnConfirmation'];
+
+    if (rdnConfirm == "confirmed") {
+        res.redirect('so-ethics-approval');
+    } else {
+        res.redirect('so-rdn-portfolio-confirm');
+    }
+
+});
+
+router.post('/so-nihr-funding', function (req, res) {
+
+    var nihrFunding = req.session.data['nihrFunding'];
+
+    if (nihrFunding) {
+
+        res.redirect('so-ethics-approval');
+
+    } else {
+
+        res.redirect('so-nihr-funding');
+
+    }
+
+});
+
+router.post('/so-ethics-approval', function (req, res) {
+
+    var soEthicsApproval = req.session.data['soEthicsApproval'];
+    var soCPMSID = req.session.data['soCPMSID'];
+
+
+    if (soEthicsApproval) {
+
+
+        if (soCPMSID) {
+
+            req.session.data['so-portfolio-funding-complete'] = true;
+
+            res.redirect('so-task-list');
+
+        } else {
+
+            res.redirect('so-study-sponsors');
+
+        }
+
+
+    } else {
+
+        res.redirect('so-ethics-approval');
+
+    }
+
+});
+
+router.post('/so-study-sponsors', function (req, res) {
+
+    var soStudySponsors = req.session.data['soStudySponsors'];
+
+    if (!soStudySponsors) {
+        return res.redirect('so-study-sponsors');
+    }
+
+    if (!Array.isArray(soStudySponsors)) {
+        soStudySponsors = [soStudySponsors];
+    }
+
+    // Remove placeholder values
+    soStudySponsors = soStudySponsors.filter(c => c !== '_unchecked');
+
+    // Nothing selected
+    if (soStudySponsors.length === 0) {
+        return res.redirect('so-study-sponsors');
+    }
+
+    // Save cleaned values back to the session if needed
+    req.session.data['soStudySponsors'] = soStudySponsors;
+
+    req.session.data['so-portfolio-funding-complete'] = true;
+
+    return res.redirect('so-task-list');
+});
+
+router.post('/so-study-title', function (req, res) {
+
+    var studyTitle = req.session.data['studyTitle'];
+
+    if (studyTitle) {
+
+        res.redirect('so-study-description');
+
+    } else {
+
+        res.redirect('so-study-title');
+
+    }
+
+});
+
+router.post('/so-study-description', function (req, res) {
+
+    var studyDescription = req.session.data['studyDescription'];
+
+    if (studyDescription) {
+
+        res.redirect('so-study-demographic');
+
+    } else {
+
+        res.redirect('so-study-description');
+
+    }
+
+});
+
+router.post('/so-study-demographic', function (req, res) {
+
+    var studyDemographic = req.session.data['studyDemographic'];
+
+    if (studyDemographic) {
+
+        res.redirect('so-health-conditions');
+
+    } else {
+
+        res.redirect('so-study-demographic');
+
+    }
+
+});
+
+router.post('/so-health-conditions', function (req, res) {
+
+    var soHealthConditions = req.session.data['soHealthConditions'];
+    var soHealthConditionsTopic = req.session.data['soHealthConditionsTopic'];
+    var soCPMSID = req.session.data['soCPMSID'];
+
+    // Convert values to arrays if necessary
+    if (soHealthConditions && !Array.isArray(soHealthConditions)) {
+        soHealthConditions = [soHealthConditions];
+    }
+
+    if (soHealthConditionsTopic && !Array.isArray(soHealthConditionsTopic)) {
+        soHealthConditionsTopic = [soHealthConditionsTopic];
+    }
+
+    // Remove placeholder values
+    soHealthConditions = (soHealthConditions || [])
+        .filter(c => c !== '_unchecked');
+
+    soHealthConditionsTopic = (soHealthConditionsTopic || [])
+        .filter(t => t !== '_unchecked');
+
+    // Check that at least one field has a valid selection
+    if (
+        soHealthConditions.length === 0 &&
+        soHealthConditionsTopic.length === 0
+    ) {
+        return res.redirect('so-health-conditions');
+    }
+
+    // Save cleaned values back to the session
+    req.session.data['soHealthConditions'] = soHealthConditions;
+    req.session.data['soHealthConditionsTopic'] = soHealthConditionsTopic;
+
+    // Preserve existing CPMS redirect logic
+    if (soCPMSID) {
+        req.session.data['so-study-details-complete'] = true;
+
+        return res.redirect('so-task-list');
+    }
+
+    return res.redirect('so-recruitment-end-date');
+
+});
+
+router.post('/so-study-location', function (req, res) {
+
+    var soStudyLocation = req.session.data['soStudyLocation'];
+
+    if (soStudyLocation) {
+
+        res.redirect('so-recruitment-end-date');
+
+    } else {
+
+        res.redirect('so-study-location');
+
+    }
+
+});
+
+router.post('/so-recruitment-end-date', function (req, res) {
+
+    var soRecruitmentEndDateDay = req.session.data['soRecruitmentEndDate']?.day;
+    var soRecruitmentEndDateMonth = req.session.data['soRecruitmentEndDate']?.month;
+    var soRecruitmentEndDateYear = req.session.data['soRecruitmentEndDate']?.year;
+
+    if (soRecruitmentEndDateDay && soRecruitmentEndDateMonth && soRecruitmentEndDateYear) {
+
+        req.session.data['so-study-details-complete'] = true;
+
+        res.redirect('so-task-list');
+
+    } else {
+
+        res.redirect('so-recruitment-end-date');
+
+    }
+
+});
+
+router.post('/so-check-answers', function (req, res) {
+
+    req.session.data['so-study-submit'] = true;
+
+    res.redirect('so-application-submitted');
+
+});
+
+// Have you arranged for your study to be listed?
+router.post('/have-you-listed-your-study', function (req, res) {
+
+    let studyListingArranged = req.session.data['studyListingArranged'];
+
+    if (studyListingArranged == "yes") {
+        // Redirect to a page that an admin has been notified
+        res.redirect('study-listed-notified');
+
+    } else if (studyListingArranged == "no") {
+        // Redirect to a page to tell the user to arrange for their study to be listed
+        res.redirect('you-need-to-list-your-study');
+
+    } else {
+        // Nothing selected, stay on page
+        res.redirect('have-you-listed-your-study');
+
+    }
+
+});
+
+
+
+// End Routes
+
+module.exports = router;

@@ -1,0 +1,98 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% set layout = "layout.html" %}
+
+{% extends layout %}
+
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{{ backLink({
+    "href": "javascript:history.go(-1)",
+    "text": "Back"
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+<form action="/{{folder}}/{{subfolder}}/so-health-conditions" method="post" novalidate>
+
+{{ searchableCheckboxes({
+  label: {
+    text: "What health and care areas does your study focus on?",
+    size: "l"
+  },
+  classes: "nhsuk-checkboxes--small",
+  hint: {
+    html: '<p>Select the topics your study focuses on from the list. For example, drug safety, carers or back pain.</p><p>Volunteers can select these topics as interests in their profile. We use this information to identify volunteers whose interests match your study.</p>'
+  },
+  id: "soHealthConditions",
+  name: "soHealthConditions",
+  selectedLabel: "Selected health and care areas",
+  items: data.health_conditions
+}) }}
+
+{% call details({
+  summary: "What if I cannot find relevant conditions or topics in the list?",
+  classes: "nhsuk-u-margin-bottom-6"
+}) %}
+  <p>If the topic is not listed, or your study covers other health and care areas, enter them in the text box.</p>
+  <p>This could include:</p>
+  <ul>
+    <li>treatments, interventions, and care pathways</li>
+    <li>lifestyle factors</li>
+    <li>social care</li>
+    <li>public health</li>
+    <li>health and care research</li>
+  </ul>
+  <div class="nhsuk-form-group nhsuk-character-count" data-module="nhsuk-character-count" data-maxlength="150" data-count-type="words">
+    <label class="nhsuk-label nhsuk-label--s" for="soHealthConditionsTopic">
+      Enter a health topic (optional)
+    </label>
+    <textarea class="nhsuk-textarea nhsuk-js-character-count" id="soHealthConditionsTopic" name="soHealthConditionsTopic" rows="5" aria-describedby="soHealthConditionsTopic-info"></textarea>
+    <div class="nhsuk-hint nhsuk-character-count__message" id="soHealthConditionsTopic-info">
+      You can enter up to 150 words
+    </div>
+  </div>
+{% endcall %}
+
+{{ button({
+  text: "Continue"
+}) }}
+
+</form>
+
+    </div>
+  </div>
+
+{% endblock %}

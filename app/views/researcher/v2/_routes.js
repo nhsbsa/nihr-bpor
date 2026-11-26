@@ -1153,7 +1153,6 @@ router.post('/so-rdn-portfolio', function (req, res) {
 
         if (soRDNPortfolio == "Yes" && soCPMSID) {
             res.redirect('so-rdn-portfolio-confirm');
-            //res.redirect('so-ethics-approval');
         
         } else if (soRDNPortfolio == "No" || soRDNPortfolio == "Not yet, but will be") {
 
@@ -1174,8 +1173,6 @@ router.post('/so-rdn-portfolio', function (req, res) {
 });
 
 router.post('/so-rdn-portfolio-confirm', function (req, res) {
-
-    console.log('Checkbox value:', req.session.data['rdnConfirmation']);
 
     let rdnConfirm = req.session.data['rdnConfirmation'];
 
@@ -1404,12 +1401,12 @@ router.post('/have-you-listed-your-study', function (req, res) {
     let studyListingArranged = req.session.data['studyListingArranged'];
 
     if (studyListingArranged == "yes") {
-        // Redirect to a confirmation page that the study has been listed and admin has been notified
-        res.redirect('study-listed-confirmation');
+        // Redirect to a page that an admin has been notified
+        res.redirect('study-listed-notified');
 
     } else if (studyListingArranged == "no") {
         // Redirect to a page to tell the user to arrange for their study to be listed
-        res.redirect('arrange-study-listing');
+        res.redirect('you-need-to-list-your-study');
 
     } else {
         // Nothing selected, stay on page

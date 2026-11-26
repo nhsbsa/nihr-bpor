@@ -1,0 +1,134 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% set layout = "layout.html" %}
+
+{% extends layout %}
+
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "Check the study details" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{{ backLink({
+    "href": "so-rdn-portfolio",
+    "text": "Back"
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+<div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+        <form action="/{{folder}}/{{subfolder}}/so-rdn-portfolio-confirm" method="post">
+            {% call fieldset({
+                legend: {
+                    text: "Check the study details",
+                    size: "l",
+                    isPageHeading: true
+                }
+                }) %}
+
+                {% set insetTextHtml %}
+                    <dl class="nhsuk-summary-list">
+                        <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">
+                                CPMS ID
+                            </dt>
+                            <dd class="nhsuk-summary-list__value">
+                                {% if data['soCPMSID'] %}
+                                    {{ data['soCPMSID'] }}
+                                {% else %}
+                                    12345
+                                {% endif %}
+                            </dd>
+                        </div>
+
+                        <div class="nhsuk-summary-list__row">
+                            <dt class="nhsuk-summary-list__key">
+                                Study name
+                            </dt>
+                            <dd class="nhsuk-summary-list__value">
+                                {% if data['soStudyName'] %}
+                                    {{ data['soStudyName'] }}
+                                {% else %}
+                                    Example study name
+                                {% endif %}
+                            </dd>
+                        </div>
+                    </dl>
+                {% endset %}
+
+                {{ insetText({
+                    html: insetTextHtml,
+                    classes: "nhsuk-u-margin-top-3 nhsuk-u-margin-bottom-5"
+                }) }}
+            {% endcall %}
+
+            {{ checkboxes({
+                idPrefix: "confirmation",
+                name: "rdnConfirmation",
+                items: [
+                    {
+                    value: "confirmed",
+                    text: "I confirm that this is the correct study and that the CPMS ID and study name are correct."
+                    }
+                ]
+            }) }}
+
+            {{ button({
+                text: "Continue",
+                id: "continue-button",
+                disabled: true
+            }) }}
+        </form>
+
+        {% call details({
+            summary: "What if this is not my study?"
+            }) %}
+            <p>The CPMS ID you entered may be incorrect. Check it against your study records or ask your study team to confirm the correct ID.</p>
+            <p>You can also check the study details page on the <a href="https://www.nihr.ac.uk/support-and-services/support-for-delivering-research/rdn-portfolio">Research Delivery Network (RDN) portfolio</a></p>
+        {% endcall %}
+
+    </div>
+</div>    
+
+<!-- JS to control the disabled state of the continue button -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+    const checkbox = document.getElementById('confirmation');
+    const button = document.getElementById('continue-button');
+
+    checkbox.addEventListener('change', function () {
+        button.disabled = !checkbox.checked;
+    });
+
+    });
+</script>
+{% endblock %}

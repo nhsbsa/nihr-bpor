@@ -19,7 +19,7 @@
   service name is needed. You can also reuse this variable
   within the <h1>, where they are the same.
 -->
-{% set pageName = "My studies" %}
+{% set pageName = "Check that this study is ready to recruit" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -69,7 +69,7 @@
 			classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
 		}) }}
 
-		<h1>Manage study</h1>
+		<h1>Check that this study is ready to recruit</h1>
 
         {% if data['studyListingArranged'] == "yes" %}
 
@@ -105,7 +105,7 @@
             items: [
                 {
                     heading: {
-                        text: "Arrange for your study to be listed",
+                        text: "Arrange for the study to be listed in study searches",
                         classes: " nhsuk-link--no-visited-state"
                     },
                     href: "have-you-listed-your-study",

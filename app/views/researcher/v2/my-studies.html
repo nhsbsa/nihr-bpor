@@ -103,7 +103,7 @@
 <!-- Logic for actions column of the table -->
 {% if data['studyListed'] == "no" or data['studyListed'] == "under discussion" %}
   {% set studyActions %}
-    <a href="manage-my-study" class="nhsuk-link nhsuk-link--no-visited-state">Manage study</a>
+    <a href="check-study-ready-to-recruit" class="nhsuk-link nhsuk-link--no-visited-state">Manage study</a>
   {% endset %}
   {% set studyStatus %}
     <strong class="nhsuk-tag nhsuk-tag--yellow">Prepare to recruit</strong>
@@ -124,7 +124,7 @@
   head: [
     { text: 'Study name', sort: true },
     { text: 'Study ID', sort: true },
-    { text: 'Owner', sort: true },
+    { text: 'Primary contact', sort: true },
     { text: 'Status', sort: true },
     { text: 'Action' }
   ],

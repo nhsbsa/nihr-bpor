@@ -1,0 +1,155 @@
+<!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
+
+<!-- Extends the layout from /app/views/layout.html -->
+{% set layout = "layout.html" %}
+
+{% extends layout %}
+
+<!--
+  In /app/views/layout.html you can:
+    - change the header and footer
+    - add custom CSS and JavaScript
+-->
+
+<!--
+  Use this to set the page name which will appear at the
+  start of the <title> tag, followed by the service name.
+  This is often not needed on the homepage, where only the
+  service name is needed. You can also reuse this variable
+  within the <h1>, where they are the same.
+-->
+{% set pageName = "" %}
+
+<!-- For adding a breadcrumb or back link -->
+<!-- Code examples can be found at https://service-manual.nhs.uk/design-system/components/breadcrumbs and https://service-manual.nhs.uk/design-system/components/back-link -->
+{% block beforeContent %}
+
+{{ nhsukPhaseBanner({
+  tag: {
+    text: "Beta"
+  },
+  html: 'This is a new service - your <a target="_blank" href="https://bepartofresearch.nihr.ac.uk/get-in-touch/">feedback<span class="nhsuk-u-visually-hidden"> (opens in a new tab)</span></a> will help us to improve it'
+}) }}
+
+{% endblock %}
+
+<!-- For adding page content -->
+<!-- Page layout code can be found at https://service-manual.nhs.uk/design-system/styles/layout -->
+{% block content %}
+
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+    {% if data['brand'] == "BPOR" %}
+
+    {{ panel({
+      heading: {
+        text: "Request submitted"
+      },
+      html: "Your reference number <strong>BPOR-2419</strong>"
+    }) }}
+
+    {% endif %}
+
+    {% if data['brand'] == "JDR" %}
+
+    {{ panel({
+      heading: {
+        text: "Request submitted"
+      },
+      html: "Your reference number <strong>JDR-2419</strong>"
+    }) }}
+
+    {% endif %}
+
+    {% if data['brand'] != "BPOR" and data['brand'] != "JDR" %}
+
+        {% if data['studyType'] == "BPOR" %}
+
+        {{ panel({
+          heading: {
+            text: "Request submitted"
+          },
+          html: "Your reference number <strong>BPOR-2419</strong>"
+        }) }}
+
+        {% elif data['studyType'] == "JDR" %}
+
+        {{ panel({
+          heading: {
+            text: "Request submitted"
+          },
+          html: "Your reference number <strong>JDR-2419</strong>"
+        }) }}
+
+        {% else %}
+
+        {{ panel({
+          heading: {
+            text: "Request submitted"
+          },
+          html: "Your reference number <strong>NIHR00123</strong>"
+        }) }}
+
+        {% endif %}
+
+    {% endif %}
+
+    {% if data['brand'] == "BPOR" or data['brand'] == "JDR" %}
+
+    <p>Keep a record of your reference number. You will need it if you contact us.</p>
+
+    <h2 class="nhsuk-heading-m">What happens next?</h2>
+
+    <p>We will review your study to check if it meets our requirements. This can take up to 3 working days.</p>
+
+    <p>We will email <strong>{% if data['soPrimaryContactFirstName'] and data['soPrimaryContactLastName'] %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %}</strong> if we need any more information.</p>
+
+    <p>If you would like to view the details submitted for this study, you will need to <a href="#">create a Recruit Registry Volunteers account</a>.</p>
+
+    <p>If you need more support or have any questions, you can email us at <a href="mailto:recruitregistryvolunteers@nihr.ac.uk">recruitregistryvolunteers@nihr.ac.uk</a></p>
+
+    {% else %}
+
+    <p>Keep a record of your reference number. You will need it if you contact us</p>
+
+    <h2 class="nhsuk-heading-m">What happens next?</h2>
+    <p>We will review your study to check if it meets our requirements. This can take up to 3 working days.</p>
+
+    <p>We will email <strong>{% if data['primaryContactConfirm'] == "Yes" %}{% if data['researcherFirstName'] %}{{ data['researcherFirstName'] }}{% else %}Jane{% endif %} {% if data['researcherLastName'] %}{{ data['researcherLastName'] }}{% else %}Doe{% endif %}{% elif data['primaryContactConfirm'] == "No" %}{{ data['soPrimaryContactFirstName'] }} {{ data['soPrimaryContactLastName'] }}{% else %}Jane Doe{% endif %}</strong> if we need any more information.</p>
+
+    <p>If you need more support or have any questions, you can email us at <a href="mailto:recruitregistryvolunteers@nihr.ac.uk">recruitregistryvolunteers@nihr.ac.uk</a></p>
+
+    {{ button({
+      text: "Return to Recruit registry volunteers service",
+      classes: "nhsuk-button--secondary",
+      href: "home"
+    }) }}
+
+    {% endif %}
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block pageScripts %}
+
+  {% if data['brand'] == "JDR" or data['brand'] == "BPOR" %}
+
+  <script type="text/javascript">
+    setTimeout(function () {
+      window.location.href = "so-application-submitted-email-non-account";
+    }, 10000); // 10,000 milliseconds = 10 seconds
+  </script>
+
+  {% else %}
+
+  <script type="text/javascript">
+    setTimeout(function () {
+      window.location.href = "so-application-submitted-email-account";
+    }, 10000); // 10,000 milliseconds = 10 seconds
+  </script>
+
+  {% endif %}
+
+{% endblock %}

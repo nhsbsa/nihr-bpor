@@ -145,6 +145,7 @@ router.get('/sitemap', (req, res) => {
 
 router.use('/researcher/v1', require('./views/researcher/v1/_routes'));
 router.use('/researcher/v2', require('./views/researcher/v2/_routes'));
+router.use('/researcher/v3', require('./views/researcher/v3/_routes'));
 router.use('/researcher/archive', require('./views/researcher/archive/_routes'));
 
 router.use('/admin/v1', require('./views/admin/v1/_routes'));

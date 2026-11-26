@@ -12,7 +12,7 @@
     - add custom CSS and JavaScript
 -->
 
-{% set pageName = "Check the study is ready to recruit" %}
+{% set pageName = "Check study is ready to recruit" %}
 
 {% set containerClasses = "nihr-dashboard" %}
 
@@ -31,7 +31,7 @@
 
 <div class="nhsuk-grid-row">
 	<div class="nhsuk-grid-column-one-quarter hide-on-mobile">
-		{% include "admin/v3/partials/side-nav.njk" %}
+		{% include "admin/v4/partials/side-nav.njk" %}
 	</div>
 
     <div class="nhsuk-grid-column-three-quarters">
@@ -42,7 +42,7 @@
             classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
         }) }}
 
-        <h1 class="nhsuk-heading-xl">Check the study is ready to recruit</h1>
+        <h1 class="nhsuk-heading-xl">Check study is ready to recruit</h1>
 
         {% if data['studyListed'] == "yes" %}
 

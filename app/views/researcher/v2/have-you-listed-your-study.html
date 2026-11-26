@@ -1,6 +1,6 @@
 <!-- USE THE currentPage VARIABLE TO SHOW THE SELECTED STATE ON MOBILE DEVICES -->
 
-{% set currentPage = "My studies" %}
+{% set currentPage = "Have you arranged for your study to be listed?" %}
 
 <!-- ADDING CUSTOM CSS - Add your custom CSS or Sass in /app/assets/sass/main.scss -->
 
@@ -65,7 +65,7 @@
 
 	<div class="nhsuk-grid-column-three-quarters">
 		{{ backLink({
-            "href": "my-studies",
+            "href": "check-study-ready-to-recruit",
             "text": "Back",
             classes: "nhsuk-u-margin-top-0 nhsuk-u-margin-bottom-5"
         }) }}
@@ -77,16 +77,21 @@
 					size: "l"
 					}
 				},
+				hint: {
+					text: "You will need to arrange for your study to be listed on CPMS, ISRCTN or ClinicalTrials.gov. Your study will then appear in our study search, and volunteers will be able to view your study."
+				},
 				idPrefix: "study-arranged",
 				name: "studyListingArranged",
 				items: [
 					{
 					value: "yes",
-					text: "Yes"
+					text: "Yes",
+					checked: data["studyListingArranged"] === "yes"
 					},
 					{
 					value: "no",
-					text: "No"
+					text: "No",
+					checked: data["studyListingArranged"] === "no"
 					}
 				]
 			}) }}
@@ -94,12 +99,6 @@
 			{{ button({
 				text: "Continue"
 			}) }}
-
-			{% call details({
-				summary: "Where can I list my study?"
-			}) %}
-				<p>Your study can be listed on CPMS, ISRCTN or Clinical Trials.</p>
-			{% endcall %}
 		</form>
 	</div>
 </div>
